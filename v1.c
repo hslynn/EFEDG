@@ -7,7 +7,7 @@
 static void 
 func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
 {   
-    *value = x + 2 * y + 0 * z;
+    *value = y*(x + z);
 }
 
 void
@@ -21,6 +21,9 @@ phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)
     assert(!SpecialDofType(v->type));
     assert(p->dim == 1);
 
+    if (order < 0) 
+	    order = DofTypeOrder(p, e);
+	 
     quad = phgQuadGetQuad3D(order);
     g1 = phgQuadGetDofValues(e, p, quad);
  
@@ -43,6 +46,65 @@ phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)
     values[2] = d3 * vol;
 }
 
+FLOAT
+dgQuadFaceNeighDofDotBas(ELEMENT *e, DOF *u, int face, int N, ELEMENT *neigh_e, 
+DOF *v, int neigh_face, int order)
+{
+    int i, j, e_v[NVert], neigh_v[NVert];
+    FLOAT d, lambda[Dim + 1], neigh_lambda[Dim + 1];
+    FLOAT *dof, *buffer;
+    const FLOAT *bas, *p, *w;
+    QUAD *quad;
+    DOF_TYPE *type;
+
+    assert(!SpecialDofType(u->type));
+    assert(face >= 0 && face <= 3);
+
+    type = (DofIsHP(u) ? u->hp->info->types[u->hp->max_order] : u->type);
+
+    if (order < 0) {
+	    i = DofTypeOrder(v, neigh_e);
+	    j = DofTypeOrder(u, e);
+	if (i < 0)
+	    i = j;
+	    order = i + j;
+    }
+    quad = phgQuadGetQuad2D(order);
+
+    /*有更好的实现方法吗？*/
+    /*e_v[i]: face号面上的i号顶点在本单元的编号；
+      neigh_v[i]: 该顶点在face面的相邻单元的编号*/
+    for (i=0; i < NVert - 1; i++) {
+        e_v[i] = GetFaceVertex(face, i);
+        for (j=0; j < NVert; j++) {
+            if (neigh_e->verts[j] == e->verts[e_v[i]]) {
+                neigh_v[i] = j;
+                break; 
+            } 
+        }
+    }
+    lambda[face] = 0.;
+    neigh_lambda[neigh_face] = 0.;
+
+    buffer = phgAlloc(sizeof(*buffer));
+    p = quad->points;
+    w = quad->weights;
+
+    d = 0.;
+    for (i = 0; i < quad->npoints; i++) {
+        for (j = 0; j < NVert - 1; j++) {
+        lambda[e_v[j]] = *(p++);
+        neigh_lambda[neigh_v[j]] = lambda[e_v[j]];
+        }
+        
+	    dof = phgDofEval(v, neigh_e, neigh_lambda, buffer);
+        bas = (FLOAT *)type->BasFuncs(u, e, N, N + 1, lambda);
+        d += *(bas++) * *(dof++) * *(w++);
+    } 
+    phgFree(buffer);
+
+    return d * phgGeomGetFaceArea(u->g, e, face);
+}
 
 static void
 build_linear_system(SOLVER *solver, DOF *u_h)
@@ -61,10 +123,10 @@ build_linear_system(SOLVER *solver, DOF *u_h)
         
                 /*mass matrix*/
                 for(i = 0; i<N; i++){
-                    /*I[N]建立了一个映射，每个单元中的基函数在线性解法器中被给予一个整体编号，以便于生成一个大矩阵*/
+                    /*I[N]建立了一个映射，每个单元中的基函数在线性解法器中被给予一个整体编号，以便于生成一个整体矩阵*/
                     I[i] = phgSolverMapE2L(solver, dof_no, e, i);
                     for(j = 0; j <= i; j++){
-                        mass_term = phgQuadBasDotBas(e, u_h, i, u_h, j, QUAD_DEFAULT);
+                       mass_term = phgQuadBasDotBas(e, u_h, i, u_h, j, QUAD_DEFAULT);
                         /*添加到解法器中矩阵的相应项*/
                         phgSolverAddMatrixEntry(solver, I[i], I[j], mass_term);
                         if(j < i){
@@ -94,11 +156,11 @@ build_linear_system(SOLVER *solver, DOF *u_h)
                         }               
         
                         for(i = 0; i < N; i++){ 
-                            val_p = phgQuadFaceDofDotBas(neigh_e, ss, u_h, DOF_PROJ_NONE, 
-                                    u_h, i, QUAD_DEFAULT); //计算u^+ 
+                            val_p = dgQuadFaceNeighDofDotBas(e, u_h, s, i, neigh_e, 
+                                    u_h, ss, QUAD_DEFAULT);//计算u^+ 
                             val_m = phgQuadFaceDofDotBas(e, s, u_h, DOF_PROJ_NONE, 
                                     u_h, i, QUAD_DEFAULT); //计算u^-
-                            boundary_term = 0.5 * normal[coord] * (val_m + val_p) + 
+                            boundary_term = 0.5 * normal[coord] * (val_p + val_m) + 
                                     (in_out - 0.5) * fabs(normal[coord]) * (val_p - val_m);//数值通量 
                         
                             /*添加到解法器相应右端项*/
@@ -116,8 +178,8 @@ build_linear_system(SOLVER *solver, DOF *u_h)
                     } 
                 }
             }
-
             dof_no++;
+            dof_no %= 6; 
         }
     }
 }
@@ -129,7 +191,7 @@ main(int argc, char * argv[])
     char *fn = "cube3.dat"; 
     //const char *matrix_fn = "mat.m", *var_name = "mat_M";
     GRID *g; 
-    DOF_TYPE *dof_tp = DOF_DG2;
+    DOF_TYPE *dof_tp = DOF_DG3;
     DOF *u_h, *p_0, *p_1, *q_0, *q_1, *w_0, *w_1;
     SOLVER *solver;
     //MAT *mat_M;
@@ -164,19 +226,20 @@ main(int argc, char * argv[])
     phgSolverDestroy(&solver);
 
     /*输出结果*/
-    phgDofDump(p_0);
     phgDofDump(p_1);
 
-    phgDofDump(q_0);
-    phgDofDump(q_1);
+    //phgDofDump(q_0);
+    //phgDofDump(q_1);
 
-    phgDofDump(w_0);
-    phgDofDump(w_1);
+    //phgDofDump(w_0);
+    //phgDofDump(w_1);
 
-    
+    /*平均值*/
+    //phgDofAXPBY(0.5, p_0, 0.5, &p_1);
+    //phgDofDump(p_1); 
     
     /*Export VTK*/
-    phgExportVTK(g, "tmp.vtk", p_0, p_1, q_0, q_1, w_0, w_1, NULL);
+    phgExportVTK(g, "tmp.vtk", u_h, p_0, p_1, q_0, q_1, w_0, w_1, NULL);
 
 
     /*release the mem*/
