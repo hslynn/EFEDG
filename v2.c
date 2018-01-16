@@ -3,11 +3,29 @@
 #include <string.h>
 #include <math.h>
 
+struct TENSOR
+{ 
+    DOF **components;
+    int rank;
+    int *dims;
+};
 
 static void 
 func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
 {   
-    *value = x+2*y;
+    *value = (x+1.)*(x+1.);
+}
+
+static void
+func_zero(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.;
+}
+
+static void
+func_one(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 1.;
 }
 
 void
@@ -106,6 +124,155 @@ DOF *v, int neigh_face, int order)
     return d * phgGeomGetFaceArea(u->g, e, face);
 }
 
+/*tensor product*/
+void
+tensorProduct(DOF **A, int m, int *dims_A, DOF **B, int n, int *dims_B, DOF **C)
+{
+    int i;
+    int num_A = 1, num;
+
+    if(m==0 && n==0){
+        *C = phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 1., *A, 0, *B, 0., NULL);
+    }
+    else if(m>0){
+        for(i=1; i<m; i++){
+           num_A *= *(dims_A + i); 
+        }
+        
+        num = num_A;
+        for(i=0; i<n; i++){
+           num *= *(dims_B + i); 
+        }
+
+        for(i=0; i<dims_A[0]; i++){
+            phgPrintf("%d,%d,%d\n", i*num, m, n);
+            tensorProduct(A + i*num_A, m-1, dims_A + 1, B, n, dims_B, C + i*num);
+        }
+    }
+    else{
+        tensorProduct(B, n, dims_B, A, m, dims_A, C);
+    }
+        
+}
+
+/*************************************************************
+void 
+contractOneOne(DOF **A, int s, DOF **B, DOF *C)
+{   
+    int i;
+    phgDofSetDataByValue(C, 0.0);
+    for(i=0; i<s; i++){
+        phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 1., A + i, 0, B + i, 1., &C);
+    }
+}
+
+void
+contractOneTwo(DOF **A, int s, DOF **B, DOF **C, int m)
+{  
+    int i;
+    DOF **temp_tensor;
+    for(i=0; i<m; i++){
+        temp_tensor = B + i*s;
+        contractOneOne(A, s, temp_tensor, C + i);
+    }
+}
+
+void
+contractOneThree(DOF **A, int s, DOF **B, DOF **C, int m, int n)
+{
+    int i;
+    DOF **temp_tensor;
+    for(i=0; i<m; i++){
+        temp_tensor = B + i*n*s;
+        contractOneTwo(A, s, temp_tensor, C + i*n, n);
+    }
+}
+
+void
+contractTwoTwo(DOF **A, int s, DOF **B, DOF **C, int m, int n)
+{
+    int i;
+    DOF *temp_tensor;
+    for(i=0; i<m; i++)
+        temp_tensor = A + i*s;
+        contractOneTwo(temp_tensor, s, B, C + i*n, n);   
+    }
+}
+
+void
+contractTwoThree(DOF **A, int s, DOF **B, DOF **C, int m, int n, int l)
+{
+    int i, j, k;
+    DOF **temp_tensor;
+    for(i=0; i<m; i++){
+        temp_tensor = A + i*s;
+        contractOneThree(temp_tensor, s, B, C + i*n*l, n, l)
+    }
+}
+
+void
+contractThreeThree(DOF **A, int s, DOF **B, DOF **C, int m, int n, int l, int o)
+{
+    int i, j, k;
+    DOF **temp_tensor;
+    for(i=0; i<m; i++){
+        temp_tensor = A + i*n*s;
+        contractTwoThree(temp_tensor, s, B, C + i*n*l*o, m, n, l); 
+        }
+    } 
+}
+***********************************************************************/
+
+void
+DofReciprocal(DOF *u_h)
+{
+    int i;
+    int data_len = DofGetDataCount(u_h);
+    FLOAT *p = DofData(u_h);
+    for(i = 0; i < data_len; i++){
+        *p = 1./(*p);
+        p++;    
+    }
+}
+
+void
+inverseMetric(DOF *metric[][3], DOF *metric_inverse[][3])
+{
+    int i, j;
+    DOF *inv_determinant;
+    DOF *adj[3][3];
+  
+    /*compute Adj(M)*/ 
+    for(i = 0; i < 3; i++){
+        for(j = 0; j < 3; j++){
+            if(j < i) adj[i][j] = adj[j][i];
+            else{            
+                adj[i][j] = phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 1., metric[(i+1)%3][(j+1)%3], 0, metric[(i+2)%3][(j+2)%3], 0., NULL); 
+                phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, -1., metric[(i+1)%3][(j+2)%3], 0, metric[(i+2)%3][(j+1)%3], 1., &adj[i][j]); 
+            }
+        }
+    }
+
+    /*compute the reciprocal of the determinant of metric matrix*/
+    inv_determinant = phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 1., metric[0][0], 0, adj[0][0], 0., NULL);  
+    phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 1., metric[0][1], 0, adj[0][1], 1., &inv_determinant);  
+    phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 1., metric[0][2], 0, adj[0][2], 1., &inv_determinant);  
+    DofReciprocal(inv_determinant); 
+   
+    /*compute the inverse matrix of the metric using M^-1 = Adj(M)/Det(M).*/ 
+    for(i =0; i<3; i++){
+        for(j = 0; j<3; j++){
+            if(j < i) metric_inverse[i][j] = metric_inverse[j][i];
+            else{
+                metric_inverse[i][j] = phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 1., adj[i][j], 0, inv_determinant, 0., NULL);
+            }
+        }
+    }
+
+}
+
+
+
 static void
 build_linear_system(SOLVER *solver, DOF *u_h)
 {
@@ -189,7 +356,8 @@ build_linear_system(SOLVER *solver, DOF *u_h)
 int 
 main(int argc, char * argv[])
 {
-    char *fn = "cube3.dat"; 
+    char *fn = "cube.dat"; 
+    int i, j;
     //const char *matrix_fn = "mat.m", *var_name = "mat_M";
     GRID *g; 
     DOF_TYPE *dof_tp = DOF_DG2;
@@ -199,7 +367,8 @@ main(int argc, char * argv[])
     DOF *Phi_100, *Phi_101, *Phi_102, *Phi_103, *Phi_111, *Phi_112, *Phi_113, *Phi_122, *Phi_123, *Phi_133;
     DOF *Phi_200, *Phi_201, *Phi_202, *Phi_203, *Phi_211, *Phi_212, *Phi_213, *Phi_222, *Phi_223, *Phi_233;
     DOF *Phi_300, *Phi_301, *Phi_302, *Phi_303, *Phi_311, *Phi_312, *Phi_313, *Phi_322, *Phi_323, *Phi_333;
-    
+
+    DOF *Lapse, *shift_1, *shift_2, *shift_3;
     SOLVER *solver;
     //MAT *mat_M;
 
@@ -227,6 +396,23 @@ main(int argc, char * argv[])
                       {psi_02, psi_12, psi_22, psi_23},
                       {psi_03, psi_13, psi_23, psi_33}};
 
+    DOF *space_metric[3][3];
+    for(i=0; i<3; i++){
+        for(j=0; j<3; j++){
+            space_metric[i][j] = psi[i+1][j+1];
+            if(i==j)
+                phgDofSetDataByValue(space_metric[i][j], 1.);
+        }
+    }
+
+    DOF *inverse_metric[3][3];
+    inverseMetric(space_metric, inverse_metric);
+
+    DOF *tensor[3][3][3][3];
+    int dims_A[2] = {3, 3};
+    int dims_B[2] = {3, 3};
+    tensorProduct(*space_metric, 2, dims_A, *inverse_metric, 2, dims_B, ***tensor);
+    
     Pi_00 = phgDofNew(g, dof_tp, 1, "Pi_00", DofInterpolation);
     Pi_01 = phgDofNew(g, dof_tp, 1, "Pi_01", DofInterpolation);
     Pi_02 = phgDofNew(g, dof_tp, 1, "Pi_02", DofInterpolation);
@@ -299,37 +485,25 @@ main(int argc, char * argv[])
 
       
     /*建立解法器，生成矩阵及右端项*/
-    solver = phgSolverCreate(SOLVER_DEFAULT, p_0, p_1, q_0, q_1, w_0, w_1, NULL);
+    //solver = phgSolverCreate(SOLVER_DEFAULT, p_0, p_1, q_0, q_1, w_0, w_1, NULL);
   
-    build_linear_system(solver, u_h);
-   
+    //build_linear_system(solver, u_h);
+    
     /*将解法器中的矩阵输出到文件*/ 
     //mat_M = phgSolverGetMat(solver);
     //phgMatDumpMATLAB(mat_M, var_name, matrix_fn);
 
     /*解法器求解*/
-    phgSolverSolve(solver, TRUE, p_0, p_1, q_0, q_1, w_0, w_1, NULL);
-    phgSolverDestroy(&solver);
+    //phgSolverSolve(solver, TRUE, p_0, p_1, q_0, q_1, w_0, w_1, NULL);
+    //phgSolverDestroy(&solver);
 
     /*输出结果*/
-    phgDofDump(Phi[1][2][3]);
 
-    //phgDofDump(q_0);
-    //phgDofDump(q_1);
-
-    //phgDofDump(w_0);
     //phgDofDump(w_1);
 
-    /*平均值*/
-    //phgDofAXPBY(0.5, p_0, 0.5, &p_1);
-    //phgDofDump(p_1); 
-    
     /*Export VTK*/
-    phgExportVTK(g, "tmp.vtk", u_h, p_0, p_1, q_0, q_1, w_0, w_1, NULL);
+    //phgExportVTK(g, "tmp.vtk", u_h, p_0, p_1, q_0, q_1, w_0, w_1, NULL);
 
-    phgDump(phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 2.22, p_0, 0, q_1, 0, NULL));
-    
-    
 
     /*release the mem*/
     phgDofFree(&psi_00); 
