@@ -3,8 +3,6 @@
 #include <string.h>
 #include <math.h>
 
-static int count = 0;
-
 struct TENSOR
 { 
     DOF **components;
@@ -147,6 +145,7 @@ tensorProduct(DOF **A, int m, int *dims_A, DOF **B, int n, int *dims_B, DOF **C)
         }
 
         for(i=0; i<dims_A[0]; i++){
+            phgPrintf("%d,%d,%d\n", i*num, m, n);
             tensorProduct(A + i*num_A, m-1, dims_A + 1, B, n, dims_B, C + i*num);
         }
     }
@@ -159,33 +158,88 @@ tensorProduct(DOF **A, int m, int *dims_A, DOF **B, int n, int *dims_B, DOF **C)
 void
 contract(DOF **A, int s, int *dims, int m, int n, DOF **B)
 {   
-    int i, j, k, l, num_1 = 1, num_2 = 1, num_3 = 1;
-    GRID *g = (*A)->g;
-    DOF_TYPE *dof_tp = (*A)->type;
+    int num_1 = 1, num_2 = 1, num_3 =1;
     DOF **ptr_B = B, **ptr_A = A;
-
-    for(i=0; i<m-1; i++)
-        num_1 *= dims[i];
-
-    for(i=m; i<n-1; i++)
-        num_2 *= dims[i];
-
-    for(i=n; i<s; i++)
-        num_3 *= dims[i];
+    for(i=0; i<s; i++)  
+        num_ *= dims[i];
 
     for(i=0; i<num_1; i++)
         for(j=0; j<num_2; j++)
-            for(k=0; k<num_3; k++){  
-                *ptr_B = phgDofNew(g, dof_tp, 1, "B", func_zero); 
-                for(l=0; l<dims[m-1]; l++){
-                    ptr_A = A + i*dims[m-1]*num_2*dims[n-1]*num_3 + l*num_2*dims[m-1]*num_3 + j*dims[m-1]*num_3 + l*num_3 + k;
-                    if(count==1)
-                        phgDofDump(*ptr_A);
-                    phgDofAXPY(1., *ptr_A, ptr_B); 
+            for(k=0; k<num_3; k++)  
+                for(l=0; l<dims[m]; l++){
+                    phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 1., *A, 0, *B, 1., ptr_B);
+                    phgDofAXPY(1., *ptr_A, ptr_B) 
                 }
-                ptr_B++;
-            }
+                p++;
 }
+
+/*************************************************************
+void 
+contractOneOne(DOF **A, int s, DOF **B, DOF *C)
+{   
+    int i;
+    phgDofSetDataByValue(C, 0.0);
+    for(i=0; i<s; i++){
+        phgDofMM(MAT_OP_N, MAT_OP_N, 1, 1, 1, 1., A + i, 0, B + i, 1., &C);
+    }
+}
+
+void
+contractOneTwo(DOF **A, int s, DOF **B, DOF **C, int m)
+{  
+    int i;
+    DOF **temp_tensor;
+    for(i=0; i<m; i++){
+        temp_tensor = B + i*s;
+        contractOneOne(A, s, temp_tensor, C + i);
+    }
+}
+
+void
+contractOneThree(DOF **A, int s, DOF **B, DOF **C, int m, int n)
+{
+    int i;
+    DOF **temp_tensor;
+    for(i=0; i<m; i++){
+        temp_tensor = B + i*n*s;
+        contractOneTwo(A, s, temp_tensor, C + i*n, n);
+    }
+}
+
+void
+contractTwoTwo(DOF **A, int s, DOF **B, DOF **C, int m, int n)
+{
+    int i;
+    DOF *temp_tensor;
+    for(i=0; i<m; i++)
+        temp_tensor = A + i*s;
+        contractOneTwo(temp_tensor, s, B, C + i*n, n);   
+    }
+}
+
+void
+contractTwoThree(DOF **A, int s, DOF **B, DOF **C, int m, int n, int l)
+{
+    int i, j, k;
+    DOF **temp_tensor;
+    for(i=0; i<m; i++){
+        temp_tensor = A + i*s;
+        contractOneThree(temp_tensor, s, B, C + i*n*l, n, l)
+    }
+}
+
+void
+contractThreeThree(DOF **A, int s, DOF **B, DOF **C, int m, int n, int l, int o)
+{
+    int i, j, k;
+    DOF **temp_tensor;
+    for(i=0; i<m; i++){
+        temp_tensor = A + i*n*s;
+        contractTwoThree(temp_tensor, s, B, C + i*n*l*o, m, n, l); 
+        }
+    } 
+}
+***********************************************************************/
 
 void
 DofReciprocal(DOF *u_h)
@@ -372,27 +426,10 @@ main(int argc, char * argv[])
     DOF *inverse_metric[3][3];
     inverseMetric(space_metric, inverse_metric);
 
-    DOF *tensor[3*3*3*3], *testT[3*3], *scalar;
+    DOF *tensor[3][3][3][3];
     int dims_A[2] = {3, 3};
     int dims_B[2] = {3, 3};
-    int dims[4] = {3, 3, 3, 3};
-    tensorProduct(*space_metric, 2, dims_A, *inverse_metric, 2, dims_B, tensor);
-    
-
-    contract(tensor, 4, dims, 1, 3, testT);
-    
-    count = 1; 
-    contract(testT, 2, dims_A, 1, 2,  &scalar);
-
-    for(i=0;i<3;i++)
-        for(j=0;j<3;j++){
-
-            phgPrintf("[%d][%d]\n",i, j);
-            phgDofDump(testT[i*3 + j]);
-        }
-    
-    phgDofDump(scalar);
-
+    tensorProduct(*space_metric, 2, dims_A, *inverse_metric, 2, dims_B, ***tensor);
     
     Pi_00 = phgDofNew(g, dof_tp, 1, "Pi_00", DofInterpolation);
     Pi_01 = phgDofNew(g, dof_tp, 1, "Pi_01", DofInterpolation);
