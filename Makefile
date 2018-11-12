@@ -1,8 +1,8 @@
-default: v2 
+default: Einstein_DG 
 all: default
 clean:
-	/bin/rm -f *.o v2
-v2: v2.o 
+	/bin/rm -f *.o Einstein_DG
+Einstein_DG: Einstein_DG 
 
 
 include /home/hslynn/apps/phg/share/phg/Makefile.inc

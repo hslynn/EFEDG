@@ -16,26 +16,6 @@ struct TENSOR
 { 
 };
 
-static void 
-func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
-{   
-    *value = (x+1.)*(x+1.);
-}
-
-static void
-func_zero(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
-{
-    *value = 0.;
-}
-
-static void
-func_one(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
-{
-    *value = 1.;
-}
-
-
-
 
 /*tensor product*/
 void
@@ -64,7 +44,6 @@ tensorProduct(struct TENSOR A, struct TENSOR B, struct TENSOR C)
     else{
         tensorProduct(B, n, dims_B, A, m, dims_A, C);
     }
-        
 }
 
 void

@@ -15,9 +15,6 @@ const int dims_Shift[1] = {3};
 const int dims_scalar[0];
 const int dims_vec[1] = {4};
 
-struct TENSOR
-{ 
-};
 
 static void 
 func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
