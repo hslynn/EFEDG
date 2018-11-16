@@ -1,5 +1,3 @@
-#include "phg.h"
-
 void
 phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)
 {
@@ -55,8 +53,8 @@ DOF *v, int neigh_face, int order)
     if (order < 0) {
 	    i = DofTypeOrder(v, neigh_e);
 	    j = DofTypeOrder(u, e);
-	if (i < 0)
-	    i = j;
+	    if (i < 0)
+	        i = j;
 	    order = i + j;
     }
     quad = phgQuadGetQuad2D(order);
