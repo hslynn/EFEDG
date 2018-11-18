@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     33079,        880]
-NotebookOptionsPosition[     31851,        841]
-NotebookOutlinePosition[     32211,        857]
-CellTagsIndexPosition[     32168,        854]
+NotebookDataLength[     32002,        853]
+NotebookOptionsPosition[     30938,        818]
+NotebookOutlinePosition[     31298,        834]
+CellTagsIndexPosition[     31255,        831]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -475,11 +475,13 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{"c", ",", "1", ",", "4"}], "}"}]}], "]"}]}], ",", 
     RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "3"}], "}"}], ",", 
+    RowBox[{"{", 
      RowBox[{"a", ",", "1", ",", "4"}], "}"}], ",", 
     RowBox[{"{", 
      RowBox[{"b", ",", "1", ",", "4"}], "}"}]}], "]"}]}]], "Input",
  CellChangeTimes->{{3.7512777625155497`*^9, 3.751277941445504*^9}, 
-   3.7512785062111*^9}],
+   3.7512785062111*^9, {3.751526295531808*^9, 3.751526300779489*^9}}],
 
 Cell[BoxData[
  RowBox[{"t3rhsPhi", ":=", 
@@ -756,7 +758,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"CForm", "[", "t6rhsPi", "]"}]], "Input",
+ RowBox[{"CForm", "[", "t3rhsPhi", "]"}]], "Input",
  CellChangeTimes->{{3.751521712768208*^9, 3.7515217170674353`*^9}, {
    3.751521992104055*^9, 3.751522020415719*^9}, {3.7515222330018272`*^9, 
    3.75152223322466*^9}, {3.751522265261598*^9, 3.7515222748976793`*^9}, 
@@ -769,61 +771,35 @@ Cell[BoxData[
    3.7515231457851973`*^9}, 3.7515232097066727`*^9, {3.751523240628203*^9, 
    3.751523305784281*^9}, {3.751523378874173*^9, 3.7515233877932158`*^9}, {
    3.75152423708851*^9, 3.751524237313142*^9}, {3.751524899247562*^9, 
-   3.751524899504857*^9}, {3.751525357954055*^9, 3.751525358252944*^9}}],
-
-Cell[BoxData[
- TemplateBox[{
-  "Part","partd",
-   "\"Part specification \\!\\(\\*RowBox[{\\\"N\\\", \\\"\[LeftDoubleBracket]\
-\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is longer than depth of \
-object.\"",2,305,10,20328170953642372154,"Local"},
-  "MessageTemplate"]], "Message", "MSG",
- CellChangeTimes->{3.751525359074045*^9}],
-
-Cell[BoxData[
- TemplateBox[{
-  "Part","partd",
-   "\"Part specification \\!\\(\\*RowBox[{\\\"N\\\", \\\"\[LeftDoubleBracket]\
-\\\", \\\"2\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is longer than depth of \
-object.\"",2,305,11,20328170953642372154,"Local"},
-  "MessageTemplate"]], "Message", "MSG",
- CellChangeTimes->{3.751525359081787*^9}],
-
-Cell[BoxData[
- TemplateBox[{
-  "Part","partd",
-   "\"Part specification \\!\\(\\*RowBox[{\\\"N\\\", \\\"\[LeftDoubleBracket]\
-\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is longer than depth of \
-object.\"",2,305,12,20328170953642372154,"Local"},
-  "MessageTemplate"]], "Message", "MSG",
- CellChangeTimes->{3.7515253590876827`*^9}],
-
-Cell[BoxData[
- TemplateBox[{
-  "General","stop",
-   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
-\\\"partd\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
-calculation.\"",2,305,13,20328170953642372154,"Local"},
-  "MessageTemplate"]], "Message", "MSG",
- CellChangeTimes->{3.751525359093038*^9}],
+   3.751524899504857*^9}, {3.751525357954055*^9, 3.751525358252944*^9}, {
+   3.751526188074243*^9, 3.751526192274682*^9}, {3.751526224106522*^9, 
+   3.7515262243755608`*^9}, {3.7515264117147923`*^9, 3.7515264119285107`*^9}}],
 
 Cell["\<\
-List(List(-(gamma1*gamma2*(Phi100*N[1] + Phi200*N[2] + \
-Phi300*N[3])),-(gamma1*gamma2*(Phi101*N[1] + Phi201*N[2] + Phi301*N[3])),
-    -(gamma1*gamma2*(Phi102*N[1] + Phi202*N[2] + \
-Phi302*N[3])),-(gamma1*gamma2*(Phi103*N[1] + Phi203*N[2] + Phi303*N[3]))),
-   List(-(gamma1*gamma2*(Phi101*N[1] + Phi201*N[2] + \
-Phi301*N[3])),-(gamma1*gamma2*(Phi111*N[1] + Phi211*N[2] + Phi311*N[3])),
-    -(gamma1*gamma2*(Phi112*N[1] + Phi212*N[2] + \
-Phi312*N[3])),-(gamma1*gamma2*(Phi113*N[1] + Phi213*N[2] + Phi313*N[3]))),
-   List(-(gamma1*gamma2*(Phi102*N[1] + Phi202*N[2] + \
-Phi302*N[3])),-(gamma1*gamma2*(Phi112*N[1] + Phi212*N[2] + Phi312*N[3])),
-    -(gamma1*gamma2*(Phi122*N[1] + Phi222*N[2] + \
-Phi322*N[3])),-(gamma1*gamma2*(Phi123*N[1] + Phi223*N[2] + Phi323*N[3]))),
-   List(-(gamma1*gamma2*(Phi103*N[1] + Phi203*N[2] + \
-Phi303*N[3])),-(gamma1*gamma2*(Phi113*N[1] + Phi213*N[2] + Phi313*N[3])),
-    -(gamma1*gamma2*(Phi123*N[1] + Phi223*N[2] + \
-Phi323*N[3])),-(gamma1*gamma2*(Phi133*N[1] + Phi233*N[2] + Phi333*N[3]))))\
+List(List(List(-(gamma2*N*Phi100),-(gamma2*N*Phi101),-(gamma2*N*Phi102),-(\
+gamma2*N*Phi103)),
+    List(-(gamma2*N*Phi101),-(gamma2*N*Phi111),-(gamma2*N*Phi112),-(gamma2*N*\
+Phi113)),
+    List(-(gamma2*N*Phi102),-(gamma2*N*Phi112),-(gamma2*N*Phi122),-(gamma2*N*\
+Phi123)),
+    List(-(gamma2*N*Phi103),-(gamma2*N*Phi113),-(gamma2*N*Phi123),-(gamma2*N*\
+Phi133))),
+   List(List(-(gamma2*N*Phi200),-(gamma2*N*Phi201),-(gamma2*N*Phi202),-(\
+gamma2*N*Phi203)),
+    List(-(gamma2*N*Phi201),-(gamma2*N*Phi211),-(gamma2*N*Phi212),-(gamma2*N*\
+Phi213)),
+    List(-(gamma2*N*Phi202),-(gamma2*N*Phi212),-(gamma2*N*Phi222),-(gamma2*N*\
+Phi223)),
+    List(-(gamma2*N*Phi203),-(gamma2*N*Phi213),-(gamma2*N*Phi223),-(gamma2*N*\
+Phi233))),
+   List(List(-(gamma2*N*Phi300),-(gamma2*N*Phi301),-(gamma2*N*Phi302),-(\
+gamma2*N*Phi303)),
+    List(-(gamma2*N*Phi301),-(gamma2*N*Phi311),-(gamma2*N*Phi312),-(gamma2*N*\
+Phi313)),
+    List(-(gamma2*N*Phi302),-(gamma2*N*Phi312),-(gamma2*N*Phi322),-(gamma2*N*\
+Phi323)),
+    List(-(gamma2*N*Phi303),-(gamma2*N*Phi313),-(gamma2*N*Phi323),-(gamma2*N*\
+Phi333))))\
 \>", "Output",
  CellChangeTimes->{{3.751521920023697*^9, 3.7515219364502773`*^9}, {
    3.751521998570446*^9, 3.751522021224249*^9}, 3.751522234461534*^9, {
@@ -835,8 +811,9 @@ Phi323*N[3])),-(gamma1*gamma2*(Phi133*N[1] + Phi233*N[2] + Phi333*N[3]))))\
    3.751522972855961*^9, {3.751523052147406*^9, 3.7515230806659517`*^9}, {
    3.7515231185680857`*^9, 3.7515231466903343`*^9}, 3.7515232102535048`*^9, {
    3.751523254942452*^9, 3.751523306339439*^9}, {3.751523375597454*^9, 
-   3.751523388507229*^9}, 3.751524237936302*^9, 3.7515249003203*^9, 
-   3.7515253590984497`*^9}]
+   3.751523388507229*^9}, 3.751524237936302*^9, 3.7515249003203*^9, {
+   3.7515253590984497`*^9, 3.75152537336022*^9}, {3.751526193289731*^9, 
+   3.75152623924341*^9}, 3.751526306069522*^9, 3.7515264125382233`*^9}]
 }, Open  ]]
 },
 WindowSize->{1920, 1025},
@@ -866,21 +843,17 @@ Cell[12081, 327, 232, 5, 40, "Input"],
 Cell[12316, 334, 1968, 50, 125, "Input"],
 Cell[14287, 386, 1086, 29, 40, "Input"],
 Cell[15376, 417, 1280, 32, 40, "Input"],
-Cell[16659, 451, 1067, 30, 40, "Input"],
-Cell[17729, 483, 541, 15, 40, "Input"],
-Cell[18273, 500, 2782, 68, 153, "Input"],
-Cell[21058, 570, 2028, 53, 69, "Input"],
-Cell[23089, 625, 1046, 29, 40, "Input"],
-Cell[24138, 656, 1105, 31, 40, "Input"],
-Cell[25246, 689, 1548, 41, 69, "Input"],
-Cell[26797, 732, 755, 21, 40, "Input"],
+Cell[16659, 451, 1184, 32, 40, "Input"],
+Cell[17846, 485, 541, 15, 40, "Input"],
+Cell[18390, 502, 2782, 68, 153, "Input"],
+Cell[21175, 572, 2028, 53, 69, "Input"],
+Cell[23206, 627, 1046, 29, 40, "Input"],
+Cell[24255, 658, 1105, 31, 40, "Input"],
+Cell[25363, 691, 1548, 41, 69, "Input"],
+Cell[26914, 734, 755, 21, 40, "Input"],
 Cell[CellGroupData[{
-Cell[27577, 757, 1019, 14, 40, "Input"],
-Cell[28599, 773, 337, 7, 27, "Message"],
-Cell[28939, 782, 337, 7, 27, "Message"],
-Cell[29279, 791, 339, 7, 27, "Message"],
-Cell[29621, 800, 339, 7, 27, "Message"],
-Cell[29963, 809, 1872, 29, 221, "Output"]
+Cell[27694, 759, 1172, 16, 40, "Input"],
+Cell[28869, 777, 2053, 38, 314, "Output"]
 }, Open  ]]
 }
 ]

@@ -5,10 +5,6 @@
 
 #include "gradDof.c"
 
-#define gamma_0 1
-#define gamma_1 -1
-#define gamma_2 1
-
 static void 
 func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
 {   
