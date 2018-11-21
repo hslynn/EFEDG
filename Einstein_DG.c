@@ -3,7 +3,6 @@
 #include <string.h>
 #include <math.h>
 
-#include "gradDof.c"
 #include "rhs_dofs.c"
 //static void 
 //func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
@@ -59,10 +58,10 @@ main(int argc, char * argv[])
     Psi_23 = phgDofNew(g, dof_tp, 1, "Psi_23", DofInterpolation);
     Psi_33 = phgDofNew(g, dof_tp, 1, "Psi_33", DofInterpolation);
 
-    DOF *dofs_Psi[10] = {Psi_00, Psi_01, Psi_02, Psi_03, 
-                                 Psi_11, Psi_12, Psi_13,
-                                         Psi_22, Psi_23,
-                                                 Psi_33};
+    //DOF *dofs_Psi[10] = {Psi_00, Psi_01, Psi_02, Psi_03, 
+    //                             Psi_11, Psi_12, Psi_13,
+    //                                     Psi_22, Psi_23,
+    //                                             Psi_33};
 
     Pi_00 = phgDofNew(g, dof_tp, 1, "Pi_00", DofInterpolation);
     Pi_01 = phgDofNew(g, dof_tp, 1, "Pi_01", DofInterpolation);
@@ -147,18 +146,6 @@ main(int argc, char * argv[])
                    Phi_333};
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     //for testing
     for(int i=0;i<10;i++){
         phgDofSetDataByValue(dofs_Pi[i], 0);
@@ -167,20 +154,21 @@ main(int argc, char * argv[])
         phgDofSetDataByValue(dofs_Phi[20 + i], 0);
     } 
     phgDofSetDataByValue(Psi_00, -1);
-    phgDofSetDataByValue(Psi_11, 0);
-    phgDofSetDataByValue(Psi_22, 0);
-    phgDofSetDataByValue(Psi_33, 0);
-
+    phgDofSetDataByValue(Psi_11, 1);
+    phgDofSetDataByValue(Psi_22, 1);
+    phgDofSetDataByValue(Psi_33, 1);
+        
     DOF *dof_rhs = phgDofNew(g, dof_tp, 50, "dof_rhs", DofInterpolation);
-    get_rhs_dof(dofs_var, dof_rhs);
 
+    get_rhs_dof(dofs_var, dof_rhs);
     //printf("test\n");
     /*Export VTK*/
     phgExportVTK(g, "tmp.vtk", dof_rhs, NULL);
 
     /*release the mem*/
-
-
+    phgDofFree(&dof_rhs);
+    for(int i=0;i<50;i++)
+        phgDofFree(dofs_var + i);
     phgFreeGrid(&g); 
  
     phgFinalize(); 

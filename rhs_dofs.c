@@ -9,7 +9,9 @@ get_rhs_dof(DOF **dofs_var, DOF *dof_rhs)
     for(int i=0; i < 50; i++){
         p_var[i] = DofData(dofs_var[i]);
     }
+    
     p_rhs = DofData(dof_rhs); 
+
     //evaluate dofs values at every data point
     data_count = DofGetDataCount(dofs_var[0]);
     for(n=0;n<data_count;n++){
@@ -17,8 +19,10 @@ get_rhs_dof(DOF **dofs_var, DOF *dof_rhs)
         for(i=0; i < 50; i++){
             values_var[i] = *(p_var[i]);
         }
-        
+            
         rhs_values(values_var, values_rhs); 
+           
+        printf("test point 2\n"); 
         for(i=0; i<50; i++){
             *p_rhs = values_rhs[i];
             p_rhs++;

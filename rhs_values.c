@@ -4,7 +4,7 @@
 #define gamma1 -1
 #define gamma2 1
 
-#define Power Pow
+#define Power(x,y) (pow((double) (x), (double) (y)))
 static void 
 rhs_values(FLOAT *values_var, FLOAT *values)
 { 
@@ -108,7 +108,7 @@ rhs_values(FLOAT *values_var, FLOAT *values)
     FLOAT dH31 = 0;
     FLOAT dH32 = 0;
     FLOAT dH33 = 0;
-    
+        
     //inverse spacetime metric
     invPsi00 = (-(Power(Psi13,2)*Psi22) + 2*Psi12*Psi13*Psi23 - Psi11*Power(Psi23,2) - Power(Psi12,2)*Psi33 + Psi11*Psi22*Psi33)/
          (Power(Psi03,2)*Power(Psi12,2) - 2*Psi02*Psi03*Psi12*Psi13 + Power(Psi02,2)*Power(Psi13,2) - Power(Psi03,2)*Psi11*Psi22 + 
@@ -117,6 +117,7 @@ rhs_values(FLOAT *values_var, FLOAT *values)
            Power(Psi02,2)*Psi11*Psi33 + 2*Psi01*Psi02*Psi12*Psi33 - Psi00*Power(Psi12,2)*Psi33 - Power(Psi01,2)*Psi22*Psi33 + 
            Psi00*Psi11*Psi22*Psi33);
     
+ printf("test point spcetime metric inverse\n"); 
     invPsi01 = (Psi03*Psi13*Psi22 - Psi03*Psi12*Psi23 - Psi02*Psi13*Psi23 + Psi01*Power(Psi23,2) + 
            Psi02*Psi12*Psi33 - Psi01*Psi22*Psi33)/
          (Power(Psi03,2)*Power(Psi12,2) - 2*Psi02*Psi03*Psi12*Psi13 + Power(Psi02,2)*Power(Psi13,2) - Power(Psi03,2)*Psi11*Psi22 + 
@@ -188,7 +189,7 @@ rhs_values(FLOAT *values_var, FLOAT *values)
            2*Psi01*Psi02*Psi13*Psi23 + 2*Psi00*Psi12*Psi13*Psi23 + Power(Psi01,2)*Power(Psi23,2) - Psi00*Psi11*Power(Psi23,2) - 
            Power(Psi02,2)*Psi11*Psi33 + 2*Psi01*Psi02*Psi12*Psi33 - Psi00*Power(Psi12,2)*Psi33 - Power(Psi01,2)*Psi22*Psi33 + 
            Psi00*Psi11*Psi22*Psi33);
-    
+     
     //inverse space metric
     g11 = (-Power(Psi23,2) + Psi22*Psi33)/
             (-(Power(Psi13,2)*Psi22) + 2*Psi12*Psi13*Psi23 - Psi11*Power(Psi23,2) - Power(Psi12,2)*Psi33 + Psi11*Psi22*Psi33);
@@ -330,6 +331,8 @@ rhs_values(FLOAT *values_var, FLOAT *values)
     rhsPsi23 = (-gamma1)*(N1*Phi123 + N2*Phi223 + N3*Phi323) - N*Pi23; 
     rhsPsi33 = (-gamma1)*(N1*Phi133 + N2*Phi233 + N3*Phi333) - N*Pi33;
     
+     
+    printf("test point Psi\n"); 
     //RHS of Pi
     
     //TERM 1
