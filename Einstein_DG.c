@@ -4,13 +4,13 @@
 #include <math.h>
 
 #include "gradDof.c"
-
-static void 
-func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
-{   
-    *value = (x+1.)*(x+1.);
-}
-
+#include "rhs_dofs.c"
+//static void 
+//func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
+//{   
+//    *value = (x+1.)*(x+1.);
+//}
+//
 //static void
 //func_zero(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 //{
@@ -31,7 +31,7 @@ main(int argc, char * argv[])
     //const char *matrix_fn = "mat.m", *var_name = "mat_M";
     GRID *g; 
     DOF_TYPE *dof_tp = DOF_DG2;
-    DOF *psi_00, *psi_01, *psi_02, *psi_03, *psi_11, *psi_12, *psi_13, *psi_22, *psi_23, *psi_33;
+    DOF *Psi_00, *Psi_01, *Psi_02, *Psi_03, *Psi_11, *Psi_12, *Psi_13, *Psi_22, *Psi_23, *Psi_33;
     DOF *Pi_00, *Pi_01, *Pi_02, *Pi_03, *Pi_11, *Pi_12, *Pi_13, *Pi_22, *Pi_23, *Pi_33;
     DOF *Phi_100, *Phi_101, *Phi_102, *Phi_103, *Phi_111, *Phi_112, *Phi_113, *Phi_122, *Phi_123, *Phi_133;
     DOF *Phi_200, *Phi_201, *Phi_202, *Phi_203, *Phi_211, *Phi_212, *Phi_213, *Phi_222, *Phi_223, *Phi_233;
@@ -48,21 +48,21 @@ main(int argc, char * argv[])
     //phgRefineAllElements(g, 1);
    
     /*creat dofs for all the functions to be solved*/ 
-    psi_00 = phgDofNew(g, dof_tp, 1, "psi_00", DofInterpolation);
-    psi_01 = phgDofNew(g, dof_tp, 1, "psi_01", DofInterpolation);
-    psi_02 = phgDofNew(g, dof_tp, 1, "psi_02", DofInterpolation);
-    psi_03 = phgDofNew(g, dof_tp, 1, "psi_03", DofInterpolation);
-    psi_11 = phgDofNew(g, dof_tp, 1, "psi_11", DofInterpolation);
-    psi_12 = phgDofNew(g, dof_tp, 1, "psi_12", DofInterpolation);
-    psi_13 = phgDofNew(g, dof_tp, 1, "psi_13", DofInterpolation);
-    psi_22 = phgDofNew(g, dof_tp, 1, "psi_22", DofInterpolation);
-    psi_23 = phgDofNew(g, dof_tp, 1, "psi_23", DofInterpolation);
-    psi_33 = phgDofNew(g, dof_tp, 1, "psi_33", DofInterpolation);
+    Psi_00 = phgDofNew(g, dof_tp, 1, "Psi_00", DofInterpolation);
+    Psi_01 = phgDofNew(g, dof_tp, 1, "Psi_01", DofInterpolation);
+    Psi_02 = phgDofNew(g, dof_tp, 1, "Psi_02", DofInterpolation);
+    Psi_03 = phgDofNew(g, dof_tp, 1, "Psi_03", DofInterpolation);
+    Psi_11 = phgDofNew(g, dof_tp, 1, "Psi_11", DofInterpolation);
+    Psi_12 = phgDofNew(g, dof_tp, 1, "Psi_12", DofInterpolation);
+    Psi_13 = phgDofNew(g, dof_tp, 1, "Psi_13", DofInterpolation);
+    Psi_22 = phgDofNew(g, dof_tp, 1, "Psi_22", DofInterpolation);
+    Psi_23 = phgDofNew(g, dof_tp, 1, "Psi_23", DofInterpolation);
+    Psi_33 = phgDofNew(g, dof_tp, 1, "Psi_33", DofInterpolation);
 
-    DOF *dofs_psi[10] = {psi_00, psi_01, psi_02, psi_03, 
-                                 psi_11, psi_12, psi_13,
-                                         psi_22, psi_23,
-                                                 psi_33};
+    DOF *dofs_Psi[10] = {Psi_00, Psi_01, Psi_02, Psi_03, 
+                                 Psi_11, Psi_12, Psi_13,
+                                         Psi_22, Psi_23,
+                                                 Psi_33};
 
     Pi_00 = phgDofNew(g, dof_tp, 1, "Pi_00", DofInterpolation);
     Pi_01 = phgDofNew(g, dof_tp, 1, "Pi_01", DofInterpolation);
@@ -125,11 +125,58 @@ main(int argc, char * argv[])
                    Phi_311, Phi_312, Phi_313,
                    Phi_322, Phi_323,
                    Phi_333};
+    DOF *dofs_var[50] ={ Psi_00, Psi_01, Psi_02, Psi_03,
+                                 Psi_11, Psi_12, Psi_13,
+                                         Psi_22, Psi_23,
+                                                 Psi_33,
+                         Pi_00, Pi_01, Pi_02, Pi_03,
+                                Pi_11, Pi_12, Pi_13,
+                                       Pi_22, Pi_23,
+                                              Pi_33,
+                   Phi_100, Phi_101, Phi_102, Phi_103, 
+                   Phi_111, Phi_112, Phi_113,
+                   Phi_122, Phi_123,
+                   Phi_133, 
+                   Phi_200, Phi_201, Phi_202, Phi_203,
+                   Phi_211, Phi_212, Phi_213,
+                   Phi_222, Phi_223,
+                   Phi_233,
+                   Phi_300, Phi_301, Phi_302, Phi_303,
+                   Phi_311, Phi_312, Phi_313,
+                   Phi_322, Phi_323,
+                   Phi_333};
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //for testing
+    for(int i=0;i<10;i++){
+        phgDofSetDataByValue(dofs_Pi[i], 0);
+        phgDofSetDataByValue(dofs_Phi[i], 0);
+        phgDofSetDataByValue(dofs_Phi[10 + i], 0);
+        phgDofSetDataByValue(dofs_Phi[20 + i], 0);
+    } 
+    phgDofSetDataByValue(Psi_00, -1);
+    phgDofSetDataByValue(Psi_11, 0);
+    phgDofSetDataByValue(Psi_22, 0);
+    phgDofSetDataByValue(Psi_33, 0);
+
+    DOF *dof_rhs = phgDofNew(g, dof_tp, 50, "dof_rhs", DofInterpolation);
+    get_rhs_dof(dofs_var, dof_rhs);
+
     //printf("test\n");
     /*Export VTK*/
-    //phgExportVTK(g, "tmp.vtk", u_h, p_0, p_1, q_0, q_1, w_0, w_1, NULL);
+    phgExportVTK(g, "tmp.vtk", dof_rhs, NULL);
 
     /*release the mem*/
 
@@ -139,5 +186,5 @@ main(int argc, char * argv[])
     phgFinalize(); 
 
     return 0;
-
+}
 
