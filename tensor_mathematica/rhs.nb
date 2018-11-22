@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     37829,        986]
-NotebookOptionsPosition[     36716,        950]
-NotebookOutlinePosition[     37076,        966]
-CellTagsIndexPosition[     37033,        963]
+NotebookDataLength[     35298,        928]
+NotebookOptionsPosition[     34308,        896]
+NotebookOutlinePosition[     34668,        912]
+CellTagsIndexPosition[     34625,        909]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -849,10 +849,8 @@ Cell[BoxData[
   3.751525365952855*^9, 3.751525367220179*^9}, {3.7517538791067877`*^9, 
   3.75175388966929*^9}, {3.751754780975473*^9, 3.751754786782928*^9}}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
- RowBox[{"CForm", "[", "vecGammaExep", "]"}]], "Input",
+ RowBox[{"CForm", "[", "rhsPsi", "]"}]], "Input",
  CellChangeTimes->{{3.751521712768208*^9, 3.7515217170674353`*^9}, {
    3.751521992104055*^9, 3.751522020415719*^9}, {3.7515222330018272`*^9, 
    3.75152223322466*^9}, {3.751522265261598*^9, 3.7515222748976793`*^9}, 
@@ -873,83 +871,31 @@ Cell[BoxData[
    3.751627735214574*^9}, {3.75162820566085*^9, 3.751628206019313*^9}, 
    3.751628335003149*^9, 3.75175339960468*^9, {3.751768328477598*^9, 
    3.75176833199234*^9}, {3.751769623359323*^9, 3.751769628758851*^9}, {
-   3.751771536588737*^9, 3.751771536958001*^9}}],
-
-Cell["\<\
-List(Gamma000*invPsi00 + Gamma100*invPsi00 + Gamma200*invPsi00 + \
-Gamma300*invPsi00 + 2*Gamma001*invPsi01 + 
-    2*Gamma101*invPsi01 + 2*Gamma201*invPsi01 + 2*Gamma301*invPsi01 + \
-2*Gamma002*invPsi02 + 2*Gamma102*invPsi02 + 
-    2*Gamma202*invPsi02 + 2*Gamma302*invPsi02 + 2*Gamma003*invPsi03 + \
-2*Gamma103*invPsi03 + 2*Gamma203*invPsi03 + 
-    2*Gamma303*invPsi03 + Gamma011*invPsi11 + Gamma111*invPsi11 + \
-Gamma211*invPsi11 + Gamma311*invPsi11 + 2*Gamma012*invPsi12 + 
-    2*Gamma112*invPsi12 + 2*Gamma212*invPsi12 + 2*Gamma312*invPsi12 + \
-2*Gamma013*invPsi13 + 2*Gamma113*invPsi13 + 
-    2*Gamma213*invPsi13 + 2*Gamma313*invPsi13 + Gamma022*invPsi22 + \
-Gamma122*invPsi22 + Gamma222*invPsi22 + Gamma322*invPsi22 + 
-    2*Gamma023*invPsi23 + 2*Gamma123*invPsi23 + 2*Gamma223*invPsi23 + \
-2*Gamma323*invPsi23 + Gamma033*invPsi33 + 
-    Gamma133*invPsi33 + Gamma233*invPsi33 + Gamma333*invPsi33,
-   Gamma000*invPsi00 + Gamma100*invPsi00 + Gamma200*invPsi00 + \
-Gamma300*invPsi00 + 2*Gamma001*invPsi01 + 2*Gamma101*invPsi01 + 
-    2*Gamma201*invPsi01 + 2*Gamma301*invPsi01 + 2*Gamma002*invPsi02 + \
-2*Gamma102*invPsi02 + 2*Gamma202*invPsi02 + 
-    2*Gamma302*invPsi02 + 2*Gamma003*invPsi03 + 2*Gamma103*invPsi03 + \
-2*Gamma203*invPsi03 + 2*Gamma303*invPsi03 + 
-    Gamma011*invPsi11 + Gamma111*invPsi11 + Gamma211*invPsi11 + \
-Gamma311*invPsi11 + 2*Gamma012*invPsi12 + 2*Gamma112*invPsi12 + 
-    2*Gamma212*invPsi12 + 2*Gamma312*invPsi12 + 2*Gamma013*invPsi13 + \
-2*Gamma113*invPsi13 + 2*Gamma213*invPsi13 + 
-    2*Gamma313*invPsi13 + Gamma022*invPsi22 + Gamma122*invPsi22 + \
-Gamma222*invPsi22 + Gamma322*invPsi22 + 2*Gamma023*invPsi23 + 
-    2*Gamma123*invPsi23 + 2*Gamma223*invPsi23 + 2*Gamma323*invPsi23 + \
-Gamma033*invPsi33 + Gamma133*invPsi33 + 
-    Gamma233*invPsi33 + Gamma333*invPsi33,Gamma000*invPsi00 + \
-Gamma100*invPsi00 + Gamma200*invPsi00 + Gamma300*invPsi00 + 
-    2*Gamma001*invPsi01 + 2*Gamma101*invPsi01 + 2*Gamma201*invPsi01 + \
-2*Gamma301*invPsi01 + 2*Gamma002*invPsi02 + 
-    2*Gamma102*invPsi02 + 2*Gamma202*invPsi02 + 2*Gamma302*invPsi02 + \
-2*Gamma003*invPsi03 + 2*Gamma103*invPsi03 + 
-    2*Gamma203*invPsi03 + 2*Gamma303*invPsi03 + Gamma011*invPsi11 + \
-Gamma111*invPsi11 + Gamma211*invPsi11 + Gamma311*invPsi11 + 
-    2*Gamma012*invPsi12 + 2*Gamma112*invPsi12 + 2*Gamma212*invPsi12 + \
-2*Gamma312*invPsi12 + 2*Gamma013*invPsi13 + 
-    2*Gamma113*invPsi13 + 2*Gamma213*invPsi13 + 2*Gamma313*invPsi13 + \
-Gamma022*invPsi22 + Gamma122*invPsi22 + 
-    Gamma222*invPsi22 + Gamma322*invPsi22 + 2*Gamma023*invPsi23 + \
-2*Gamma123*invPsi23 + 2*Gamma223*invPsi23 + 
-    2*Gamma323*invPsi23 + Gamma033*invPsi33 + Gamma133*invPsi33 + \
-Gamma233*invPsi33 + Gamma333*invPsi33,
-   Gamma000*invPsi00 + Gamma100*invPsi00 + Gamma200*invPsi00 + \
-Gamma300*invPsi00 + 2*Gamma001*invPsi01 + 2*Gamma101*invPsi01 + 
-    2*Gamma201*invPsi01 + 2*Gamma301*invPsi01 + 2*Gamma002*invPsi02 + \
-2*Gamma102*invPsi02 + 2*Gamma202*invPsi02 + 
-    2*Gamma302*invPsi02 + 2*Gamma003*invPsi03 + 2*Gamma103*invPsi03 + \
-2*Gamma203*invPsi03 + 2*Gamma303*invPsi03 + 
-    Gamma011*invPsi11 + Gamma111*invPsi11 + Gamma211*invPsi11 + \
-Gamma311*invPsi11 + 2*Gamma012*invPsi12 + 2*Gamma112*invPsi12 + 
-    2*Gamma212*invPsi12 + 2*Gamma312*invPsi12 + 2*Gamma013*invPsi13 + \
-2*Gamma113*invPsi13 + 2*Gamma213*invPsi13 + 
-    2*Gamma313*invPsi13 + Gamma022*invPsi22 + Gamma122*invPsi22 + \
-Gamma222*invPsi22 + Gamma322*invPsi22 + 2*Gamma023*invPsi23 + 
-    2*Gamma123*invPsi23 + 2*Gamma223*invPsi23 + 2*Gamma323*invPsi23 + \
-Gamma033*invPsi33 + Gamma133*invPsi33 + 
-    Gamma233*invPsi33 + Gamma333*invPsi33)\
-\>", "Output",
- CellChangeTimes->{3.751771540307828*^9}]
-}, Open  ]],
-
-Cell["\<\
-
-   \
-\>", "Input",
- CellChangeTimes->{{3.7517706641337442`*^9, 3.7517706641389427`*^9}, {
-   3.751771109014085*^9, 3.751771118767218*^9}, 3.751771172563169*^9, {
-   3.751771204192995*^9, 3.7517712299226017`*^9}}]
+   3.751771536588737*^9, 3.751771536958001*^9}, {3.751797716651968*^9, 
+   3.751797718609096*^9}, {3.7517978386740627`*^9, 3.751797868108568*^9}, {
+   3.7518436119729347`*^9, 3.751843633533297*^9}, 3.751843764014892*^9, {
+   3.751843849214424*^9, 3.75184385379809*^9}, {3.751844052762103*^9, 
+   3.7518440581126757`*^9}, {3.7518443756362534`*^9, 3.751844433169959*^9}, {
+   3.75184448622762*^9, 3.751844494355193*^9}, {3.751844587282764*^9, 
+   3.751844588511114*^9}, {3.751844626795124*^9, 3.751844653807523*^9}, {
+   3.751844860530188*^9, 3.75184488572188*^9}, {3.7518451400426807`*^9, 
+   3.7518451402554197`*^9}, {3.751845200459573*^9, 3.751845274915991*^9}, {
+   3.751845507575973*^9, 3.7518455179837103`*^9}, {3.7518455533801737`*^9, 
+   3.7518455536599073`*^9}, {3.75184560233449*^9, 3.751845604066896*^9}, 
+   3.751845795669355*^9, {3.751846391047179*^9, 3.751846424845173*^9}, {
+   3.751846459010124*^9, 3.751846460541986*^9}, 3.75184656460541*^9, {
+   3.751846829682212*^9, 3.751846853852914*^9}, 3.751846935107967*^9, {
+   3.751847166750408*^9, 3.7518471692619867`*^9}, {3.75184722772246*^9, 
+   3.751847356302121*^9}, {3.751847486845929*^9, 3.751847509992087*^9}, {
+   3.751847560517186*^9, 3.751847635726885*^9}, {3.751847666273747*^9, 
+   3.751847743153201*^9}, {3.751847783561339*^9, 3.751847808300394*^9}, {
+   3.7518478435636253`*^9, 3.751847860969564*^9}, {3.751847891421874*^9, 
+   3.751847954609358*^9}, {3.751848034215098*^9, 3.7518480562559767`*^9}, {
+   3.751848180264842*^9, 3.751848183746709*^9}, {3.751848383731575*^9, 
+   3.751848385928069*^9}}]
 },
-WindowSize->{1920, 1025},
-WindowMargins->{{0, Automatic}, {Automatic, 1}},
+WindowSize->{960, 1025},
+WindowMargins->{{0, Automatic}, {-2, Automatic}},
 Magnification->1.25,
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
@@ -965,29 +911,25 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 1088, 24, 40, "Input"],
-Cell[1649, 46, 6359, 161, 321, "Input"],
-Cell[8011, 209, 776, 20, 69, "Input"],
-Cell[8790, 231, 893, 24, 40, "Input"],
-Cell[9686, 257, 3725, 103, 265, "Input"],
+Cell[558, 20, 1088, 24, 69, "Input"],
+Cell[1649, 46, 6359, 161, 573, "Input"],
+Cell[8011, 209, 776, 20, 97, "Input"],
+Cell[8790, 231, 893, 24, 97, "Input"],
+Cell[9686, 257, 3725, 103, 573, "Input"],
 Cell[13414, 362, 283, 7, 40, "Input"],
 Cell[13700, 371, 232, 5, 40, "Input"],
-Cell[13935, 378, 2942, 78, 153, "Input"],
-Cell[16880, 458, 1176, 31, 40, "Input"],
-Cell[18059, 491, 1410, 35, 50, "Input"],
-Cell[19472, 528, 1380, 37, 50, "Input"],
-Cell[20855, 567, 623, 17, 50, "Input"],
-Cell[21481, 586, 2934, 73, 191, "Input"],
-Cell[24418, 661, 2028, 53, 86, "Input"],
-Cell[26449, 716, 1046, 29, 50, "Input"],
-Cell[27498, 747, 1285, 34, 50, "Input"],
-Cell[28786, 783, 1548, 41, 86, "Input"],
-Cell[30337, 826, 883, 23, 50, "Input"],
-Cell[CellGroupData[{
-Cell[31245, 853, 1563, 22, 50, "Input"],
-Cell[32811, 877, 3663, 62, 945, "Output"]
-}, Open  ]],
-Cell[36489, 942, 223, 6, 80, InheritFromParent]
+Cell[13935, 378, 2942, 78, 209, "Input"],
+Cell[16880, 458, 1176, 31, 97, "Input"],
+Cell[18059, 491, 1410, 35, 97, "Input"],
+Cell[19472, 528, 1380, 37, 97, "Input"],
+Cell[20855, 567, 623, 17, 69, "Input"],
+Cell[21481, 586, 2934, 73, 237, "Input"],
+Cell[24418, 661, 2028, 53, 209, "Input"],
+Cell[26449, 716, 1046, 29, 97, "Input"],
+Cell[27498, 747, 1285, 34, 97, "Input"],
+Cell[28786, 783, 1548, 41, 209, "Input"],
+Cell[30337, 826, 883, 23, 97, "Input"],
+Cell[31223, 851, 3081, 43, 40, "Input"]
 }
 ]
 *)
