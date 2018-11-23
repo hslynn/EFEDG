@@ -5,6 +5,7 @@
 #define gamma2 1
 
 #define Power(x,y) (pow((double) (x), (double) (y)))
+
 static void 
 rhs_values(FLOAT *values_var, FLOAT *values)
 { 
