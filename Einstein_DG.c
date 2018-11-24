@@ -98,6 +98,23 @@ main(int argc, char * argv[])
     create_dofs(g, dof_tp, dofs_rhsPi, names_rhsPi, 10);
     create_dofs(g, dof_tp, dofs_rhsPhi, names_rhsPhi, 30);
 
+    //create two list to store dofs of var and rhs
+    DOF *dofs_var[50];
+    DOF *dofs_rhs[50];
+    for(int i =0;i<10;i++){
+        dofs_var[i] = dofs_Psi[i];
+        dofs_var[10+i] = dofs_Pi[i];
+        dofs_var[20+i] = dofs_Phi[i]; 
+        dofs_var[30+i] = dofs_Phi[10 + i];
+        dofs_var[40+i] = dofs_Phi[20 + i];
+
+        dofs_rhs[i] = dofs_rhsPsi[i];
+        dofs_rhs[10+i] = dofs_rhsPi[i];
+        dofs_rhs[20+i] = dofs_rhsPhi[i]; 
+        dofs_rhs[30+i] = dofs_rhsPhi[10 + i];
+        dofs_rhs[40+i] = dofs_rhsPhi[20 + i];
+    }
+
     /*create auxi dofs*/
     DOF *dofs_g[6], *dofs_N[4];
     char *names_g[6] = {"g11","g12","g13","g22","g23","g33"};
@@ -121,10 +138,7 @@ main(int argc, char * argv[])
         t0 = phgGetTime(NULL);
     }   
 
-    get_dofs_g(dofs_Psi, dofs_g);
-    get_dofs_N(dofs_Psi, dofs_g, dofs_N);
-   // get_dofs_rhs(dofs_Psi, dofs_Pi, dofs_Phi, dofs_g, dofs_N, 
-   //                 dofs_rhsPsi, dofs_rhsPi, dofs_rhsPhi);
+    get_dofs_auxi(dofs_var, dofs_g, dofs_N, dofs_rhs); 
 
     if(phgRank == 0){ 
         t1 = phgGetTime(NULL);
@@ -132,19 +146,17 @@ main(int argc, char * argv[])
     }
 
     /*Export VTK*/
-    phgExportVTK(g, "vtk.vtk", dofs_g[1], NULL);
+    phgExportVTKn(g, "g.vtk", 6, dofs_g);
+    phgExportVTKn(g, "N.vtk", 4, dofs_N);
+    
+    phgExportVTKn(g, "rhsPsi.vtk", 10, dofs_rhsPsi);
+    phgExportVTKn(g, "rhsPi.vtk", 10, dofs_rhsPi);
+    phgExportVTKn(g, "rhsPhi.vtk", 30, dofs_rhsPhi);
+    
     /*release the mem*/
-    for(int i=0;i<10;i++){
-        phgDofFree(dofs_Psi + i);
-        phgDofFree(dofs_Pi + i);
-        phgDofFree(dofs_Phi + i);
-        phgDofFree(dofs_Phi + 10 + i);
-        phgDofFree(dofs_Phi + 20 + i);
-        phgDofFree(dofs_rhsPsi + i);
-        phgDofFree(dofs_rhsPi + i);
-        phgDofFree(dofs_rhsPhi + i);
-        phgDofFree(dofs_rhsPhi + 10 + i);
-        phgDofFree(dofs_rhsPhi + 20 + i);
+    for(int i=0;i<50;i++){
+        phgDofFree(dofs_var + i);
+        phgDofFree(dofs_rhs + i);
         }
     for(int i=0; i<6; i++){
         phgDofFree(dofs_g + i);

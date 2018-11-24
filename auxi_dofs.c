@@ -4,34 +4,6 @@
 # define Power(x, y) (pow((double) (x), (double) (y)))
 
 static void
-get_dofs_rhs(DOF **dofs_var, DOF **dofs_rhs)
-{
-    INT i, n, data_count;
-    FLOAT *p_var[50], *p_rhs[50], values_var[50], values_rhs[50];
-    for(INT i=0; i < 50; i++){
-        p_var[i] = DofData(dofs_var[i]);
-        p_rhs[i] = DofData(dofs_rhs[i]); 
-    }
-
-    //evaluate dofs values at every data point
-    data_count = DofGetDataCount(dofs_var[0]);
-    for(n=0;n<data_count;n++){
-        //compute rhs values at data point
-        for(i=0; i < 50; i++){
-            values_var[i] = *(p_var[i]);
-        }
-
-        rhs_values(values_var, values_rhs); 
-
-        for(i=0; i<50; i++){
-            *p_rhs[i] = values_rhs[i];
-            p_rhs[i]++;
-            p_var[i]++; 
-        }
-    }
-}
-
-static void
 get_dofs_g(DOF **dofs_Psi, DOF **dofs_g)
 {
     INT i, n, data_count;
@@ -88,7 +60,7 @@ get_dofs_N(DOF **dofs_Psi, DOF **dofs_g, DOF **dofs_N)
     FLOAT N, N1, N2, N3;
 
     for(i=0; i<4; i++){
-        p_Psi[i] = DofData(dofs_Psi[i+1]);
+        p_Psi[i] = DofData(dofs_Psi[i]);
         p_N[i] = DofData(dofs_N[i]);
     }
 
@@ -130,5 +102,35 @@ get_dofs_N(DOF **dofs_Psi, DOF **dofs_g, DOF **dofs_N)
             p_g[i]++;
         }
     }
+}
 
+static void
+get_dofs_auxi(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_rhs)
+{
+    DOF **dofs_Psi = dofs_var;
+    get_dofs_g(dofs_Psi, dofs_g);
+    get_dofs_N(dofs_Psi, dofs_g, dofs_N);
+    INT i, n, data_count;
+    FLOAT *p_var[50], *p_rhs[50], values_var[50], values_rhs[50];
+    for(INT i=0; i < 50; i++){
+        p_var[i] = DofData(dofs_var[i]);
+        p_rhs[i] = DofData(dofs_rhs[i]); 
+    }
+
+    //evaluate dofs values at every data point
+    data_count = DofGetDataCount(dofs_var[0]);
+    for(n=0;n<data_count;n++){
+        //compute rhs values at data point
+        for(i=0; i < 50; i++){
+            values_var[i] = *(p_var[i]);
+        }
+
+        rhs_values(values_var, values_rhs); 
+
+        for(i=0; i<50; i++){
+            *p_rhs[i] = values_rhs[i];
+            p_rhs[i]++;
+            p_var[i]++; 
+        }
+    }
 }
