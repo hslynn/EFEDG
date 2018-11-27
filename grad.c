@@ -3,38 +3,41 @@
 static void
 build_linear_system(SOLVER *solver, DOF *u_h)
 {
-    int i, j, s, ss, coord, in_out;
+    int n, k, i, j, s, ss, coord, in_out;
     GRID *g = u_h->g;
     ELEMENT *e, *neigh_e;
-    FLOAT val_p, val_m, mass_term, boundary_term, stiff_term[3];
+    FLOAT val_ext, val_int, mass_term, boundary_term, stiff_term[3];
 
     ForAllElements(g, e){ 
-    int N = DofGetNBas(u_h, e); 
-    int I[6*N];
+    int nbas = DofGetNBas(u_h, e); 
+    int I[6*nbas];
         
-        for(i = 0; i<N; i++){
+        for(n = 0; n<nbas; n++){
             
             /*stiffness part*/ 
-            phgQuadDofGradBas(e, u_h, u_h, i, 10, stiff_term);
+            phgQuadDofGradBas(e, u_h, u_h, n, 10, stiff_term);
 
             /*mass matrix*/
             for(coord = 0; coord<3; coord++){
                 for(in_out = 0; in_out < 2; in_out++){
                     /*I[]建立了一个映射，每个单元的自由度在线性解法器中被给予一个编号*/
-                    I[6*i  + 2*coord + in_out] = phgSolverMapE2L(solver, 0, e, 6*i  + 2*coord + in_out);
+                    i = 6*n + 2*coord + in_out;//i是e单元中基函数编号为n、坐标编号为coord、flux编号为in_out对应的自由度编号 
+
+                    I[i] = phgSolverMapE2L(solver, 0, e, i);
 
                     /*mass part*/
-                    for(j = 0; j <= i; j++){
-                        mass_term = phgQuadBasDotBas(e, u_h, i, u_h, j, QUAD_DEFAULT);
+                    for(k = 0; k <= n; k++){
+                        mass_term = phgQuadBasDotBas(e, u_h, n, u_h, k, QUAD_DEFAULT);
+                        j = 6*k + 2*coord + in_out;
                         /*添加到解法器中矩阵的相应项*/
-                        phgSolverAddMatrixEntry(solver, I[6*i  + 2*coord + in_out], I[6*j  + 2*coord + in_out], mass_term);
-                        if(j < i){
-                            phgSolverAddMatrixEntry(solver, I[6*j  + 2*coord + in_out], I[6*i  + 2*coord + in_out], mass_term);
+                        phgSolverAddMatrixEntry(solver, I[i], I[j], mass_term);
+                        if(k < n){
+                            phgSolverAddMatrixEntry(solver, I[j], I[i], mass_term);
                         }
                     }
 
                     /*添加stiffness到解法器相应右端项*/
-                    phgSolverAddRHSEntry(solver, I[6*i  + 2*coord + in_out], - stiff_term[coord]);
+                    phgSolverAddRHSEntry(solver, I[i], - stiff_term[coord]);
 
                 
                     /*boundary term, using numerical flux*/ 
@@ -47,21 +50,21 @@ build_linear_system(SOLVER *solver, DOF *u_h)
                                 if(neigh_e->faces[ss] == e->faces[s]) break; 
                             }               
         
-                            val_p = dgQuadFaceNeighDofDotBas(e, u_h, s, i, neigh_e, 
+                            val_ext = dgQuadFaceNeighDofDotBas(e, u_h, s, n, neigh_e, 
                                     u_h, ss, QUAD_DEFAULT);//计算u^+ 
-                            val_m = phgQuadFaceDofDotBas(e, s, u_h, DOF_PROJ_NONE, 
-                                    u_h, i, QUAD_DEFAULT); //计算u^-
-                            boundary_term = 0.5 * normal[coord] * (val_p + val_m) + 
-                                    (in_out - 0.5) * fabs(normal[coord]) * (val_p - val_m);//数值通量 
+                            val_int = phgQuadFaceDofDotBas(e, s, u_h, DOF_PROJ_NONE, 
+                                    u_h, n, QUAD_DEFAULT); //计算u^-
+                            boundary_term = 0.5 * normal[coord] * (val_ext + val_int) + 
+                                    (0.5 - in_out) * fabs(normal[coord]) * (val_ext - val_int);//数值通量, in_out = 0 对应于取plus 
                             
                             /*添加到解法器相应右端项*/
-                            phgSolverAddRHSEntry(solver, I[i*6 + coord*2 + in_out], boundary_term);
+                            phgSolverAddRHSEntry(solver, I[i], boundary_term);
                         } 
                         else{//s是边界面时,只有u^- 
                             boundary_term = normal[coord] * phgQuadFaceDofDotBas(e, s,
-                                    u_h, DOF_PROJ_NONE, u_h, i, QUAD_DEFAULT); 
+                                    u_h, DOF_PROJ_NONE, u_h, n, QUAD_DEFAULT); 
                                 
-                            phgSolverAddRHSEntry(solver, I[i*6 + coord*2 +in_out], boundary_term);
+                            phgSolverAddRHSEntry(solver, I[i], boundary_term);
                         } 
                     } 
                 }
@@ -84,9 +87,9 @@ dgHJGradDof(DOF *u_h, DOF *dof_grad)
 }
 
 static void
-get_dofs_grad(DOF **dofs_var, DOF ** dofs_grad)
+get_dofs_grad(DOF **dofs_var, DOF ** dofs_grad, int ndof)
 {
-    for(INT i=0;i<50;i++)
+    for(INT i=0;i<ndof;i++)
         { 
             dgHJGradDof(dofs_var[i], dofs_grad[i]);
         }

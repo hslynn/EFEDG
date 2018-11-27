@@ -125,7 +125,7 @@ get_dofs_auxi(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_rhs)
             values_var[i] = *(p_var[i]);
         }
 
-        rhs_values(values_var, values_rhs); 
+        get_values_rhs(values_var, values_rhs); 
 
         for(i=0; i<50; i++){
             *p_rhs[i] = values_rhs[i];

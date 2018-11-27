@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     30572,        857]
-NotebookOptionsPosition[     29980,        835]
-NotebookOutlinePosition[     30339,        851]
-CellTagsIndexPosition[     30296,        848]
+NotebookDataLength[     30502,        854]
+NotebookOptionsPosition[     29955,        833]
+NotebookOutlinePosition[     30313,        849]
+CellTagsIndexPosition[     30270,        846]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -323,7 +323,8 @@ Cell[BoxData[{
    3.75127685164922*^9, 3.7512768592945843`*^9}, 3.7515095969877377`*^9, 
    3.7515096285527153`*^9, {3.751511146063731*^9, 3.751511146471191*^9}, {
    3.751513241389028*^9, 3.751513241801962*^9}, {3.7515132719777117`*^9, 
-   3.751513305577026*^9}, {3.751513381123088*^9, 3.751513534901597*^9}}],
+   3.751513305577026*^9}, {3.751513381123088*^9, 3.751513534901597*^9}, {
+   3.752294746993412*^9, 3.752294747374462*^9}, 3.7522947859849*^9}],
 
 Cell[BoxData[{
  RowBox[{"dPsiAve", ":=", 
@@ -670,9 +671,6 @@ Cell[BoxData[
    3.7515116012878532`*^9, 3.751511601585353*^9}, {3.7515135471513987`*^9, 
    3.751513563755628*^9}, 3.7515143398559*^9}],
 
-Cell[BoxData[""], "Input",
- CellChangeTimes->{{3.751509810505224*^9, 3.751509811555525*^9}}],
-
 Cell[BoxData[
  RowBox[{"t1HhatPi", ":=", 
   RowBox[{"Table", "[", 
@@ -833,8 +831,8 @@ Cell[BoxData[
 
 Cell["", "Chapter"]
 },
-WindowSize->{960, 1025},
-WindowMargins->{{1060, -100}, {-85, Automatic}},
+WindowSize->{1920, 1025},
+WindowMargins->{{960, -960}, {-2, Automatic}},
 Magnification->1.25,
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
@@ -850,15 +848,14 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 11141, 305, 1805, "Input"],
-Cell[11702, 327, 11255, 307, 1777, "Input"],
-Cell[22960, 636, 1367, 34, 97, "Input"],
-Cell[24330, 672, 92, 1, 40, "Input"],
-Cell[24425, 675, 1152, 30, 153, "Input"],
-Cell[25580, 707, 2104, 58, 209, "Input"],
-Cell[27687, 767, 1208, 32, 153, "Input"],
-Cell[28898, 801, 1056, 30, 153, "Input"],
-Cell[29957, 833, 19, 0, 82, "Chapter"]
+Cell[558, 20, 11211, 306, 909, "Input"],
+Cell[11772, 328, 11255, 307, 881, "Input"],
+Cell[23030, 637, 1367, 34, 40, "Input"],
+Cell[24400, 673, 1152, 30, 40, "Input"],
+Cell[25555, 705, 2104, 58, 69, "Input"],
+Cell[27662, 765, 1208, 32, 40, "Input"],
+Cell[28873, 799, 1056, 30, 40, "Input"],
+Cell[29932, 831, 19, 0, 82, "Chapter"]
 }
 ]
 *)

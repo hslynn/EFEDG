@@ -7,7 +7,7 @@
 #define Power(x,y) (pow((double) (x), (double) (y)))
 
 static void 
-rhs_values(FLOAT *values_var, FLOAT *values)
+get_values_rhs(FLOAT *values_var, FLOAT *values)
 { 
     FLOAT invPsi00, invPsi01, invPsi02, invPsi03, invPsi11, invPsi12, invPsi13, invPsi22, invPsi23, invPsi33;
     FLOAT g11, g12, g13, g22, g23, g33;

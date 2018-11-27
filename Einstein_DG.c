@@ -5,12 +5,12 @@
 
 #include "auxi_dofs.c"
 #include "dofs.c"
-#include "grad.c"
-static void 
-func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
-{   
-    *value = x*x + y;
-}
+#include "Hhat_dofs.c"
+//static void 
+//func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
+//{   
+//    *value = x*x + y;
+//}
 
 //static void
 //func_zero(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
@@ -30,7 +30,7 @@ main(int argc, char * argv[])
     char *meshfile ="icosahedron.mesh";
     //const char *matrix_fn = "mat.m", *var_name = "mat_M";
     GRID *g; 
-    DOF_TYPE *dof_tp = DOF_DG3;
+    DOF_TYPE *dof_tp = DOF_DG2;
     FLOAT t0 = 0.0, t1 = 0.0;
     //MAT *mat_M;
 
@@ -131,7 +131,7 @@ main(int argc, char * argv[])
 
 
     //create two list to store dofs of var and rhs
-    DOF *dofs_var[50], *dofs_rhs[50], *dofs_grad[50];
+    DOF *dofs_var[50], *dofs_rhs[50], *dofs_grad_var[50];
     for(int i =0;i<10;i++){
         dofs_var[i] = dofs_Psi[i];
         dofs_var[10+i] = dofs_Pi[i];
@@ -145,11 +145,11 @@ main(int argc, char * argv[])
         dofs_rhs[30+i] = dofs_rhsPhi[10 + i];
         dofs_rhs[40+i] = dofs_rhsPhi[20 + i];
 
-        dofs_grad[i] = dofs_gradPsi[i];
-        dofs_grad[10+i] = dofs_gradPi[i];
-        dofs_grad[20+i] = dofs_gradPhi[i]; 
-        dofs_grad[30+i] = dofs_gradPhi[10 + i];
-        dofs_grad[40+i] = dofs_gradPhi[20 + i];
+        dofs_grad_var[i] = dofs_gradPsi[i];
+        dofs_grad_var[10+i] = dofs_gradPi[i];
+        dofs_grad_var[20+i] = dofs_gradPhi[i]; 
+        dofs_grad_var[30+i] = dofs_gradPhi[10 + i];
+        dofs_grad_var[40+i] = dofs_gradPhi[20 + i];
     }
 
     /*create auxi dofs*/
@@ -161,7 +161,7 @@ main(int argc, char * argv[])
   
     //for testing
     for(int i=0;i<10;i++){
-        phgDofSetDataByFunction(dofs_Pi[i], func_u);
+        phgDofSetDataByValue(dofs_Phi[i], 0);
         phgDofSetDataByValue(dofs_Phi[i], 0);
         phgDofSetDataByValue(dofs_Phi[10 + i], 0);
         phgDofSetDataByValue(dofs_Phi[20 + i], 0);
@@ -175,9 +175,10 @@ main(int argc, char * argv[])
         t0 = phgGetTime(NULL);
     }   
 
-    //get_dofs_auxi(dofs_var, dofs_g, dofs_N, dofs_rhs); 
-    //get_dofs_grad(dofs_var, dofs_grad);
-    dgHJGradDof(dofs_Pi[0], dofs_gradPi[0]);
+    get_dofs_auxi(dofs_var, dofs_g, dofs_N, dofs_rhs); 
+    get_dofs_grad(dofs_var, dofs_grad_var, 50);
+    DOF *dofs_Hhat[50];
+    get_dofs_Hhat(dofs_grad_var, dofs_g, dofs_N, dofs_Hhat);
 
     if(phgRank == 0){ 
         t1 = phgGetTime(NULL);
@@ -186,14 +187,14 @@ main(int argc, char * argv[])
 
     /*Export VTK*/
     //phgExportVTKn(g, "gradPsi.vtk", 10, dofs_gradPsi);
-    phgDofDump(dofs_gradPi[0]);
+    phgDofDump(dofs_Hhat[0]);
     //phgExportVTKn(g, "gradPhi.vtk", 30, dofs_gradPhi);
     
     /*release the mem*/
     for(int i=0;i<50;i++){
         phgDofFree(dofs_var + i);
         phgDofFree(dofs_rhs + i);
-        phgDofFree(dofs_grad + i);
+        phgDofFree(dofs_grad_var + i);
         }
     for(int i=0; i<6; i++){
         phgDofFree(dofs_g + i);
