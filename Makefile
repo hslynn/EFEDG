@@ -5,4 +5,4 @@ clean:
 Einstein_DG.o: Einstein_DG.c 
 
 
-include /home/hslynn/Apps/phg/share/phg/Makefile.inc
+include /home/hslynn/apps/phg/share/phg/Makefile.inc
