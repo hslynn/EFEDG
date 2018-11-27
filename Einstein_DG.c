@@ -6,6 +6,7 @@
 #include "auxi_dofs.c"
 #include "dofs.c"
 #include "Hhat_dofs.c"
+
 //static void 
 //func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
 //{   

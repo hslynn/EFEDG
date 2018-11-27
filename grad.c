@@ -83,7 +83,6 @@ dgHJGradDof(DOF *u_h, DOF *dof_grad)
     
     phgSolverSolve(solver, TRUE, dof_grad, NULL);
     phgSolverDestroy(&solver);
-
 }
 
 static void
@@ -94,20 +93,4 @@ get_dofs_grad(DOF **dofs_var, DOF ** dofs_grad, int ndof)
             dgHJGradDof(dofs_var[i], dofs_grad[i]);
         }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
