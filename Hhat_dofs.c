@@ -29,16 +29,12 @@ get_dofs_Hhat(DOF **dofs_grad_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_Hhat)
 {
     DOF *dofs_grad_var_hat[50]; 
     get_dofs_grad_hat(dofs_grad_var, dofs_grad_var_hat, 50);
-
-    GRID *g = dofs_N[0]->g;
-    ELEMENT *e;
+    
     INT i, j, n, data_count = DofGetDataCount(dofs_N[0]);
     FLOAT *p_grad_hat[50], *p_g[6], *p_N[4], *p_Hhat[50];
     FLOAT values_grad_hat[50][6], values_g[6], values_N[4], values_Hhat[50];
     
     for(i=0; i<50; i++){
-        phgDofCopy(dofs_g, dofs_Hhat[i], NULL, "Hhat");
-
         p_grad_hat[i] = DofData(dofs_grad_var_hat[i]);
         p_Hhat[i] = DofData(dofs_Hhat[i]);
     }    
