@@ -1,43 +1,30 @@
 #include "grad.c"
 #include "Hhat_values.c"
 
-DOF *get_dof_grad_hat(DOF *dof_grad)
-{
-    INT i, npair = DofGetDataCount(dof_grad)/2;
-    FLOAT grad_plus, grad_minus;
-    FLOAT *p = DofData(dof_grad);
-    
-    for(i=0;i<npair;i++){
-        grad_plus = *p, grad_minus = *(p+1); 
-        *p = 0.5 * (grad_plus + grad_minus);
-        *(++p) = 0.5 * (grad_plus - grad_minus); 
-        p++;
-    } 
-    return dof_grad;
-}
-
 static void
-get_dofs_grad_hat(DOF **dofs_grad, DOF **dofs_grad_hat, INT ndof) 
+get_dofs_Hhat(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, 
+        DOF **dofs_gradPsi, DOF **dofs_gradPi, DOF **dofs_gradPhi, DOF **dofs_Hhat)
 {
-   for(INT i=0;i<ndof;i++){
-        dofs_grad_hat[i] = get_dof_grad_hat(dofs_grad[i]);
-    } 
-}
-
-static void
-get_dofs_Hhat(DOF **dofs_grad_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_Hhat)
-{
-    DOF *dofs_grad_var_hat[50]; 
-    get_dofs_grad_hat(dofs_grad_var, dofs_grad_var_hat, 50);
+    get_dofs_grad_hat(dofs_var, dofs_Psi, 10);
+    get_dofs_grad_hat(dofs_var + 10, dofs_Pi, 10);
+    get_dofs_grad_hat(dofs_var + 20, dofs_Phi, 30);
     
     INT i, j, n, data_count = DofGetDataCount(dofs_N[0]);
-    FLOAT *p_grad_hat[50], *p_g[6], *p_N[4], *p_Hhat[50];
-    FLOAT values_grad_hat[50][6], values_g[6], values_N[4], values_Hhat[50];
+    FLOAT *p_gradPsi[30], *p_gradPi[30], *p_gradPhi[90], *p_g[6], *p_N[4], *p_Hhat[50];
+    FLOAT v_gradPsi[30][2], v_gradPi[30][2], v_gradPhi[90][2];
+    FLOAT v_g[6], v_N[4], v_Hhat[50];
     
-    for(i=0; i<50; i++){
-        p_grad_hat[i] = DofData(dofs_grad_var_hat[i]);
-        p_Hhat[i] = DofData(dofs_Hhat[i]);
+    for(i=0; i<30; i++){
+        p_gradPsi[i] = DofData(dofs_gradPsi[i]);
+        p_gradPi[i] = DofData(dofs_gradPi[i])
+        p_gradPhi[i] = DofData(dofs_gradPhi[i])
+        p_gradPhi[30+i] = DofData(dofs_gradPhi[i])
+        p_gradPhi[30+i] = DofData(dofs_gradPhi[i])
     }    
+
+    for(i=0; i<50; i++){
+        p_Hhat[i] = DofData(dofs_Hhat[i]);
+    }
     for(i=0; i<6; i++){
         p_g[i] = DofData(dofs_g[i]);
     }

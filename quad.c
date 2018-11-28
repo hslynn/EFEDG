@@ -18,7 +18,6 @@ phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)
     g2 = phgQuadGetBasisGradient(e, v, m, quad);
     w = quad->weights;
     
-    
     d1 = d2 = d3 = 0.;
     for (i = 0; i < quad->npoints; i++) {
         d1 += *(g1) * (*g2++) * (*w);
