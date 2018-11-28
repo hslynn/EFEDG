@@ -16,10 +16,10 @@ get_dofs_Hhat(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N,
     
     for(i=0; i<30; i++){
         p_gradPsi[i] = DofData(dofs_gradPsi[i]);
-        p_gradPi[i] = DofData(dofs_gradPi[i])
-        p_gradPhi[i] = DofData(dofs_gradPhi[i])
-        p_gradPhi[30+i] = DofData(dofs_gradPhi[i])
-        p_gradPhi[30+i] = DofData(dofs_gradPhi[i])
+        p_gradPi[i] = DofData(dofs_gradPi[i]);
+        p_gradPhi[i] = DofData(dofs_gradPhi[i]);
+        p_gradPhi[30+i] = DofData(dofs_gradPhi[30+i]);
+        p_gradPhi[60+i] = DofData(dofs_gradPhi[60+i]);
     }    
 
     for(i=0; i<50; i++){
@@ -34,9 +34,13 @@ get_dofs_Hhat(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N,
    
     // 
     for(n=0;n<data_count;n++){
-        for(i=0; i<50; i++){
-            for(j=0; j<6; j++){
-                values_grad_hat[i][j] = *(p_grad_hat[i]++);
+        for(i=0; i<30; i++){
+            for(j=0; j<2; j++){
+                values_gradPsi[i][j] = *(p_gradPsi[i]++);
+                values_gradPi[i][j] = *(p_gradPi[i]++);
+                values_gradPhi[i][j] = *(p_gradPhi[i]++);
+                values_gradPhi[30+i][j] = *(p_gradPhi[30+i]++);
+                values_gradPhi[60+i][j] = *(p_gradPhi[60+i]++);
             }
         }
         for(i=0; i<6; i++){
@@ -46,7 +50,8 @@ get_dofs_Hhat(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N,
             values_N[i] = *(p_N[i]++);
         }
         
-        get_values_Hhat(values_grad_hat, values_g, values_N, values_Hhat);
+        get_values_Hhat(values_gradPsi, values_gradPi, values_gradPhi,  
+                values_g, values_N, values_Hhat);
 
         for(i=0; i<50; i++){
             *(p_Hhat[i]++) = values_Hhat[i];
