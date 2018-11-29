@@ -96,6 +96,7 @@ get_dofs_grad(DOF **dofs, DOF **dofs_grad, int ndof)
 static void
 get_dof_grad_hat(DOF *dof_grad)
 {
+    
     INT i, npair = DofGetDataCount(dof_grad)/2;
     FLOAT grad_plus, grad_minus;
     FLOAT *p = DofData(dof_grad);
@@ -111,7 +112,8 @@ get_dof_grad_hat(DOF *dof_grad)
 static void
 get_dofs_grad_hat(DOF **dofs, DOF **dofs_grad_hat, INT ndof) 
 {
-    get_dofs_grad(dofs_grad, dofs_grad_hat, ndof);
+    get_dofs_grad(dofs, dofs_grad_hat, ndof);
+    
     for(int i=0;i<3*ndof;i++){
         get_dof_grad_hat(dofs_grad_hat[i]);
     }    
