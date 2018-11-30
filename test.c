@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-
-
 static void
 list2tensor(float *list, float *tensor, int dim)
 {

@@ -7,7 +7,7 @@
 #define Power(x,y) (pow((double) (x), (double) (y)))
 
 static void 
-get_values_rhs(FLOAT *values_var, FLOAT *values)
+get_values_src(FLOAT *values_var, FLOAT *values)
 { 
     FLOAT invPsi00, invPsi01, invPsi02, invPsi03, invPsi11, invPsi12, invPsi13, invPsi22, invPsi23, invPsi33;
     FLOAT g11, g12, g13, g22, g23, g33;
@@ -38,51 +38,51 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
     FLOAT Phi300 = Phi[20], Phi301 = Phi[21], Phi302 = Phi[22], Phi303 = Phi[23], Phi311 = Phi[24];
     FLOAT Phi312 = Phi[25], Phi313 = Phi[26], Phi322 = Phi[27], Phi323 = Phi[28], Phi333 = Phi[29]; 
     
-    FLOAT rhsPsi00,rhsPsi01,rhsPsi02,rhsPsi03,rhsPsi11,rhsPsi12,rhsPsi13,rhsPsi22,rhsPsi23,rhsPsi33;
+    FLOAT srcPsi00,srcPsi01,srcPsi02,srcPsi03,srcPsi11,srcPsi12,srcPsi13,srcPsi22,srcPsi23,srcPsi33;
     
-    FLOAT rhsPi00, t1rhsPi00, t2rhsPi00, t3rhsPi00, t4rhsPi00, t5rhsPi00, t6rhsPi00;
-    FLOAT rhsPi01, t1rhsPi01, t2rhsPi01, t3rhsPi01, t4rhsPi01, t5rhsPi01, t6rhsPi01;
-    FLOAT rhsPi02, t1rhsPi02, t2rhsPi02, t3rhsPi02, t4rhsPi02, t5rhsPi02, t6rhsPi02;
-    FLOAT rhsPi03, t1rhsPi03, t2rhsPi03, t3rhsPi03, t4rhsPi03, t5rhsPi03, t6rhsPi03;
-    FLOAT rhsPi11, t1rhsPi11, t2rhsPi11, t3rhsPi11, t4rhsPi11, t5rhsPi11, t6rhsPi11;
-    FLOAT rhsPi12, t1rhsPi12, t2rhsPi12, t3rhsPi12, t4rhsPi12, t5rhsPi12, t6rhsPi12;
-    FLOAT rhsPi13, t1rhsPi13, t2rhsPi13, t3rhsPi13, t4rhsPi13, t5rhsPi13, t6rhsPi13;
-    FLOAT rhsPi22, t1rhsPi22, t2rhsPi22, t3rhsPi22, t4rhsPi22, t5rhsPi22, t6rhsPi22;
-    FLOAT rhsPi23, t1rhsPi23, t2rhsPi23, t3rhsPi23, t4rhsPi23, t5rhsPi23, t6rhsPi23;
-    FLOAT rhsPi33, t1rhsPi33, t2rhsPi33, t3rhsPi33, t4rhsPi33, t5rhsPi33, t6rhsPi33;
+    FLOAT srcPi00, t1srcPi00, t2srcPi00, t3srcPi00, t4srcPi00, t5srcPi00, t6srcPi00;
+    FLOAT srcPi01, t1srcPi01, t2srcPi01, t3srcPi01, t4srcPi01, t5srcPi01, t6srcPi01;
+    FLOAT srcPi02, t1srcPi02, t2srcPi02, t3srcPi02, t4srcPi02, t5srcPi02, t6srcPi02;
+    FLOAT srcPi03, t1srcPi03, t2srcPi03, t3srcPi03, t4srcPi03, t5srcPi03, t6srcPi03;
+    FLOAT srcPi11, t1srcPi11, t2srcPi11, t3srcPi11, t4srcPi11, t5srcPi11, t6srcPi11;
+    FLOAT srcPi12, t1srcPi12, t2srcPi12, t3srcPi12, t4srcPi12, t5srcPi12, t6srcPi12;
+    FLOAT srcPi13, t1srcPi13, t2srcPi13, t3srcPi13, t4srcPi13, t5srcPi13, t6srcPi13;
+    FLOAT srcPi22, t1srcPi22, t2srcPi22, t3srcPi22, t4srcPi22, t5srcPi22, t6srcPi22;
+    FLOAT srcPi23, t1srcPi23, t2srcPi23, t3srcPi23, t4srcPi23, t5srcPi23, t6srcPi23;
+    FLOAT srcPi33, t1srcPi33, t2srcPi33, t3srcPi33, t4srcPi33, t5srcPi33, t6srcPi33;
     
-    FLOAT rhsPhi100, t1rhsPhi100, t2rhsPhi100, t3rhsPhi100;
-    FLOAT rhsPhi101, t1rhsPhi101, t2rhsPhi101, t3rhsPhi101;
-    FLOAT rhsPhi102, t1rhsPhi102, t2rhsPhi102, t3rhsPhi102;
-    FLOAT rhsPhi103, t1rhsPhi103, t2rhsPhi103, t3rhsPhi103;
-    FLOAT rhsPhi111, t1rhsPhi111, t2rhsPhi111, t3rhsPhi111;
-    FLOAT rhsPhi112, t1rhsPhi112, t2rhsPhi112, t3rhsPhi112;
-    FLOAT rhsPhi113, t1rhsPhi113, t2rhsPhi113, t3rhsPhi113;
-    FLOAT rhsPhi122, t1rhsPhi122, t2rhsPhi122, t3rhsPhi122;
-    FLOAT rhsPhi123, t1rhsPhi123, t2rhsPhi123, t3rhsPhi123;
-    FLOAT rhsPhi133, t1rhsPhi133, t2rhsPhi133, t3rhsPhi133;
+    FLOAT srcPhi100, t1srcPhi100, t2srcPhi100, t3srcPhi100;
+    FLOAT srcPhi101, t1srcPhi101, t2srcPhi101, t3srcPhi101;
+    FLOAT srcPhi102, t1srcPhi102, t2srcPhi102, t3srcPhi102;
+    FLOAT srcPhi103, t1srcPhi103, t2srcPhi103, t3srcPhi103;
+    FLOAT srcPhi111, t1srcPhi111, t2srcPhi111, t3srcPhi111;
+    FLOAT srcPhi112, t1srcPhi112, t2srcPhi112, t3srcPhi112;
+    FLOAT srcPhi113, t1srcPhi113, t2srcPhi113, t3srcPhi113;
+    FLOAT srcPhi122, t1srcPhi122, t2srcPhi122, t3srcPhi122;
+    FLOAT srcPhi123, t1srcPhi123, t2srcPhi123, t3srcPhi123;
+    FLOAT srcPhi133, t1srcPhi133, t2srcPhi133, t3srcPhi133;
                                                    
-    FLOAT rhsPhi200, t1rhsPhi200, t2rhsPhi200, t3rhsPhi200;
-    FLOAT rhsPhi201, t1rhsPhi201, t2rhsPhi201, t3rhsPhi201;
-    FLOAT rhsPhi202, t1rhsPhi202, t2rhsPhi202, t3rhsPhi202;
-    FLOAT rhsPhi203, t1rhsPhi203, t2rhsPhi203, t3rhsPhi203;
-    FLOAT rhsPhi211, t1rhsPhi211, t2rhsPhi211, t3rhsPhi211;
-    FLOAT rhsPhi212, t1rhsPhi212, t2rhsPhi212, t3rhsPhi212;
-    FLOAT rhsPhi213, t1rhsPhi213, t2rhsPhi213, t3rhsPhi213;
-    FLOAT rhsPhi222, t1rhsPhi222, t2rhsPhi222, t3rhsPhi222;
-    FLOAT rhsPhi223, t1rhsPhi223, t2rhsPhi223, t3rhsPhi223;
-    FLOAT rhsPhi233, t1rhsPhi233, t2rhsPhi233, t3rhsPhi233;
+    FLOAT srcPhi200, t1srcPhi200, t2srcPhi200, t3srcPhi200;
+    FLOAT srcPhi201, t1srcPhi201, t2srcPhi201, t3srcPhi201;
+    FLOAT srcPhi202, t1srcPhi202, t2srcPhi202, t3srcPhi202;
+    FLOAT srcPhi203, t1srcPhi203, t2srcPhi203, t3srcPhi203;
+    FLOAT srcPhi211, t1srcPhi211, t2srcPhi211, t3srcPhi211;
+    FLOAT srcPhi212, t1srcPhi212, t2srcPhi212, t3srcPhi212;
+    FLOAT srcPhi213, t1srcPhi213, t2srcPhi213, t3srcPhi213;
+    FLOAT srcPhi222, t1srcPhi222, t2srcPhi222, t3srcPhi222;
+    FLOAT srcPhi223, t1srcPhi223, t2srcPhi223, t3srcPhi223;
+    FLOAT srcPhi233, t1srcPhi233, t2srcPhi233, t3srcPhi233;
                                                    
-    FLOAT rhsPhi300, t1rhsPhi300, t2rhsPhi300, t3rhsPhi300;
-    FLOAT rhsPhi301, t1rhsPhi301, t2rhsPhi301, t3rhsPhi301;
-    FLOAT rhsPhi302, t1rhsPhi302, t2rhsPhi302, t3rhsPhi302;
-    FLOAT rhsPhi303, t1rhsPhi303, t2rhsPhi303, t3rhsPhi303;
-    FLOAT rhsPhi311, t1rhsPhi311, t2rhsPhi311, t3rhsPhi311;
-    FLOAT rhsPhi312, t1rhsPhi312, t2rhsPhi312, t3rhsPhi312;
-    FLOAT rhsPhi313, t1rhsPhi313, t2rhsPhi313, t3rhsPhi313;
-    FLOAT rhsPhi322, t1rhsPhi322, t2rhsPhi322, t3rhsPhi322;
-    FLOAT rhsPhi323, t1rhsPhi323, t2rhsPhi323, t3rhsPhi323;
-    FLOAT rhsPhi333, t1rhsPhi333, t2rhsPhi333, t3rhsPhi333;
+    FLOAT srcPhi300, t1srcPhi300, t2srcPhi300, t3srcPhi300;
+    FLOAT srcPhi301, t1srcPhi301, t2srcPhi301, t3srcPhi301;
+    FLOAT srcPhi302, t1srcPhi302, t2srcPhi302, t3srcPhi302;
+    FLOAT srcPhi303, t1srcPhi303, t2srcPhi303, t3srcPhi303;
+    FLOAT srcPhi311, t1srcPhi311, t2srcPhi311, t3srcPhi311;
+    FLOAT srcPhi312, t1srcPhi312, t2srcPhi312, t3srcPhi312;
+    FLOAT srcPhi313, t1srcPhi313, t2srcPhi313, t3srcPhi313;
+    FLOAT srcPhi322, t1srcPhi322, t2srcPhi322, t3srcPhi322;
+    FLOAT srcPhi323, t1srcPhi323, t2srcPhi323, t3srcPhi323;
+    FLOAT srcPhi333, t1srcPhi333, t2srcPhi333, t3srcPhi333;
     
     //Gauge functions H^a
     FLOAT H0 = 0;
@@ -318,22 +318,22 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
 
     
     //RHS of Psi
-    rhsPsi00 = (-gamma1)*(N1*Phi100 + N2*Phi200 + N3*Phi300) - N*Pi00; 
-    rhsPsi01 = (-gamma1)*(N1*Phi101 + N2*Phi201 + N3*Phi301) - N*Pi01; 
-    rhsPsi02 = (-gamma1)*(N1*Phi102 + N2*Phi202 + N3*Phi302) - N*Pi02; 
-    rhsPsi03 = (-gamma1)*(N1*Phi103 + N2*Phi203 + N3*Phi303) - N*Pi03; 
-    rhsPsi11 = (-gamma1)*(N1*Phi111 + N2*Phi211 + N3*Phi311) - N*Pi11; 
-    rhsPsi12 = (-gamma1)*(N1*Phi112 + N2*Phi212 + N3*Phi312) - N*Pi12;
-    rhsPsi13 = (-gamma1)*(N1*Phi113 + N2*Phi213 + N3*Phi313) - N*Pi13; 
-    rhsPsi22 = (-gamma1)*(N1*Phi122 + N2*Phi222 + N3*Phi322) - N*Pi22; 
-    rhsPsi23 = (-gamma1)*(N1*Phi123 + N2*Phi223 + N3*Phi323) - N*Pi23; 
-    rhsPsi33 = (-gamma1)*(N1*Phi133 + N2*Phi233 + N3*Phi333) - N*Pi33;
+    srcPsi00 = (-gamma1)*(N1*Phi100 + N2*Phi200 + N3*Phi300) - N*Pi00; 
+    srcPsi01 = (-gamma1)*(N1*Phi101 + N2*Phi201 + N3*Phi301) - N*Pi01; 
+    srcPsi02 = (-gamma1)*(N1*Phi102 + N2*Phi202 + N3*Phi302) - N*Pi02; 
+    srcPsi03 = (-gamma1)*(N1*Phi103 + N2*Phi203 + N3*Phi303) - N*Pi03; 
+    srcPsi11 = (-gamma1)*(N1*Phi111 + N2*Phi211 + N3*Phi311) - N*Pi11; 
+    srcPsi12 = (-gamma1)*(N1*Phi112 + N2*Phi212 + N3*Phi312) - N*Pi12;
+    srcPsi13 = (-gamma1)*(N1*Phi113 + N2*Phi213 + N3*Phi313) - N*Pi13; 
+    srcPsi22 = (-gamma1)*(N1*Phi122 + N2*Phi222 + N3*Phi322) - N*Pi22; 
+    srcPsi23 = (-gamma1)*(N1*Phi123 + N2*Phi223 + N3*Phi323) - N*Pi23; 
+    srcPsi33 = (-gamma1)*(N1*Phi133 + N2*Phi233 + N3*Phi333) - N*Pi33;
     
      
     //RHS of Pi
     
     //TERM 1
-    t1rhsPi00 = 2*N*(invPsi00*(-(Power(Gamma000,2)*invPsi00) - 2*Gamma000*Gamma001*invPsi01 - 2*Gamma000*Gamma002*invPsi02 - 
+    t1srcPi00 = 2*N*(invPsi00*(-(Power(Gamma000,2)*invPsi00) - 2*Gamma000*Gamma001*invPsi01 - 2*Gamma000*Gamma002*invPsi02 - 
             Power(Gamma001,2)*invPsi11 - 2*Gamma001*Gamma002*invPsi12 - Power(Gamma002,2)*invPsi22 + g11*Power(Phi100,2) + 
             2*g12*Phi100*Phi200 + g22*Power(Phi200,2) + 2*g13*Phi100*Phi300 + 2*g23*Phi200*Phi300 + g33*Power(Phi300,2) - 
             Power(Pi00,2)) + 2*invPsi01*(-(Gamma000*Gamma001*invPsi00) - Power(Gamma001,2)*invPsi01 - Gamma000*Gamma011*invPsi01 - 
@@ -371,7 +371,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             2*g12*Phi103*Phi203 + g22*Power(Phi203,2) + 2*g13*Phi103*Phi303 + 2*g23*Phi203*Phi303 + g33*Power(Phi303,2) - 
             Power(Pi03,2)));
     
-    t1rhsPi01 = 2*N*(invPsi00*(-(Gamma000*Gamma100*invPsi00) - Gamma001*Gamma100*invPsi01 - Gamma000*Gamma101*invPsi01 - 
+    t1srcPi01 = 2*N*(invPsi00*(-(Gamma000*Gamma100*invPsi00) - Gamma001*Gamma100*invPsi01 - Gamma000*Gamma101*invPsi01 - 
             Gamma002*Gamma100*invPsi02 - Gamma000*Gamma102*invPsi02 - Gamma001*Gamma101*invPsi11 - Gamma002*Gamma101*invPsi12 - 
             Gamma001*Gamma102*invPsi12 - Gamma002*Gamma102*invPsi22 + g11*Phi100*Phi101 + g12*Phi101*Phi200 + g12*Phi100*Phi201 + 
             g22*Phi200*Phi201 + g13*Phi101*Phi300 + g23*Phi201*Phi300 + g13*Phi100*Phi301 + g23*Phi200*Phi301 + g33*Phi300*Phi301 - 
@@ -437,7 +437,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             g22*Phi203*Phi213 + g13*Phi113*Phi303 + g23*Phi213*Phi303 + g13*Phi103*Phi313 + g23*Phi203*Phi313 + g33*Phi303*Phi313 - 
             Pi03*Pi13));
     
-    t1rhsPi02 = 2*N*(invPsi00*(-(Gamma000*Gamma200*invPsi00) - Gamma001*Gamma200*invPsi01 - Gamma000*Gamma201*invPsi01 - 
+    t1srcPi02 = 2*N*(invPsi00*(-(Gamma000*Gamma200*invPsi00) - Gamma001*Gamma200*invPsi01 - Gamma000*Gamma201*invPsi01 - 
             Gamma002*Gamma200*invPsi02 - Gamma000*Gamma202*invPsi02 - Gamma001*Gamma201*invPsi11 - Gamma002*Gamma201*invPsi12 - 
             Gamma001*Gamma202*invPsi12 - Gamma002*Gamma202*invPsi22 + g11*Phi100*Phi102 + g12*Phi102*Phi200 + g12*Phi100*Phi202 + 
             g22*Phi200*Phi202 + g13*Phi102*Phi300 + g23*Phi202*Phi300 + g13*Phi100*Phi302 + g23*Phi200*Phi302 + g33*Phi300*Phi302 - 
@@ -503,7 +503,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             g22*Phi203*Phi223 + g13*Phi123*Phi303 + g23*Phi223*Phi303 + g13*Phi103*Phi323 + g23*Phi203*Phi323 + g33*Phi303*Phi323 - 
             Pi03*Pi23));
     
-    t1rhsPi03 = 2*N*(invPsi00*(-(Gamma000*Gamma300*invPsi00) - Gamma001*Gamma300*invPsi01 - Gamma000*Gamma301*invPsi01 - 
+    t1srcPi03 = 2*N*(invPsi00*(-(Gamma000*Gamma300*invPsi00) - Gamma001*Gamma300*invPsi01 - Gamma000*Gamma301*invPsi01 - 
             Gamma002*Gamma300*invPsi02 - Gamma000*Gamma302*invPsi02 - Gamma001*Gamma301*invPsi11 - Gamma002*Gamma301*invPsi12 - 
             Gamma001*Gamma302*invPsi12 - Gamma002*Gamma302*invPsi22 + g11*Phi100*Phi103 + g12*Phi103*Phi200 + g12*Phi100*Phi203 + 
             g22*Phi200*Phi203 + g13*Phi103*Phi300 + g23*Phi203*Phi300 + g13*Phi100*Phi303 + g23*Phi200*Phi303 + g33*Phi300*Phi303 - 
@@ -569,7 +569,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             g22*Phi203*Phi233 + g13*Phi133*Phi303 + g23*Phi233*Phi303 + g13*Phi103*Phi333 + g23*Phi203*Phi333 + g33*Phi303*Phi333 - 
             Pi03*Pi33));
     
-    t1rhsPi11 = 2*N*(invPsi00*(-(Power(Gamma100,2)*invPsi00) - 2*Gamma100*Gamma101*invPsi01 - 2*Gamma100*Gamma102*invPsi02 - 
+    t1srcPi11 = 2*N*(invPsi00*(-(Power(Gamma100,2)*invPsi00) - 2*Gamma100*Gamma101*invPsi01 - 2*Gamma100*Gamma102*invPsi02 - 
             Power(Gamma101,2)*invPsi11 - 2*Gamma101*Gamma102*invPsi12 - Power(Gamma102,2)*invPsi22 + g11*Power(Phi101,2) + 
             2*g12*Phi101*Phi201 + g22*Power(Phi201,2) + 2*g13*Phi101*Phi301 + 2*g23*Phi201*Phi301 + g33*Power(Phi301,2) - 
             Power(Pi01,2)) + 2*invPsi01*(-(Gamma100*Gamma101*invPsi00) - Power(Gamma101,2)*invPsi01 - Gamma100*Gamma111*invPsi01 - 
@@ -607,7 +607,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             2*g12*Phi113*Phi213 + g22*Power(Phi213,2) + 2*g13*Phi113*Phi313 + 2*g23*Phi213*Phi313 + g33*Power(Phi313,2) - 
             Power(Pi13,2)));
     
-    t1rhsPi12 = 2*N*(invPsi00*(-(Gamma100*Gamma200*invPsi00) - Gamma101*Gamma200*invPsi01 - Gamma100*Gamma201*invPsi01 - 
+    t1srcPi12 = 2*N*(invPsi00*(-(Gamma100*Gamma200*invPsi00) - Gamma101*Gamma200*invPsi01 - Gamma100*Gamma201*invPsi01 - 
             Gamma102*Gamma200*invPsi02 - Gamma100*Gamma202*invPsi02 - Gamma101*Gamma201*invPsi11 - Gamma102*Gamma201*invPsi12 - 
             Gamma101*Gamma202*invPsi12 - Gamma102*Gamma202*invPsi22 + g11*Phi101*Phi102 + g12*Phi102*Phi201 + g12*Phi101*Phi202 + 
             g22*Phi201*Phi202 + g13*Phi102*Phi301 + g23*Phi202*Phi301 + g13*Phi101*Phi302 + g23*Phi201*Phi302 + g33*Phi301*Phi302 - 
@@ -673,7 +673,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             g22*Phi213*Phi223 + g13*Phi123*Phi313 + g23*Phi223*Phi313 + g13*Phi113*Phi323 + g23*Phi213*Phi323 + g33*Phi313*Phi323 - 
             Pi13*Pi23));
     
-    t1rhsPi13 = 2*N*(invPsi00*(-(Gamma100*Gamma300*invPsi00) - Gamma101*Gamma300*invPsi01 - Gamma100*Gamma301*invPsi01 - 
+    t1srcPi13 = 2*N*(invPsi00*(-(Gamma100*Gamma300*invPsi00) - Gamma101*Gamma300*invPsi01 - Gamma100*Gamma301*invPsi01 - 
             Gamma102*Gamma300*invPsi02 - Gamma100*Gamma302*invPsi02 - Gamma101*Gamma301*invPsi11 - Gamma102*Gamma301*invPsi12 - 
             Gamma101*Gamma302*invPsi12 - Gamma102*Gamma302*invPsi22 + g11*Phi101*Phi103 + g12*Phi103*Phi201 + g12*Phi101*Phi203 + 
             g22*Phi201*Phi203 + g13*Phi103*Phi301 + g23*Phi203*Phi301 + g13*Phi101*Phi303 + g23*Phi201*Phi303 + g33*Phi301*Phi303 - 
@@ -739,7 +739,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             g22*Phi213*Phi233 + g13*Phi133*Phi313 + g23*Phi233*Phi313 + g13*Phi113*Phi333 + g23*Phi213*Phi333 + g33*Phi313*Phi333 - 
             Pi13*Pi33));
     
-    t1rhsPi22 = 2*N*(invPsi00*(-(Power(Gamma200,2)*invPsi00) - 2*Gamma200*Gamma201*invPsi01 - 2*Gamma200*Gamma202*invPsi02 - 
+    t1srcPi22 = 2*N*(invPsi00*(-(Power(Gamma200,2)*invPsi00) - 2*Gamma200*Gamma201*invPsi01 - 2*Gamma200*Gamma202*invPsi02 - 
             Power(Gamma201,2)*invPsi11 - 2*Gamma201*Gamma202*invPsi12 - Power(Gamma202,2)*invPsi22 + g11*Power(Phi102,2) + 
             2*g12*Phi102*Phi202 + g22*Power(Phi202,2) + 2*g13*Phi102*Phi302 + 2*g23*Phi202*Phi302 + g33*Power(Phi302,2) - 
             Power(Pi02,2)) + 2*invPsi01*(-(Gamma200*Gamma201*invPsi00) - Power(Gamma201,2)*invPsi01 - Gamma200*Gamma211*invPsi01 - 
@@ -777,7 +777,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             2*g12*Phi123*Phi223 + g22*Power(Phi223,2) + 2*g13*Phi123*Phi323 + 2*g23*Phi223*Phi323 + g33*Power(Phi323,2) - 
             Power(Pi23,2)));
     
-    t1rhsPi23 = 2*N*(invPsi00*(-(Gamma200*Gamma300*invPsi00) - Gamma201*Gamma300*invPsi01 - Gamma200*Gamma301*invPsi01 - 
+    t1srcPi23 = 2*N*(invPsi00*(-(Gamma200*Gamma300*invPsi00) - Gamma201*Gamma300*invPsi01 - Gamma200*Gamma301*invPsi01 - 
             Gamma202*Gamma300*invPsi02 - Gamma200*Gamma302*invPsi02 - Gamma201*Gamma301*invPsi11 - Gamma202*Gamma301*invPsi12 - 
             Gamma201*Gamma302*invPsi12 - Gamma202*Gamma302*invPsi22 + g11*Phi102*Phi103 + g12*Phi103*Phi202 + g12*Phi102*Phi203 + 
             g22*Phi202*Phi203 + g13*Phi103*Phi302 + g23*Phi203*Phi302 + g13*Phi102*Phi303 + g23*Phi202*Phi303 + g33*Phi302*Phi303 - 
@@ -843,7 +843,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             g22*Phi223*Phi233 + g13*Phi133*Phi323 + g23*Phi233*Phi323 + g13*Phi123*Phi333 + g23*Phi223*Phi333 + g33*Phi323*Phi333 - 
             Pi23*Pi33));
     
-    t1rhsPi33 = 2*N*(invPsi00*(-(Power(Gamma300,2)*invPsi00) - 2*Gamma300*Gamma301*invPsi01 - 2*Gamma300*Gamma302*invPsi02 - 
+    t1srcPi33 = 2*N*(invPsi00*(-(Power(Gamma300,2)*invPsi00) - 2*Gamma300*Gamma301*invPsi01 - 2*Gamma300*Gamma302*invPsi02 - 
             Power(Gamma301,2)*invPsi11 - 2*Gamma301*Gamma302*invPsi12 - Power(Gamma302,2)*invPsi22 + g11*Power(Phi103,2) + 
             2*g12*Phi103*Phi203 + g22*Power(Phi203,2) + 2*g13*Phi103*Phi303 + 2*g23*Phi203*Phi303 + g33*Power(Phi303,2) - 
             Power(Pi03,2)) + 2*invPsi01*(-(Gamma300*Gamma301*invPsi00) - Power(Gamma301,2)*invPsi01 - Gamma300*Gamma311*invPsi01 - 
@@ -882,92 +882,92 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
             Power(Pi33,2)));
     
     //TERM 2
-    t2rhsPi00 = -((2*dH00 - 2*Gamma000*H0*invPsi00 - 2*Gamma100*H0*invPsi01 - 2*Gamma000*H1*invPsi01 - 2*Gamma200*H0*invPsi02 - 
+    t2srcPi00 = -((2*dH00 - 2*Gamma000*H0*invPsi00 - 2*Gamma100*H0*invPsi01 - 2*Gamma000*H1*invPsi01 - 2*Gamma200*H0*invPsi02 - 
            2*Gamma000*H2*invPsi02 - 2*Gamma300*H0*invPsi03 - 2*Gamma000*H3*invPsi03 - 2*Gamma100*H1*invPsi11 - 
            2*Gamma200*H1*invPsi12 - 2*Gamma100*H2*invPsi12 - 2*Gamma300*H1*invPsi13 - 2*Gamma100*H3*invPsi13 - 
            2*Gamma200*H2*invPsi22 - 2*Gamma300*H2*invPsi23 - 2*Gamma200*H3*invPsi23 - 2*Gamma300*H3*invPsi33)*N);
     
-    t2rhsPi01 = -((dH01 + dH10 - 2*Gamma001*H0*invPsi00 - 2*Gamma101*H0*invPsi01 - 2*Gamma001*H1*invPsi01 - 2*Gamma201*H0*invPsi02 - 
+    t2srcPi01 = -((dH01 + dH10 - 2*Gamma001*H0*invPsi00 - 2*Gamma101*H0*invPsi01 - 2*Gamma001*H1*invPsi01 - 2*Gamma201*H0*invPsi02 - 
            2*Gamma001*H2*invPsi02 - 2*Gamma301*H0*invPsi03 - 2*Gamma001*H3*invPsi03 - 2*Gamma101*H1*invPsi11 - 
            2*Gamma201*H1*invPsi12 - 2*Gamma101*H2*invPsi12 - 2*Gamma301*H1*invPsi13 - 2*Gamma101*H3*invPsi13 - 
            2*Gamma201*H2*invPsi22 - 2*Gamma301*H2*invPsi23 - 2*Gamma201*H3*invPsi23 - 2*Gamma301*H3*invPsi33)*N);
     
-    t2rhsPi02 = -((dH02 + dH20 - 2*Gamma002*H0*invPsi00 - 2*Gamma102*H0*invPsi01 - 2*Gamma002*H1*invPsi01 - 2*Gamma202*H0*invPsi02 - 
+    t2srcPi02 = -((dH02 + dH20 - 2*Gamma002*H0*invPsi00 - 2*Gamma102*H0*invPsi01 - 2*Gamma002*H1*invPsi01 - 2*Gamma202*H0*invPsi02 - 
            2*Gamma002*H2*invPsi02 - 2*Gamma302*H0*invPsi03 - 2*Gamma002*H3*invPsi03 - 2*Gamma102*H1*invPsi11 - 
            2*Gamma202*H1*invPsi12 - 2*Gamma102*H2*invPsi12 - 2*Gamma302*H1*invPsi13 - 2*Gamma102*H3*invPsi13 - 
            2*Gamma202*H2*invPsi22 - 2*Gamma302*H2*invPsi23 - 2*Gamma202*H3*invPsi23 - 2*Gamma302*H3*invPsi33)*N);
     
-    t2rhsPi03 = -((dH03 + dH30 - 2*Gamma003*H0*invPsi00 - 2*Gamma103*H0*invPsi01 - 2*Gamma003*H1*invPsi01 - 2*Gamma203*H0*invPsi02 - 
+    t2srcPi03 = -((dH03 + dH30 - 2*Gamma003*H0*invPsi00 - 2*Gamma103*H0*invPsi01 - 2*Gamma003*H1*invPsi01 - 2*Gamma203*H0*invPsi02 - 
            2*Gamma003*H2*invPsi02 - 2*Gamma303*H0*invPsi03 - 2*Gamma003*H3*invPsi03 - 2*Gamma103*H1*invPsi11 - 
            2*Gamma203*H1*invPsi12 - 2*Gamma103*H2*invPsi12 - 2*Gamma303*H1*invPsi13 - 2*Gamma103*H3*invPsi13 - 
            2*Gamma203*H2*invPsi22 - 2*Gamma303*H2*invPsi23 - 2*Gamma203*H3*invPsi23 - 2*Gamma303*H3*invPsi33)*N);
     
-    t2rhsPi11 = -((2*dH11 - 2*Gamma011*H0*invPsi00 - 2*Gamma111*H0*invPsi01 - 2*Gamma011*H1*invPsi01 - 2*Gamma211*H0*invPsi02 - 
+    t2srcPi11 = -((2*dH11 - 2*Gamma011*H0*invPsi00 - 2*Gamma111*H0*invPsi01 - 2*Gamma011*H1*invPsi01 - 2*Gamma211*H0*invPsi02 - 
            2*Gamma011*H2*invPsi02 - 2*Gamma311*H0*invPsi03 - 2*Gamma011*H3*invPsi03 - 2*Gamma111*H1*invPsi11 - 
            2*Gamma211*H1*invPsi12 - 2*Gamma111*H2*invPsi12 - 2*Gamma311*H1*invPsi13 - 2*Gamma111*H3*invPsi13 - 
            2*Gamma211*H2*invPsi22 - 2*Gamma311*H2*invPsi23 - 2*Gamma211*H3*invPsi23 - 2*Gamma311*H3*invPsi33)*N);
     
-    t2rhsPi12 = -((dH12 + dH21 - 2*Gamma012*H0*invPsi00 - 2*Gamma112*H0*invPsi01 - 2*Gamma012*H1*invPsi01 - 2*Gamma212*H0*invPsi02 - 
+    t2srcPi12 = -((dH12 + dH21 - 2*Gamma012*H0*invPsi00 - 2*Gamma112*H0*invPsi01 - 2*Gamma012*H1*invPsi01 - 2*Gamma212*H0*invPsi02 - 
            2*Gamma012*H2*invPsi02 - 2*Gamma312*H0*invPsi03 - 2*Gamma012*H3*invPsi03 - 2*Gamma112*H1*invPsi11 - 
            2*Gamma212*H1*invPsi12 - 2*Gamma112*H2*invPsi12 - 2*Gamma312*H1*invPsi13 - 2*Gamma112*H3*invPsi13 - 
            2*Gamma212*H2*invPsi22 - 2*Gamma312*H2*invPsi23 - 2*Gamma212*H3*invPsi23 - 2*Gamma312*H3*invPsi33)*N);
     
-    t2rhsPi13 = -((dH13 + dH31 - 2*Gamma013*H0*invPsi00 - 2*Gamma113*H0*invPsi01 - 2*Gamma013*H1*invPsi01 - 2*Gamma213*H0*invPsi02 - 
+    t2srcPi13 = -((dH13 + dH31 - 2*Gamma013*H0*invPsi00 - 2*Gamma113*H0*invPsi01 - 2*Gamma013*H1*invPsi01 - 2*Gamma213*H0*invPsi02 - 
            2*Gamma013*H2*invPsi02 - 2*Gamma313*H0*invPsi03 - 2*Gamma013*H3*invPsi03 - 2*Gamma113*H1*invPsi11 - 
            2*Gamma213*H1*invPsi12 - 2*Gamma113*H2*invPsi12 - 2*Gamma313*H1*invPsi13 - 2*Gamma113*H3*invPsi13 - 
            2*Gamma213*H2*invPsi22 - 2*Gamma313*H2*invPsi23 - 2*Gamma213*H3*invPsi23 - 2*Gamma313*H3*invPsi33)*N);
     
-    t2rhsPi22 = -((2*dH22 - 2*Gamma022*H0*invPsi00 - 2*Gamma122*H0*invPsi01 - 2*Gamma022*H1*invPsi01 - 2*Gamma222*H0*invPsi02 - 
+    t2srcPi22 = -((2*dH22 - 2*Gamma022*H0*invPsi00 - 2*Gamma122*H0*invPsi01 - 2*Gamma022*H1*invPsi01 - 2*Gamma222*H0*invPsi02 - 
            2*Gamma022*H2*invPsi02 - 2*Gamma322*H0*invPsi03 - 2*Gamma022*H3*invPsi03 - 2*Gamma122*H1*invPsi11 - 
            2*Gamma222*H1*invPsi12 - 2*Gamma122*H2*invPsi12 - 2*Gamma322*H1*invPsi13 - 2*Gamma122*H3*invPsi13 - 
            2*Gamma222*H2*invPsi22 - 2*Gamma322*H2*invPsi23 - 2*Gamma222*H3*invPsi23 - 2*Gamma322*H3*invPsi33)*N);
     
-    t2rhsPi23 = -((dH23 + dH32 - 2*Gamma023*H0*invPsi00 - 2*Gamma123*H0*invPsi01 - 2*Gamma023*H1*invPsi01 - 2*Gamma223*H0*invPsi02 - 
+    t2srcPi23 = -((dH23 + dH32 - 2*Gamma023*H0*invPsi00 - 2*Gamma123*H0*invPsi01 - 2*Gamma023*H1*invPsi01 - 2*Gamma223*H0*invPsi02 - 
            2*Gamma023*H2*invPsi02 - 2*Gamma323*H0*invPsi03 - 2*Gamma023*H3*invPsi03 - 2*Gamma123*H1*invPsi11 - 
            2*Gamma223*H1*invPsi12 - 2*Gamma123*H2*invPsi12 - 2*Gamma323*H1*invPsi13 - 2*Gamma123*H3*invPsi13 - 
            2*Gamma223*H2*invPsi22 - 2*Gamma323*H2*invPsi23 - 2*Gamma223*H3*invPsi23 - 2*Gamma323*H3*invPsi33)*N);
     
-    t2rhsPi33 = -((2*dH33 - 2*Gamma033*H0*invPsi00 - 2*Gamma133*H0*invPsi01 - 2*Gamma033*H1*invPsi01 - 2*Gamma233*H0*invPsi02 - 
+    t2srcPi33 = -((2*dH33 - 2*Gamma033*H0*invPsi00 - 2*Gamma133*H0*invPsi01 - 2*Gamma033*H1*invPsi01 - 2*Gamma233*H0*invPsi02 - 
            2*Gamma033*H2*invPsi02 - 2*Gamma333*H0*invPsi03 - 2*Gamma033*H3*invPsi03 - 2*Gamma133*H1*invPsi11 - 
            2*Gamma233*H1*invPsi12 - 2*Gamma133*H2*invPsi12 - 2*Gamma333*H1*invPsi13 - 2*Gamma133*H3*invPsi13 - 
            2*Gamma233*H2*invPsi22 - 2*Gamma333*H2*invPsi23 - 2*Gamma233*H3*invPsi23 - 2*Gamma333*H3*invPsi33)*N);
     
     //TERM 3
     
-    t3rhsPi00 = -0.5*N*(Power(Pi00,2)*Power(t0,2) + 2*Pi00*Pi01*t0*t1 + Pi00*Pi11*Power(t1,2) + 2*Pi00*Pi02*t0*t2 + 
+    t3srcPi00 = -0.5*N*(Power(Pi00,2)*Power(t0,2) + 2*Pi00*Pi01*t0*t1 + Pi00*Pi11*Power(t1,2) + 2*Pi00*Pi02*t0*t2 + 
            2*Pi00*Pi12*t1*t2 + Pi00*Pi22*Power(t2,2) + 2*Pi00*Pi03*t0*t3 + 2*Pi00*Pi13*t1*t3 + 2*Pi00*Pi23*t2*t3 + 
            Pi00*Pi33*Power(t3,2)); 
     
-    t3rhsPi01 = -0.5*N*(Pi00*Pi01*Power(t0,2) + 2*Power(Pi01,2)*t0*t1 + Pi01*Pi11*Power(t1,2) + 
+    t3srcPi01 = -0.5*N*(Pi00*Pi01*Power(t0,2) + 2*Power(Pi01,2)*t0*t1 + Pi01*Pi11*Power(t1,2) + 
            2*Pi01*Pi02*t0*t2 + 2*Pi01*Pi12*t1*t2 + Pi01*Pi22*Power(t2,2) + 2*Pi01*Pi03*t0*t3 + 2*Pi01*Pi13*t1*t3 + 
            2*Pi01*Pi23*t2*t3 + Pi01*Pi33*Power(t3,2));
     
-    t3rhsPi02 = -0.5*N*(Pi00*Pi02*Power(t0,2) + 2*Pi01*Pi02*t0*t1 + Pi02*Pi11*Power(t1,2) + 2*Power(Pi02,2)*t0*t2 + 2*Pi02*Pi12*t1*t2 + 
+    t3srcPi02 = -0.5*N*(Pi00*Pi02*Power(t0,2) + 2*Pi01*Pi02*t0*t1 + Pi02*Pi11*Power(t1,2) + 2*Power(Pi02,2)*t0*t2 + 2*Pi02*Pi12*t1*t2 + 
            Pi02*Pi22*Power(t2,2) + 2*Pi02*Pi03*t0*t3 + 2*Pi02*Pi13*t1*t3 + 2*Pi02*Pi23*t2*t3 + Pi02*Pi33*Power(t3,2));
     
-    t3rhsPi03 = -0.5*N*(Pi00*Pi03*Power(t0,2) + 2*Pi01*Pi03*t0*t1 + Pi03*Pi11*Power(t1,2) + 2*Pi02*Pi03*t0*t2 + 2*Pi03*Pi12*t1*t2 + 
+    t3srcPi03 = -0.5*N*(Pi00*Pi03*Power(t0,2) + 2*Pi01*Pi03*t0*t1 + Pi03*Pi11*Power(t1,2) + 2*Pi02*Pi03*t0*t2 + 2*Pi03*Pi12*t1*t2 + 
            Pi03*Pi22*Power(t2,2) + 2*Power(Pi03,2)*t0*t3 + 2*Pi03*Pi13*t1*t3 + 2*Pi03*Pi23*t2*t3 + Pi03*Pi33*Power(t3,2));
     
-    t3rhsPi11 = -0.5*N*(Pi00*Pi11*Power(t0,2) + 2*Pi01*Pi11*t0*t1 + Power(Pi11,2)*Power(t1,2) + 2*Pi02*Pi11*t0*t2 + 2*Pi11*Pi12*t1*t2 + 
+    t3srcPi11 = -0.5*N*(Pi00*Pi11*Power(t0,2) + 2*Pi01*Pi11*t0*t1 + Power(Pi11,2)*Power(t1,2) + 2*Pi02*Pi11*t0*t2 + 2*Pi11*Pi12*t1*t2 + 
            Pi11*Pi22*Power(t2,2) + 2*Pi03*Pi11*t0*t3 + 2*Pi11*Pi13*t1*t3 + 2*Pi11*Pi23*t2*t3 + Pi11*Pi33*Power(t3,2));
     
-    t3rhsPi12 = -0.5*N*(Pi00*Pi12*Power(t0,2) + 2*Pi01*Pi12*t0*t1 + Pi11*Pi12*Power(t1,2) + 2*Pi02*Pi12*t0*t2 + 2*Power(Pi12,2)*t1*t2 + 
+    t3srcPi12 = -0.5*N*(Pi00*Pi12*Power(t0,2) + 2*Pi01*Pi12*t0*t1 + Pi11*Pi12*Power(t1,2) + 2*Pi02*Pi12*t0*t2 + 2*Power(Pi12,2)*t1*t2 + 
            Pi12*Pi22*Power(t2,2) + 2*Pi03*Pi12*t0*t3 + 2*Pi12*Pi13*t1*t3 + 2*Pi12*Pi23*t2*t3 + Pi12*Pi33*Power(t3,2));
     
-    t3rhsPi13 = -0.5*N*(Pi00*Pi13*Power(t0,2) + 2*Pi01*Pi13*t0*t1 + Pi11*Pi13*Power(t1,2) + 2*Pi02*Pi13*t0*t2 + 2*Pi12*Pi13*t1*t2 + 
+    t3srcPi13 = -0.5*N*(Pi00*Pi13*Power(t0,2) + 2*Pi01*Pi13*t0*t1 + Pi11*Pi13*Power(t1,2) + 2*Pi02*Pi13*t0*t2 + 2*Pi12*Pi13*t1*t2 + 
            Pi13*Pi22*Power(t2,2) + 2*Pi03*Pi13*t0*t3 + 2*Power(Pi13,2)*t1*t3 + 2*Pi13*Pi23*t2*t3 + Pi13*Pi33*Power(t3,2));
     
-    t3rhsPi22 = -0.5*N*(Pi00*Pi22*Power(t0,2) + 2*Pi01*Pi22*t0*t1 + Pi11*Pi22*Power(t1,2) + 2*Pi02*Pi22*t0*t2 + 2*Pi12*Pi22*t1*t2 + 
+    t3srcPi22 = -0.5*N*(Pi00*Pi22*Power(t0,2) + 2*Pi01*Pi22*t0*t1 + Pi11*Pi22*Power(t1,2) + 2*Pi02*Pi22*t0*t2 + 2*Pi12*Pi22*t1*t2 + 
            Power(Pi22,2)*Power(t2,2) + 2*Pi03*Pi22*t0*t3 + 2*Pi13*Pi22*t1*t3 + 2*Pi22*Pi23*t2*t3 + Pi22*Pi33*Power(t3,2));
     
-    t3rhsPi23 = -0.5*N*(Pi00*Pi23*Power(t0,2) + 2*Pi01*Pi23*t0*t1 + Pi11*Pi23*Power(t1,2) + 2*Pi02*Pi23*t0*t2 + 2*Pi12*Pi23*t1*t2 + 
+    t3srcPi23 = -0.5*N*(Pi00*Pi23*Power(t0,2) + 2*Pi01*Pi23*t0*t1 + Pi11*Pi23*Power(t1,2) + 2*Pi02*Pi23*t0*t2 + 2*Pi12*Pi23*t1*t2 + 
            Pi22*Pi23*Power(t2,2) + 2*Pi03*Pi23*t0*t3 + 2*Pi13*Pi23*t1*t3 + 2*Power(Pi23,2)*t2*t3 + Pi23*Pi33*Power(t3,2));
     
-    t3rhsPi33 = -0.5*N*(Pi00*Pi33*Power(t0,2) + 2*Pi01*Pi33*t0*t1 + Pi11*Pi33*Power(t1,2) + 2*Pi02*Pi33*t0*t2 + 2*Pi12*Pi33*t1*t2 + 
+    t3srcPi33 = -0.5*N*(Pi00*Pi33*Power(t0,2) + 2*Pi01*Pi33*t0*t1 + Pi11*Pi33*Power(t1,2) + 2*Pi02*Pi33*t0*t2 + 2*Pi12*Pi33*t1*t2 + 
            Pi22*Pi33*Power(t2,2) + 2*Pi03*Pi33*t0*t3 + 2*Pi13*Pi33*t1*t3 + 2*Pi23*Pi33*t2*t3 + Power(Pi33,2)*Power(t3,2));
     
     //TERM 4
-    t4rhsPi00 = -(N*(g11*Phi100*Pi00*t0 + g12*Phi200*Pi00*t0 + g13*Phi300*Pi00*t0 + g12*Phi100*Pi01*t0 + g22*Phi200*Pi01*t0 + 
+    t4srcPi00 = -(N*(g11*Phi100*Pi00*t0 + g12*Phi200*Pi00*t0 + g13*Phi300*Pi00*t0 + g12*Phi100*Pi01*t0 + g22*Phi200*Pi01*t0 + 
              g23*Phi300*Pi01*t0 + g13*Phi100*Pi02*t0 + g23*Phi200*Pi02*t0 + g33*Phi300*Pi02*t0 + g11*Phi100*Pi01*t1 + 
              g12*Phi200*Pi01*t1 + g13*Phi300*Pi01*t1 + g12*Phi100*Pi11*t1 + g22*Phi200*Pi11*t1 + g23*Phi300*Pi11*t1 + 
              g13*Phi100*Pi12*t1 + g23*Phi200*Pi12*t1 + g33*Phi300*Pi12*t1 + g11*Phi100*Pi02*t2 + g12*Phi200*Pi02*t2 + 
@@ -976,7 +976,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
              g12*Phi100*Pi13*t3 + g22*Phi200*Pi13*t3 + g23*Phi300*Pi13*t3 + g13*Phi100*Pi23*t3 + g23*Phi200*Pi23*t3 + 
              g33*Phi300*Pi23*t3));
     
-    t4rhsPi01 = -(N*(g11*Phi101*Pi00*t0 + g12*Phi201*Pi00*t0 + g13*Phi301*Pi00*t0 + g12*Phi101*Pi01*t0 + 
+    t4srcPi01 = -(N*(g11*Phi101*Pi00*t0 + g12*Phi201*Pi00*t0 + g13*Phi301*Pi00*t0 + g12*Phi101*Pi01*t0 + 
              g22*Phi201*Pi01*t0 + g23*Phi301*Pi01*t0 + g13*Phi101*Pi02*t0 + g23*Phi201*Pi02*t0 + g33*Phi301*Pi02*t0 + 
              g11*Phi101*Pi01*t1 + g12*Phi201*Pi01*t1 + g13*Phi301*Pi01*t1 + g12*Phi101*Pi11*t1 + g22*Phi201*Pi11*t1 + 
              g23*Phi301*Pi11*t1 + g13*Phi101*Pi12*t1 + g23*Phi201*Pi12*t1 + g33*Phi301*Pi12*t1 + g11*Phi101*Pi02*t2 + 
@@ -985,7 +985,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
              g13*Phi301*Pi03*t3 + g12*Phi101*Pi13*t3 + g22*Phi201*Pi13*t3 + g23*Phi301*Pi13*t3 + g13*Phi101*Pi23*t3 + 
              g23*Phi201*Pi23*t3 + g33*Phi301*Pi23*t3));
                 
-    t4rhsPi02 = -(N*(g11*Phi102*Pi00*t0 + g12*Phi202*Pi00*t0 + g13*Phi302*Pi00*t0 + g12*Phi102*Pi01*t0 + g22*Phi202*Pi01*t0 + 
+    t4srcPi02 = -(N*(g11*Phi102*Pi00*t0 + g12*Phi202*Pi00*t0 + g13*Phi302*Pi00*t0 + g12*Phi102*Pi01*t0 + g22*Phi202*Pi01*t0 + 
              g23*Phi302*Pi01*t0 + g13*Phi102*Pi02*t0 + g23*Phi202*Pi02*t0 + g33*Phi302*Pi02*t0 + g11*Phi102*Pi01*t1 + 
              g12*Phi202*Pi01*t1 + g13*Phi302*Pi01*t1 + g12*Phi102*Pi11*t1 + g22*Phi202*Pi11*t1 + g23*Phi302*Pi11*t1 + 
              g13*Phi102*Pi12*t1 + g23*Phi202*Pi12*t1 + g33*Phi302*Pi12*t1 + g11*Phi102*Pi02*t2 + g12*Phi202*Pi02*t2 + 
@@ -994,7 +994,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
              g12*Phi102*Pi13*t3 + g22*Phi202*Pi13*t3 + g23*Phi302*Pi13*t3 + g13*Phi102*Pi23*t3 + g23*Phi202*Pi23*t3 + 
              g33*Phi302*Pi23*t3));
                 
-    t4rhsPi03 = -(N*(g11*Phi103*Pi00*t0 + g12*Phi203*Pi00*t0 + g13*Phi303*Pi00*t0 + g12*Phi103*Pi01*t0 + 
+    t4srcPi03 = -(N*(g11*Phi103*Pi00*t0 + g12*Phi203*Pi00*t0 + g13*Phi303*Pi00*t0 + g12*Phi103*Pi01*t0 + 
              g22*Phi203*Pi01*t0 + g23*Phi303*Pi01*t0 + g13*Phi103*Pi02*t0 + g23*Phi203*Pi02*t0 + g33*Phi303*Pi02*t0 + 
              g11*Phi103*Pi01*t1 + g12*Phi203*Pi01*t1 + g13*Phi303*Pi01*t1 + g12*Phi103*Pi11*t1 + g22*Phi203*Pi11*t1 + 
              g23*Phi303*Pi11*t1 + g13*Phi103*Pi12*t1 + g23*Phi203*Pi12*t1 + g33*Phi303*Pi12*t1 + g11*Phi103*Pi02*t2 + 
@@ -1003,7 +1003,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
              g13*Phi303*Pi03*t3 + g12*Phi103*Pi13*t3 + g22*Phi203*Pi13*t3 + g23*Phi303*Pi13*t3 + g13*Phi103*Pi23*t3 + 
              g23*Phi203*Pi23*t3 + g33*Phi303*Pi23*t3));
     
-    t4rhsPi11 = -(N*(g11*Phi111*Pi00*t0 + g12*Phi211*Pi00*t0 + g13*Phi311*Pi00*t0 + g12*Phi111*Pi01*t0 + 
+    t4srcPi11 = -(N*(g11*Phi111*Pi00*t0 + g12*Phi211*Pi00*t0 + g13*Phi311*Pi00*t0 + g12*Phi111*Pi01*t0 + 
              g22*Phi211*Pi01*t0 + g23*Phi311*Pi01*t0 + g13*Phi111*Pi02*t0 + g23*Phi211*Pi02*t0 + g33*Phi311*Pi02*t0 + 
              g11*Phi111*Pi01*t1 + g12*Phi211*Pi01*t1 + g13*Phi311*Pi01*t1 + g12*Phi111*Pi11*t1 + g22*Phi211*Pi11*t1 + 
              g23*Phi311*Pi11*t1 + g13*Phi111*Pi12*t1 + g23*Phi211*Pi12*t1 + g33*Phi311*Pi12*t1 + g11*Phi111*Pi02*t2 + 
@@ -1012,7 +1012,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
              g13*Phi311*Pi03*t3 + g12*Phi111*Pi13*t3 + g22*Phi211*Pi13*t3 + g23*Phi311*Pi13*t3 + g13*Phi111*Pi23*t3 + 
              g23*Phi211*Pi23*t3 + g33*Phi311*Pi23*t3));
     
-    t4rhsPi12 = -(N*(g11*Phi112*Pi00*t0 + g12*Phi212*Pi00*t0 + g13*Phi312*Pi00*t0 + g12*Phi112*Pi01*t0 + g22*Phi212*Pi01*t0 + 
+    t4srcPi12 = -(N*(g11*Phi112*Pi00*t0 + g12*Phi212*Pi00*t0 + g13*Phi312*Pi00*t0 + g12*Phi112*Pi01*t0 + g22*Phi212*Pi01*t0 + 
              g23*Phi312*Pi01*t0 + g13*Phi112*Pi02*t0 + g23*Phi212*Pi02*t0 + g33*Phi312*Pi02*t0 + g11*Phi112*Pi01*t1 + 
              g12*Phi212*Pi01*t1 + g13*Phi312*Pi01*t1 + g12*Phi112*Pi11*t1 + g22*Phi212*Pi11*t1 + g23*Phi312*Pi11*t1 + 
              g13*Phi112*Pi12*t1 + g23*Phi212*Pi12*t1 + g33*Phi312*Pi12*t1 + g11*Phi112*Pi02*t2 + g12*Phi212*Pi02*t2 + 
@@ -1021,7 +1021,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
              g12*Phi112*Pi13*t3 + g22*Phi212*Pi13*t3 + g23*Phi312*Pi13*t3 + g13*Phi112*Pi23*t3 + g23*Phi212*Pi23*t3 + 
              g33*Phi312*Pi23*t3)); 
     
-    t4rhsPi13 = -(N*(g11*Phi113*Pi00*t0 + g12*Phi213*Pi00*t0 + g13*Phi313*Pi00*t0 + g12*Phi113*Pi01*t0 + 
+    t4srcPi13 = -(N*(g11*Phi113*Pi00*t0 + g12*Phi213*Pi00*t0 + g13*Phi313*Pi00*t0 + g12*Phi113*Pi01*t0 + 
              g22*Phi213*Pi01*t0 + g23*Phi313*Pi01*t0 + g13*Phi113*Pi02*t0 + g23*Phi213*Pi02*t0 + g33*Phi313*Pi02*t0 + 
              g11*Phi113*Pi01*t1 + g12*Phi213*Pi01*t1 + g13*Phi313*Pi01*t1 + g12*Phi113*Pi11*t1 + g22*Phi213*Pi11*t1 + 
              g23*Phi313*Pi11*t1 + g13*Phi113*Pi12*t1 + g23*Phi213*Pi12*t1 + g33*Phi313*Pi12*t1 + g11*Phi113*Pi02*t2 + 
@@ -1032,7 +1032,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
     
 
 
-    t4rhsPi22 = -(N*(g11*Phi122*Pi00*t0 + g12*Phi222*Pi00*t0 + g13*Phi322*Pi00*t0 + g12*Phi122*Pi01*t0 + g22*Phi222*Pi01*t0 + 
+    t4srcPi22 = -(N*(g11*Phi122*Pi00*t0 + g12*Phi222*Pi00*t0 + g13*Phi322*Pi00*t0 + g12*Phi122*Pi01*t0 + g22*Phi222*Pi01*t0 + 
              g23*Phi322*Pi01*t0 + g13*Phi122*Pi02*t0 + g23*Phi222*Pi02*t0 + g33*Phi322*Pi02*t0 + g11*Phi122*Pi01*t1 + 
              g12*Phi222*Pi01*t1 + g13*Phi322*Pi01*t1 + g12*Phi122*Pi11*t1 + g22*Phi222*Pi11*t1 + g23*Phi322*Pi11*t1 + 
              g13*Phi122*Pi12*t1 + g23*Phi222*Pi12*t1 + g33*Phi322*Pi12*t1 + g11*Phi122*Pi02*t2 + g12*Phi222*Pi02*t2 + 
@@ -1041,7 +1041,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
              g12*Phi122*Pi13*t3 + g22*Phi222*Pi13*t3 + g23*Phi322*Pi13*t3 + g13*Phi122*Pi23*t3 + g23*Phi222*Pi23*t3 + 
              g33*Phi322*Pi23*t3));
     
-    t4rhsPi23 = -(N*(g11*Phi123*Pi00*t0 + g12*Phi223*Pi00*t0 + g13*Phi323*Pi00*t0 + g12*Phi123*Pi01*t0 + 
+    t4srcPi23 = -(N*(g11*Phi123*Pi00*t0 + g12*Phi223*Pi00*t0 + g13*Phi323*Pi00*t0 + g12*Phi123*Pi01*t0 + 
              g22*Phi223*Pi01*t0 + g23*Phi323*Pi01*t0 + g13*Phi123*Pi02*t0 + g23*Phi223*Pi02*t0 + g33*Phi323*Pi02*t0 + 
              g11*Phi123*Pi01*t1 + g12*Phi223*Pi01*t1 + g13*Phi323*Pi01*t1 + g12*Phi123*Pi11*t1 + g22*Phi223*Pi11*t1 + 
              g23*Phi323*Pi11*t1 + g13*Phi123*Pi12*t1 + g23*Phi223*Pi12*t1 + g33*Phi323*Pi12*t1 + g11*Phi123*Pi02*t2 + 
@@ -1050,7 +1050,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
              g13*Phi323*Pi03*t3 + g12*Phi123*Pi13*t3 + g22*Phi223*Pi13*t3 + g23*Phi323*Pi13*t3 + g13*Phi123*Pi23*t3 + 
              g23*Phi223*Pi23*t3 + g33*Phi323*Pi23*t3));
     
-    t4rhsPi33 = -(N*(g11*Phi133*Pi00*t0 + g12*Phi233*Pi00*t0 + g13*Phi333*Pi00*t0 + g12*Phi133*Pi01*t0 + 
+    t4srcPi33 = -(N*(g11*Phi133*Pi00*t0 + g12*Phi233*Pi00*t0 + g13*Phi333*Pi00*t0 + g12*Phi133*Pi01*t0 + 
              g22*Phi233*Pi01*t0 + g23*Phi333*Pi01*t0 + g13*Phi133*Pi02*t0 + g23*Phi233*Pi02*t0 + g33*Phi333*Pi02*t0 + 
              g11*Phi133*Pi01*t1 + g12*Phi233*Pi01*t1 + g13*Phi333*Pi01*t1 + g12*Phi133*Pi11*t1 + g22*Phi233*Pi11*t1 + 
              g23*Phi333*Pi11*t1 + g13*Phi133*Pi12*t1 + g23*Phi233*Pi12*t1 + g33*Phi333*Pi12*t1 + g11*Phi133*Pi02*t2 + 
@@ -1061,169 +1061,169 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
     
     //TERM 5
     
-    t5rhsPi00 = gamma0*N*((2*t0 - Psi00*t0)*(H0 + vecGamma0) - Psi00*t1*(H1 + vecGamma1) - Psi00*t2*(H2 + vecGamma2) - 
+    t5srcPi00 = gamma0*N*((2*t0 - Psi00*t0)*(H0 + vecGamma0) - Psi00*t1*(H1 + vecGamma1) - Psi00*t2*(H2 + vecGamma2) - 
            Psi00*t3*(H3 + vecGamma3));
     
-    t5rhsPi01 = gamma0*N*((-(Psi01*t0) + t1)*(H0 + vecGamma0) + (t0 - Psi01*t1)*(H1 + vecGamma1) - 
+    t5srcPi01 = gamma0*N*((-(Psi01*t0) + t1)*(H0 + vecGamma0) + (t0 - Psi01*t1)*(H1 + vecGamma1) - 
            Psi01*t2*(H2 + vecGamma2) - Psi01*t3*(H3 + vecGamma3));
     
-    t5rhsPi02 = gamma0*N*((-(Psi02*t0) + t2)*(H0 + vecGamma0) - Psi02*t1*(H1 + vecGamma1) + (t0 - Psi02*t2)*(H2 + vecGamma2) - 
+    t5srcPi02 = gamma0*N*((-(Psi02*t0) + t2)*(H0 + vecGamma0) - Psi02*t1*(H1 + vecGamma1) + (t0 - Psi02*t2)*(H2 + vecGamma2) - 
            Psi02*t3*(H3 + vecGamma3));
     
-    t5rhsPi03 = gamma0*N*((-(Psi03*t0) + t3)*(H0 + vecGamma0) - Psi03*t1*(H1 + vecGamma1) - 
+    t5srcPi03 = gamma0*N*((-(Psi03*t0) + t3)*(H0 + vecGamma0) - Psi03*t1*(H1 + vecGamma1) - 
            Psi03*t2*(H2 + vecGamma2) + (t0 - Psi03*t3)*(H3 + vecGamma3));
     
     
-    t5rhsPi11 = gamma0*N*(-(Psi11*t0*(H0 + vecGamma0)) + (2*t1 - Psi11*t1)*(H1 + vecGamma1) - 
+    t5srcPi11 = gamma0*N*(-(Psi11*t0*(H0 + vecGamma0)) + (2*t1 - Psi11*t1)*(H1 + vecGamma1) - 
            Psi11*t2*(H2 + vecGamma2) - Psi11*t3*(H3 + vecGamma3));
      
     
-    t5rhsPi12 = gamma0*N*(-(Psi12*t0*(H0 + vecGamma0)) + (-(Psi12*t1) + t2)*(H1 + vecGamma1) + (t1 - Psi12*t2)*(H2 + vecGamma2) - 
+    t5srcPi12 = gamma0*N*(-(Psi12*t0*(H0 + vecGamma0)) + (-(Psi12*t1) + t2)*(H1 + vecGamma1) + (t1 - Psi12*t2)*(H2 + vecGamma2) - 
            Psi12*t3*(H3 + vecGamma3));
     
     
-    t5rhsPi13 = gamma0*N*(-(Psi13*t0*(H0 + vecGamma0)) + (-(Psi13*t1) + t3)*(H1 + vecGamma1) - 
+    t5srcPi13 = gamma0*N*(-(Psi13*t0*(H0 + vecGamma0)) + (-(Psi13*t1) + t3)*(H1 + vecGamma1) - 
            Psi13*t2*(H2 + vecGamma2) + (t1 - Psi13*t3)*(H3 + vecGamma3));
     
-    t5rhsPi22 = gamma0*N*(-(Psi22*t0*(H0 + vecGamma0)) - Psi22*t1*(H1 + vecGamma1) + (2*t2 - Psi22*t2)*(H2 + vecGamma2) - 
+    t5srcPi22 = gamma0*N*(-(Psi22*t0*(H0 + vecGamma0)) - Psi22*t1*(H1 + vecGamma1) + (2*t2 - Psi22*t2)*(H2 + vecGamma2) - 
            Psi22*t3*(H3 + vecGamma3));
     
-    t5rhsPi23 = gamma0*N*(-(Psi23*t0*(H0 + vecGamma0)) - Psi23*t1*(H1 + vecGamma1) + 
+    t5srcPi23 = gamma0*N*(-(Psi23*t0*(H0 + vecGamma0)) - Psi23*t1*(H1 + vecGamma1) + 
            (-(Psi23*t2) + t3)*(H2 + vecGamma2) + (t2 - Psi23*t3)*(H3 + vecGamma3));
      
-    t5rhsPi33 = gamma0*N*(-(Psi33*t0*(H0 + vecGamma0)) - Psi33*t1*(H1 + vecGamma1) - 
+    t5srcPi33 = gamma0*N*(-(Psi33*t0*(H0 + vecGamma0)) - Psi33*t1*(H1 + vecGamma1) - 
            Psi33*t2*(H2 + vecGamma2) + (2*t3 - Psi33*t3)*(H3 + vecGamma3));
     
     //TERM 6
-    t6rhsPi00 = -(gamma1*gamma2*(N1*Phi100 + N2*Phi200 + N3*Phi300));
+    t6srcPi00 = -(gamma1*gamma2*(N1*Phi100 + N2*Phi200 + N3*Phi300));
     
-    t6rhsPi01 = -(gamma1*gamma2*(N1*Phi101 + N2*Phi201 + N3*Phi301));
+    t6srcPi01 = -(gamma1*gamma2*(N1*Phi101 + N2*Phi201 + N3*Phi301));
     
-    t6rhsPi02 = -(gamma1*gamma2*(N1*Phi102 + N2*Phi202 + N3*Phi302));
+    t6srcPi02 = -(gamma1*gamma2*(N1*Phi102 + N2*Phi202 + N3*Phi302));
     
-    t6rhsPi03 = -(gamma1*gamma2*(N1*Phi103 + N2*Phi203 + N3*Phi303));
+    t6srcPi03 = -(gamma1*gamma2*(N1*Phi103 + N2*Phi203 + N3*Phi303));
     
-    t6rhsPi11 = -(gamma1*gamma2*(N1*Phi111 + N2*Phi211 + N3*Phi311));
+    t6srcPi11 = -(gamma1*gamma2*(N1*Phi111 + N2*Phi211 + N3*Phi311));
     
-    t6rhsPi12 = -(gamma1*gamma2*(N1*Phi112 + N2*Phi212 + N3*Phi312));
+    t6srcPi12 = -(gamma1*gamma2*(N1*Phi112 + N2*Phi212 + N3*Phi312));
     
-    t6rhsPi13 = -(gamma1*gamma2*(N1*Phi113 + N2*Phi213 + N3*Phi313));
+    t6srcPi13 = -(gamma1*gamma2*(N1*Phi113 + N2*Phi213 + N3*Phi313));
     
-    t6rhsPi22 = -(gamma1*gamma2*(N1*Phi122 + N2*Phi222 + N3*Phi322));
+    t6srcPi22 = -(gamma1*gamma2*(N1*Phi122 + N2*Phi222 + N3*Phi322));
     
-    t6rhsPi23 = -(gamma1*gamma2*(N1*Phi123 + N2*Phi223 + N3*Phi323));
+    t6srcPi23 = -(gamma1*gamma2*(N1*Phi123 + N2*Phi223 + N3*Phi323));
     
-    t6rhsPi33 = -(gamma1*gamma2*(N1*Phi133 + N2*Phi233 + N3*Phi333));
+    t6srcPi33 = -(gamma1*gamma2*(N1*Phi133 + N2*Phi233 + N3*Phi333));
     
     //Sum all terms of RHS Pi
-    rhsPi00 = t1rhsPi00 + t2rhsPi00 + t3rhsPi00 + t4rhsPi00 + t5rhsPi00 + t6rhsPi00;
-    rhsPi01 = t1rhsPi01 + t2rhsPi01 + t3rhsPi01 + t4rhsPi01 + t5rhsPi01 + t6rhsPi01;
-    rhsPi02 = t1rhsPi02 + t2rhsPi02 + t3rhsPi02 + t4rhsPi02 + t5rhsPi02 + t6rhsPi02;
-    rhsPi03 = t1rhsPi03 + t2rhsPi03 + t3rhsPi03 + t4rhsPi03 + t5rhsPi03 + t6rhsPi03;
-    rhsPi11 = t1rhsPi11 + t2rhsPi11 + t3rhsPi11 + t4rhsPi11 + t5rhsPi11 + t6rhsPi11;
-    rhsPi12 = t1rhsPi12 + t2rhsPi12 + t3rhsPi12 + t4rhsPi12 + t5rhsPi12 + t6rhsPi12;
-    rhsPi13 = t1rhsPi13 + t2rhsPi13 + t3rhsPi13 + t4rhsPi13 + t5rhsPi13 + t6rhsPi13;
-    rhsPi22 = t1rhsPi22 + t2rhsPi22 + t3rhsPi22 + t4rhsPi22 + t5rhsPi22 + t6rhsPi22;
-    rhsPi23 = t1rhsPi23 + t2rhsPi23 + t3rhsPi23 + t4rhsPi23 + t5rhsPi23 + t6rhsPi23;
-    rhsPi33 = t1rhsPi33 + t2rhsPi33 + t3rhsPi33 + t4rhsPi33 + t5rhsPi33 + t6rhsPi33;
+    srcPi00 = t1srcPi00 + t2srcPi00 + t3srcPi00 + t4srcPi00 + t5srcPi00 + t6srcPi00;
+    srcPi01 = t1srcPi01 + t2srcPi01 + t3srcPi01 + t4srcPi01 + t5srcPi01 + t6srcPi01;
+    srcPi02 = t1srcPi02 + t2srcPi02 + t3srcPi02 + t4srcPi02 + t5srcPi02 + t6srcPi02;
+    srcPi03 = t1srcPi03 + t2srcPi03 + t3srcPi03 + t4srcPi03 + t5srcPi03 + t6srcPi03;
+    srcPi11 = t1srcPi11 + t2srcPi11 + t3srcPi11 + t4srcPi11 + t5srcPi11 + t6srcPi11;
+    srcPi12 = t1srcPi12 + t2srcPi12 + t3srcPi12 + t4srcPi12 + t5srcPi12 + t6srcPi12;
+    srcPi13 = t1srcPi13 + t2srcPi13 + t3srcPi13 + t4srcPi13 + t5srcPi13 + t6srcPi13;
+    srcPi22 = t1srcPi22 + t2srcPi22 + t3srcPi22 + t4srcPi22 + t5srcPi22 + t6srcPi22;
+    srcPi23 = t1srcPi23 + t2srcPi23 + t3srcPi23 + t4srcPi23 + t5srcPi23 + t6srcPi23;
+    srcPi33 = t1srcPi33 + t2srcPi33 + t3srcPi33 + t4srcPi33 + t5srcPi33 + t6srcPi33;
     
     //RHS of Phi
     
     //TEMR 1 of Phi
     
-    t1rhsPhi100 = 0.5*N*Pi00*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi100 = 0.5*N*Pi00*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
     
-    t1rhsPhi101 =  0.5*N*Pi01*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi101 =  0.5*N*Pi01*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
     
-    t1rhsPhi102 = 0.5*N*Pi02*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi102 = 0.5*N*Pi02*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
     
-    t1rhsPhi103 = 0.5*N*Pi03*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi103 = 0.5*N*Pi03*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
     
-    t1rhsPhi111 = 0.5*N*Pi11*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi111 = 0.5*N*Pi11*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
     
-    t1rhsPhi112 = 0.5*N*Pi12*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi112 = 0.5*N*Pi12*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
         
-    t1rhsPhi113 = 0.5*N*Pi13*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi113 = 0.5*N*Pi13*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
     
-    t1rhsPhi122 = 0.5*N*Pi22*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi122 = 0.5*N*Pi22*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
     
-    t1rhsPhi123 = 0.5*N*Pi23*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi123 = 0.5*N*Pi23*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
     
-    t1rhsPhi133 = 0.5*N*Pi33*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
+    t1srcPhi133 = 0.5*N*Pi33*(Phi100*Power(t0,2) + 2*Phi101*t0*t1 + Phi111*Power(t1,2) + 2*Phi102*t0*t2 + 2*Phi112*t1*t2 + 
             Phi122*Power(t2,2) + 2*Phi103*t0*t3 + 2*Phi113*t1*t3 + 2*Phi123*t2*t3 + Phi133*Power(t3,2));
     
-    t1rhsPhi200 = 0.5*N*Pi00*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi200 = 0.5*N*Pi00*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi201 = 0.5*N*Pi01*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi201 = 0.5*N*Pi01*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi202 = 0.5*N*Pi02*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi202 = 0.5*N*Pi02*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi203 = 0.5*N*Pi03*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi203 = 0.5*N*Pi03*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi211 = 0.5*N*Pi11*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi211 = 0.5*N*Pi11*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi212 = 0.5*N*Pi12*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi212 = 0.5*N*Pi12*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi213 = 0.5*N*Pi13*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi213 = 0.5*N*Pi13*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi222 = 0.5*N*Pi22*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi222 = 0.5*N*Pi22*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi223 = 0.5*N*Pi23*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi223 = 0.5*N*Pi23*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi233 = 0.5*N*Pi33*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
+    t1srcPhi233 = 0.5*N*Pi33*(Phi200*Power(t0,2) + 2*Phi201*t0*t1 + Phi211*Power(t1,2) + 2*Phi202*t0*t2 + 2*Phi212*t1*t2 + 
             Phi222*Power(t2,2) + 2*Phi203*t0*t3 + 2*Phi213*t1*t3 + 2*Phi223*t2*t3 + Phi233*Power(t3,2));
     
-    t1rhsPhi300 = 0.5*N*Pi00*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi300 = 0.5*N*Pi00*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
             Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
-    t1rhsPhi301 = 0.5*N*Pi01*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi301 = 0.5*N*Pi01*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
             Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
-    t1rhsPhi302 = 0.5*N*Pi02*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi302 = 0.5*N*Pi02*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
             Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
-    t1rhsPhi303 = 0.5*N*Pi03*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi303 = 0.5*N*Pi03*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
             Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
-    t1rhsPhi311 = 0.5*N*Pi11*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi311 = 0.5*N*Pi11*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
              Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
-    t1rhsPhi312 = 0.5*N*Pi12*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi312 = 0.5*N*Pi12*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
                     Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
-    t1rhsPhi313 = 0.5*N*Pi13*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi313 = 0.5*N*Pi13*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
                     Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
-    t1rhsPhi322 = 0.5*N*Pi22*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi322 = 0.5*N*Pi22*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
                     Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
-    t1rhsPhi323 = 0.5*N*Pi23*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi323 = 0.5*N*Pi23*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
                     Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
-    t1rhsPhi333 = 0.5*N*Pi33*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
+    t1srcPhi333 = 0.5*N*Pi33*(Phi300*Power(t0,2) + 2*Phi301*t0*t1 + Phi311*Power(t1,2) + 2*Phi302*t0*t2 + 2*Phi312*t1*t2 + 
                     Phi322*Power(t2,2) + 2*Phi303*t0*t3 + 2*Phi313*t1*t3 + 2*Phi323*t2*t3 + Phi333*Power(t3,2));
     
     
     //TERM 2 of Phi
-    t2rhsPhi100 =  N*(g11*Phi100*Phi101*t0 + 
+    t2srcPhi100 =  N*(g11*Phi100*Phi101*t0 + 
                      g12*Phi100*Phi102*t0 + g13*Phi100*Phi103*t0 + 
                      g12*Phi101*Phi200*t0 + g22*Phi102*Phi200*t0 + 
                      g23*Phi103*Phi200*t0 + g13*Phi101*Phi300*t0 + 
@@ -1243,7 +1243,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
                      g13*Phi113*Phi300*t3 + g23*Phi123*Phi300*t3 + 
                      g33*Phi133*Phi300*t3);   
 
-    t2rhsPhi101 = N*(g11*Power(Phi101,2)*t0 + g12*Phi101*Phi102*t0 + 
+    t2srcPhi101 = N*(g11*Power(Phi101,2)*t0 + g12*Phi101*Phi102*t0 + 
                      g13*Phi101*Phi103*t0 + g12*Phi101*Phi201*t0 + 
                      g22*Phi102*Phi201*t0 + g23*Phi103*Phi201*t0 + 
                      g13*Phi101*Phi301*t0 + g23*Phi102*Phi301*t0 + 
@@ -1262,7 +1262,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
                      g23*Phi133*Phi201*t3 + g13*Phi113*Phi301*t3 + 
                      g23*Phi123*Phi301*t3 + g33*Phi133*Phi301*t3); 
     
-    t2rhsPhi102 = N*(g11*Phi101*Phi102*t0 + g12*Power(Phi102,2)*t0 + 
+    t2srcPhi102 = N*(g11*Phi101*Phi102*t0 + g12*Power(Phi102,2)*t0 + 
                      g13*Phi102*Phi103*t0 + g12*Phi101*Phi202*t0 + 
                      g22*Phi102*Phi202*t0 + g23*Phi103*Phi202*t0 + 
                      g13*Phi101*Phi302*t0 + g23*Phi102*Phi302*t0 + 
@@ -1281,7 +1281,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
                      g23*Phi133*Phi202*t3 + g13*Phi113*Phi302*t3 + 
                      g23*Phi123*Phi302*t3 + g33*Phi133*Phi302*t3);    
 
-    t2rhsPhi103 = N*(g11*Phi101*Phi103*t0 + g12*Phi102*Phi103*t0 + 
+    t2srcPhi103 = N*(g11*Phi101*Phi103*t0 + g12*Phi102*Phi103*t0 + 
                      g13*Power(Phi103,2)*t0 + g12*Phi101*Phi203*t0 + 
                      g22*Phi102*Phi203*t0 + g23*Phi103*Phi203*t0 + 
                      g13*Phi101*Phi303*t0 + g23*Phi102*Phi303*t0 + 
@@ -1300,7 +1300,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
                      g23*Phi133*Phi203*t3 + g13*Phi113*Phi303*t3 + 
                      g23*Phi123*Phi303*t3 + g33*Phi133*Phi303*t3);
          
-    t2rhsPhi111 = N*(g11*Phi101*Phi111*t0 + g12*Phi102*Phi111*t0 + 
+    t2srcPhi111 = N*(g11*Phi101*Phi111*t0 + g12*Phi102*Phi111*t0 + 
      g13*Phi103*Phi111*t0 + g12*Phi101*Phi211*t0 + 
      g22*Phi102*Phi211*t0 + g23*Phi103*Phi211*t0 + 
      g13*Phi101*Phi311*t0 + g23*Phi102*Phi311*t0 + 
@@ -1319,7 +1319,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi133*Phi211*t3 + g13*Phi113*Phi311*t3 + 
      g23*Phi123*Phi311*t3 + g33*Phi133*Phi311*t3);  
 
-    t2rhsPhi112 = N*(g11*Phi101*Phi112*t0 + g12*Phi102*Phi112*t0 + 
+    t2srcPhi112 = N*(g11*Phi101*Phi112*t0 + g12*Phi102*Phi112*t0 + 
      g13*Phi103*Phi112*t0 + g12*Phi101*Phi212*t0 + 
      g22*Phi102*Phi212*t0 + g23*Phi103*Phi212*t0 + 
      g13*Phi101*Phi312*t0 + g23*Phi102*Phi312*t0 + 
@@ -1338,7 +1338,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi133*Phi212*t3 + g13*Phi113*Phi312*t3 + 
      g23*Phi123*Phi312*t3 + g33*Phi133*Phi312*t3);
     
-    t2rhsPhi113 = N*(g11*Phi101*Phi113*t0 + g12*Phi102*Phi113*t0 + 
+    t2srcPhi113 = N*(g11*Phi101*Phi113*t0 + g12*Phi102*Phi113*t0 + 
      g13*Phi103*Phi113*t0 + g12*Phi101*Phi213*t0 + 
      g22*Phi102*Phi213*t0 + g23*Phi103*Phi213*t0 + 
      g13*Phi101*Phi313*t0 + g23*Phi102*Phi313*t0 + 
@@ -1357,7 +1357,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi133*Phi213*t3 + g13*Phi113*Phi313*t3 + 
      g23*Phi123*Phi313*t3 + g33*Phi133*Phi313*t3); 
     
-    t2rhsPhi122 = N*(g11*Phi101*Phi122*t0 + g12*Phi102*Phi122*t0 + 
+    t2srcPhi122 = N*(g11*Phi101*Phi122*t0 + g12*Phi102*Phi122*t0 + 
      g13*Phi103*Phi122*t0 + g12*Phi101*Phi222*t0 + 
      g22*Phi102*Phi222*t0 + g23*Phi103*Phi222*t0 + 
      g13*Phi101*Phi322*t0 + g23*Phi102*Phi322*t0 + 
@@ -1376,7 +1376,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi133*Phi222*t3 + g13*Phi113*Phi322*t3 + 
      g23*Phi123*Phi322*t3 + g33*Phi133*Phi322*t3); 
     
-    t2rhsPhi123 = N*(g11*Phi101*Phi123*t0 + g12*Phi102*Phi123*t0 + 
+    t2srcPhi123 = N*(g11*Phi101*Phi123*t0 + g12*Phi102*Phi123*t0 + 
      g13*Phi103*Phi123*t0 + g12*Phi101*Phi223*t0 + 
      g22*Phi102*Phi223*t0 + g23*Phi103*Phi223*t0 + 
      g13*Phi101*Phi323*t0 + g23*Phi102*Phi323*t0 + 
@@ -1395,7 +1395,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi133*Phi223*t3 + g13*Phi113*Phi323*t3 + 
      g23*Phi123*Phi323*t3 + g33*Phi133*Phi323*t3); 
     
-    t2rhsPhi133 = N*(g11*Phi101*Phi133*t0 + g12*Phi102*Phi133*t0 + 
+    t2srcPhi133 = N*(g11*Phi101*Phi133*t0 + g12*Phi102*Phi133*t0 + 
      g13*Phi103*Phi133*t0 + g12*Phi101*Phi233*t0 + 
      g22*Phi102*Phi233*t0 + g23*Phi103*Phi233*t0 + 
      g13*Phi101*Phi333*t0 + g23*Phi102*Phi333*t0 + 
@@ -1414,7 +1414,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi133*Phi233*t3 + g13*Phi113*Phi333*t3 + 
      g23*Phi123*Phi333*t3 + g33*Phi133*Phi333*t3); 
     
-    t2rhsPhi200 = N*(g11*Phi100*Phi201*t0 + g12*Phi200*Phi201*t0 + 
+    t2srcPhi200 = N*(g11*Phi100*Phi201*t0 + g12*Phi200*Phi201*t0 + 
      g12*Phi100*Phi202*t0 + g22*Phi200*Phi202*t0 + 
      g13*Phi100*Phi203*t0 + g23*Phi200*Phi203*t0 + 
      g13*Phi201*Phi300*t0 + g23*Phi202*Phi300*t0 + 
@@ -1433,7 +1433,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi200*Phi233*t3 + g13*Phi213*Phi300*t3 + 
      g23*Phi223*Phi300*t3 + g33*Phi233*Phi300*t3); 
     
-    t2rhsPhi201 = N*(g11*Phi101*Phi201*t0 + g12*Power(Phi201,2)*t0 + 
+    t2srcPhi201 = N*(g11*Phi101*Phi201*t0 + g12*Power(Phi201,2)*t0 + 
      g12*Phi101*Phi202*t0 + g22*Phi201*Phi202*t0 + 
      g13*Phi101*Phi203*t0 + g23*Phi201*Phi203*t0 + 
      g13*Phi201*Phi301*t0 + g23*Phi202*Phi301*t0 + 
@@ -1452,7 +1452,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi201*Phi233*t3 + g13*Phi213*Phi301*t3 + 
      g23*Phi223*Phi301*t3 + g33*Phi233*Phi301*t3); 
     
-    t2rhsPhi202 = N*(g11*Phi102*Phi201*t0 + g12*Phi102*Phi202*t0 + 
+    t2srcPhi202 = N*(g11*Phi102*Phi201*t0 + g12*Phi102*Phi202*t0 + 
      g12*Phi201*Phi202*t0 + g22*Power(Phi202,2)*t0 + 
      g13*Phi102*Phi203*t0 + g23*Phi202*Phi203*t0 + 
      g13*Phi201*Phi302*t0 + g23*Phi202*Phi302*t0 + 
@@ -1471,7 +1471,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi202*Phi233*t3 + g13*Phi213*Phi302*t3 + 
      g23*Phi223*Phi302*t3 + g33*Phi233*Phi302*t3); 
     
-    t2rhsPhi203 = N*(g11*Phi103*Phi201*t0 + g12*Phi103*Phi202*t0 + 
+    t2srcPhi203 = N*(g11*Phi103*Phi201*t0 + g12*Phi103*Phi202*t0 + 
      g13*Phi103*Phi203*t0 + g12*Phi201*Phi203*t0 + 
      g22*Phi202*Phi203*t0 + g23*Power(Phi203,2)*t0 + 
      g13*Phi201*Phi303*t0 + g23*Phi202*Phi303*t0 + 
@@ -1490,7 +1490,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi203*Phi233*t3 + g13*Phi213*Phi303*t3 + 
      g23*Phi223*Phi303*t3 + g33*Phi233*Phi303*t3); 
     
-    t2rhsPhi211 = N*(g11*Phi111*Phi201*t0 + g12*Phi111*Phi202*t0 + 
+    t2srcPhi211 = N*(g11*Phi111*Phi201*t0 + g12*Phi111*Phi202*t0 + 
      g13*Phi111*Phi203*t0 + g12*Phi201*Phi211*t0 + 
      g22*Phi202*Phi211*t0 + g23*Phi203*Phi211*t0 + 
      g13*Phi201*Phi311*t0 + g23*Phi202*Phi311*t0 + 
@@ -1509,7 +1509,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi211*Phi233*t3 + g13*Phi213*Phi311*t3 + 
      g23*Phi223*Phi311*t3 + g33*Phi233*Phi311*t3); 
 
-    t2rhsPhi212 = N*(g11*Phi112*Phi201*t0 + g12*Phi112*Phi202*t0 + 
+    t2srcPhi212 = N*(g11*Phi112*Phi201*t0 + g12*Phi112*Phi202*t0 + 
      g13*Phi112*Phi203*t0 + g12*Phi201*Phi212*t0 + 
      g22*Phi202*Phi212*t0 + g23*Phi203*Phi212*t0 + 
      g13*Phi201*Phi312*t0 + g23*Phi202*Phi312*t0 + 
@@ -1528,7 +1528,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi212*Phi233*t3 + g13*Phi213*Phi312*t3 + 
      g23*Phi223*Phi312*t3 + g33*Phi233*Phi312*t3); 
     
-    t2rhsPhi213 = N*(g11*Phi113*Phi201*t0 + g12*Phi113*Phi202*t0 + 
+    t2srcPhi213 = N*(g11*Phi113*Phi201*t0 + g12*Phi113*Phi202*t0 + 
      g13*Phi113*Phi203*t0 + g12*Phi201*Phi213*t0 + 
      g22*Phi202*Phi213*t0 + g23*Phi203*Phi213*t0 + 
      g13*Phi201*Phi313*t0 + g23*Phi202*Phi313*t0 + 
@@ -1547,7 +1547,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi213*Phi233*t3 + g13*Phi213*Phi313*t3 + 
      g23*Phi223*Phi313*t3 + g33*Phi233*Phi313*t3);
     
-    t2rhsPhi222 = N*(g11*Phi122*Phi201*t0 + g12*Phi122*Phi202*t0 + 
+    t2srcPhi222 = N*(g11*Phi122*Phi201*t0 + g12*Phi122*Phi202*t0 + 
      g13*Phi122*Phi203*t0 + g12*Phi201*Phi222*t0 + 
      g22*Phi202*Phi222*t0 + g23*Phi203*Phi222*t0 + 
      g13*Phi201*Phi322*t0 + g23*Phi202*Phi322*t0 + 
@@ -1566,7 +1566,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi222*Phi233*t3 + g13*Phi213*Phi322*t3 + 
      g23*Phi223*Phi322*t3 + g33*Phi233*Phi322*t3); 
     
-    t2rhsPhi223 = N*(g11*Phi123*Phi201*t0 + g12*Phi123*Phi202*t0 + 
+    t2srcPhi223 = N*(g11*Phi123*Phi201*t0 + g12*Phi123*Phi202*t0 + 
      g13*Phi123*Phi203*t0 + g12*Phi201*Phi223*t0 + 
      g22*Phi202*Phi223*t0 + g23*Phi203*Phi223*t0 + 
      g13*Phi201*Phi323*t0 + g23*Phi202*Phi323*t0 + 
@@ -1585,7 +1585,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi223*Phi233*t3 + g13*Phi213*Phi323*t3 + 
      g23*Phi223*Phi323*t3 + g33*Phi233*Phi323*t3);
     
-    t2rhsPhi233 = N*(g11*Phi133*Phi201*t0 + g12*Phi133*Phi202*t0 + 
+    t2srcPhi233 = N*(g11*Phi133*Phi201*t0 + g12*Phi133*Phi202*t0 + 
      g13*Phi133*Phi203*t0 + g12*Phi201*Phi233*t0 + 
      g22*Phi202*Phi233*t0 + g23*Phi203*Phi233*t0 + 
      g13*Phi201*Phi333*t0 + g23*Phi202*Phi333*t0 + 
@@ -1604,7 +1604,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Power(Phi233,2)*t3 + g13*Phi213*Phi333*t3 + 
      g23*Phi223*Phi333*t3 + g33*Phi233*Phi333*t3); 
     
-    t2rhsPhi300 = N*(g11*Phi100*Phi301*t0 + g12*Phi200*Phi301*t0 + 
+    t2srcPhi300 = N*(g11*Phi100*Phi301*t0 + g12*Phi200*Phi301*t0 + 
      g13*Phi300*Phi301*t0 + g12*Phi100*Phi302*t0 + 
      g22*Phi200*Phi302*t0 + g23*Phi300*Phi302*t0 + 
      g13*Phi100*Phi303*t0 + g23*Phi200*Phi303*t0 + 
@@ -1623,7 +1623,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi300*Phi323*t3 + g13*Phi100*Phi333*t3 + 
      g23*Phi200*Phi333*t3 + g33*Phi300*Phi333*t3); 
     
-    t2rhsPhi301 = N*(g11*Phi101*Phi301*t0 + g12*Phi201*Phi301*t0 + 
+    t2srcPhi301 = N*(g11*Phi101*Phi301*t0 + g12*Phi201*Phi301*t0 + 
      g13*Power(Phi301,2)*t0 + g12*Phi101*Phi302*t0 + 
      g22*Phi201*Phi302*t0 + g23*Phi301*Phi302*t0 + 
      g13*Phi101*Phi303*t0 + g23*Phi201*Phi303*t0 + 
@@ -1642,7 +1642,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi301*Phi323*t3 + g13*Phi101*Phi333*t3 + 
      g23*Phi201*Phi333*t3 + g33*Phi301*Phi333*t3); 
     
-    t2rhsPhi302 = N*(g11*Phi102*Phi301*t0 + g12*Phi202*Phi301*t0 + 
+    t2srcPhi302 = N*(g11*Phi102*Phi301*t0 + g12*Phi202*Phi301*t0 + 
      g12*Phi102*Phi302*t0 + g22*Phi202*Phi302*t0 + 
      g13*Phi301*Phi302*t0 + g23*Power(Phi302,2)*t0 + 
      g13*Phi102*Phi303*t0 + g23*Phi202*Phi303*t0 + 
@@ -1661,7 +1661,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi302*Phi323*t3 + g13*Phi102*Phi333*t3 + 
      g23*Phi202*Phi333*t3 + g33*Phi302*Phi333*t3); 
     
-    t2rhsPhi303 = N*(g11*Phi103*Phi301*t0 + g12*Phi203*Phi301*t0 + 
+    t2srcPhi303 = N*(g11*Phi103*Phi301*t0 + g12*Phi203*Phi301*t0 + 
      g12*Phi103*Phi302*t0 + g22*Phi203*Phi302*t0 + 
      g13*Phi103*Phi303*t0 + g23*Phi203*Phi303*t0 + 
      g13*Phi301*Phi303*t0 + g23*Phi302*Phi303*t0 + 
@@ -1680,7 +1680,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi303*Phi323*t3 + g13*Phi103*Phi333*t3 + 
      g23*Phi203*Phi333*t3 + g33*Phi303*Phi333*t3); 
     
-    t2rhsPhi311 = N*(g11*Phi111*Phi301*t0 + g12*Phi211*Phi301*t0 + 
+    t2srcPhi311 = N*(g11*Phi111*Phi301*t0 + g12*Phi211*Phi301*t0 + 
      g12*Phi111*Phi302*t0 + g22*Phi211*Phi302*t0 + 
      g13*Phi111*Phi303*t0 + g23*Phi211*Phi303*t0 + 
      g13*Phi301*Phi311*t0 + g23*Phi302*Phi311*t0 + 
@@ -1699,7 +1699,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi311*Phi323*t3 + g13*Phi111*Phi333*t3 + 
      g23*Phi211*Phi333*t3 + g33*Phi311*Phi333*t3); 
     
-    t2rhsPhi312 = N*(g11*Phi112*Phi301*t0 + g12*Phi212*Phi301*t0 + 
+    t2srcPhi312 = N*(g11*Phi112*Phi301*t0 + g12*Phi212*Phi301*t0 + 
      g12*Phi112*Phi302*t0 + g22*Phi212*Phi302*t0 + 
      g13*Phi112*Phi303*t0 + g23*Phi212*Phi303*t0 + 
      g13*Phi301*Phi312*t0 + g23*Phi302*Phi312*t0 + 
@@ -1718,7 +1718,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi312*Phi323*t3 + g13*Phi112*Phi333*t3 + 
      g23*Phi212*Phi333*t3 + g33*Phi312*Phi333*t3); 
     
-    t2rhsPhi313 = N*(g11*Phi113*Phi301*t0 + g12*Phi213*Phi301*t0 + 
+    t2srcPhi313 = N*(g11*Phi113*Phi301*t0 + g12*Phi213*Phi301*t0 + 
      g12*Phi113*Phi302*t0 + g22*Phi213*Phi302*t0 + 
      g13*Phi113*Phi303*t0 + g23*Phi213*Phi303*t0 + 
      g13*Phi301*Phi313*t0 + g23*Phi302*Phi313*t0 + 
@@ -1737,7 +1737,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi313*Phi323*t3 + g13*Phi113*Phi333*t3 + 
      g23*Phi213*Phi333*t3 + g33*Phi313*Phi333*t3); 
     
-    t2rhsPhi322 = N*(g11*Phi122*Phi301*t0 + g12*Phi222*Phi301*t0 + 
+    t2srcPhi322 = N*(g11*Phi122*Phi301*t0 + g12*Phi222*Phi301*t0 + 
      g12*Phi122*Phi302*t0 + g22*Phi222*Phi302*t0 + 
      g13*Phi122*Phi303*t0 + g23*Phi222*Phi303*t0 + 
      g13*Phi301*Phi322*t0 + g23*Phi302*Phi322*t0 + 
@@ -1756,7 +1756,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Phi322*Phi323*t3 + g13*Phi122*Phi333*t3 + 
      g23*Phi222*Phi333*t3 + g33*Phi322*Phi333*t3); 
     
-    t2rhsPhi323 = N*(g11*Phi123*Phi301*t0 + g12*Phi223*Phi301*t0 + 
+    t2srcPhi323 = N*(g11*Phi123*Phi301*t0 + g12*Phi223*Phi301*t0 + 
      g12*Phi123*Phi302*t0 + g22*Phi223*Phi302*t0 + 
      g13*Phi123*Phi303*t0 + g23*Phi223*Phi303*t0 + 
      g13*Phi301*Phi323*t0 + g23*Phi302*Phi323*t0 + 
@@ -1775,7 +1775,7 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
      g23*Power(Phi323,2)*t3 + g13*Phi123*Phi333*t3 + 
      g23*Phi223*Phi333*t3 + g33*Phi323*Phi333*t3);
     
-    t2rhsPhi333 = N*(g11*Phi133*Phi301*t0 + g12*Phi233*Phi301*t0 + 
+    t2srcPhi333 = N*(g11*Phi133*Phi301*t0 + g12*Phi233*Phi301*t0 + 
      g12*Phi133*Phi302*t0 + g22*Phi233*Phi302*t0 + 
      g13*Phi133*Phi303*t0 + g23*Phi233*Phi303*t0 + 
      g13*Phi301*Phi333*t0 + g23*Phi302*Phi333*t0 + 
@@ -1796,82 +1796,82 @@ get_values_rhs(FLOAT *values_var, FLOAT *values)
     
     
     //TERM 3 of Phi
-    t3rhsPhi100 = -(gamma2*N*Phi100);
-    t3rhsPhi101 = -(gamma2*N*Phi101);
-    t3rhsPhi102 = -(gamma2*N*Phi102);
-    t3rhsPhi103 = -(gamma2*N*Phi103);
-    t3rhsPhi111 = -(gamma2*N*Phi111);
-    t3rhsPhi112 = -(gamma2*N*Phi112);
-    t3rhsPhi113 = -(gamma2*N*Phi113);
-    t3rhsPhi122 = -(gamma2*N*Phi122);
-    t3rhsPhi123 = -(gamma2*N*Phi123);
-    t3rhsPhi133 = -(gamma2*N*Phi133);
+    t3srcPhi100 = -(gamma2*N*Phi100);
+    t3srcPhi101 = -(gamma2*N*Phi101);
+    t3srcPhi102 = -(gamma2*N*Phi102);
+    t3srcPhi103 = -(gamma2*N*Phi103);
+    t3srcPhi111 = -(gamma2*N*Phi111);
+    t3srcPhi112 = -(gamma2*N*Phi112);
+    t3srcPhi113 = -(gamma2*N*Phi113);
+    t3srcPhi122 = -(gamma2*N*Phi122);
+    t3srcPhi123 = -(gamma2*N*Phi123);
+    t3srcPhi133 = -(gamma2*N*Phi133);
     
-    t3rhsPhi200 = -(gamma2*N*Phi200);
-    t3rhsPhi201 = -(gamma2*N*Phi201);
-    t3rhsPhi202 = -(gamma2*N*Phi202);
-    t3rhsPhi203 = -(gamma2*N*Phi203);
-    t3rhsPhi211 = -(gamma2*N*Phi211);
-    t3rhsPhi212 = -(gamma2*N*Phi212);
-    t3rhsPhi213 = -(gamma2*N*Phi213);
-    t3rhsPhi222 = -(gamma2*N*Phi222);
-    t3rhsPhi223 = -(gamma2*N*Phi223);
-    t3rhsPhi233 = -(gamma2*N*Phi233);
+    t3srcPhi200 = -(gamma2*N*Phi200);
+    t3srcPhi201 = -(gamma2*N*Phi201);
+    t3srcPhi202 = -(gamma2*N*Phi202);
+    t3srcPhi203 = -(gamma2*N*Phi203);
+    t3srcPhi211 = -(gamma2*N*Phi211);
+    t3srcPhi212 = -(gamma2*N*Phi212);
+    t3srcPhi213 = -(gamma2*N*Phi213);
+    t3srcPhi222 = -(gamma2*N*Phi222);
+    t3srcPhi223 = -(gamma2*N*Phi223);
+    t3srcPhi233 = -(gamma2*N*Phi233);
     
-    t3rhsPhi300 = -(gamma2*N*Phi300);
-    t3rhsPhi301 = -(gamma2*N*Phi301);
-    t3rhsPhi302 = -(gamma2*N*Phi302);
-    t3rhsPhi303 = -(gamma2*N*Phi303);
-    t3rhsPhi311 = -(gamma2*N*Phi311);
-    t3rhsPhi312 = -(gamma2*N*Phi312);
-    t3rhsPhi313 = -(gamma2*N*Phi313);
-    t3rhsPhi322 = -(gamma2*N*Phi322);
-    t3rhsPhi323 = -(gamma2*N*Phi323);
-    t3rhsPhi333 = -(gamma2*N*Phi333);
+    t3srcPhi300 = -(gamma2*N*Phi300);
+    t3srcPhi301 = -(gamma2*N*Phi301);
+    t3srcPhi302 = -(gamma2*N*Phi302);
+    t3srcPhi303 = -(gamma2*N*Phi303);
+    t3srcPhi311 = -(gamma2*N*Phi311);
+    t3srcPhi312 = -(gamma2*N*Phi312);
+    t3srcPhi313 = -(gamma2*N*Phi313);
+    t3srcPhi322 = -(gamma2*N*Phi322);
+    t3srcPhi323 = -(gamma2*N*Phi323);
+    t3srcPhi333 = -(gamma2*N*Phi333);
     
     //Sum all terms of RHS Phi
-    rhsPhi100 = t1rhsPhi100 + t2rhsPhi100 + t3rhsPhi100;
-    rhsPhi101 = t1rhsPhi101 + t2rhsPhi101 + t3rhsPhi101;
-    rhsPhi102 = t1rhsPhi102 + t2rhsPhi102 + t3rhsPhi102;
-    rhsPhi103 = t1rhsPhi103 + t2rhsPhi103 + t3rhsPhi103;
-    rhsPhi111 = t1rhsPhi111 + t2rhsPhi111 + t3rhsPhi111;
-    rhsPhi112 = t1rhsPhi112 + t2rhsPhi112 + t3rhsPhi112;
-    rhsPhi113 = t1rhsPhi113 + t2rhsPhi113 + t3rhsPhi113;
-    rhsPhi122 = t1rhsPhi122 + t2rhsPhi122 + t3rhsPhi122;
-    rhsPhi123 = t1rhsPhi123 + t2rhsPhi123 + t3rhsPhi123;
-    rhsPhi133 = t1rhsPhi133 + t2rhsPhi133 + t3rhsPhi133;
+    srcPhi100 = t1srcPhi100 + t2srcPhi100 + t3srcPhi100;
+    srcPhi101 = t1srcPhi101 + t2srcPhi101 + t3srcPhi101;
+    srcPhi102 = t1srcPhi102 + t2srcPhi102 + t3srcPhi102;
+    srcPhi103 = t1srcPhi103 + t2srcPhi103 + t3srcPhi103;
+    srcPhi111 = t1srcPhi111 + t2srcPhi111 + t3srcPhi111;
+    srcPhi112 = t1srcPhi112 + t2srcPhi112 + t3srcPhi112;
+    srcPhi113 = t1srcPhi113 + t2srcPhi113 + t3srcPhi113;
+    srcPhi122 = t1srcPhi122 + t2srcPhi122 + t3srcPhi122;
+    srcPhi123 = t1srcPhi123 + t2srcPhi123 + t3srcPhi123;
+    srcPhi133 = t1srcPhi133 + t2srcPhi133 + t3srcPhi133;
                                                        
-    rhsPhi200 = t1rhsPhi200 + t2rhsPhi200 + t3rhsPhi200;
-    rhsPhi201 = t1rhsPhi201 + t2rhsPhi201 + t3rhsPhi201;
-    rhsPhi202 = t1rhsPhi202 + t2rhsPhi202 + t3rhsPhi202;
-    rhsPhi203 = t1rhsPhi203 + t2rhsPhi203 + t3rhsPhi203;
-    rhsPhi211 = t1rhsPhi211 + t2rhsPhi211 + t3rhsPhi211;
-    rhsPhi212 = t1rhsPhi212 + t2rhsPhi212 + t3rhsPhi212;
-    rhsPhi213 = t1rhsPhi213 + t2rhsPhi213 + t3rhsPhi213;
-    rhsPhi222 = t1rhsPhi222 + t2rhsPhi222 + t3rhsPhi222;
-    rhsPhi223 = t1rhsPhi223 + t2rhsPhi223 + t3rhsPhi223;
-    rhsPhi233 = t1rhsPhi233 + t2rhsPhi233 + t3rhsPhi233;
+    srcPhi200 = t1srcPhi200 + t2srcPhi200 + t3srcPhi200;
+    srcPhi201 = t1srcPhi201 + t2srcPhi201 + t3srcPhi201;
+    srcPhi202 = t1srcPhi202 + t2srcPhi202 + t3srcPhi202;
+    srcPhi203 = t1srcPhi203 + t2srcPhi203 + t3srcPhi203;
+    srcPhi211 = t1srcPhi211 + t2srcPhi211 + t3srcPhi211;
+    srcPhi212 = t1srcPhi212 + t2srcPhi212 + t3srcPhi212;
+    srcPhi213 = t1srcPhi213 + t2srcPhi213 + t3srcPhi213;
+    srcPhi222 = t1srcPhi222 + t2srcPhi222 + t3srcPhi222;
+    srcPhi223 = t1srcPhi223 + t2srcPhi223 + t3srcPhi223;
+    srcPhi233 = t1srcPhi233 + t2srcPhi233 + t3srcPhi233;
                                                        
-    rhsPhi300 = t1rhsPhi300 + t2rhsPhi300 + t3rhsPhi300;
-    rhsPhi301 = t1rhsPhi301 + t2rhsPhi301 + t3rhsPhi301;
-    rhsPhi302 = t1rhsPhi302 + t2rhsPhi302 + t3rhsPhi302;
-    rhsPhi303 = t1rhsPhi303 + t2rhsPhi303 + t3rhsPhi303;
-    rhsPhi311 = t1rhsPhi311 + t2rhsPhi311 + t3rhsPhi311;
-    rhsPhi312 = t1rhsPhi312 + t2rhsPhi312 + t3rhsPhi312;
-    rhsPhi313 = t1rhsPhi313 + t2rhsPhi313 + t3rhsPhi313;
-    rhsPhi322 = t1rhsPhi322 + t2rhsPhi322 + t3rhsPhi322;
-    rhsPhi323 = t1rhsPhi323 + t2rhsPhi323 + t3rhsPhi323;
-    rhsPhi333 = t1rhsPhi333 + t2rhsPhi333 + t3rhsPhi333;
+    srcPhi300 = t1srcPhi300 + t2srcPhi300 + t3srcPhi300;
+    srcPhi301 = t1srcPhi301 + t2srcPhi301 + t3srcPhi301;
+    srcPhi302 = t1srcPhi302 + t2srcPhi302 + t3srcPhi302;
+    srcPhi303 = t1srcPhi303 + t2srcPhi303 + t3srcPhi303;
+    srcPhi311 = t1srcPhi311 + t2srcPhi311 + t3srcPhi311;
+    srcPhi312 = t1srcPhi312 + t2srcPhi312 + t3srcPhi312;
+    srcPhi313 = t1srcPhi313 + t2srcPhi313 + t3srcPhi313;
+    srcPhi322 = t1srcPhi322 + t2srcPhi322 + t3srcPhi322;
+    srcPhi323 = t1srcPhi323 + t2srcPhi323 + t3srcPhi323;
+    srcPhi333 = t1srcPhi333 + t2srcPhi333 + t3srcPhi333;
     
-    //put values of rhs in values[];
-    values[0] = rhsPsi00; values[1] = rhsPsi01; values[2] = rhsPsi02; values[3] = rhsPsi03; values[4] = rhsPsi11;
-    values[5] = rhsPsi12; values[6] = rhsPsi13; values[7] = rhsPsi22; values[8] = rhsPsi23; values[9] = rhsPsi33;
-    values[10] = rhsPi00; values[11] = rhsPi01; values[12] = rhsPi02; values[13] = rhsPi03; values[14] = rhsPi11;
-    values[15] = rhsPi12; values[16] = rhsPi13; values[17] = rhsPi22; values[18] = rhsPi23; values[19] = rhsPi33;
-    values[20] = rhsPhi100; values[21] = rhsPhi101; values[22] = rhsPhi102; values[23] = rhsPhi103; values[24] = rhsPhi111;
-    values[25] = rhsPhi112; values[26] = rhsPhi113; values[27] = rhsPhi122; values[28] = rhsPhi123; values[29] = rhsPhi133;
-    values[30] = rhsPhi200; values[31] = rhsPhi201; values[32] = rhsPhi202; values[33] = rhsPhi203; values[34] = rhsPhi211;
-    values[35] = rhsPhi212; values[36] = rhsPhi213; values[37] = rhsPhi222; values[38] = rhsPhi223; values[39] = rhsPhi233;
-    values[40] = rhsPhi300; values[41] = rhsPhi301; values[42] = rhsPhi302; values[43] = rhsPhi303; values[44] = rhsPhi311;
-    values[45] = rhsPhi312; values[46] = rhsPhi313; values[47] = rhsPhi322; values[48] = rhsPhi323; values[49] = rhsPhi333;    
+    //put values of src in values[];
+    values[0] = srcPsi00; values[1] = srcPsi01; values[2] = srcPsi02; values[3] = srcPsi03; values[4] = srcPsi11;
+    values[5] = srcPsi12; values[6] = srcPsi13; values[7] = srcPsi22; values[8] = srcPsi23; values[9] = srcPsi33;
+    values[10] = srcPi00; values[11] = srcPi01; values[12] = srcPi02; values[13] = srcPi03; values[14] = srcPi11;
+    values[15] = srcPi12; values[16] = srcPi13; values[17] = srcPi22; values[18] = srcPi23; values[19] = srcPi33;
+    values[20] = srcPhi100; values[21] = srcPhi101; values[22] = srcPhi102; values[23] = srcPhi103; values[24] = srcPhi111;
+    values[25] = srcPhi112; values[26] = srcPhi113; values[27] = srcPhi122; values[28] = srcPhi123; values[29] = srcPhi133;
+    values[30] = srcPhi200; values[31] = srcPhi201; values[32] = srcPhi202; values[33] = srcPhi203; values[34] = srcPhi211;
+    values[35] = srcPhi212; values[36] = srcPhi213; values[37] = srcPhi222; values[38] = srcPhi223; values[39] = srcPhi233;
+    values[40] = srcPhi300; values[41] = srcPhi301; values[42] = srcPhi302; values[43] = srcPhi303; values[44] = srcPhi311;
+    values[45] = srcPhi312; values[46] = srcPhi313; values[47] = srcPhi322; values[48] = srcPhi323; values[49] = srcPhi333;    
 }
