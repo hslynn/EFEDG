@@ -8,23 +8,18 @@
 #include "auxi_dofs.c"
 #include "Hhat.c"
 #include "rk2.c"
-static void 
-func_Psi00(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
-{   
-    *value = x*x + y;
-}
+#include "Schwarzschild.c"
 
 int 
 main(int argc, char * argv[])
 {
     char *meshfile ="./mesh/hollowed_icosahedron.mesh";
-    //const char *matrix_fn = "mat.m", *var_name = "mat_M";
     GRID *g; 
     DOF_TYPE *dof_tp = DOF_DG2;
     FLOAT t0 = 0.0, t1 = 0.0;
-    FLOAT dt = 0.01;
+    FLOAT dt = 0.01, max_time = 1.0;
+    INT max_step = ceil(max_time/dt);
     INT i;
-    //MAT *mat_M;
 
     phgInit(&argc, &argv);	
 
@@ -34,9 +29,11 @@ main(int argc, char * argv[])
 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
+    DOF *dofs_ini_Psi[10];
     create_dofs(g, dof_tp, 1, dofs_Psi, "Psi", 10);
     create_dofs(g, dof_tp, 1, dofs_Pi, "Pi", 10);
     create_dofs(g, dof_tp, 1, dofs_Phi, "Phi", 30);
+    create_dofs(g, dof_tp, 1, dofs_ini_Psi, "ini_Psi", 10);
 
     /*create dofs for all source terms*/
     DOF *dofs_srcPsi[10], *dofs_srcPi[10], *dofs_srcPhi[30];
@@ -81,37 +78,40 @@ main(int argc, char * argv[])
     } 
 
     //phgDofSetDataByFunction(dofs_Pi[1], func_u);
-    phgDofSetDataByValue(dofs_Psi[0], -1);
-    phgDofSetDataByValue(dofs_Psi[4], 1);
-    phgDofSetDataByValue(dofs_Psi[7], 1);
-    phgDofSetDataByValue(dofs_Psi[9], 1);
-
+    phgDofSetDataByFunction(dofs_Psi[0], func_Psi00);
+    phgDofSetDataByFunction(dofs_Psi[4], func_Psi11);
+    phgDofSetDataByFunction(dofs_Psi[5], func_Psi12);
+    phgDofSetDataByFunction(dofs_Psi[6], func_Psi13);
+    phgDofSetDataByFunction(dofs_Psi[7], func_Psi22);
+    phgDofSetDataByFunction(dofs_Psi[8], func_Psi23);
+    phgDofSetDataByFunction(dofs_Psi[9], func_Psi33);
+    copy_dofs(dofs_Psi, dofs_ini_Psi, "ini_Psi", 10);
     
-    printf("test0");
     
     if(phgRank == 0){    
         t0 = phgGetTime(NULL);
     }   
+
     get_dofs_rhs(dofs_var, dofs_g, dofs_N, dofs_src,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-    printf("test1");
-    ssp_rk2(dt, dofs_var, dofs_g, dofs_N, dofs_src,
-        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+
+    char vtk_name[20]; 
+    for(i=0;i<max_step;i++){
+        sprintf(vtk_name, "%f", i*dt);
+        strcat(vtk_name, ".vtk");
+        printf("step %d completed\n", i);
+        printf("time length: %f\n\n", i*dt);
+        phgExportVTKn(g, vtk_name, 10, dofs_Psi);
+        ssp_rk2(dt, dofs_var, dofs_g, dofs_N, dofs_src,
+                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+    }
       
-    printf("test2");
     if(phgRank == 0){ 
         t1 = phgGetTime(NULL);
         phgPrintf("Total time cost = %f\n\n", t1 - t0);
     }
 
-    /*Export VTK*/
-    //phgExportVTKn(g, "gradPsi.vtk", 10, dofs_gradPsi);
-    for(i=0;i<10;i++){
-        phgDofDump(dofs_Psi[i]);
-    }
-
-    phgExportVTK(g, "Psi.vtk",dofs_Psi[0], NULL);
-    
+     
     /*release the mem*/
     for(i=0;i<NVAR;i++){
         phgDofFree(dofs_var + i);

@@ -13,6 +13,14 @@ create_dofs(GRID *g, DOF_TYPE *type, INT dim, DOF **dofs_list, char *name_head, 
 }
 
 static void
+copy_dofs(DOF **dofs_A, DOF **dofs_B, char *name, INT ndof)
+{
+    for(INT i=0;i<ndof;i++){
+        phgDofCopy(dofs_A[i], dofs_B + i, NULL, name);
+    }
+}
+
+static void
 list2tensor(FLOAT *list, FLOAT *tensor, int dim)
 {
     int i, j;
