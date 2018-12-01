@@ -9,7 +9,7 @@
 #include "Hhat.c"
 #include "rk2.c"
 static void 
-func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
+func_Psi00(FLOAT x, FLOAT y, FLOAT z, FLOAT *value) 
 {   
     *value = x*x + y;
 }
@@ -17,7 +17,7 @@ func_u(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 int 
 main(int argc, char * argv[])
 {
-    char *meshfile ="cube.dat";
+    char *meshfile ="./mesh/hollowed_icosahedron.mesh";
     //const char *matrix_fn = "mat.m", *var_name = "mat_M";
     GRID *g; 
     DOF_TYPE *dof_tp = DOF_DG2;
@@ -38,7 +38,7 @@ main(int argc, char * argv[])
     create_dofs(g, dof_tp, 1, dofs_Pi, "Pi", 10);
     create_dofs(g, dof_tp, 1, dofs_Phi, "Phi", 30);
 
-    /*create dofs for all RHS terms*/
+    /*create dofs for all source terms*/
     DOF *dofs_srcPsi[10], *dofs_srcPi[10], *dofs_srcPhi[30];
     create_dofs(g, dof_tp, 1, dofs_srcPsi, "srcPsi", 10);
     create_dofs(g, dof_tp, 1, dofs_srcPi, "srcPi", 10);
@@ -50,8 +50,8 @@ main(int argc, char * argv[])
     create_dofs(g, dof_tp, 2, dofs_gradPi, "gradPi", 30);
     create_dofs(g, dof_tp, 2, dofs_gradPhi, "gradPhi", 90);
 
-    //create lists to store dofs of var, src and grad
-    DOF *dofs_var[50], *dofs_src[50];
+    //create lists to store dofs of var, src
+    DOF *dofs_var[NVAR], *dofs_src[NVAR];
     for(i =0;i<10;i++){
         dofs_var[i] = dofs_Psi[i];
         dofs_var[10+i] = dofs_Pi[i];
@@ -67,10 +67,10 @@ main(int argc, char * argv[])
     }
 
     /*create auxi dofs*/
-    DOF *dofs_g[6], *dofs_N[4], *dofs_Hhat[50], *dofs_rhs[50];
+    DOF *dofs_g[6], *dofs_N[4], *dofs_Hhat[NVAR], *dofs_rhs[NVAR];
     create_dofs(g, dof_tp, 1, dofs_g, "g", 6);
     create_dofs(g, dof_tp, 1, dofs_N, "N", 4);
-    create_dofs(g, dof_tp, 1, dofs_Hhat, "Hhat", 50);  
+    create_dofs(g, dof_tp, 1, dofs_Hhat, "Hhat", NVAR);  
 
     //for testing
     for(i=0;i<10;i++){
@@ -110,10 +110,10 @@ main(int argc, char * argv[])
         phgDofDump(dofs_Psi[i]);
     }
 
-    //phgExportVTKn(g, "gradPhi.vtk", 30, dofs_gradPhi);
+    phgExportVTK(g, "Psi.vtk",dofs_Psi[0], NULL);
     
     /*release the mem*/
-    for(i=0;i<50;i++){
+    for(i=0;i<NVAR;i++){
         phgDofFree(dofs_var + i);
         phgDofFree(dofs_src + i);
         phgDofFree(dofs_Hhat + i);
