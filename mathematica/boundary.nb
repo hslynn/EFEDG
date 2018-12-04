@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      6492,        215]
-NotebookOptionsPosition[      6107,        197]
-NotebookOutlinePosition[      6446,        212]
-CellTagsIndexPosition[      6403,        209]
+NotebookDataLength[      5973,        194]
+NotebookOptionsPosition[      5624,        178]
+NotebookOutlinePosition[      5964,        193]
+CellTagsIndexPosition[      5921,        190]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -21,7 +21,15 @@ Notebook[{
 Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.752916760994162*^9, 3.752916761569016*^9}}],
 
-Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"R", ":=", 
+  SuperscriptBox[
+   RowBox[{"(", 
+    RowBox[{
+     SuperscriptBox["x", "2"], "+", 
+     SuperscriptBox["y", "2"], "+", 
+     SuperscriptBox["z", "2"]}], ")"}], "0.5"]}]], "Input",
+ CellChangeTimes->{{3.75291778362514*^9, 3.7529178109800587`*^9}}],
 
 Cell[BoxData[
  RowBox[{"\n", 
@@ -34,7 +42,10 @@ Cell[BoxData[
         RowBox[{"M", "/", "R"}]}], ")"}]}], "/", 
      RowBox[{"(", 
       RowBox[{"1.0", "+", 
-       RowBox[{"M", "/", "R"}]}], ")"}]}]}], "\[IndentingNewLine]", "\n", 
+       RowBox[{"M", "/", "R"}]}], ")"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{"Psi01", ":=", "0"}], "\n", 
+   RowBox[{"Psi02", ":=", "0"}], "\[IndentingNewLine]", 
+   RowBox[{"Psi03", ":=", "0"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"Psi11", ":=", 
     RowBox[{
      RowBox[{"Power", "[", 
@@ -55,7 +66,7 @@ Cell[BoxData[
        RowBox[{"Power", "[", 
         RowBox[{"R", ",", "4.0"}], "]"}]}], "*", 
       RowBox[{"Power", "[", 
-       RowBox[{"x", ",", "2.0"}], "]"}]}]}]}], "\n", "\[IndentingNewLine]", 
+       RowBox[{"x", ",", "2.0"}], "]"}]}]}]}], "\[IndentingNewLine]", "\n", 
    RowBox[{"Psi12", ":=", 
     RowBox[{
      RowBox[{
@@ -69,8 +80,8 @@ Cell[BoxData[
       RowBox[{"Power", "[", 
        RowBox[{"M", ",", "2.0"}], "]"}], "/", 
       RowBox[{"Power", "[", 
-       RowBox[{"R", ",", "4.0"}], "]"}]}], "*", "x", "*", "y"}]}], 
-   "\[IndentingNewLine]", "\n", 
+       RowBox[{"R", ",", "4.0"}], "]"}]}], "*", "x", "*", "y"}]}], "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"Psi13", ":=", 
     RowBox[{
      RowBox[{
@@ -85,118 +96,88 @@ Cell[BoxData[
        RowBox[{"M", ",", "2.0"}], "]"}], "/", 
       RowBox[{"Power", "[", 
        RowBox[{"R", ",", "4.0"}], "]"}]}], "*", "x", "*", "z"}]}], "\n", 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"Psi22", ":=", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Psi22", ":=", 
+    RowBox[{
+     RowBox[{"Power", "[", 
+      RowBox[{
+       RowBox[{"1.0", "+", 
+        RowBox[{"M", "/", "R"}]}], ",", "2.0"}], "]"}], "+", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1.0", "+", 
+         RowBox[{"M", "/", "R"}]}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"M", "/", "R"}]}], ")"}]}], "*", 
+      RowBox[{
+       RowBox[{"Power", "[", 
+        RowBox[{"M", ",", "2.0"}], "]"}], "/", 
+       RowBox[{"Power", "[", 
+        RowBox[{"R", ",", "4.0"}], "]"}]}], "*", 
+      RowBox[{"Power", "[", 
+       RowBox[{"y", ",", "2.0"}], "]"}]}]}]}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"Psi23", ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1.0", "+", 
+        RowBox[{"M", "/", "R"}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"M", "/", "R"}]}], ")"}]}], "*", 
      RowBox[{
       RowBox[{"Power", "[", 
-       RowBox[{
-        RowBox[{"1.0", "+", 
-         RowBox[{"M", "/", "R"}]}], ",", "2.0"}], "]"}], "+", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"(", 
-         RowBox[{"1.0", "+", 
-          RowBox[{"M", "/", "R"}]}], ")"}], "/", 
-        RowBox[{"(", 
-         RowBox[{"1", "-", 
-          RowBox[{"M", "/", "R"}]}], ")"}]}], "*", 
-       RowBox[{
-        RowBox[{"Power", "[", 
-         RowBox[{"M", ",", "2.0"}], "]"}], "/", 
-        RowBox[{"Power", "[", 
-         RowBox[{"R", ",", "4.0"}], "]"}]}], "*", 
-       RowBox[{"Power", "[", 
-        RowBox[{"y", ",", "2.0"}], "]"}]}]}]}], ";"}], "\n", 
+       RowBox[{"M", ",", "2.0"}], "]"}], "/", 
+      RowBox[{"Power", "[", 
+       RowBox[{"R", ",", "4.0"}], "]"}]}], "*", "y", "*", "z"}]}], "\n", 
    "\[IndentingNewLine]", 
-   RowBox[{"static", " ", "void"}], "\n", 
-   RowBox[{"func_Psi23", 
-    RowBox[{"(", 
-     RowBox[{
-      RowBox[{"FLOAT", " ", "x"}], ",", 
-      RowBox[{"FLOAT", " ", "y"}], ",", 
-      RowBox[{"FLOAT", " ", "z"}], ",", 
-      RowBox[{"FLOAT", "*", "value"}]}], ")"}]}], "\n", 
-   RowBox[{"{", "\[IndentingNewLine]", 
+   RowBox[{"Psi33", ":=", 
     RowBox[{
-     RowBox[{
-      RowBox[{"*", "value"}], "=", 
+     RowBox[{"Power", "[", 
       RowBox[{
-       RowBox[{
-        RowBox[{"(", 
-         RowBox[{"1.0", "+", 
-          RowBox[{"M", "/", "R"}]}], ")"}], "/", 
-        RowBox[{"(", 
-         RowBox[{"1", "-", 
-          RowBox[{"M", "/", "R"}]}], ")"}]}], "*", "pow", 
-       RowBox[{
-        RowBox[{"(", 
-         RowBox[{"M", ",", "2.0"}], ")"}], "/", "pow"}], 
+       RowBox[{"1.0", "+", 
+        RowBox[{"M", "/", "R"}]}], ",", "2.0"}], "]"}], "+", 
+     RowBox[{
+      RowBox[{
        RowBox[{"(", 
-        RowBox[{"R", ",", "4.0"}], ")"}], "*", "y", "*", "z"}]}], ";"}], 
-    "}"}], "\n", "\[IndentingNewLine]", 
-   RowBox[{"static", " ", "void"}], "\n", 
-   RowBox[{"func_Psi33", 
-    RowBox[{"(", 
-     RowBox[{
-      RowBox[{"FLOAT", " ", "x"}], ",", 
-      RowBox[{"FLOAT", " ", "y"}], ",", 
-      RowBox[{"FLOAT", " ", "z"}], ",", 
-      RowBox[{"FLOAT", "*", "value"}]}], ")"}]}], "\n", 
-   RowBox[{"{", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"*", "value"}], "=", 
+        RowBox[{"1.0", "+", 
+         RowBox[{"M", "/", "R"}]}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{"1", "-", 
+         RowBox[{"M", "/", "R"}]}], ")"}]}], "*", 
       RowBox[{
-       RowBox[{"pow", 
-        RowBox[{"(", 
-         RowBox[{
-          RowBox[{"1.0", "+", 
-           RowBox[{"M", "/", "R"}]}], ",", "2.0"}], ")"}]}], "+", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"(", 
-          RowBox[{"1.0", "+", 
-           RowBox[{"M", "/", "R"}]}], ")"}], "/", 
-         RowBox[{"(", 
-          RowBox[{"1", "-", 
-           RowBox[{"M", "/", "R"}]}], ")"}]}], "*", "pow", 
-        RowBox[{
-         RowBox[{"(", 
-          RowBox[{"M", ",", "2.0"}], ")"}], "/", "pow"}], 
-        RowBox[{"(", 
-         RowBox[{"R", ",", "4.0"}], ")"}], "*", "pow", 
-        RowBox[{"(", 
-         RowBox[{"z", ",", "2.0"}], ")"}]}]}]}], ";"}]}]}]}]], "Input",
+       RowBox[{"Power", "[", 
+        RowBox[{"M", ",", "2.0"}], "]"}], "/", 
+       RowBox[{"Power", "[", 
+        RowBox[{"R", ",", "4.0"}], "]"}]}], "*", 
+      RowBox[{"Power", "[", 
+       RowBox[{"z", ",", "2.0"}], "]"}]}]}]}]}]}]], "Input",
  CellChangeTimes->{{3.752917192823496*^9, 3.752917192823814*^9}, {
   3.752917349925311*^9, 3.752917458085446*^9}, {3.7529174925118113`*^9, 
-  3.752917657720091*^9}}],
+  3.7529177617852287`*^9}, {3.7529179718074627`*^9, 3.752917994309574*^9}}],
 
 Cell[BoxData[
- FractionBox[
-  RowBox[{
-   SuperscriptBox["M", "2.`"], " ", 
-   RowBox[{"(", 
-    RowBox[{"1.`", "\[VeryThinSpace]", "+", 
-     FractionBox["M", "R"]}], ")"}], " ", "x", " ", "z"}], 
-  RowBox[{
-   RowBox[{"(", 
-    RowBox[{"1", "-", 
-     FractionBox["M", "R"]}], ")"}], " ", 
-   SuperscriptBox["R", "4.`"]}]]], "Output",
- CellChangeTimes->{
-  3.752917462597857*^9, {3.752917500147306*^9, 3.752917541260614*^9}, 
-   3.752917585597855*^9}],
-
-Cell[BoxData[
- RowBox[{"static", " ", "void"}]], "Output",
- CellChangeTimes->{
-  3.752917462597857*^9, {3.752917500147306*^9, 3.752917541260614*^9}, 
-   3.7529175855989933`*^9}]
-}, Open  ]]
+ RowBox[{"psi", ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"Psi00", ",", "Psi01", ",", "Psi02", ",", "Psi03"}], "}"}], ",", 
+    
+    RowBox[{"{", 
+     RowBox[{"Psi01", ",", "Psi11", ",", "Psi12", ",", "Psi13"}], "}"}], ",", 
+    
+    RowBox[{"{", 
+     RowBox[{"Psi02", ",", "Psi12", ",", "Psi22", ",", "Psi23"}], "}"}], ",", 
+    
+    RowBox[{"{", 
+     RowBox[{"Psi03", ",", "Psi13", ",", "Psi23", ",", "Psi33"}], "}"}]}], 
+   "}"}]}]], "Input",
+ CellChangeTimes->{{3.752917827648365*^9, 3.7529179635344887`*^9}}]
 },
-WindowSize->{1920, 1056},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowSize->{808, 911},
+WindowMargins->{{Automatic, 111}, {64, Automatic}},
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -212,11 +193,9 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[558, 20, 92, 1, 32, "Input"],
-Cell[CellGroupData[{
-Cell[675, 25, 4780, 147, 481, "Input"],
-Cell[5458, 174, 453, 14, 71, "Output"],
-Cell[5914, 190, 177, 4, 32, "Output"]
-}, Open  ]]
+Cell[653, 23, 283, 8, 42, "Input"],
+Cell[939, 33, 4124, 125, 460, "Input"],
+Cell[5066, 160, 554, 16, 57, "Input"]
 }
 ]
 *)
