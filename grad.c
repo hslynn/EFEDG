@@ -1,7 +1,7 @@
 #include "quad.c"
 
 static void
-build_linear_system(SOLVER *solver, DOF *u_h, int coord)
+build_linear_system(SOLVER *solver, DOF *u_h, int coord, func_bdry)
 {
     int n, k, i, j, s, ss, in_out;
     GRID *g = u_h->g;
@@ -42,7 +42,11 @@ build_linear_system(SOLVER *solver, DOF *u_h, int coord)
                 /*boundary term, using numerical flux*/ 
                 for (s=0; s<4; s++){
                     const FLOAT *normal = phgGeomGetFaceOutNormal(g, e, s);                        
-                    
+
+                    val_int = phgQuadFaceDofDotBas(e, s, u_h, DOF_PROJ_NONE, 
+                                u_h, n, QUAD_DEFAULT); //计算u^-
+                   
+                    /*分是否边界面来计算u^+*/ 
                     if(e->bound_type[s] & INTERIOR){//如果s是内部面,找到邻居单元及s面在其上的编号ss
                         neigh_e = (ELEMENT *)e->neighbours[s];
                         for(ss = 0; ss < 4; ss++){ 
@@ -51,20 +55,16 @@ build_linear_system(SOLVER *solver, DOF *u_h, int coord)
         
                         val_ext = dgQuadFaceNeighDofDotBas(e, u_h, s, n, neigh_e, 
                                 u_h, ss, QUAD_DEFAULT);//计算u^+ 
-                        val_int = phgQuadFaceDofDotBas(e, s, u_h, DOF_PROJ_NONE, 
-                                u_h, n, QUAD_DEFAULT); //计算u^-
-                        boundary_term = 0.5 * normal[coord] * (val_ext + val_int) + 
-                                (0.5 - in_out) * fabs(normal[coord]) * (val_ext - val_int);//数值通量, in_out = 0 对应于取plus 
-                        
-                        /*添加到解法器相应右端项*/
-                        phgSolverAddRHSEntry(solver, I[i], boundary_term);
                     } 
                     else{//s是边界面时,施加边界条件 
-                        boundary_term = normal[coord] * phgQuadFaceDofDotBas(e, s,
-                                u_h, DOF_PROJ_NONE, u_h, n, QUAD_DEFAULT); 
-                            
-                        phgSolverAddRHSEntry(solver, I[i], boundary_term);
-                    } 
+                        val_ext = ;   
+                        
+                    }
+
+                    boundary_term = 0.5 * normal[coord] * (val_ext + val_int) + 
+                                (0.5 - in_out) * fabs(normal[coord]) * (val_ext - val_int);//数值通量, in_out = 0 对应于取plus  
+                    /*添加到解法器相应右端项*/
+                    phgSolverAddRHSEntry(solver, I[i], boundary_term);
                 } 
             }
         }
@@ -72,24 +72,24 @@ build_linear_system(SOLVER *solver, DOF *u_h, int coord)
 }
 
 static void
-dgHJGradDof(DOF *u_h, DOF *dof_grad, int coord)
+dgHJGradDof(DOF *u_h, DOF *dof_grad, int coord, DOF_USER_FUNC func_bdry)
 {
     SOLVER *solver;
     solver = phgSolverCreate(SOLVER_DEFAULT, dof_grad, NULL);
     
-    build_linear_system(solver, u_h, coord);
+    build_linear_system(solver, u_h, coord, func_bdry);
     
     phgSolverSolve(solver, TRUE, dof_grad, NULL);
     phgSolverDestroy(&solver);
 }
 
 static void
-get_dofs_grad(DOF **dofs, DOF **dofs_grad, int ndof)
+get_dofs_grad(DOF **dofs, DOF **dofs_grad, DOF_USER_FUNC *bdry_funcs, int ndof)
 {
     for(INT i=0;i<ndof;i++){ 
-        dgHJGradDof(dofs[i], dofs_grad[i], 0);
-        dgHJGradDof(dofs[i], dofs_grad[ndof + i], 1);
-        dgHJGradDof(dofs[i], dofs_grad[2*ndof + i], 2);
+        dgHJGradDof(dofs[i], dofs_grad[i], 0, funcs_bdry[i]);
+        dgHJGradDof(dofs[i], dofs_grad[ndof + i], 1, funcs_bdry[i]);
+        dgHJGradDof(dofs[i], dofs_grad[2*ndof + i], 2, funcs_bdry[i]);
     }
 }
 
