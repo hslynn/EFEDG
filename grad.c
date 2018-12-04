@@ -59,7 +59,7 @@ build_linear_system(SOLVER *solver, DOF *u_h, int coord)
                         /*添加到解法器相应右端项*/
                         phgSolverAddRHSEntry(solver, I[i], boundary_term);
                     } 
-                    else{//s是边界面时,只有u^- 
+                    else{//s是边界面时,施加边界条件 
                         boundary_term = normal[coord] * phgQuadFaceDofDotBas(e, s,
                                 u_h, DOF_PROJ_NONE, u_h, n, QUAD_DEFAULT); 
                             
