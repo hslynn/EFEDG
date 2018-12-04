@@ -48,6 +48,7 @@ static void
 func_Psi33(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
     *value = pow(1.0+M/R, 2.0) + (1.0+M/R)/(1-M/R)*pow(M, 2.0)/pow(R, 4.0)*pow(z, 2.0);
+}
 
 static void
 init_bdry_funcs(DOF_USER_FUNC *func_bdrys_Psi, DOF_USER_FUNC *func_bdrys_Pi, DOF_USER_FUNC *func_bdrys_Phi)
