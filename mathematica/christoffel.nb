@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     45875,       1389]
-NotebookOptionsPosition[     43154,       1298]
-NotebookOutlinePosition[     43844,       1321]
-CellTagsIndexPosition[     43801,       1318]
+NotebookDataLength[     43279,       1298]
+NotebookOptionsPosition[     40797,       1214]
+NotebookOutlinePosition[     41487,       1237]
+CellTagsIndexPosition[     41444,       1234]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1045,40 +1045,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Note:", "Subsubsection"],
-
-Cell[TextData[{
- "It is important not to use the symbols, ",
- StyleBox["i",
-  FontWeight->"Bold"],
- ", ",
- StyleBox["j",
-  FontWeight->"Bold"],
- ", ",
- StyleBox["k",
-  FontWeight->"Bold"],
- ", ",
- StyleBox["l",
-  FontWeight->"Bold"],
- ", ",
- StyleBox["n,",
-  FontWeight->"Bold",
-  FontVariations->{"CompatibilityType"->0}],
- " or ",
- StyleBox["s  ",
-  FontWeight->"Bold"],
- "as constants or coordinates in the metric that you specify above. The \
-reason is that  the first four of those symbols are used as summation or \
-table indices in the calculations done below. The last is the dimension of \
-the space. "
-}], "Text"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell["Calculating the inverse metric:", "Subsubsection"],
-
-Cell["The inverse metric is obtained through matrix inversion.", "Text"],
 
 Cell[BoxData[
  RowBox[{"inversemetric", ":=", 
@@ -1095,29 +1062,6 @@ Cell["inversemetric // MatrixForm", "Item",
 Cell[CellGroupData[{
 
 Cell["Calculating the affine connection:", "Subsubsection"],
-
-Cell[TextData[{
- "The calculation of the components of the affine connection is done by \
-transcribing the definition given earlier into the notation of ",
- StyleBox["Mathematica",
-  FontSlant->"Italic"],
- " and using the ",
- StyleBox["Mathematica",
-  FontSlant->"Italic"],
- " functions ",
- StyleBox["D",
-  FontWeight->"Bold"],
- " for taking partial derivatives, ",
- StyleBox["Sum",
-  FontWeight->"Bold"],
- " for summing over repeated indices, ",
- StyleBox["Table",
-  FontWeight->"Bold"],
- " for forming a list of components, and ",
- StyleBox["Simplify",
-  FontWeight->"Bold"],
- " for simplifying the result."
-}], "Text"],
 
 Cell[BoxData[
  RowBox[{"affine", ":=", 
@@ -1177,41 +1121,13 @@ Cell[CellGroupData[{
 Cell["Displaying the affine connection:", "Subsubsection"],
 
 Cell["\<\
-The nonzero components of the affine connections are displayed below. You \
-need not follow the details of constructing the functions that we use for \
-that purpose. Because the affine connection is symmetric under interchange of \
-the last two indices, only the independent components are displayed.\
-\>", "Text"],
-
-Cell[BoxData[
- RowBox[{"listaffine", ":=", 
-  RowBox[{"Table", "[", 
-   RowBox[{
-    RowBox[{"If", "[", 
-     RowBox[{
-      RowBox[{"UnsameQ", "[", 
-       RowBox[{
-        RowBox[{"affine", "[", 
-         RowBox[{"[", 
-          RowBox[{"i", ",", "j", ",", "k"}], "]"}], "]"}], ",", "0"}], "]"}], 
-      ",", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"ToString", "[", 
-         RowBox[{"\[CapitalGamma]", "[", 
-          RowBox[{"i", ",", "j", ",", "k"}], "]"}], "]"}], ",", 
-        RowBox[{"affine", "[", 
-         RowBox[{"[", 
-          RowBox[{"i", ",", "j", ",", "k"}], "]"}], "]"}]}], "}"}]}], "]"}], 
-    " ", ",", 
-    RowBox[{"{", 
-     RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"j", ",", "1", ",", "n"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"k", ",", "1", ",", "j"}], "}"}]}], "]"}]}]], "Input",
+listaffine := Table[If[UnsameQ[affine[[i, j, k]], 0], {ToString[\
+\[CapitalGamma][i, j, k]], affine[[i, j, k]]}] , {i, 1, n}, {j, 1, n}, {k, 1, \
+j}]\
+\>", "Item",
  CellChangeTimes->{{3.6733425468985653`*^9, 3.673342562115239*^9}, {
-  3.6733427141474895`*^9, 3.6733427167912083`*^9}}]
+  3.6733427141474895`*^9, 3.6733427167912083`*^9}, {3.7529196342938643`*^9, 
+  3.7529196377873077`*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1362,32 +1278,25 @@ Cell[23386, 712, 11458, 329, 490, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[34893, 1047, 30, 0, 53, "Subsubsection"],
-Cell[34926, 1049, 623, 24, 82, "Text"]
+Cell[34893, 1047, 56, 0, 53, "Subsubsection"],
+Cell[34952, 1049, 181, 4, 48, "Input"],
+Cell[35136, 1055, 72, 0, 49, "Text"],
+Cell[35211, 1057, 109, 1, 46, "Item"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[35586, 1078, 56, 0, 53, "Subsubsection"],
-Cell[35645, 1080, 72, 0, 49, "Text"],
-Cell[35720, 1082, 181, 4, 48, "Input"],
-Cell[35904, 1088, 72, 0, 49, "Text"],
-Cell[35979, 1090, 109, 1, 46, "Item"]
+Cell[35357, 1063, 59, 0, 53, "Subsubsection"],
+Cell[35419, 1065, 1798, 50, 148, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[36125, 1096, 59, 0, 53, "Subsubsection"],
-Cell[36187, 1098, 621, 21, 82, "Text"],
-Cell[36811, 1121, 1798, 50, 148, "Input"]
+Cell[37254, 1120, 58, 0, 53, "Subsubsection"],
+Cell[37315, 1122, 347, 7, 46, "Item"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[38646, 1176, 58, 0, 53, "Subsubsection"],
-Cell[38707, 1178, 324, 5, 82, "Text"],
-Cell[39034, 1185, 985, 28, 48, "Input"]
-}, Open  ]],
+Cell[37699, 1134, 102, 1, 53, "Subsubsection"],
+Cell[37804, 1137, 2603, 60, 214, "Input"],
 Cell[CellGroupData[{
-Cell[40056, 1218, 102, 1, 53, "Subsubsection"],
-Cell[40161, 1221, 2603, 60, 214, "Input"],
-Cell[CellGroupData[{
-Cell[42789, 1285, 245, 5, 48, "Input"],
-Cell[43037, 1292, 77, 1, 48, "Output"]
+Cell[40432, 1201, 245, 5, 48, "Input"],
+Cell[40680, 1208, 77, 1, 48, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
