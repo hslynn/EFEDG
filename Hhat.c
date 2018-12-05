@@ -59,12 +59,12 @@ get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT value
 }
 
 static void
-get_dofs_Hhat(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, 
+get_dofs_Hhat(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, 
         DOF **dofs_gradPsi, DOF **dofs_gradPi, DOF **dofs_gradPhi, DOF **dofs_Hhat)
 {
-    get_dofs_grad_hat(dofs_var, dofs_gradPsi, 10);
-    get_dofs_grad_hat(dofs_var + 10, dofs_gradPi, 10);
-    get_dofs_grad_hat(dofs_var + 20, dofs_gradPhi, 30);
+    get_dofs_grad_hat(dofs_var, dofs_bdry, dofs_gradPsi, 10);
+    get_dofs_grad_hat(dofs_var + 10, dofs_bdry + 10, dofs_gradPi, 10);
+    get_dofs_grad_hat(dofs_var + 20, dofs_bdry+ 20, dofs_gradPhi, 30);
 
     INT i, j, n, data_count = DofGetDataCount(dofs_N[0]);
     FLOAT *p_gradPsi[30], *p_gradPi[30], *p_gradPhi[90], *p_g[6], *p_N[4], *p_Hhat[50];

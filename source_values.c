@@ -4,7 +4,7 @@
 #define gamma1 -1
 #define gamma2 1
 
-#define Power(x,y) (pow((double) (x), (double) (y)))
+#define Power(x,y) (Pow((FLOAT) (x), (FLOAT) (y)))
 
 static void 
 get_values_src(FLOAT *values_var, FLOAT *values)

@@ -1,8 +1,6 @@
 #include <math.h>
 #include "source_values.c"
 
-# define Power(x, y) (pow((double) (x), (double) (y)))
-
 static void
 get_dofs_g(DOF **dofs_Psi, DOF **dofs_g)
 {

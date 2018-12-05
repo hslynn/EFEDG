@@ -8,7 +8,7 @@
 #include "auxi_dofs.c"
 #include "Hhat.c"
 #include "rk2.c"
-#include "Schwarzschild.c"
+#include "Schwarzschild_Harmonic.c"
 
 int 
 main(int argc, char * argv[])
@@ -29,11 +29,11 @@ main(int argc, char * argv[])
 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
-    DOF *dofs_ini_Psi[10];
+    DOF *dofs_ini_var[50], *dofs_bdry[50];
     create_dofs(g, dof_tp, 1, dofs_Psi, "Psi", 10);
     create_dofs(g, dof_tp, 1, dofs_Pi, "Pi", 10);
     create_dofs(g, dof_tp, 1, dofs_Phi, "Phi", 30);
-    create_dofs(g, dof_tp, 1, dofs_ini_Psi, "ini_Psi", 10);
+    create_dofs(g, dof_tp, 1, dofs_ini_var, "ini_var", 50);
 
     /*create dofs for all source terms*/
     DOF *dofs_srcPsi[10], *dofs_srcPi[10], *dofs_srcPhi[30];
@@ -78,21 +78,16 @@ main(int argc, char * argv[])
     } 
 
     //phgDofSetDataByFunction(dofs_Pi[1], func_u);
-    phgDofSetDataByFunction(dofs_Psi[0], func_Psi00);
-    phgDofSetDataByFunction(dofs_Psi[4], func_Psi11);
-    phgDofSetDataByFunction(dofs_Psi[5], func_Psi12);
-    phgDofSetDataByFunction(dofs_Psi[6], func_Psi13);
-    phgDofSetDataByFunction(dofs_Psi[7], func_Psi22);
-    phgDofSetDataByFunction(dofs_Psi[8], func_Psi23);
-    phgDofSetDataByFunction(dofs_Psi[9], func_Psi33);
-    copy_dofs(dofs_Psi, dofs_ini_Psi, "ini_Psi", 10);
+    set_data_dofs(dofs_var);
+    copy_dofs(dofs_var, dofs_ini_var, "ini_var", NVAR);
+    copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
     
     
     if(phgRank == 0){    
         t0 = phgGetTime(NULL);
     }   
 
-    get_dofs_rhs(dofs_var, dofs_g, dofs_N, dofs_src,
+    get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
 
     char vtk_name[20]; 
@@ -102,7 +97,7 @@ main(int argc, char * argv[])
         printf("step %d completed\n", i);
         printf("time length: %f\n\n", i*dt);
         phgExportVTKn(g, vtk_name, 10, dofs_Psi);
-        ssp_rk2(dt, dofs_var, dofs_g, dofs_N, dofs_src,
+        ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
                 dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
       

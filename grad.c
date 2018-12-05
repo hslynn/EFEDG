@@ -1,7 +1,7 @@
 #include "quad.c"
 
 static void
-build_linear_system(SOLVER *solver, DOF *u_h, int coord, func_bdry)
+build_linear_system(SOLVER *solver, DOF *u_h, DOF *dof_bdry, int coord)
 {
     int n, k, i, j, s, ss, in_out;
     GRID *g = u_h->g;
@@ -57,7 +57,8 @@ build_linear_system(SOLVER *solver, DOF *u_h, int coord, func_bdry)
                                 u_h, ss, QUAD_DEFAULT);//计算u^+ 
                     } 
                     else{//s是边界面时,施加边界条件 
-                        val_ext = ;   
+                        val_ext = phgQuadFaceDofDotBas(e, s, dof_bdry, DOF_PROJ_NONE, 
+                                u_h, n, QUAD_DEFAULT);
                         
                     }
 
@@ -72,24 +73,24 @@ build_linear_system(SOLVER *solver, DOF *u_h, int coord, func_bdry)
 }
 
 static void
-dgHJGradDof(DOF *u_h, DOF *dof_grad, int coord, DOF_USER_FUNC func_bdry)
+dgHJGradDof(DOF *u_h, DOF *dof_bdry, DOF *dof_grad, int coord)
 {
     SOLVER *solver;
     solver = phgSolverCreate(SOLVER_DEFAULT, dof_grad, NULL);
     
-    build_linear_system(solver, u_h, coord, func_bdry);
+    build_linear_system(solver, u_h, dof_bdry, coord);
     
     phgSolverSolve(solver, TRUE, dof_grad, NULL);
     phgSolverDestroy(&solver);
 }
 
 static void
-get_dofs_grad(DOF **dofs, DOF **dofs_grad, DOF_USER_FUNC *bdry_funcs, int ndof)
+get_dofs_grad(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad, int ndof)
 {
     for(INT i=0;i<ndof;i++){ 
-        dgHJGradDof(dofs[i], dofs_grad[i], 0, funcs_bdry[i]);
-        dgHJGradDof(dofs[i], dofs_grad[ndof + i], 1, funcs_bdry[i]);
-        dgHJGradDof(dofs[i], dofs_grad[2*ndof + i], 2, funcs_bdry[i]);
+        dgHJGradDof(dofs[i], dofs_bdry[i], dofs_grad[i], 0);
+        dgHJGradDof(dofs[i], dofs_bdry[i], dofs_grad[ndof + i], 1);
+        dgHJGradDof(dofs[i], dofs_bdry[i], dofs_grad[2*ndof + i], 2);
     }
 }
 
@@ -110,9 +111,9 @@ get_dof_grad_hat(DOF *dof_grad)
 }
 
 static void
-get_dofs_grad_hat(DOF **dofs, DOF **dofs_grad_hat, INT ndof) 
+get_dofs_grad_hat(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad_hat, INT ndof) 
 {
-    get_dofs_grad(dofs, dofs_grad_hat, ndof);
+    get_dofs_grad(dofs, dofs_bdry, dofs_grad_hat, ndof);
     
     for(int i=0;i<3*ndof;i++){
         get_dof_grad_hat(dofs_grad_hat[i]);
