@@ -34,6 +34,7 @@ main(int argc, char * argv[])
     create_dofs(g, dof_tp, 1, dofs_Pi, "Pi", 10);
     create_dofs(g, dof_tp, 1, dofs_Phi, "Phi", 30);
     create_dofs(g, dof_tp, 1, dofs_ini_var, "ini_var", 50);
+    create_dofs(g, dof_tp, 1, dofs_bdry, "bdry", NVAR);
 
     /*create dofs for all source terms*/
     DOF *dofs_srcPsi[10], *dofs_srcPi[10], *dofs_srcPhi[30];
@@ -69,15 +70,7 @@ main(int argc, char * argv[])
     create_dofs(g, dof_tp, 1, dofs_N, "N", 4);
     create_dofs(g, dof_tp, 1, dofs_Hhat, "Hhat", NVAR);  
 
-    //for testing
-    for(i=0;i<10;i++){
-        phgDofSetDataByValue(dofs_Pi[i], 0);
-        phgDofSetDataByValue(dofs_Phi[i], 0);
-        phgDofSetDataByValue(dofs_Phi[10 + i], 0);
-        phgDofSetDataByValue(dofs_Phi[20 + i], 0);
-    } 
-
-    //phgDofSetDataByFunction(dofs_Pi[1], func_u);
+    //set dof data
     set_data_dofs(dofs_var);
     copy_dofs(dofs_var, dofs_ini_var, "ini_var", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
@@ -108,24 +101,18 @@ main(int argc, char * argv[])
 
      
     /*release the mem*/
-    for(i=0;i<NVAR;i++){
-        phgDofFree(dofs_var + i);
-        phgDofFree(dofs_src + i);
-        phgDofFree(dofs_Hhat + i);
-        }
-    for(i=0;i<30;i++){
-        phgDofFree(dofs_gradPsi + i);
-        phgDofFree(dofs_gradPi + i);
-        phgDofFree(dofs_gradPhi + i);
-        phgDofFree(dofs_gradPhi + 30 + i);
-        phgDofFree(dofs_gradPhi + 60 + i);
-        }
-    for(i=0; i<6; i++){
-        phgDofFree(dofs_g + i);
-    }
-    for(i=0; i<4; i++){
-        phgDofFree(dofs_N + i);
-    }
+    free_dofs(dofs_var, NVAR);
+    free_dofs(dofs_src, NVAR);
+    free_dofs(dofs_Hhat, NVAR);
+    free_dofs(dofs_ini_var, NVAR);
+    free_dofs(dofs_bdry, NVAR);
+
+    free_dofs(dofs_gradPsi, 30);
+    free_dofs(dofs_gradPi, 30);
+    free_dofs(dofs_gradPhi, 90);
+
+    free_dofs(dofs_g, 6);
+    free_dofs(dofs_N, 4);
     phgFreeGrid(&g); 
  
     phgFinalize(); 

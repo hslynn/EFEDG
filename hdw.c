@@ -21,6 +21,14 @@ copy_dofs(DOF **dofs_A, DOF **dofs_B, char *name, INT ndof)
 }
 
 static void
+free_dofs(DOF **dofs, INT ndof)
+{
+    for(INT i=0;i<ndof;i++){
+        phgDofFree(dofs + i);
+    } 
+}
+
+static void
 list2tensor(FLOAT *list, FLOAT *tensor, int dim)
 {
     int i, j;
