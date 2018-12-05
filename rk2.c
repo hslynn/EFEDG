@@ -16,16 +16,19 @@ ssp_rk2(FLOAT dt, DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, D
     INT i; 
     DOF *dofs_var_temp[NVAR];
     create_dofs(dofs_var[0]->g, dofs_var[0]->type, 1, dofs_var_temp, "temp_var", NVAR); 
+    copy_dofs(dofs_var, dofs_var_temp, "temp_var", NVAR);
+    phgDofDump(dofs_var_temp[5]);
+    phgDofDump(dofs_rhs[5]);
     for(i=0;i<NVAR;i++){
-        phgDofCopy(dofs_var[i], dofs_var_temp + i, NULL, "temp_var");
         phgDofAXPBY(dt, dofs_rhs[i], 1.0, dofs_var_temp + i);
     }
-    
+    phgDofDump(dofs_var_temp[5]); 
     get_dofs_rhs(dofs_var_temp, dofs_bdry, dofs_g, dofs_N, dofs_src,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs); 
     for(i=0;i<NVAR;i++){
        phgDofAXPBY(dt, dofs_rhs[i], 1.0, dofs_var_temp + i); 
        phgDofAXPBY(0.5, dofs_var_temp[i], 0.5, dofs_var + i);
-       phgDofFree(dofs_var_temp + i);  
     }
+    
+    free_dofs(dofs_var_temp, NVAR);
 }

@@ -13,9 +13,13 @@ create_dofs(GRID *g, DOF_TYPE *type, INT dim, DOF **dofs_list, char *name_head, 
 }
 
 static void
-copy_dofs(DOF **dofs_A, DOF **dofs_B, char *name, INT ndof)
+copy_dofs(DOF **dofs_A, DOF **dofs_B, char *name_head, INT ndof)
 {
+    char name[15], name_idx[5];
     for(INT i=0;i<ndof;i++){
+        strcpy(name, name_head);
+        sprintf(name_idx, "_%d", i);
+        strcat(name, name_idx);
         phgDofCopy(dofs_A[i], dofs_B + i, NULL, name);
     }
 }

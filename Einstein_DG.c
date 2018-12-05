@@ -9,13 +9,14 @@
 #include "Hhat.c"
 #include "rk2.c"
 #include "Schwarzschild_Harmonic.c"
+#include "error.c"
 
 int 
 main(int argc, char * argv[])
 {
     char *meshfile ="./mesh/hollowed_icosahedron.mesh";
     GRID *g; 
-    DOF_TYPE *dof_tp = DOF_DG2;
+    DOF_TYPE *dof_tp = DOF_DG4;
     FLOAT t0 = 0.0, t1 = 0.0;
     FLOAT dt = 0.01, max_time = 1.0;
     INT max_step = ceil(max_time/dt);
@@ -29,12 +30,13 @@ main(int argc, char * argv[])
 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
-    DOF *dofs_ini_var[50], *dofs_bdry[50];
+    DOF *dofs_sol[50], *dofs_bdry[50], *dofs_diff[NVAR];
     create_dofs(g, dof_tp, 1, dofs_Psi, "Psi", 10);
     create_dofs(g, dof_tp, 1, dofs_Pi, "Pi", 10);
     create_dofs(g, dof_tp, 1, dofs_Phi, "Phi", 30);
-    create_dofs(g, dof_tp, 1, dofs_ini_var, "ini_var", 50);
+    create_dofs(g, dof_tp, 1, dofs_sol, "sol", 50);
     create_dofs(g, dof_tp, 1, dofs_bdry, "bdry", NVAR);
+    create_dofs(g, dof_tp, 1, dofs_diff, "diff", NVAR);
 
     /*create dofs for all source terms*/
     DOF *dofs_srcPsi[10], *dofs_srcPi[10], *dofs_srcPhi[30];
@@ -72,10 +74,9 @@ main(int argc, char * argv[])
 
     //set dof data
     set_data_dofs(dofs_var);
-    copy_dofs(dofs_var, dofs_ini_var, "ini_var", NVAR);
+    copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
-    
-    
+   
     if(phgRank == 0){    
         t0 = phgGetTime(NULL);
     }   
@@ -83,13 +84,21 @@ main(int argc, char * argv[])
     get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
 
-    char vtk_name[20]; 
+    char var_name[30], rhs_name[30], diff_name[30]; 
     for(i=0;i<max_step;i++){
-        sprintf(vtk_name, "%f", i*dt);
-        strcat(vtk_name, ".vtk");
+        get_dofs_diff(dofs_var, dofs_sol, dofs_diff); 
+
+        sprintf(var_name, "var_%f", i*dt);
+        sprintf(rhs_name, "rhs_%f", i*dt);
+        sprintf(diff_name, "diff_%f", i*dt);
+        strcat(var_name, ".vtk");
+        strcat(rhs_name, ".vtk");
+        strcat(diff_name, ".vtk");
         printf("step %d completed\n", i);
         printf("time length: %f\n\n", i*dt);
-        phgExportVTKn(g, vtk_name, 10, dofs_Psi);
+        phgExportVTKn(g, var_name, 10, dofs_var);
+        phgExportVTKn(g, rhs_name, 10, dofs_rhs);
+        phgExportVTKn(g, diff_name, 10, dofs_diff);
         ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
                 dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
@@ -104,7 +113,7 @@ main(int argc, char * argv[])
     free_dofs(dofs_var, NVAR);
     free_dofs(dofs_src, NVAR);
     free_dofs(dofs_Hhat, NVAR);
-    free_dofs(dofs_ini_var, NVAR);
+    free_dofs(dofs_sol, NVAR);
     free_dofs(dofs_bdry, NVAR);
 
     free_dofs(dofs_gradPsi, 30);

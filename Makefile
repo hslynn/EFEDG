@@ -1,7 +1,7 @@
 default: Einstein_DG 
 all: default
 clean:
-	/bin/rm -f *.o Einstein_DG
+	/bin/rm -f *.o *.txt *.vtk Einstein_DG
 Einstein_DG.o: Einstein_DG.c 
 
 
