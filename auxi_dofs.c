@@ -108,6 +108,7 @@ get_dofs_auxi(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_src)
     DOF **dofs_Psi = dofs_var;
     get_dofs_g(dofs_Psi, dofs_g);
     get_dofs_N(dofs_Psi, dofs_g, dofs_N);
+
     INT i, n, data_count;
     FLOAT *p_var[50], *p_src[50], values_var[50], values_src[50];
     for(INT i=0; i < 50; i++){
@@ -117,12 +118,13 @@ get_dofs_auxi(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_src)
 
     //evaluate dofs values at every data point
     data_count = DofGetDataCount(dofs_var[0]);
+    
     for(n=0;n<data_count;n++){
         //compute src values at data point
         for(i=0; i < 50; i++){
             values_var[i] = *(p_var[i]);
         }
-
+        
         get_values_src(values_var, values_src); 
 
         for(i=0; i<50; i++){

@@ -38,6 +38,7 @@ get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT value
         for(b=a;b<4;b++){
             for(i=0;i<3;i++){
                 (*p_Psi) += -(1+gamma1)*values_N[i+1]*tensor_gradPsi_ave[i][a][b];  //grad_diff part missing
+                printf("%p = %f\n", p_Psi, *p_Psi);
                 (*p_Pi) += -values_N[i+1]*tensor_gradPi_ave[i][a][b] 
                         - gamma1*gamma2*values_N[i+1]*tensor_gradPi_ave[i][a][b];
                 (*p_xPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][0][a][b];
@@ -46,6 +47,7 @@ get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT value
                 for(j=0;j<3;j++){
                     (*p_Pi) += values_N[0]*tensor_g[i][j]*tensor_gradPhi_ave[i][j][a][b];
                 }
+                printf("\n");
             }
             *(p_xPhi++) = values_N[0]*tensor_gradPi_ave[0][a][b] - values_N[0]*gamma2*tensor_gradPsi_ave[0][a][b];
             *(p_yPhi++) = values_N[0]*tensor_gradPi_ave[1][a][b] - values_N[0]*gamma2*tensor_gradPsi_ave[1][a][b];
@@ -66,9 +68,9 @@ get_dofs_Hhat(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N,
     get_dofs_grad_hat(dofs_var + 20, dofs_bdry+ 20, dofs_gradPhi, 30);
 
     INT i, j, n, data_count = DofGetDataCount(dofs_N[0]);
-    FLOAT *p_gradPsi[30], *p_gradPi[30], *p_gradPhi[90], *p_g[6], *p_N[4], *p_Hhat[50];
+    FLOAT *p_gradPsi[30], *p_gradPi[30], *p_gradPhi[90], *p_g[6], *p_N[4], *p_Hhat[NVAR];
     FLOAT v_gradPsi[30][2], v_gradPi[30][2], v_gradPhi[90][2];
-    FLOAT v_g[6], v_N[4], v_Hhat[50];
+    FLOAT v_g[6], v_N[4], v_Hhat[NVAR];
     
     for(i=0; i<30; i++){
         p_gradPsi[i] = DofData(dofs_gradPsi[i]);
@@ -78,7 +80,7 @@ get_dofs_Hhat(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N,
         p_gradPhi[60+i] = DofData(dofs_gradPhi[60+i]);
     }    
 
-    for(i=0; i<50; i++){
+    for(i=0; i<NVAR; i++){
         p_Hhat[i] = DofData(dofs_Hhat[i]);
     }
     for(i=0; i<6; i++){
@@ -109,7 +111,7 @@ get_dofs_Hhat(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N,
         get_values_Hhat(v_gradPsi, v_gradPi, v_gradPhi,  
                 v_g, v_N, v_Hhat);
         
-        for(i=0; i<50; i++){
+        for(i=0; i<NVAR; i++){
             *(p_Hhat[i]++) = v_Hhat[i];
         }
     }

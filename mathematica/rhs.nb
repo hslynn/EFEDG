@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     35298,        928]
-NotebookOptionsPosition[     34308,        896]
-NotebookOutlinePosition[     34668,        912]
-CellTagsIndexPosition[     34625,        909]
+NotebookDataLength[     40182,       1014]
+NotebookOptionsPosition[     39117,        979]
+NotebookOutlinePosition[     39478,        995]
+CellTagsIndexPosition[     39435,        992]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -849,8 +849,13 @@ Cell[BoxData[
   3.751525365952855*^9, 3.751525367220179*^9}, {3.7517538791067877`*^9, 
   3.75175388966929*^9}, {3.751754780975473*^9, 3.751754786782928*^9}}],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
- RowBox[{"CForm", "[", "rhsPsi", "]"}]], "Input",
+ RowBox[{"CForm", "[", 
+  RowBox[{"t1rhsPi", "[", 
+   RowBox[{"[", 
+    RowBox[{"2", ",", "2"}], "]"}], "]"}], "]"}]], "Input",
  CellChangeTimes->{{3.751521712768208*^9, 3.7515217170674353`*^9}, {
    3.751521992104055*^9, 3.751522020415719*^9}, {3.7515222330018272`*^9, 
    3.75152223322466*^9}, {3.751522265261598*^9, 3.7515222748976793`*^9}, 
@@ -892,9 +897,87 @@ Cell[BoxData[
    3.7518478435636253`*^9, 3.751847860969564*^9}, {3.751847891421874*^9, 
    3.751847954609358*^9}, {3.751848034215098*^9, 3.7518480562559767`*^9}, {
    3.751848180264842*^9, 3.751848183746709*^9}, {3.751848383731575*^9, 
-   3.751848385928069*^9}}]
+   3.751848385928069*^9}, {3.753064453079256*^9, 3.75306452285332*^9}}],
+
+Cell["\<\
+2*N*(invPsi00*(-(Power(Gamma100,2)*invPsi00) - 2*Gamma100*Gamma101*invPsi01 - \
+2*Gamma100*Gamma102*invPsi02 - 
+        Power(Gamma101,2)*invPsi11 - 2*Gamma101*Gamma102*invPsi12 - \
+Power(Gamma102,2)*invPsi22 + g11*Power(Phi101,2) + 
+        2*g12*Phi101*Phi201 + g22*Power(Phi201,2) + 2*g13*Phi101*Phi301 + \
+2*g23*Phi201*Phi301 + g33*Power(Phi301,2) - 
+        Power(Pi01,2)) + 2*invPsi01*(-(Gamma100*Gamma101*invPsi00) - \
+Power(Gamma101,2)*invPsi01 - Gamma100*Gamma111*invPsi01 - 
+        Gamma101*Gamma102*invPsi02 - Gamma100*Gamma112*invPsi02 - \
+Gamma101*Gamma111*invPsi11 - Gamma102*Gamma111*invPsi12 - 
+        Gamma101*Gamma112*invPsi12 - Gamma102*Gamma112*invPsi22 + \
+g11*Phi101*Phi111 + g12*Phi111*Phi201 + g12*Phi101*Phi211 + 
+        g22*Phi201*Phi211 + g13*Phi111*Phi301 + g23*Phi211*Phi301 + \
+g13*Phi101*Phi311 + g23*Phi201*Phi311 + g33*Phi301*Phi311 - 
+        Pi01*Pi11) + invPsi11*(-(Power(Gamma101,2)*invPsi00) - \
+2*Gamma101*Gamma111*invPsi01 - 2*Gamma101*Gamma112*invPsi02 - 
+        Power(Gamma111,2)*invPsi11 - 2*Gamma111*Gamma112*invPsi12 - \
+Power(Gamma112,2)*invPsi22 + g11*Power(Phi111,2) + 
+        2*g12*Phi111*Phi211 + g22*Power(Phi211,2) + 2*g13*Phi111*Phi311 + \
+2*g23*Phi211*Phi311 + g33*Power(Phi311,2) - 
+        Power(Pi11,2)) + 2*invPsi02*(-(Gamma100*Gamma102*invPsi00) - \
+Gamma101*Gamma102*invPsi01 - Gamma100*Gamma112*invPsi01 - 
+        Power(Gamma102,2)*invPsi02 - Gamma100*Gamma122*invPsi02 - \
+Gamma101*Gamma112*invPsi11 - Gamma102*Gamma112*invPsi12 - 
+        Gamma101*Gamma122*invPsi12 - Gamma102*Gamma122*invPsi22 + \
+g11*Phi101*Phi112 + g12*Phi112*Phi201 + g12*Phi101*Phi212 + 
+        g22*Phi201*Phi212 + g13*Phi112*Phi301 + g23*Phi212*Phi301 + \
+g13*Phi101*Phi312 + g23*Phi201*Phi312 + g33*Phi301*Phi312 - 
+        Pi01*Pi12) + 2*invPsi12*(-(Gamma101*Gamma102*invPsi00) - \
+Gamma102*Gamma111*invPsi01 - Gamma101*Gamma112*invPsi01 - 
+        Gamma102*Gamma112*invPsi02 - Gamma101*Gamma122*invPsi02 - \
+Gamma111*Gamma112*invPsi11 - Power(Gamma112,2)*invPsi12 - 
+        Gamma111*Gamma122*invPsi12 - Gamma112*Gamma122*invPsi22 + \
+g11*Phi111*Phi112 + g12*Phi112*Phi211 + g12*Phi111*Phi212 + 
+        g22*Phi211*Phi212 + g13*Phi112*Phi311 + g23*Phi212*Phi311 + \
+g13*Phi111*Phi312 + g23*Phi211*Phi312 + g33*Phi311*Phi312 - 
+        Pi11*Pi12) + invPsi22*(-(Power(Gamma102,2)*invPsi00) - \
+2*Gamma102*Gamma112*invPsi01 - 2*Gamma102*Gamma122*invPsi02 - 
+        Power(Gamma112,2)*invPsi11 - 2*Gamma112*Gamma122*invPsi12 - \
+Power(Gamma122,2)*invPsi22 + g11*Power(Phi112,2) + 
+        2*g12*Phi112*Phi212 + g22*Power(Phi212,2) + 2*g13*Phi112*Phi312 + \
+2*g23*Phi212*Phi312 + g33*Power(Phi312,2) - 
+        Power(Pi12,2)) + 2*invPsi03*(-(Gamma100*Gamma103*invPsi00) - \
+Gamma101*Gamma103*invPsi01 - Gamma100*Gamma113*invPsi01 - 
+        Gamma102*Gamma103*invPsi02 - Gamma100*Gamma123*invPsi02 - \
+Gamma101*Gamma113*invPsi11 - Gamma102*Gamma113*invPsi12 - 
+        Gamma101*Gamma123*invPsi12 - Gamma102*Gamma123*invPsi22 + \
+g11*Phi101*Phi113 + g12*Phi113*Phi201 + g12*Phi101*Phi213 + 
+        g22*Phi201*Phi213 + g13*Phi113*Phi301 + g23*Phi213*Phi301 + \
+g13*Phi101*Phi313 + g23*Phi201*Phi313 + g33*Phi301*Phi313 - 
+        Pi01*Pi13) + 2*invPsi13*(-(Gamma101*Gamma103*invPsi00) - \
+Gamma103*Gamma111*invPsi01 - Gamma101*Gamma113*invPsi01 - 
+        Gamma103*Gamma112*invPsi02 - Gamma101*Gamma123*invPsi02 - \
+Gamma111*Gamma113*invPsi11 - Gamma112*Gamma113*invPsi12 - 
+        Gamma111*Gamma123*invPsi12 - Gamma112*Gamma123*invPsi22 + \
+g11*Phi111*Phi113 + g12*Phi113*Phi211 + g12*Phi111*Phi213 + 
+        g22*Phi211*Phi213 + g13*Phi113*Phi311 + g23*Phi213*Phi311 + \
+g13*Phi111*Phi313 + g23*Phi211*Phi313 + g33*Phi311*Phi313 - 
+        Pi11*Pi13) + 2*invPsi23*(-(Gamma102*Gamma103*invPsi00) - \
+Gamma103*Gamma112*invPsi01 - Gamma102*Gamma113*invPsi01 - 
+        Gamma103*Gamma122*invPsi02 - Gamma102*Gamma123*invPsi02 - \
+Gamma112*Gamma113*invPsi11 - Gamma113*Gamma122*invPsi12 - 
+        Gamma112*Gamma123*invPsi12 - Gamma122*Gamma123*invPsi22 + \
+g11*Phi112*Phi113 + g12*Phi113*Phi212 + g12*Phi112*Phi213 + 
+        g22*Phi212*Phi213 + g13*Phi113*Phi312 + g23*Phi213*Phi312 + \
+g13*Phi112*Phi313 + g23*Phi212*Phi313 + g33*Phi312*Phi313 - 
+        Pi12*Pi13) + invPsi33*(-(Power(Gamma103,2)*invPsi00) - \
+2*Gamma103*Gamma113*invPsi01 - 2*Gamma103*Gamma123*invPsi02 - 
+        Power(Gamma113,2)*invPsi11 - 2*Gamma113*Gamma123*invPsi12 - \
+Power(Gamma123,2)*invPsi22 + g11*Power(Phi113,2) + 
+        2*g12*Phi113*Phi213 + g22*Power(Phi213,2) + 2*g13*Phi113*Phi313 + \
+2*g23*Phi213*Phi313 + g33*Power(Phi313,2) - 
+        Power(Pi13,2)))\
+\>", "Output",
+ CellChangeTimes->{3.753064537224942*^9}]
+}, Open  ]]
 },
-WindowSize->{960, 1025},
+WindowSize->{1920, 1025},
 WindowMargins->{{0, Automatic}, {-2, Automatic}},
 Magnification->1.25,
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
@@ -911,25 +994,28 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 1088, 24, 69, "Input"],
-Cell[1649, 46, 6359, 161, 573, "Input"],
-Cell[8011, 209, 776, 20, 97, "Input"],
-Cell[8790, 231, 893, 24, 97, "Input"],
-Cell[9686, 257, 3725, 103, 573, "Input"],
+Cell[558, 20, 1088, 24, 40, "Input"],
+Cell[1649, 46, 6359, 161, 321, "Input"],
+Cell[8011, 209, 776, 20, 69, "Input"],
+Cell[8790, 231, 893, 24, 40, "Input"],
+Cell[9686, 257, 3725, 103, 265, "Input"],
 Cell[13414, 362, 283, 7, 40, "Input"],
 Cell[13700, 371, 232, 5, 40, "Input"],
-Cell[13935, 378, 2942, 78, 209, "Input"],
-Cell[16880, 458, 1176, 31, 97, "Input"],
-Cell[18059, 491, 1410, 35, 97, "Input"],
-Cell[19472, 528, 1380, 37, 97, "Input"],
-Cell[20855, 567, 623, 17, 69, "Input"],
-Cell[21481, 586, 2934, 73, 237, "Input"],
-Cell[24418, 661, 2028, 53, 209, "Input"],
-Cell[26449, 716, 1046, 29, 97, "Input"],
-Cell[27498, 747, 1285, 34, 97, "Input"],
-Cell[28786, 783, 1548, 41, 209, "Input"],
-Cell[30337, 826, 883, 23, 97, "Input"],
-Cell[31223, 851, 3081, 43, 40, "Input"]
+Cell[13935, 378, 2942, 78, 153, "Input"],
+Cell[16880, 458, 1176, 31, 40, "Input"],
+Cell[18059, 491, 1410, 35, 40, "Input"],
+Cell[19472, 528, 1380, 37, 40, "Input"],
+Cell[20855, 567, 623, 17, 40, "Input"],
+Cell[21481, 586, 2934, 73, 153, "Input"],
+Cell[24418, 661, 2028, 53, 69, "Input"],
+Cell[26449, 716, 1046, 29, 40, "Input"],
+Cell[27498, 747, 1285, 34, 40, "Input"],
+Cell[28786, 783, 1548, 41, 69, "Input"],
+Cell[30337, 826, 883, 23, 40, "Input"],
+Cell[CellGroupData[{
+Cell[31245, 853, 3204, 46, 40, "Input"],
+Cell[34452, 901, 4649, 75, 895, "Output"]
+}, Open  ]]
 }
 ]
 *)

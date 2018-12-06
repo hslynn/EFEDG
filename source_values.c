@@ -19,7 +19,7 @@ get_values_src(FLOAT *values_var, FLOAT *values)
     FLOAT Gamma300,Gamma301,Gamma302,Gamma303,Gamma311,Gamma312,Gamma313,Gamma322,Gamma323,Gamma333;
     FLOAT vecGamma0, vecGamma1, vecGamma2, vecGamma3;
     
-    FLOAT *Psi = values_var, *Pi = values_var + 10, *Phi = values_var + 30; 
+    FLOAT *Psi = values_var, *Pi = values_var + 10, *Phi = values_var + 20; 
     FLOAT Psi00 = Psi[0], Psi01 = Psi[1], Psi02 = Psi[2], Psi03 = Psi[3], Psi11 = Psi[4];
     FLOAT Psi12 = Psi[5], Psi13 = Psi[6], Psi22 = Psi[7], Psi23 = Psi[8], Psi33 = Psi[9]; 
     

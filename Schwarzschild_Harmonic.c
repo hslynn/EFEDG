@@ -1,4 +1,4 @@
-#define M 0.5
+#define M 0.1
 #define R (Pow(x*x + y*y + z*z, 0.5))
 
 static void

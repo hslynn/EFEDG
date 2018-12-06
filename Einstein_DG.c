@@ -74,13 +74,13 @@ main(int argc, char * argv[])
 
     //set dof data
     set_data_dofs(dofs_var);
+    phgExportVTKn(g, "var.vtk", 50, dofs_var);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
    
     if(phgRank == 0){    
         t0 = phgGetTime(NULL);
     }   
-
     get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     
@@ -97,8 +97,9 @@ main(int argc, char * argv[])
         printf("step %d completed\n", i);
         printf("time length: %f\n\n", i*dt);
         phgExportVTKn(g, Hhat_name, 10, dofs_Hhat);
-        phgExportVTKn(g, rhs_name, 50, dofs_rhs);
+        phgExportVTKn(g, rhs_name, 10, dofs_rhs);
         phgExportVTKn(g, diff_name, 10, dofs_diff);
+        
         ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
                 dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
@@ -115,6 +116,7 @@ main(int argc, char * argv[])
     free_dofs(dofs_Hhat, NVAR);
     free_dofs(dofs_sol, NVAR);
     free_dofs(dofs_bdry, NVAR);
+    free_dofs(dofs_diff, NVAR);
 
     free_dofs(dofs_gradPsi, 30);
     free_dofs(dofs_gradPi, 30);
