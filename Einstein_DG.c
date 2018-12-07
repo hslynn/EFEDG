@@ -85,7 +85,7 @@ main(int argc, char * argv[])
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     
     char Hhat_name[30], rhs_name[30], diff_name[30]; 
-    for(i=0;i<max_step;i++){
+    for(i=max_step - 1;i<max_step;i++){
         get_dofs_diff(dofs_var, dofs_sol, dofs_diff); 
 
         sprintf(Hhat_name, "Hhat_%f", i*dt);
@@ -100,8 +100,8 @@ main(int argc, char * argv[])
         phgExportVTKn(g, rhs_name, 10, dofs_rhs);
         phgExportVTKn(g, diff_name, 10, dofs_diff);
         
-        ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
-                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+        //ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
+        //        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
       
     if(phgRank == 0){ 
