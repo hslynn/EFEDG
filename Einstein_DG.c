@@ -16,7 +16,7 @@ main(int argc, char * argv[])
 {
     char *meshfile ="./mesh/hollowed_icosahedron.mesh";
     GRID *g; 
-    DOF_TYPE *dof_tp = DOF_DG4;
+    DOF_TYPE *dof_tp = DOF_DG5;
     FLOAT t0 = 0.0, t1 = 0.0;
     FLOAT dt = 0.01, max_time = 1.0;
     INT max_step = ceil(max_time/dt);
@@ -85,20 +85,20 @@ main(int argc, char * argv[])
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     
     char Hhat_name[30], rhs_name[30], diff_name[30]; 
-    for(i=max_step - 1;i<max_step;i++){
+    for(i=max_step-1;i<max_step;i++){
         get_dofs_diff(dofs_var, dofs_sol, dofs_diff); 
 
         sprintf(Hhat_name, "Hhat_%f", i*dt);
         sprintf(rhs_name, "rhs_%f", i*dt);
-        sprintf(diff_name, "diff_%f", i*dt);
+        //sprintf(diff_name, "diff_%f", i*dt);
         strcat(Hhat_name, ".vtk");
         strcat(rhs_name, ".vtk");
-        strcat(diff_name, ".vtk");
+        //strcat(diff_name, ".vtk");
         printf("step %d completed\n", i);
         printf("time length: %f\n\n", i*dt);
-        phgExportVTKn(g, Hhat_name, 10, dofs_Hhat);
-        phgExportVTKn(g, rhs_name, 10, dofs_rhs);
-        phgExportVTKn(g, diff_name, 10, dofs_diff);
+        phgExportVTKn(g, Hhat_name, 50, dofs_Hhat + 0);
+        phgExportVTKn(g, rhs_name, 50, dofs_rhs + 0);
+        //phgExportVTKn(g, diff_name, 10, dofs_diff);
         
         //ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
         //        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
