@@ -25,8 +25,8 @@ get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT value
         list2tensor(list_gradPsi_diff + i*10, tensor_gradPsi_diff[i][0], 4);
         list2tensor(list_gradPi_diff + i*10, tensor_gradPi_diff[i][0], 4);
         for(j=0;j<3;j++){
-            list2tensor(list_gradPhi_ave + i*j*10, tensor_gradPhi_ave[i][j][0], 4);
-            list2tensor(list_gradPhi_diff + i*j*10, tensor_gradPhi_diff[i][j][0], 4);
+            list2tensor(list_gradPhi_ave + i*30 + j*10, tensor_gradPhi_ave[i][j][0], 4);
+            list2tensor(list_gradPhi_diff + i*30 + j*10, tensor_gradPhi_diff[i][j][0], 4);
         }
     }
     list2tensor(values_g, tensor_g[0], 3);
@@ -36,6 +36,11 @@ get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT value
     FLOAT *p_xPhi = values_Hhat + 20, *p_yPhi = values_Hhat + 30, *p_zPhi = values_Hhat + 40;
     for(a=0;a<4;a++){
         for(b=a;b<4;b++){
+            *p_Psi = 0.;
+            *p_Pi = 0.;
+            *p_xPhi = 0.;
+            *p_yPhi = 0.;
+            *p_zPhi = 0.;
             for(i=0;i<3;i++){
                 (*p_Psi) += -(1+gamma1)*values_N[i+1]*tensor_gradPsi_ave[i][a][b];  //grad_diff part missing
                 (*p_Pi) += -values_N[i+1]*tensor_gradPi_ave[i][a][b] 
@@ -44,10 +49,15 @@ get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT value
                 (*p_xPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][0][a][b];
                 (*p_yPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][1][a][b];
                 (*p_zPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][2][a][b];
+
+                printf("*p_Pi: %f", *p_Pi);
                 for(j=0;j<3;j++){
                     (*p_Pi) += values_N[0]*tensor_g[i][j]*tensor_gradPhi_ave[i][j][a][b];
+                    printf("lapse: %f, g[%d][%d]: %f, gradPhi_ave[%d][%d][%d][%d]: %f\n", values_N[0], i, j, tensor_g[i][j], i, j, a, b, tensor_gradPhi_ave[i][j][a][b]); 
+                    printf("*p_Pi: %f", *p_Pi);
                 }
             }
+            printf("\n\n");
 
             *(p_xPhi++) = values_N[0]*tensor_gradPi_ave[0][a][b] - values_N[0]*gamma2*tensor_gradPsi_ave[0][a][b];
             *(p_yPhi++) = values_N[0]*tensor_gradPi_ave[1][a][b] - values_N[0]*gamma2*tensor_gradPsi_ave[1][a][b];
@@ -64,9 +74,13 @@ get_dofs_Hhat(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N,
         DOF **dofs_gradPsi, DOF **dofs_gradPi, DOF **dofs_gradPhi, DOF **dofs_Hhat)
 {
     get_dofs_grad_hat(dofs_var, dofs_bdry, dofs_gradPsi, 10);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradPsi_dg5.vtk", 30, dofs_gradPsi);
     get_dofs_grad_hat(dofs_var + 10, dofs_bdry + 10, dofs_gradPi, 10);
     get_dofs_grad_hat(dofs_var + 20, dofs_bdry+ 20, dofs_gradPhi, 30);
+    phgExportVTKn(dofs_gradPsi[0]->g, "gradPsi_dg5.vtk", 30, dofs_gradPsi);
+    phgExportVTKn(dofs_gradPsi[0]->g, "gradPi_dg5.vtk", 30, dofs_gradPi);
+    phgExportVTKn(dofs_gradPsi[0]->g, "gradxPhi_dg5.vtk", 30, dofs_gradPhi);
+    phgExportVTKn(dofs_gradPsi[0]->g, "gradyPhi_dg5.vtk", 30, dofs_gradPhi + 30);
+    phgExportVTKn(dofs_gradPsi[0]->g, "gradzPhi_dg5.vtk", 30, dofs_gradPhi + 60);
 
     INT i, j, n, data_count = DofGetDataCount(dofs_N[0]);
     FLOAT *p_gradPsi[30], *p_gradPi[30], *p_gradPhi[90], *p_g[6], *p_N[4], *p_Hhat[NVAR];

@@ -334,552 +334,814 @@ get_values_src(FLOAT *values_var, FLOAT *values)
     
     //TERM 1
     t1srcPi00 = 2*N*(invPsi00*(-(Power(Gamma000,2)*invPsi00) - 2*Gamma000*Gamma001*invPsi01 - 2*Gamma000*Gamma002*invPsi02 - 
-            Power(Gamma001,2)*invPsi11 - 2*Gamma001*Gamma002*invPsi12 - Power(Gamma002,2)*invPsi22 + g11*Power(Phi100,2) + 
-            2*g12*Phi100*Phi200 + g22*Power(Phi200,2) + 2*g13*Phi100*Phi300 + 2*g23*Phi200*Phi300 + g33*Power(Phi300,2) - 
-            Power(Pi00,2)) + 2*invPsi01*(-(Gamma000*Gamma001*invPsi00) - Power(Gamma001,2)*invPsi01 - Gamma000*Gamma011*invPsi01 - 
-            Gamma001*Gamma002*invPsi02 - Gamma000*Gamma012*invPsi02 - Gamma001*Gamma011*invPsi11 - Gamma002*Gamma011*invPsi12 - 
-            Gamma001*Gamma012*invPsi12 - Gamma002*Gamma012*invPsi22 + g11*Phi100*Phi101 + g12*Phi101*Phi200 + g12*Phi100*Phi201 + 
-            g22*Phi200*Phi201 + g13*Phi101*Phi300 + g23*Phi201*Phi300 + g13*Phi100*Phi301 + g23*Phi200*Phi301 + g33*Phi300*Phi301 - 
-            Pi00*Pi01) + invPsi11*(-(Power(Gamma001,2)*invPsi00) - 2*Gamma001*Gamma011*invPsi01 - 2*Gamma001*Gamma012*invPsi02 - 
-            Power(Gamma011,2)*invPsi11 - 2*Gamma011*Gamma012*invPsi12 - Power(Gamma012,2)*invPsi22 + g11*Power(Phi101,2) + 
-            2*g12*Phi101*Phi201 + g22*Power(Phi201,2) + 2*g13*Phi101*Phi301 + 2*g23*Phi201*Phi301 + g33*Power(Phi301,2) - 
-            Power(Pi01,2)) + 2*invPsi02*(-(Gamma000*Gamma002*invPsi00) - Gamma001*Gamma002*invPsi01 - Gamma000*Gamma012*invPsi01 - 
-            Power(Gamma002,2)*invPsi02 - Gamma000*Gamma022*invPsi02 - Gamma001*Gamma012*invPsi11 - Gamma002*Gamma012*invPsi12 - 
-            Gamma001*Gamma022*invPsi12 - Gamma002*Gamma022*invPsi22 + g11*Phi100*Phi102 + g12*Phi102*Phi200 + g12*Phi100*Phi202 + 
-            g22*Phi200*Phi202 + g13*Phi102*Phi300 + g23*Phi202*Phi300 + g13*Phi100*Phi302 + g23*Phi200*Phi302 + g33*Phi300*Phi302 - 
-            Pi00*Pi02) + 2*invPsi12*(-(Gamma001*Gamma002*invPsi00) - Gamma002*Gamma011*invPsi01 - Gamma001*Gamma012*invPsi01 - 
-            Gamma002*Gamma012*invPsi02 - Gamma001*Gamma022*invPsi02 - Gamma011*Gamma012*invPsi11 - Power(Gamma012,2)*invPsi12 - 
-            Gamma011*Gamma022*invPsi12 - Gamma012*Gamma022*invPsi22 + g11*Phi101*Phi102 + g12*Phi102*Phi201 + g12*Phi101*Phi202 + 
-            g22*Phi201*Phi202 + g13*Phi102*Phi301 + g23*Phi202*Phi301 + g13*Phi101*Phi302 + g23*Phi201*Phi302 + g33*Phi301*Phi302 - 
-            Pi01*Pi02) + invPsi22*(-(Power(Gamma002,2)*invPsi00) - 2*Gamma002*Gamma012*invPsi01 - 2*Gamma002*Gamma022*invPsi02 - 
-            Power(Gamma012,2)*invPsi11 - 2*Gamma012*Gamma022*invPsi12 - Power(Gamma022,2)*invPsi22 + g11*Power(Phi102,2) + 
-            2*g12*Phi102*Phi202 + g22*Power(Phi202,2) + 2*g13*Phi102*Phi302 + 2*g23*Phi202*Phi302 + g33*Power(Phi302,2) - 
-            Power(Pi02,2)) + 2*invPsi03*(-(Gamma000*Gamma003*invPsi00) - Gamma001*Gamma003*invPsi01 - Gamma000*Gamma013*invPsi01 - 
-            Gamma002*Gamma003*invPsi02 - Gamma000*Gamma023*invPsi02 - Gamma001*Gamma013*invPsi11 - Gamma002*Gamma013*invPsi12 - 
-            Gamma001*Gamma023*invPsi12 - Gamma002*Gamma023*invPsi22 + g11*Phi100*Phi103 + g12*Phi103*Phi200 + g12*Phi100*Phi203 + 
-            g22*Phi200*Phi203 + g13*Phi103*Phi300 + g23*Phi203*Phi300 + g13*Phi100*Phi303 + g23*Phi200*Phi303 + g33*Phi300*Phi303 - 
-            Pi00*Pi03) + 2*invPsi13*(-(Gamma001*Gamma003*invPsi00) - Gamma003*Gamma011*invPsi01 - Gamma001*Gamma013*invPsi01 - 
-            Gamma003*Gamma012*invPsi02 - Gamma001*Gamma023*invPsi02 - Gamma011*Gamma013*invPsi11 - Gamma012*Gamma013*invPsi12 - 
-            Gamma011*Gamma023*invPsi12 - Gamma012*Gamma023*invPsi22 + g11*Phi101*Phi103 + g12*Phi103*Phi201 + g12*Phi101*Phi203 + 
-            g22*Phi201*Phi203 + g13*Phi103*Phi301 + g23*Phi203*Phi301 + g13*Phi101*Phi303 + g23*Phi201*Phi303 + g33*Phi301*Phi303 - 
-            Pi01*Pi03) + 2*invPsi23*(-(Gamma002*Gamma003*invPsi00) - Gamma003*Gamma012*invPsi01 - Gamma002*Gamma013*invPsi01 - 
-            Gamma003*Gamma022*invPsi02 - Gamma002*Gamma023*invPsi02 - Gamma012*Gamma013*invPsi11 - Gamma013*Gamma022*invPsi12 - 
-            Gamma012*Gamma023*invPsi12 - Gamma022*Gamma023*invPsi22 + g11*Phi102*Phi103 + g12*Phi103*Phi202 + g12*Phi102*Phi203 + 
-            g22*Phi202*Phi203 + g13*Phi103*Phi302 + g23*Phi203*Phi302 + g13*Phi102*Phi303 + g23*Phi202*Phi303 + g33*Phi302*Phi303 - 
-            Pi02*Pi03) + invPsi33*(-(Power(Gamma003,2)*invPsi00) - 2*Gamma003*Gamma013*invPsi01 - 2*Gamma003*Gamma023*invPsi02 - 
-            Power(Gamma013,2)*invPsi11 - 2*Gamma013*Gamma023*invPsi12 - Power(Gamma023,2)*invPsi22 + g11*Power(Phi103,2) + 
-            2*g12*Phi103*Phi203 + g22*Power(Phi203,2) + 2*g13*Phi103*Phi303 + 2*g23*Phi203*Phi303 + g33*Power(Phi303,2) - 
-            Power(Pi03,2)));
+        2*Gamma000*Gamma003*invPsi03 - Power(Gamma001,2)*invPsi11 - 2*Gamma001*Gamma002*invPsi12 - 
+        2*Gamma001*Gamma003*invPsi13 - Power(Gamma002,2)*invPsi22 - 2*Gamma002*Gamma003*invPsi23 - Power(Gamma003,2)*invPsi33 + 
+        g11*Power(Phi100,2) + 2*g12*Phi100*Phi200 + g22*Power(Phi200,2) + 2*g13*Phi100*Phi300 + 2*g23*Phi200*Phi300 + 
+        g33*Power(Phi300,2) - Power(Pi00,2)) + 2*invPsi01*
+      (-(Gamma000*Gamma001*invPsi00) - Power(Gamma001,2)*invPsi01 - Gamma000*Gamma011*invPsi01 - Gamma001*Gamma002*invPsi02 - 
+        Gamma000*Gamma012*invPsi02 - Gamma001*Gamma003*invPsi03 - Gamma000*Gamma013*invPsi03 - Gamma001*Gamma011*invPsi11 - 
+        Gamma002*Gamma011*invPsi12 - Gamma001*Gamma012*invPsi12 - Gamma003*Gamma011*invPsi13 - Gamma001*Gamma013*invPsi13 - 
+        Gamma002*Gamma012*invPsi22 - Gamma003*Gamma012*invPsi23 - Gamma002*Gamma013*invPsi23 - Gamma003*Gamma013*invPsi33 + 
+        g11*Phi100*Phi101 + g12*Phi101*Phi200 + g12*Phi100*Phi201 + g22*Phi200*Phi201 + g13*Phi101*Phi300 + g23*Phi201*Phi300 + 
+        g13*Phi100*Phi301 + g23*Phi200*Phi301 + g33*Phi300*Phi301 - Pi00*Pi01) + 
+     invPsi11*(-(Power(Gamma001,2)*invPsi00) - 2*Gamma001*Gamma011*invPsi01 - 2*Gamma001*Gamma012*invPsi02 - 
+        2*Gamma001*Gamma013*invPsi03 - Power(Gamma011,2)*invPsi11 - 2*Gamma011*Gamma012*invPsi12 - 
+        2*Gamma011*Gamma013*invPsi13 - Power(Gamma012,2)*invPsi22 - 2*Gamma012*Gamma013*invPsi23 - Power(Gamma013,2)*invPsi33 + 
+        g11*Power(Phi101,2) + 2*g12*Phi101*Phi201 + g22*Power(Phi201,2) + 2*g13*Phi101*Phi301 + 2*g23*Phi201*Phi301 + 
+        g33*Power(Phi301,2) - Power(Pi01,2)) + 2*invPsi02*
+      (-(Gamma000*Gamma002*invPsi00) - Gamma001*Gamma002*invPsi01 - Gamma000*Gamma012*invPsi01 - Power(Gamma002,2)*invPsi02 - 
+        Gamma000*Gamma022*invPsi02 - Gamma002*Gamma003*invPsi03 - Gamma000*Gamma023*invPsi03 - Gamma001*Gamma012*invPsi11 - 
+        Gamma002*Gamma012*invPsi12 - Gamma001*Gamma022*invPsi12 - Gamma003*Gamma012*invPsi13 - Gamma001*Gamma023*invPsi13 - 
+        Gamma002*Gamma022*invPsi22 - Gamma003*Gamma022*invPsi23 - Gamma002*Gamma023*invPsi23 - Gamma003*Gamma023*invPsi33 + 
+        g11*Phi100*Phi102 + g12*Phi102*Phi200 + g12*Phi100*Phi202 + g22*Phi200*Phi202 + g13*Phi102*Phi300 + g23*Phi202*Phi300 + 
+        g13*Phi100*Phi302 + g23*Phi200*Phi302 + g33*Phi300*Phi302 - Pi00*Pi02) + 
+     2*invPsi12*(-(Gamma001*Gamma002*invPsi00) - Gamma002*Gamma011*invPsi01 - Gamma001*Gamma012*invPsi01 - 
+        Gamma002*Gamma012*invPsi02 - Gamma001*Gamma022*invPsi02 - Gamma002*Gamma013*invPsi03 - Gamma001*Gamma023*invPsi03 - 
+        Gamma011*Gamma012*invPsi11 - Power(Gamma012,2)*invPsi12 - Gamma011*Gamma022*invPsi12 - Gamma012*Gamma013*invPsi13 - 
+        Gamma011*Gamma023*invPsi13 - Gamma012*Gamma022*invPsi22 - Gamma013*Gamma022*invPsi23 - Gamma012*Gamma023*invPsi23 - 
+        Gamma013*Gamma023*invPsi33 + g11*Phi101*Phi102 + g12*Phi102*Phi201 + g12*Phi101*Phi202 + g22*Phi201*Phi202 + 
+        g13*Phi102*Phi301 + g23*Phi202*Phi301 + g13*Phi101*Phi302 + g23*Phi201*Phi302 + g33*Phi301*Phi302 - Pi01*Pi02) + 
+     invPsi22*(-(Power(Gamma002,2)*invPsi00) - 2*Gamma002*Gamma012*invPsi01 - 2*Gamma002*Gamma022*invPsi02 - 
+        2*Gamma002*Gamma023*invPsi03 - Power(Gamma012,2)*invPsi11 - 2*Gamma012*Gamma022*invPsi12 - 
+        2*Gamma012*Gamma023*invPsi13 - Power(Gamma022,2)*invPsi22 - 2*Gamma022*Gamma023*invPsi23 - Power(Gamma023,2)*invPsi33 + 
+        g11*Power(Phi102,2) + 2*g12*Phi102*Phi202 + g22*Power(Phi202,2) + 2*g13*Phi102*Phi302 + 2*g23*Phi202*Phi302 + 
+        g33*Power(Phi302,2) - Power(Pi02,2)) + 2*invPsi03*
+      (-(Gamma000*Gamma003*invPsi00) - Gamma001*Gamma003*invPsi01 - Gamma000*Gamma013*invPsi01 - Gamma002*Gamma003*invPsi02 - 
+        Gamma000*Gamma023*invPsi02 - Power(Gamma003,2)*invPsi03 - Gamma000*Gamma033*invPsi03 - Gamma001*Gamma013*invPsi11 - 
+        Gamma002*Gamma013*invPsi12 - Gamma001*Gamma023*invPsi12 - Gamma003*Gamma013*invPsi13 - Gamma001*Gamma033*invPsi13 - 
+        Gamma002*Gamma023*invPsi22 - Gamma003*Gamma023*invPsi23 - Gamma002*Gamma033*invPsi23 - Gamma003*Gamma033*invPsi33 + 
+        g11*Phi100*Phi103 + g12*Phi103*Phi200 + g12*Phi100*Phi203 + g22*Phi200*Phi203 + g13*Phi103*Phi300 + g23*Phi203*Phi300 + 
+        g13*Phi100*Phi303 + g23*Phi200*Phi303 + g33*Phi300*Phi303 - Pi00*Pi03) + 
+     2*invPsi13*(-(Gamma001*Gamma003*invPsi00) - Gamma003*Gamma011*invPsi01 - Gamma001*Gamma013*invPsi01 - 
+        Gamma003*Gamma012*invPsi02 - Gamma001*Gamma023*invPsi02 - Gamma003*Gamma013*invPsi03 - Gamma001*Gamma033*invPsi03 - 
+        Gamma011*Gamma013*invPsi11 - Gamma012*Gamma013*invPsi12 - Gamma011*Gamma023*invPsi12 - Power(Gamma013,2)*invPsi13 - 
+        Gamma011*Gamma033*invPsi13 - Gamma012*Gamma023*invPsi22 - Gamma013*Gamma023*invPsi23 - Gamma012*Gamma033*invPsi23 - 
+        Gamma013*Gamma033*invPsi33 + g11*Phi101*Phi103 + g12*Phi103*Phi201 + g12*Phi101*Phi203 + g22*Phi201*Phi203 + 
+        g13*Phi103*Phi301 + g23*Phi203*Phi301 + g13*Phi101*Phi303 + g23*Phi201*Phi303 + g33*Phi301*Phi303 - Pi01*Pi03) + 
+     2*invPsi23*(-(Gamma002*Gamma003*invPsi00) - Gamma003*Gamma012*invPsi01 - Gamma002*Gamma013*invPsi01 - 
+        Gamma003*Gamma022*invPsi02 - Gamma002*Gamma023*invPsi02 - Gamma003*Gamma023*invPsi03 - Gamma002*Gamma033*invPsi03 - 
+        Gamma012*Gamma013*invPsi11 - Gamma013*Gamma022*invPsi12 - Gamma012*Gamma023*invPsi12 - Gamma013*Gamma023*invPsi13 - 
+        Gamma012*Gamma033*invPsi13 - Gamma022*Gamma023*invPsi22 - Power(Gamma023,2)*invPsi23 - Gamma022*Gamma033*invPsi23 - 
+        Gamma023*Gamma033*invPsi33 + g11*Phi102*Phi103 + g12*Phi103*Phi202 + g12*Phi102*Phi203 + g22*Phi202*Phi203 + 
+        g13*Phi103*Phi302 + g23*Phi203*Phi302 + g13*Phi102*Phi303 + g23*Phi202*Phi303 + g33*Phi302*Phi303 - Pi02*Pi03) + 
+     invPsi33*(-(Power(Gamma003,2)*invPsi00) - 2*Gamma003*Gamma013*invPsi01 - 2*Gamma003*Gamma023*invPsi02 - 
+        2*Gamma003*Gamma033*invPsi03 - Power(Gamma013,2)*invPsi11 - 2*Gamma013*Gamma023*invPsi12 - 
+        2*Gamma013*Gamma033*invPsi13 - Power(Gamma023,2)*invPsi22 - 2*Gamma023*Gamma033*invPsi23 - Power(Gamma033,2)*invPsi33 + 
+        g11*Power(Phi103,2) + 2*g12*Phi103*Phi203 + g22*Power(Phi203,2) + 2*g13*Phi103*Phi303 + 2*g23*Phi203*Phi303 + 
+        g33*Power(Phi303,2) - Power(Pi03,2)));
     
     t1srcPi01 = 2*N*(invPsi00*(-(Gamma000*Gamma100*invPsi00) - Gamma001*Gamma100*invPsi01 - Gamma000*Gamma101*invPsi01 - 
-            Gamma002*Gamma100*invPsi02 - Gamma000*Gamma102*invPsi02 - Gamma001*Gamma101*invPsi11 - Gamma002*Gamma101*invPsi12 - 
-            Gamma001*Gamma102*invPsi12 - Gamma002*Gamma102*invPsi22 + g11*Phi100*Phi101 + g12*Phi101*Phi200 + g12*Phi100*Phi201 + 
-            g22*Phi200*Phi201 + g13*Phi101*Phi300 + g23*Phi201*Phi300 + g13*Phi100*Phi301 + g23*Phi200*Phi301 + g33*Phi300*Phi301 - 
-            Pi00*Pi01) + invPsi01*(-(Gamma001*Gamma100*invPsi00) - Gamma011*Gamma100*invPsi01 - Gamma001*Gamma101*invPsi01 - 
-            Gamma012*Gamma100*invPsi02 - Gamma001*Gamma102*invPsi02 - Gamma011*Gamma101*invPsi11 - Gamma012*Gamma101*invPsi12 - 
-            Gamma011*Gamma102*invPsi12 - Gamma012*Gamma102*invPsi22 + g11*Power(Phi101,2) + 2*g12*Phi101*Phi201 + 
-            g22*Power(Phi201,2) + 2*g13*Phi101*Phi301 + 2*g23*Phi201*Phi301 + g33*Power(Phi301,2) - Power(Pi01,2)) + 
-         invPsi02*(-(Gamma002*Gamma100*invPsi00) - Gamma012*Gamma100*invPsi01 - Gamma002*Gamma101*invPsi01 - 
-            Gamma022*Gamma100*invPsi02 - Gamma002*Gamma102*invPsi02 - Gamma012*Gamma101*invPsi11 - Gamma022*Gamma101*invPsi12 - 
-            Gamma012*Gamma102*invPsi12 - Gamma022*Gamma102*invPsi22 + g11*Phi101*Phi102 + g12*Phi102*Phi201 + g12*Phi101*Phi202 + 
-            g22*Phi201*Phi202 + g13*Phi102*Phi301 + g23*Phi202*Phi301 + g13*Phi101*Phi302 + g23*Phi201*Phi302 + g33*Phi301*Phi302 - 
-            Pi01*Pi02) + invPsi03*(-(Gamma003*Gamma100*invPsi00) - Gamma013*Gamma100*invPsi01 - Gamma003*Gamma101*invPsi01 - 
-            Gamma023*Gamma100*invPsi02 - Gamma003*Gamma102*invPsi02 - Gamma013*Gamma101*invPsi11 - Gamma023*Gamma101*invPsi12 - 
-            Gamma013*Gamma102*invPsi12 - Gamma023*Gamma102*invPsi22 + g11*Phi101*Phi103 + g12*Phi103*Phi201 + g12*Phi101*Phi203 + 
-            g22*Phi201*Phi203 + g13*Phi103*Phi301 + g23*Phi203*Phi301 + g13*Phi101*Phi303 + g23*Phi201*Phi303 + g33*Phi301*Phi303 - 
-            Pi01*Pi03) + invPsi01*(-(Gamma000*Gamma101*invPsi00) - Gamma001*Gamma101*invPsi01 - Gamma000*Gamma111*invPsi01 - 
-            Gamma002*Gamma101*invPsi02 - Gamma000*Gamma112*invPsi02 - Gamma001*Gamma111*invPsi11 - Gamma002*Gamma111*invPsi12 - 
-            Gamma001*Gamma112*invPsi12 - Gamma002*Gamma112*invPsi22 + g11*Phi100*Phi111 + g12*Phi111*Phi200 + g12*Phi100*Phi211 + 
-            g22*Phi200*Phi211 + g13*Phi111*Phi300 + g23*Phi211*Phi300 + g13*Phi100*Phi311 + g23*Phi200*Phi311 + g33*Phi300*Phi311 - 
-            Pi00*Pi11) + invPsi11*(-(Gamma001*Gamma101*invPsi00) - Gamma011*Gamma101*invPsi01 - Gamma001*Gamma111*invPsi01 - 
-            Gamma012*Gamma101*invPsi02 - Gamma001*Gamma112*invPsi02 - Gamma011*Gamma111*invPsi11 - Gamma012*Gamma111*invPsi12 - 
-            Gamma011*Gamma112*invPsi12 - Gamma012*Gamma112*invPsi22 + g11*Phi101*Phi111 + g12*Phi111*Phi201 + g12*Phi101*Phi211 + 
-            g22*Phi201*Phi211 + g13*Phi111*Phi301 + g23*Phi211*Phi301 + g13*Phi101*Phi311 + g23*Phi201*Phi311 + g33*Phi301*Phi311 - 
-            Pi01*Pi11) + invPsi12*(-(Gamma002*Gamma101*invPsi00) - Gamma012*Gamma101*invPsi01 - Gamma002*Gamma111*invPsi01 - 
-            Gamma022*Gamma101*invPsi02 - Gamma002*Gamma112*invPsi02 - Gamma012*Gamma111*invPsi11 - Gamma022*Gamma111*invPsi12 - 
-            Gamma012*Gamma112*invPsi12 - Gamma022*Gamma112*invPsi22 + g11*Phi102*Phi111 + g12*Phi111*Phi202 + g12*Phi102*Phi211 + 
-            g22*Phi202*Phi211 + g13*Phi111*Phi302 + g23*Phi211*Phi302 + g13*Phi102*Phi311 + g23*Phi202*Phi311 + g33*Phi302*Phi311 - 
-            Pi02*Pi11) + invPsi13*(-(Gamma003*Gamma101*invPsi00) - Gamma013*Gamma101*invPsi01 - Gamma003*Gamma111*invPsi01 - 
-            Gamma023*Gamma101*invPsi02 - Gamma003*Gamma112*invPsi02 - Gamma013*Gamma111*invPsi11 - Gamma023*Gamma111*invPsi12 - 
-            Gamma013*Gamma112*invPsi12 - Gamma023*Gamma112*invPsi22 + g11*Phi103*Phi111 + g12*Phi111*Phi203 + g12*Phi103*Phi211 + 
-            g22*Phi203*Phi211 + g13*Phi111*Phi303 + g23*Phi211*Phi303 + g13*Phi103*Phi311 + g23*Phi203*Phi311 + g33*Phi303*Phi311 - 
-            Pi03*Pi11) + invPsi02*(-(Gamma000*Gamma102*invPsi00) - Gamma001*Gamma102*invPsi01 - Gamma000*Gamma112*invPsi01 - 
-            Gamma002*Gamma102*invPsi02 - Gamma000*Gamma122*invPsi02 - Gamma001*Gamma112*invPsi11 - Gamma002*Gamma112*invPsi12 - 
-            Gamma001*Gamma122*invPsi12 - Gamma002*Gamma122*invPsi22 + g11*Phi100*Phi112 + g12*Phi112*Phi200 + g12*Phi100*Phi212 + 
-            g22*Phi200*Phi212 + g13*Phi112*Phi300 + g23*Phi212*Phi300 + g13*Phi100*Phi312 + g23*Phi200*Phi312 + g33*Phi300*Phi312 - 
-            Pi00*Pi12) + invPsi12*(-(Gamma001*Gamma102*invPsi00) - Gamma011*Gamma102*invPsi01 - Gamma001*Gamma112*invPsi01 - 
-            Gamma012*Gamma102*invPsi02 - Gamma001*Gamma122*invPsi02 - Gamma011*Gamma112*invPsi11 - Gamma012*Gamma112*invPsi12 - 
-            Gamma011*Gamma122*invPsi12 - Gamma012*Gamma122*invPsi22 + g11*Phi101*Phi112 + g12*Phi112*Phi201 + g12*Phi101*Phi212 + 
-            g22*Phi201*Phi212 + g13*Phi112*Phi301 + g23*Phi212*Phi301 + g13*Phi101*Phi312 + g23*Phi201*Phi312 + g33*Phi301*Phi312 - 
-            Pi01*Pi12) + invPsi22*(-(Gamma002*Gamma102*invPsi00) - Gamma012*Gamma102*invPsi01 - Gamma002*Gamma112*invPsi01 - 
-            Gamma022*Gamma102*invPsi02 - Gamma002*Gamma122*invPsi02 - Gamma012*Gamma112*invPsi11 - Gamma022*Gamma112*invPsi12 - 
-            Gamma012*Gamma122*invPsi12 - Gamma022*Gamma122*invPsi22 + g11*Phi102*Phi112 + g12*Phi112*Phi202 + g12*Phi102*Phi212 + 
-            g22*Phi202*Phi212 + g13*Phi112*Phi302 + g23*Phi212*Phi302 + g13*Phi102*Phi312 + g23*Phi202*Phi312 + g33*Phi302*Phi312 - 
-            Pi02*Pi12) + invPsi23*(-(Gamma003*Gamma102*invPsi00) - Gamma013*Gamma102*invPsi01 - Gamma003*Gamma112*invPsi01 - 
-            Gamma023*Gamma102*invPsi02 - Gamma003*Gamma122*invPsi02 - Gamma013*Gamma112*invPsi11 - Gamma023*Gamma112*invPsi12 - 
-            Gamma013*Gamma122*invPsi12 - Gamma023*Gamma122*invPsi22 + g11*Phi103*Phi112 + g12*Phi112*Phi203 + g12*Phi103*Phi212 + 
-            g22*Phi203*Phi212 + g13*Phi112*Phi303 + g23*Phi212*Phi303 + g13*Phi103*Phi312 + g23*Phi203*Phi312 + g33*Phi303*Phi312 - 
-            Pi03*Pi12) + invPsi03*(-(Gamma000*Gamma103*invPsi00) - Gamma001*Gamma103*invPsi01 - Gamma000*Gamma113*invPsi01 - 
-            Gamma002*Gamma103*invPsi02 - Gamma000*Gamma123*invPsi02 - Gamma001*Gamma113*invPsi11 - Gamma002*Gamma113*invPsi12 - 
-            Gamma001*Gamma123*invPsi12 - Gamma002*Gamma123*invPsi22 + g11*Phi100*Phi113 + g12*Phi113*Phi200 + g12*Phi100*Phi213 + 
-            g22*Phi200*Phi213 + g13*Phi113*Phi300 + g23*Phi213*Phi300 + g13*Phi100*Phi313 + g23*Phi200*Phi313 + g33*Phi300*Phi313 - 
-            Pi00*Pi13) + invPsi13*(-(Gamma001*Gamma103*invPsi00) - Gamma011*Gamma103*invPsi01 - Gamma001*Gamma113*invPsi01 - 
-            Gamma012*Gamma103*invPsi02 - Gamma001*Gamma123*invPsi02 - Gamma011*Gamma113*invPsi11 - Gamma012*Gamma113*invPsi12 - 
-            Gamma011*Gamma123*invPsi12 - Gamma012*Gamma123*invPsi22 + g11*Phi101*Phi113 + g12*Phi113*Phi201 + g12*Phi101*Phi213 + 
-            g22*Phi201*Phi213 + g13*Phi113*Phi301 + g23*Phi213*Phi301 + g13*Phi101*Phi313 + g23*Phi201*Phi313 + g33*Phi301*Phi313 - 
-            Pi01*Pi13) + invPsi23*(-(Gamma002*Gamma103*invPsi00) - Gamma012*Gamma103*invPsi01 - Gamma002*Gamma113*invPsi01 - 
-            Gamma022*Gamma103*invPsi02 - Gamma002*Gamma123*invPsi02 - Gamma012*Gamma113*invPsi11 - Gamma022*Gamma113*invPsi12 - 
-            Gamma012*Gamma123*invPsi12 - Gamma022*Gamma123*invPsi22 + g11*Phi102*Phi113 + g12*Phi113*Phi202 + g12*Phi102*Phi213 + 
-            g22*Phi202*Phi213 + g13*Phi113*Phi302 + g23*Phi213*Phi302 + g13*Phi102*Phi313 + g23*Phi202*Phi313 + g33*Phi302*Phi313 - 
-            Pi02*Pi13) + invPsi33*(-(Gamma003*Gamma103*invPsi00) - Gamma013*Gamma103*invPsi01 - Gamma003*Gamma113*invPsi01 - 
-            Gamma023*Gamma103*invPsi02 - Gamma003*Gamma123*invPsi02 - Gamma013*Gamma113*invPsi11 - Gamma023*Gamma113*invPsi12 - 
-            Gamma013*Gamma123*invPsi12 - Gamma023*Gamma123*invPsi22 + g11*Phi103*Phi113 + g12*Phi113*Phi203 + g12*Phi103*Phi213 + 
-            g22*Phi203*Phi213 + g13*Phi113*Phi303 + g23*Phi213*Phi303 + g13*Phi103*Phi313 + g23*Phi203*Phi313 + g33*Phi303*Phi313 - 
-            Pi03*Pi13));
+        Gamma002*Gamma100*invPsi02 - Gamma000*Gamma102*invPsi02 - Gamma003*Gamma100*invPsi03 - Gamma000*Gamma103*invPsi03 - 
+        Gamma001*Gamma101*invPsi11 - Gamma002*Gamma101*invPsi12 - Gamma001*Gamma102*invPsi12 - Gamma003*Gamma101*invPsi13 - 
+        Gamma001*Gamma103*invPsi13 - Gamma002*Gamma102*invPsi22 - Gamma003*Gamma102*invPsi23 - Gamma002*Gamma103*invPsi23 - 
+        Gamma003*Gamma103*invPsi33 + g11*Phi100*Phi101 + g12*Phi101*Phi200 + g12*Phi100*Phi201 + g22*Phi200*Phi201 + 
+        g13*Phi101*Phi300 + g23*Phi201*Phi300 + g13*Phi100*Phi301 + g23*Phi200*Phi301 + g33*Phi300*Phi301 - Pi00*Pi01) + 
+     invPsi01*(-(Gamma001*Gamma100*invPsi00) - Gamma011*Gamma100*invPsi01 - Gamma001*Gamma101*invPsi01 - 
+        Gamma012*Gamma100*invPsi02 - Gamma001*Gamma102*invPsi02 - Gamma013*Gamma100*invPsi03 - Gamma001*Gamma103*invPsi03 - 
+        Gamma011*Gamma101*invPsi11 - Gamma012*Gamma101*invPsi12 - Gamma011*Gamma102*invPsi12 - Gamma013*Gamma101*invPsi13 - 
+        Gamma011*Gamma103*invPsi13 - Gamma012*Gamma102*invPsi22 - Gamma013*Gamma102*invPsi23 - Gamma012*Gamma103*invPsi23 - 
+        Gamma013*Gamma103*invPsi33 + g11*Power(Phi101,2) + 2*g12*Phi101*Phi201 + g22*Power(Phi201,2) + 2*g13*Phi101*Phi301 + 
+        2*g23*Phi201*Phi301 + g33*Power(Phi301,2) - Power(Pi01,2)) + 
+     invPsi02*(-(Gamma002*Gamma100*invPsi00) - Gamma012*Gamma100*invPsi01 - Gamma002*Gamma101*invPsi01 - 
+        Gamma022*Gamma100*invPsi02 - Gamma002*Gamma102*invPsi02 - Gamma023*Gamma100*invPsi03 - Gamma002*Gamma103*invPsi03 - 
+        Gamma012*Gamma101*invPsi11 - Gamma022*Gamma101*invPsi12 - Gamma012*Gamma102*invPsi12 - Gamma023*Gamma101*invPsi13 - 
+        Gamma012*Gamma103*invPsi13 - Gamma022*Gamma102*invPsi22 - Gamma023*Gamma102*invPsi23 - Gamma022*Gamma103*invPsi23 - 
+        Gamma023*Gamma103*invPsi33 + g11*Phi101*Phi102 + g12*Phi102*Phi201 + g12*Phi101*Phi202 + g22*Phi201*Phi202 + 
+        g13*Phi102*Phi301 + g23*Phi202*Phi301 + g13*Phi101*Phi302 + g23*Phi201*Phi302 + g33*Phi301*Phi302 - Pi01*Pi02) + 
+     invPsi03*(-(Gamma003*Gamma100*invPsi00) - Gamma013*Gamma100*invPsi01 - Gamma003*Gamma101*invPsi01 - 
+        Gamma023*Gamma100*invPsi02 - Gamma003*Gamma102*invPsi02 - Gamma033*Gamma100*invPsi03 - Gamma003*Gamma103*invPsi03 - 
+        Gamma013*Gamma101*invPsi11 - Gamma023*Gamma101*invPsi12 - Gamma013*Gamma102*invPsi12 - Gamma033*Gamma101*invPsi13 - 
+        Gamma013*Gamma103*invPsi13 - Gamma023*Gamma102*invPsi22 - Gamma033*Gamma102*invPsi23 - Gamma023*Gamma103*invPsi23 - 
+        Gamma033*Gamma103*invPsi33 + g11*Phi101*Phi103 + g12*Phi103*Phi201 + g12*Phi101*Phi203 + g22*Phi201*Phi203 + 
+        g13*Phi103*Phi301 + g23*Phi203*Phi301 + g13*Phi101*Phi303 + g23*Phi201*Phi303 + g33*Phi301*Phi303 - Pi01*Pi03) + 
+     invPsi01*(-(Gamma000*Gamma101*invPsi00) - Gamma001*Gamma101*invPsi01 - Gamma000*Gamma111*invPsi01 - 
+        Gamma002*Gamma101*invPsi02 - Gamma000*Gamma112*invPsi02 - Gamma003*Gamma101*invPsi03 - Gamma000*Gamma113*invPsi03 - 
+        Gamma001*Gamma111*invPsi11 - Gamma002*Gamma111*invPsi12 - Gamma001*Gamma112*invPsi12 - Gamma003*Gamma111*invPsi13 - 
+        Gamma001*Gamma113*invPsi13 - Gamma002*Gamma112*invPsi22 - Gamma003*Gamma112*invPsi23 - Gamma002*Gamma113*invPsi23 - 
+        Gamma003*Gamma113*invPsi33 + g11*Phi100*Phi111 + g12*Phi111*Phi200 + g12*Phi100*Phi211 + g22*Phi200*Phi211 + 
+        g13*Phi111*Phi300 + g23*Phi211*Phi300 + g13*Phi100*Phi311 + g23*Phi200*Phi311 + g33*Phi300*Phi311 - Pi00*Pi11) + 
+     invPsi11*(-(Gamma001*Gamma101*invPsi00) - Gamma011*Gamma101*invPsi01 - Gamma001*Gamma111*invPsi01 - 
+        Gamma012*Gamma101*invPsi02 - Gamma001*Gamma112*invPsi02 - Gamma013*Gamma101*invPsi03 - Gamma001*Gamma113*invPsi03 - 
+        Gamma011*Gamma111*invPsi11 - Gamma012*Gamma111*invPsi12 - Gamma011*Gamma112*invPsi12 - Gamma013*Gamma111*invPsi13 - 
+        Gamma011*Gamma113*invPsi13 - Gamma012*Gamma112*invPsi22 - Gamma013*Gamma112*invPsi23 - Gamma012*Gamma113*invPsi23 - 
+        Gamma013*Gamma113*invPsi33 + g11*Phi101*Phi111 + g12*Phi111*Phi201 + g12*Phi101*Phi211 + g22*Phi201*Phi211 + 
+        g13*Phi111*Phi301 + g23*Phi211*Phi301 + g13*Phi101*Phi311 + g23*Phi201*Phi311 + g33*Phi301*Phi311 - Pi01*Pi11) + 
+     invPsi12*(-(Gamma002*Gamma101*invPsi00) - Gamma012*Gamma101*invPsi01 - Gamma002*Gamma111*invPsi01 - 
+        Gamma022*Gamma101*invPsi02 - Gamma002*Gamma112*invPsi02 - Gamma023*Gamma101*invPsi03 - Gamma002*Gamma113*invPsi03 - 
+        Gamma012*Gamma111*invPsi11 - Gamma022*Gamma111*invPsi12 - Gamma012*Gamma112*invPsi12 - Gamma023*Gamma111*invPsi13 - 
+        Gamma012*Gamma113*invPsi13 - Gamma022*Gamma112*invPsi22 - Gamma023*Gamma112*invPsi23 - Gamma022*Gamma113*invPsi23 - 
+        Gamma023*Gamma113*invPsi33 + g11*Phi102*Phi111 + g12*Phi111*Phi202 + g12*Phi102*Phi211 + g22*Phi202*Phi211 + 
+        g13*Phi111*Phi302 + g23*Phi211*Phi302 + g13*Phi102*Phi311 + g23*Phi202*Phi311 + g33*Phi302*Phi311 - Pi02*Pi11) + 
+     invPsi13*(-(Gamma003*Gamma101*invPsi00) - Gamma013*Gamma101*invPsi01 - Gamma003*Gamma111*invPsi01 - 
+        Gamma023*Gamma101*invPsi02 - Gamma003*Gamma112*invPsi02 - Gamma033*Gamma101*invPsi03 - Gamma003*Gamma113*invPsi03 - 
+        Gamma013*Gamma111*invPsi11 - Gamma023*Gamma111*invPsi12 - Gamma013*Gamma112*invPsi12 - Gamma033*Gamma111*invPsi13 - 
+        Gamma013*Gamma113*invPsi13 - Gamma023*Gamma112*invPsi22 - Gamma033*Gamma112*invPsi23 - Gamma023*Gamma113*invPsi23 - 
+        Gamma033*Gamma113*invPsi33 + g11*Phi103*Phi111 + g12*Phi111*Phi203 + g12*Phi103*Phi211 + g22*Phi203*Phi211 + 
+        g13*Phi111*Phi303 + g23*Phi211*Phi303 + g13*Phi103*Phi311 + g23*Phi203*Phi311 + g33*Phi303*Phi311 - Pi03*Pi11) + 
+     invPsi02*(-(Gamma000*Gamma102*invPsi00) - Gamma001*Gamma102*invPsi01 - Gamma000*Gamma112*invPsi01 - 
+        Gamma002*Gamma102*invPsi02 - Gamma000*Gamma122*invPsi02 - Gamma003*Gamma102*invPsi03 - Gamma000*Gamma123*invPsi03 - 
+        Gamma001*Gamma112*invPsi11 - Gamma002*Gamma112*invPsi12 - Gamma001*Gamma122*invPsi12 - Gamma003*Gamma112*invPsi13 - 
+        Gamma001*Gamma123*invPsi13 - Gamma002*Gamma122*invPsi22 - Gamma003*Gamma122*invPsi23 - Gamma002*Gamma123*invPsi23 - 
+        Gamma003*Gamma123*invPsi33 + g11*Phi100*Phi112 + g12*Phi112*Phi200 + g12*Phi100*Phi212 + g22*Phi200*Phi212 + 
+        g13*Phi112*Phi300 + g23*Phi212*Phi300 + g13*Phi100*Phi312 + g23*Phi200*Phi312 + g33*Phi300*Phi312 - Pi00*Pi12) + 
+     invPsi12*(-(Gamma001*Gamma102*invPsi00) - Gamma011*Gamma102*invPsi01 - Gamma001*Gamma112*invPsi01 - 
+        Gamma012*Gamma102*invPsi02 - Gamma001*Gamma122*invPsi02 - Gamma013*Gamma102*invPsi03 - Gamma001*Gamma123*invPsi03 - 
+        Gamma011*Gamma112*invPsi11 - Gamma012*Gamma112*invPsi12 - Gamma011*Gamma122*invPsi12 - Gamma013*Gamma112*invPsi13 - 
+        Gamma011*Gamma123*invPsi13 - Gamma012*Gamma122*invPsi22 - Gamma013*Gamma122*invPsi23 - Gamma012*Gamma123*invPsi23 - 
+        Gamma013*Gamma123*invPsi33 + g11*Phi101*Phi112 + g12*Phi112*Phi201 + g12*Phi101*Phi212 + g22*Phi201*Phi212 + 
+        g13*Phi112*Phi301 + g23*Phi212*Phi301 + g13*Phi101*Phi312 + g23*Phi201*Phi312 + g33*Phi301*Phi312 - Pi01*Pi12) + 
+     invPsi22*(-(Gamma002*Gamma102*invPsi00) - Gamma012*Gamma102*invPsi01 - Gamma002*Gamma112*invPsi01 - 
+        Gamma022*Gamma102*invPsi02 - Gamma002*Gamma122*invPsi02 - Gamma023*Gamma102*invPsi03 - Gamma002*Gamma123*invPsi03 - 
+        Gamma012*Gamma112*invPsi11 - Gamma022*Gamma112*invPsi12 - Gamma012*Gamma122*invPsi12 - Gamma023*Gamma112*invPsi13 - 
+        Gamma012*Gamma123*invPsi13 - Gamma022*Gamma122*invPsi22 - Gamma023*Gamma122*invPsi23 - Gamma022*Gamma123*invPsi23 - 
+        Gamma023*Gamma123*invPsi33 + g11*Phi102*Phi112 + g12*Phi112*Phi202 + g12*Phi102*Phi212 + g22*Phi202*Phi212 + 
+        g13*Phi112*Phi302 + g23*Phi212*Phi302 + g13*Phi102*Phi312 + g23*Phi202*Phi312 + g33*Phi302*Phi312 - Pi02*Pi12) + 
+     invPsi23*(-(Gamma003*Gamma102*invPsi00) - Gamma013*Gamma102*invPsi01 - Gamma003*Gamma112*invPsi01 - 
+        Gamma023*Gamma102*invPsi02 - Gamma003*Gamma122*invPsi02 - Gamma033*Gamma102*invPsi03 - Gamma003*Gamma123*invPsi03 - 
+        Gamma013*Gamma112*invPsi11 - Gamma023*Gamma112*invPsi12 - Gamma013*Gamma122*invPsi12 - Gamma033*Gamma112*invPsi13 - 
+        Gamma013*Gamma123*invPsi13 - Gamma023*Gamma122*invPsi22 - Gamma033*Gamma122*invPsi23 - Gamma023*Gamma123*invPsi23 - 
+        Gamma033*Gamma123*invPsi33 + g11*Phi103*Phi112 + g12*Phi112*Phi203 + g12*Phi103*Phi212 + g22*Phi203*Phi212 + 
+        g13*Phi112*Phi303 + g23*Phi212*Phi303 + g13*Phi103*Phi312 + g23*Phi203*Phi312 + g33*Phi303*Phi312 - Pi03*Pi12) + 
+     invPsi03*(-(Gamma000*Gamma103*invPsi00) - Gamma001*Gamma103*invPsi01 - Gamma000*Gamma113*invPsi01 - 
+        Gamma002*Gamma103*invPsi02 - Gamma000*Gamma123*invPsi02 - Gamma003*Gamma103*invPsi03 - Gamma000*Gamma133*invPsi03 - 
+        Gamma001*Gamma113*invPsi11 - Gamma002*Gamma113*invPsi12 - Gamma001*Gamma123*invPsi12 - Gamma003*Gamma113*invPsi13 - 
+        Gamma001*Gamma133*invPsi13 - Gamma002*Gamma123*invPsi22 - Gamma003*Gamma123*invPsi23 - Gamma002*Gamma133*invPsi23 - 
+        Gamma003*Gamma133*invPsi33 + g11*Phi100*Phi113 + g12*Phi113*Phi200 + g12*Phi100*Phi213 + g22*Phi200*Phi213 + 
+        g13*Phi113*Phi300 + g23*Phi213*Phi300 + g13*Phi100*Phi313 + g23*Phi200*Phi313 + g33*Phi300*Phi313 - Pi00*Pi13) + 
+     invPsi13*(-(Gamma001*Gamma103*invPsi00) - Gamma011*Gamma103*invPsi01 - Gamma001*Gamma113*invPsi01 - 
+        Gamma012*Gamma103*invPsi02 - Gamma001*Gamma123*invPsi02 - Gamma013*Gamma103*invPsi03 - Gamma001*Gamma133*invPsi03 - 
+        Gamma011*Gamma113*invPsi11 - Gamma012*Gamma113*invPsi12 - Gamma011*Gamma123*invPsi12 - Gamma013*Gamma113*invPsi13 - 
+        Gamma011*Gamma133*invPsi13 - Gamma012*Gamma123*invPsi22 - Gamma013*Gamma123*invPsi23 - Gamma012*Gamma133*invPsi23 - 
+        Gamma013*Gamma133*invPsi33 + g11*Phi101*Phi113 + g12*Phi113*Phi201 + g12*Phi101*Phi213 + g22*Phi201*Phi213 + 
+        g13*Phi113*Phi301 + g23*Phi213*Phi301 + g13*Phi101*Phi313 + g23*Phi201*Phi313 + g33*Phi301*Phi313 - Pi01*Pi13) + 
+     invPsi23*(-(Gamma002*Gamma103*invPsi00) - Gamma012*Gamma103*invPsi01 - Gamma002*Gamma113*invPsi01 - 
+        Gamma022*Gamma103*invPsi02 - Gamma002*Gamma123*invPsi02 - Gamma023*Gamma103*invPsi03 - Gamma002*Gamma133*invPsi03 - 
+        Gamma012*Gamma113*invPsi11 - Gamma022*Gamma113*invPsi12 - Gamma012*Gamma123*invPsi12 - Gamma023*Gamma113*invPsi13 - 
+        Gamma012*Gamma133*invPsi13 - Gamma022*Gamma123*invPsi22 - Gamma023*Gamma123*invPsi23 - Gamma022*Gamma133*invPsi23 - 
+        Gamma023*Gamma133*invPsi33 + g11*Phi102*Phi113 + g12*Phi113*Phi202 + g12*Phi102*Phi213 + g22*Phi202*Phi213 + 
+        g13*Phi113*Phi302 + g23*Phi213*Phi302 + g13*Phi102*Phi313 + g23*Phi202*Phi313 + g33*Phi302*Phi313 - Pi02*Pi13) + 
+     invPsi33*(-(Gamma003*Gamma103*invPsi00) - Gamma013*Gamma103*invPsi01 - Gamma003*Gamma113*invPsi01 - 
+        Gamma023*Gamma103*invPsi02 - Gamma003*Gamma123*invPsi02 - Gamma033*Gamma103*invPsi03 - Gamma003*Gamma133*invPsi03 - 
+        Gamma013*Gamma113*invPsi11 - Gamma023*Gamma113*invPsi12 - Gamma013*Gamma123*invPsi12 - Gamma033*Gamma113*invPsi13 - 
+        Gamma013*Gamma133*invPsi13 - Gamma023*Gamma123*invPsi22 - Gamma033*Gamma123*invPsi23 - Gamma023*Gamma133*invPsi23 - 
+        Gamma033*Gamma133*invPsi33 + g11*Phi103*Phi113 + g12*Phi113*Phi203 + g12*Phi103*Phi213 + g22*Phi203*Phi213 + 
+        g13*Phi113*Phi303 + g23*Phi213*Phi303 + g13*Phi103*Phi313 + g23*Phi203*Phi313 + g33*Phi303*Phi313 - Pi03*Pi13));
     
     t1srcPi02 = 2*N*(invPsi00*(-(Gamma000*Gamma200*invPsi00) - Gamma001*Gamma200*invPsi01 - Gamma000*Gamma201*invPsi01 - 
-            Gamma002*Gamma200*invPsi02 - Gamma000*Gamma202*invPsi02 - Gamma001*Gamma201*invPsi11 - Gamma002*Gamma201*invPsi12 - 
-            Gamma001*Gamma202*invPsi12 - Gamma002*Gamma202*invPsi22 + g11*Phi100*Phi102 + g12*Phi102*Phi200 + g12*Phi100*Phi202 + 
-            g22*Phi200*Phi202 + g13*Phi102*Phi300 + g23*Phi202*Phi300 + g13*Phi100*Phi302 + g23*Phi200*Phi302 + g33*Phi300*Phi302 - 
-            Pi00*Pi02) + invPsi01*(-(Gamma001*Gamma200*invPsi00) - Gamma011*Gamma200*invPsi01 - Gamma001*Gamma201*invPsi01 - 
-            Gamma012*Gamma200*invPsi02 - Gamma001*Gamma202*invPsi02 - Gamma011*Gamma201*invPsi11 - Gamma012*Gamma201*invPsi12 - 
-            Gamma011*Gamma202*invPsi12 - Gamma012*Gamma202*invPsi22 + g11*Phi101*Phi102 + g12*Phi102*Phi201 + g12*Phi101*Phi202 + 
-            g22*Phi201*Phi202 + g13*Phi102*Phi301 + g23*Phi202*Phi301 + g13*Phi101*Phi302 + g23*Phi201*Phi302 + g33*Phi301*Phi302 - 
-            Pi01*Pi02) + invPsi02*(-(Gamma002*Gamma200*invPsi00) - Gamma012*Gamma200*invPsi01 - Gamma002*Gamma201*invPsi01 - 
-            Gamma022*Gamma200*invPsi02 - Gamma002*Gamma202*invPsi02 - Gamma012*Gamma201*invPsi11 - Gamma022*Gamma201*invPsi12 - 
-            Gamma012*Gamma202*invPsi12 - Gamma022*Gamma202*invPsi22 + g11*Power(Phi102,2) + 2*g12*Phi102*Phi202 + 
-            g22*Power(Phi202,2) + 2*g13*Phi102*Phi302 + 2*g23*Phi202*Phi302 + g33*Power(Phi302,2) - Power(Pi02,2)) + 
-         invPsi03*(-(Gamma003*Gamma200*invPsi00) - Gamma013*Gamma200*invPsi01 - Gamma003*Gamma201*invPsi01 - 
-            Gamma023*Gamma200*invPsi02 - Gamma003*Gamma202*invPsi02 - Gamma013*Gamma201*invPsi11 - Gamma023*Gamma201*invPsi12 - 
-            Gamma013*Gamma202*invPsi12 - Gamma023*Gamma202*invPsi22 + g11*Phi102*Phi103 + g12*Phi103*Phi202 + g12*Phi102*Phi203 + 
-            g22*Phi202*Phi203 + g13*Phi103*Phi302 + g23*Phi203*Phi302 + g13*Phi102*Phi303 + g23*Phi202*Phi303 + g33*Phi302*Phi303 - 
-            Pi02*Pi03) + invPsi01*(-(Gamma000*Gamma201*invPsi00) - Gamma001*Gamma201*invPsi01 - Gamma000*Gamma211*invPsi01 - 
-            Gamma002*Gamma201*invPsi02 - Gamma000*Gamma212*invPsi02 - Gamma001*Gamma211*invPsi11 - Gamma002*Gamma211*invPsi12 - 
-            Gamma001*Gamma212*invPsi12 - Gamma002*Gamma212*invPsi22 + g11*Phi100*Phi112 + g12*Phi112*Phi200 + g12*Phi100*Phi212 + 
-            g22*Phi200*Phi212 + g13*Phi112*Phi300 + g23*Phi212*Phi300 + g13*Phi100*Phi312 + g23*Phi200*Phi312 + g33*Phi300*Phi312 - 
-            Pi00*Pi12) + invPsi11*(-(Gamma001*Gamma201*invPsi00) - Gamma011*Gamma201*invPsi01 - Gamma001*Gamma211*invPsi01 - 
-            Gamma012*Gamma201*invPsi02 - Gamma001*Gamma212*invPsi02 - Gamma011*Gamma211*invPsi11 - Gamma012*Gamma211*invPsi12 - 
-            Gamma011*Gamma212*invPsi12 - Gamma012*Gamma212*invPsi22 + g11*Phi101*Phi112 + g12*Phi112*Phi201 + g12*Phi101*Phi212 + 
-            g22*Phi201*Phi212 + g13*Phi112*Phi301 + g23*Phi212*Phi301 + g13*Phi101*Phi312 + g23*Phi201*Phi312 + g33*Phi301*Phi312 - 
-            Pi01*Pi12) + invPsi12*(-(Gamma002*Gamma201*invPsi00) - Gamma012*Gamma201*invPsi01 - Gamma002*Gamma211*invPsi01 - 
-            Gamma022*Gamma201*invPsi02 - Gamma002*Gamma212*invPsi02 - Gamma012*Gamma211*invPsi11 - Gamma022*Gamma211*invPsi12 - 
-            Gamma012*Gamma212*invPsi12 - Gamma022*Gamma212*invPsi22 + g11*Phi102*Phi112 + g12*Phi112*Phi202 + g12*Phi102*Phi212 + 
-            g22*Phi202*Phi212 + g13*Phi112*Phi302 + g23*Phi212*Phi302 + g13*Phi102*Phi312 + g23*Phi202*Phi312 + g33*Phi302*Phi312 - 
-            Pi02*Pi12) + invPsi13*(-(Gamma003*Gamma201*invPsi00) - Gamma013*Gamma201*invPsi01 - Gamma003*Gamma211*invPsi01 - 
-            Gamma023*Gamma201*invPsi02 - Gamma003*Gamma212*invPsi02 - Gamma013*Gamma211*invPsi11 - Gamma023*Gamma211*invPsi12 - 
-            Gamma013*Gamma212*invPsi12 - Gamma023*Gamma212*invPsi22 + g11*Phi103*Phi112 + g12*Phi112*Phi203 + g12*Phi103*Phi212 + 
-            g22*Phi203*Phi212 + g13*Phi112*Phi303 + g23*Phi212*Phi303 + g13*Phi103*Phi312 + g23*Phi203*Phi312 + g33*Phi303*Phi312 - 
-            Pi03*Pi12) + invPsi02*(-(Gamma000*Gamma202*invPsi00) - Gamma001*Gamma202*invPsi01 - Gamma000*Gamma212*invPsi01 - 
-            Gamma002*Gamma202*invPsi02 - Gamma000*Gamma222*invPsi02 - Gamma001*Gamma212*invPsi11 - Gamma002*Gamma212*invPsi12 - 
-            Gamma001*Gamma222*invPsi12 - Gamma002*Gamma222*invPsi22 + g11*Phi100*Phi122 + g12*Phi122*Phi200 + g12*Phi100*Phi222 + 
-            g22*Phi200*Phi222 + g13*Phi122*Phi300 + g23*Phi222*Phi300 + g13*Phi100*Phi322 + g23*Phi200*Phi322 + g33*Phi300*Phi322 - 
-            Pi00*Pi22) + invPsi12*(-(Gamma001*Gamma202*invPsi00) - Gamma011*Gamma202*invPsi01 - Gamma001*Gamma212*invPsi01 - 
-            Gamma012*Gamma202*invPsi02 - Gamma001*Gamma222*invPsi02 - Gamma011*Gamma212*invPsi11 - Gamma012*Gamma212*invPsi12 - 
-            Gamma011*Gamma222*invPsi12 - Gamma012*Gamma222*invPsi22 + g11*Phi101*Phi122 + g12*Phi122*Phi201 + g12*Phi101*Phi222 + 
-            g22*Phi201*Phi222 + g13*Phi122*Phi301 + g23*Phi222*Phi301 + g13*Phi101*Phi322 + g23*Phi201*Phi322 + g33*Phi301*Phi322 - 
-            Pi01*Pi22) + invPsi22*(-(Gamma002*Gamma202*invPsi00) - Gamma012*Gamma202*invPsi01 - Gamma002*Gamma212*invPsi01 - 
-            Gamma022*Gamma202*invPsi02 - Gamma002*Gamma222*invPsi02 - Gamma012*Gamma212*invPsi11 - Gamma022*Gamma212*invPsi12 - 
-            Gamma012*Gamma222*invPsi12 - Gamma022*Gamma222*invPsi22 + g11*Phi102*Phi122 + g12*Phi122*Phi202 + g12*Phi102*Phi222 + 
-            g22*Phi202*Phi222 + g13*Phi122*Phi302 + g23*Phi222*Phi302 + g13*Phi102*Phi322 + g23*Phi202*Phi322 + g33*Phi302*Phi322 - 
-            Pi02*Pi22) + invPsi23*(-(Gamma003*Gamma202*invPsi00) - Gamma013*Gamma202*invPsi01 - Gamma003*Gamma212*invPsi01 - 
-            Gamma023*Gamma202*invPsi02 - Gamma003*Gamma222*invPsi02 - Gamma013*Gamma212*invPsi11 - Gamma023*Gamma212*invPsi12 - 
-            Gamma013*Gamma222*invPsi12 - Gamma023*Gamma222*invPsi22 + g11*Phi103*Phi122 + g12*Phi122*Phi203 + g12*Phi103*Phi222 + 
-            g22*Phi203*Phi222 + g13*Phi122*Phi303 + g23*Phi222*Phi303 + g13*Phi103*Phi322 + g23*Phi203*Phi322 + g33*Phi303*Phi322 - 
-            Pi03*Pi22) + invPsi03*(-(Gamma000*Gamma203*invPsi00) - Gamma001*Gamma203*invPsi01 - Gamma000*Gamma213*invPsi01 - 
-            Gamma002*Gamma203*invPsi02 - Gamma000*Gamma223*invPsi02 - Gamma001*Gamma213*invPsi11 - Gamma002*Gamma213*invPsi12 - 
-            Gamma001*Gamma223*invPsi12 - Gamma002*Gamma223*invPsi22 + g11*Phi100*Phi123 + g12*Phi123*Phi200 + g12*Phi100*Phi223 + 
-            g22*Phi200*Phi223 + g13*Phi123*Phi300 + g23*Phi223*Phi300 + g13*Phi100*Phi323 + g23*Phi200*Phi323 + g33*Phi300*Phi323 - 
-            Pi00*Pi23) + invPsi13*(-(Gamma001*Gamma203*invPsi00) - Gamma011*Gamma203*invPsi01 - Gamma001*Gamma213*invPsi01 - 
-            Gamma012*Gamma203*invPsi02 - Gamma001*Gamma223*invPsi02 - Gamma011*Gamma213*invPsi11 - Gamma012*Gamma213*invPsi12 - 
-            Gamma011*Gamma223*invPsi12 - Gamma012*Gamma223*invPsi22 + g11*Phi101*Phi123 + g12*Phi123*Phi201 + g12*Phi101*Phi223 + 
-            g22*Phi201*Phi223 + g13*Phi123*Phi301 + g23*Phi223*Phi301 + g13*Phi101*Phi323 + g23*Phi201*Phi323 + g33*Phi301*Phi323 - 
-            Pi01*Pi23) + invPsi23*(-(Gamma002*Gamma203*invPsi00) - Gamma012*Gamma203*invPsi01 - Gamma002*Gamma213*invPsi01 - 
-            Gamma022*Gamma203*invPsi02 - Gamma002*Gamma223*invPsi02 - Gamma012*Gamma213*invPsi11 - Gamma022*Gamma213*invPsi12 - 
-            Gamma012*Gamma223*invPsi12 - Gamma022*Gamma223*invPsi22 + g11*Phi102*Phi123 + g12*Phi123*Phi202 + g12*Phi102*Phi223 + 
-            g22*Phi202*Phi223 + g13*Phi123*Phi302 + g23*Phi223*Phi302 + g13*Phi102*Phi323 + g23*Phi202*Phi323 + g33*Phi302*Phi323 - 
-            Pi02*Pi23) + invPsi33*(-(Gamma003*Gamma203*invPsi00) - Gamma013*Gamma203*invPsi01 - Gamma003*Gamma213*invPsi01 - 
-            Gamma023*Gamma203*invPsi02 - Gamma003*Gamma223*invPsi02 - Gamma013*Gamma213*invPsi11 - Gamma023*Gamma213*invPsi12 - 
-            Gamma013*Gamma223*invPsi12 - Gamma023*Gamma223*invPsi22 + g11*Phi103*Phi123 + g12*Phi123*Phi203 + g12*Phi103*Phi223 + 
-            g22*Phi203*Phi223 + g13*Phi123*Phi303 + g23*Phi223*Phi303 + g13*Phi103*Phi323 + g23*Phi203*Phi323 + g33*Phi303*Phi323 - 
-            Pi03*Pi23));
+        Gamma002*Gamma200*invPsi02 - Gamma000*Gamma202*invPsi02 - Gamma003*Gamma200*invPsi03 - Gamma000*Gamma203*invPsi03 - 
+        Gamma001*Gamma201*invPsi11 - Gamma002*Gamma201*invPsi12 - Gamma001*Gamma202*invPsi12 - Gamma003*Gamma201*invPsi13 - 
+        Gamma001*Gamma203*invPsi13 - Gamma002*Gamma202*invPsi22 - Gamma003*Gamma202*invPsi23 - Gamma002*Gamma203*invPsi23 - 
+        Gamma003*Gamma203*invPsi33 + g11*Phi100*Phi102 + g12*Phi102*Phi200 + g12*Phi100*Phi202 + g22*Phi200*Phi202 + 
+        g13*Phi102*Phi300 + g23*Phi202*Phi300 + g13*Phi100*Phi302 + g23*Phi200*Phi302 + g33*Phi300*Phi302 - Pi00*Pi02) + 
+     invPsi01*(-(Gamma001*Gamma200*invPsi00) - Gamma011*Gamma200*invPsi01 - Gamma001*Gamma201*invPsi01 - 
+        Gamma012*Gamma200*invPsi02 - Gamma001*Gamma202*invPsi02 - Gamma013*Gamma200*invPsi03 - Gamma001*Gamma203*invPsi03 - 
+        Gamma011*Gamma201*invPsi11 - Gamma012*Gamma201*invPsi12 - Gamma011*Gamma202*invPsi12 - Gamma013*Gamma201*invPsi13 - 
+        Gamma011*Gamma203*invPsi13 - Gamma012*Gamma202*invPsi22 - Gamma013*Gamma202*invPsi23 - Gamma012*Gamma203*invPsi23 - 
+        Gamma013*Gamma203*invPsi33 + g11*Phi101*Phi102 + g12*Phi102*Phi201 + g12*Phi101*Phi202 + g22*Phi201*Phi202 + 
+        g13*Phi102*Phi301 + g23*Phi202*Phi301 + g13*Phi101*Phi302 + g23*Phi201*Phi302 + g33*Phi301*Phi302 - Pi01*Pi02) + 
+     invPsi02*(-(Gamma002*Gamma200*invPsi00) - Gamma012*Gamma200*invPsi01 - Gamma002*Gamma201*invPsi01 - 
+        Gamma022*Gamma200*invPsi02 - Gamma002*Gamma202*invPsi02 - Gamma023*Gamma200*invPsi03 - Gamma002*Gamma203*invPsi03 - 
+        Gamma012*Gamma201*invPsi11 - Gamma022*Gamma201*invPsi12 - Gamma012*Gamma202*invPsi12 - Gamma023*Gamma201*invPsi13 - 
+        Gamma012*Gamma203*invPsi13 - Gamma022*Gamma202*invPsi22 - Gamma023*Gamma202*invPsi23 - Gamma022*Gamma203*invPsi23 - 
+        Gamma023*Gamma203*invPsi33 + g11*Power(Phi102,2) + 2*g12*Phi102*Phi202 + g22*Power(Phi202,2) + 2*g13*Phi102*Phi302 + 
+        2*g23*Phi202*Phi302 + g33*Power(Phi302,2) - Power(Pi02,2)) + 
+     invPsi03*(-(Gamma003*Gamma200*invPsi00) - Gamma013*Gamma200*invPsi01 - Gamma003*Gamma201*invPsi01 - 
+        Gamma023*Gamma200*invPsi02 - Gamma003*Gamma202*invPsi02 - Gamma033*Gamma200*invPsi03 - Gamma003*Gamma203*invPsi03 - 
+        Gamma013*Gamma201*invPsi11 - Gamma023*Gamma201*invPsi12 - Gamma013*Gamma202*invPsi12 - Gamma033*Gamma201*invPsi13 - 
+        Gamma013*Gamma203*invPsi13 - Gamma023*Gamma202*invPsi22 - Gamma033*Gamma202*invPsi23 - Gamma023*Gamma203*invPsi23 - 
+        Gamma033*Gamma203*invPsi33 + g11*Phi102*Phi103 + g12*Phi103*Phi202 + g12*Phi102*Phi203 + g22*Phi202*Phi203 + 
+        g13*Phi103*Phi302 + g23*Phi203*Phi302 + g13*Phi102*Phi303 + g23*Phi202*Phi303 + g33*Phi302*Phi303 - Pi02*Pi03) + 
+     invPsi01*(-(Gamma000*Gamma201*invPsi00) - Gamma001*Gamma201*invPsi01 - Gamma000*Gamma211*invPsi01 - 
+        Gamma002*Gamma201*invPsi02 - Gamma000*Gamma212*invPsi02 - Gamma003*Gamma201*invPsi03 - Gamma000*Gamma213*invPsi03 - 
+        Gamma001*Gamma211*invPsi11 - Gamma002*Gamma211*invPsi12 - Gamma001*Gamma212*invPsi12 - Gamma003*Gamma211*invPsi13 - 
+        Gamma001*Gamma213*invPsi13 - Gamma002*Gamma212*invPsi22 - Gamma003*Gamma212*invPsi23 - Gamma002*Gamma213*invPsi23 - 
+        Gamma003*Gamma213*invPsi33 + g11*Phi100*Phi112 + g12*Phi112*Phi200 + g12*Phi100*Phi212 + g22*Phi200*Phi212 + 
+        g13*Phi112*Phi300 + g23*Phi212*Phi300 + g13*Phi100*Phi312 + g23*Phi200*Phi312 + g33*Phi300*Phi312 - Pi00*Pi12) + 
+     invPsi11*(-(Gamma001*Gamma201*invPsi00) - Gamma011*Gamma201*invPsi01 - Gamma001*Gamma211*invPsi01 - 
+        Gamma012*Gamma201*invPsi02 - Gamma001*Gamma212*invPsi02 - Gamma013*Gamma201*invPsi03 - Gamma001*Gamma213*invPsi03 - 
+        Gamma011*Gamma211*invPsi11 - Gamma012*Gamma211*invPsi12 - Gamma011*Gamma212*invPsi12 - Gamma013*Gamma211*invPsi13 - 
+        Gamma011*Gamma213*invPsi13 - Gamma012*Gamma212*invPsi22 - Gamma013*Gamma212*invPsi23 - Gamma012*Gamma213*invPsi23 - 
+        Gamma013*Gamma213*invPsi33 + g11*Phi101*Phi112 + g12*Phi112*Phi201 + g12*Phi101*Phi212 + g22*Phi201*Phi212 + 
+        g13*Phi112*Phi301 + g23*Phi212*Phi301 + g13*Phi101*Phi312 + g23*Phi201*Phi312 + g33*Phi301*Phi312 - Pi01*Pi12) + 
+     invPsi12*(-(Gamma002*Gamma201*invPsi00) - Gamma012*Gamma201*invPsi01 - Gamma002*Gamma211*invPsi01 - 
+        Gamma022*Gamma201*invPsi02 - Gamma002*Gamma212*invPsi02 - Gamma023*Gamma201*invPsi03 - Gamma002*Gamma213*invPsi03 - 
+        Gamma012*Gamma211*invPsi11 - Gamma022*Gamma211*invPsi12 - Gamma012*Gamma212*invPsi12 - Gamma023*Gamma211*invPsi13 - 
+        Gamma012*Gamma213*invPsi13 - Gamma022*Gamma212*invPsi22 - Gamma023*Gamma212*invPsi23 - Gamma022*Gamma213*invPsi23 - 
+        Gamma023*Gamma213*invPsi33 + g11*Phi102*Phi112 + g12*Phi112*Phi202 + g12*Phi102*Phi212 + g22*Phi202*Phi212 + 
+        g13*Phi112*Phi302 + g23*Phi212*Phi302 + g13*Phi102*Phi312 + g23*Phi202*Phi312 + g33*Phi302*Phi312 - Pi02*Pi12) + 
+     invPsi13*(-(Gamma003*Gamma201*invPsi00) - Gamma013*Gamma201*invPsi01 - Gamma003*Gamma211*invPsi01 - 
+        Gamma023*Gamma201*invPsi02 - Gamma003*Gamma212*invPsi02 - Gamma033*Gamma201*invPsi03 - Gamma003*Gamma213*invPsi03 - 
+        Gamma013*Gamma211*invPsi11 - Gamma023*Gamma211*invPsi12 - Gamma013*Gamma212*invPsi12 - Gamma033*Gamma211*invPsi13 - 
+        Gamma013*Gamma213*invPsi13 - Gamma023*Gamma212*invPsi22 - Gamma033*Gamma212*invPsi23 - Gamma023*Gamma213*invPsi23 - 
+        Gamma033*Gamma213*invPsi33 + g11*Phi103*Phi112 + g12*Phi112*Phi203 + g12*Phi103*Phi212 + g22*Phi203*Phi212 + 
+        g13*Phi112*Phi303 + g23*Phi212*Phi303 + g13*Phi103*Phi312 + g23*Phi203*Phi312 + g33*Phi303*Phi312 - Pi03*Pi12) + 
+     invPsi02*(-(Gamma000*Gamma202*invPsi00) - Gamma001*Gamma202*invPsi01 - Gamma000*Gamma212*invPsi01 - 
+        Gamma002*Gamma202*invPsi02 - Gamma000*Gamma222*invPsi02 - Gamma003*Gamma202*invPsi03 - Gamma000*Gamma223*invPsi03 - 
+        Gamma001*Gamma212*invPsi11 - Gamma002*Gamma212*invPsi12 - Gamma001*Gamma222*invPsi12 - Gamma003*Gamma212*invPsi13 - 
+        Gamma001*Gamma223*invPsi13 - Gamma002*Gamma222*invPsi22 - Gamma003*Gamma222*invPsi23 - Gamma002*Gamma223*invPsi23 - 
+        Gamma003*Gamma223*invPsi33 + g11*Phi100*Phi122 + g12*Phi122*Phi200 + g12*Phi100*Phi222 + g22*Phi200*Phi222 + 
+        g13*Phi122*Phi300 + g23*Phi222*Phi300 + g13*Phi100*Phi322 + g23*Phi200*Phi322 + g33*Phi300*Phi322 - Pi00*Pi22) + 
+     invPsi12*(-(Gamma001*Gamma202*invPsi00) - Gamma011*Gamma202*invPsi01 - Gamma001*Gamma212*invPsi01 - 
+        Gamma012*Gamma202*invPsi02 - Gamma001*Gamma222*invPsi02 - Gamma013*Gamma202*invPsi03 - Gamma001*Gamma223*invPsi03 - 
+        Gamma011*Gamma212*invPsi11 - Gamma012*Gamma212*invPsi12 - Gamma011*Gamma222*invPsi12 - Gamma013*Gamma212*invPsi13 - 
+        Gamma011*Gamma223*invPsi13 - Gamma012*Gamma222*invPsi22 - Gamma013*Gamma222*invPsi23 - Gamma012*Gamma223*invPsi23 - 
+        Gamma013*Gamma223*invPsi33 + g11*Phi101*Phi122 + g12*Phi122*Phi201 + g12*Phi101*Phi222 + g22*Phi201*Phi222 + 
+        g13*Phi122*Phi301 + g23*Phi222*Phi301 + g13*Phi101*Phi322 + g23*Phi201*Phi322 + g33*Phi301*Phi322 - Pi01*Pi22) + 
+     invPsi22*(-(Gamma002*Gamma202*invPsi00) - Gamma012*Gamma202*invPsi01 - Gamma002*Gamma212*invPsi01 - 
+        Gamma022*Gamma202*invPsi02 - Gamma002*Gamma222*invPsi02 - Gamma023*Gamma202*invPsi03 - Gamma002*Gamma223*invPsi03 - 
+        Gamma012*Gamma212*invPsi11 - Gamma022*Gamma212*invPsi12 - Gamma012*Gamma222*invPsi12 - Gamma023*Gamma212*invPsi13 - 
+        Gamma012*Gamma223*invPsi13 - Gamma022*Gamma222*invPsi22 - Gamma023*Gamma222*invPsi23 - Gamma022*Gamma223*invPsi23 - 
+        Gamma023*Gamma223*invPsi33 + g11*Phi102*Phi122 + g12*Phi122*Phi202 + g12*Phi102*Phi222 + g22*Phi202*Phi222 + 
+        g13*Phi122*Phi302 + g23*Phi222*Phi302 + g13*Phi102*Phi322 + g23*Phi202*Phi322 + g33*Phi302*Phi322 - Pi02*Pi22) + 
+     invPsi23*(-(Gamma003*Gamma202*invPsi00) - Gamma013*Gamma202*invPsi01 - Gamma003*Gamma212*invPsi01 - 
+        Gamma023*Gamma202*invPsi02 - Gamma003*Gamma222*invPsi02 - Gamma033*Gamma202*invPsi03 - Gamma003*Gamma223*invPsi03 - 
+        Gamma013*Gamma212*invPsi11 - Gamma023*Gamma212*invPsi12 - Gamma013*Gamma222*invPsi12 - Gamma033*Gamma212*invPsi13 - 
+        Gamma013*Gamma223*invPsi13 - Gamma023*Gamma222*invPsi22 - Gamma033*Gamma222*invPsi23 - Gamma023*Gamma223*invPsi23 - 
+        Gamma033*Gamma223*invPsi33 + g11*Phi103*Phi122 + g12*Phi122*Phi203 + g12*Phi103*Phi222 + g22*Phi203*Phi222 + 
+        g13*Phi122*Phi303 + g23*Phi222*Phi303 + g13*Phi103*Phi322 + g23*Phi203*Phi322 + g33*Phi303*Phi322 - Pi03*Pi22) + 
+     invPsi03*(-(Gamma000*Gamma203*invPsi00) - Gamma001*Gamma203*invPsi01 - Gamma000*Gamma213*invPsi01 - 
+        Gamma002*Gamma203*invPsi02 - Gamma000*Gamma223*invPsi02 - Gamma003*Gamma203*invPsi03 - Gamma000*Gamma233*invPsi03 - 
+        Gamma001*Gamma213*invPsi11 - Gamma002*Gamma213*invPsi12 - Gamma001*Gamma223*invPsi12 - Gamma003*Gamma213*invPsi13 - 
+        Gamma001*Gamma233*invPsi13 - Gamma002*Gamma223*invPsi22 - Gamma003*Gamma223*invPsi23 - Gamma002*Gamma233*invPsi23 - 
+        Gamma003*Gamma233*invPsi33 + g11*Phi100*Phi123 + g12*Phi123*Phi200 + g12*Phi100*Phi223 + g22*Phi200*Phi223 + 
+        g13*Phi123*Phi300 + g23*Phi223*Phi300 + g13*Phi100*Phi323 + g23*Phi200*Phi323 + g33*Phi300*Phi323 - Pi00*Pi23) + 
+     invPsi13*(-(Gamma001*Gamma203*invPsi00) - Gamma011*Gamma203*invPsi01 - Gamma001*Gamma213*invPsi01 - 
+        Gamma012*Gamma203*invPsi02 - Gamma001*Gamma223*invPsi02 - Gamma013*Gamma203*invPsi03 - Gamma001*Gamma233*invPsi03 - 
+        Gamma011*Gamma213*invPsi11 - Gamma012*Gamma213*invPsi12 - Gamma011*Gamma223*invPsi12 - Gamma013*Gamma213*invPsi13 - 
+        Gamma011*Gamma233*invPsi13 - Gamma012*Gamma223*invPsi22 - Gamma013*Gamma223*invPsi23 - Gamma012*Gamma233*invPsi23 - 
+        Gamma013*Gamma233*invPsi33 + g11*Phi101*Phi123 + g12*Phi123*Phi201 + g12*Phi101*Phi223 + g22*Phi201*Phi223 + 
+        g13*Phi123*Phi301 + g23*Phi223*Phi301 + g13*Phi101*Phi323 + g23*Phi201*Phi323 + g33*Phi301*Phi323 - Pi01*Pi23) + 
+     invPsi23*(-(Gamma002*Gamma203*invPsi00) - Gamma012*Gamma203*invPsi01 - Gamma002*Gamma213*invPsi01 - 
+        Gamma022*Gamma203*invPsi02 - Gamma002*Gamma223*invPsi02 - Gamma023*Gamma203*invPsi03 - Gamma002*Gamma233*invPsi03 - 
+        Gamma012*Gamma213*invPsi11 - Gamma022*Gamma213*invPsi12 - Gamma012*Gamma223*invPsi12 - Gamma023*Gamma213*invPsi13 - 
+        Gamma012*Gamma233*invPsi13 - Gamma022*Gamma223*invPsi22 - Gamma023*Gamma223*invPsi23 - Gamma022*Gamma233*invPsi23 - 
+        Gamma023*Gamma233*invPsi33 + g11*Phi102*Phi123 + g12*Phi123*Phi202 + g12*Phi102*Phi223 + g22*Phi202*Phi223 + 
+        g13*Phi123*Phi302 + g23*Phi223*Phi302 + g13*Phi102*Phi323 + g23*Phi202*Phi323 + g33*Phi302*Phi323 - Pi02*Pi23) + 
+     invPsi33*(-(Gamma003*Gamma203*invPsi00) - Gamma013*Gamma203*invPsi01 - Gamma003*Gamma213*invPsi01 - 
+        Gamma023*Gamma203*invPsi02 - Gamma003*Gamma223*invPsi02 - Gamma033*Gamma203*invPsi03 - Gamma003*Gamma233*invPsi03 - 
+        Gamma013*Gamma213*invPsi11 - Gamma023*Gamma213*invPsi12 - Gamma013*Gamma223*invPsi12 - Gamma033*Gamma213*invPsi13 - 
+        Gamma013*Gamma233*invPsi13 - Gamma023*Gamma223*invPsi22 - Gamma033*Gamma223*invPsi23 - Gamma023*Gamma233*invPsi23 - 
+        Gamma033*Gamma233*invPsi33 + g11*Phi103*Phi123 + g12*Phi123*Phi203 + g12*Phi103*Phi223 + g22*Phi203*Phi223 + 
+        g13*Phi123*Phi303 + g23*Phi223*Phi303 + g13*Phi103*Phi323 + g23*Phi203*Phi323 + g33*Phi303*Phi323 - Pi03*Pi23));
     
     t1srcPi03 = 2*N*(invPsi00*(-(Gamma000*Gamma300*invPsi00) - Gamma001*Gamma300*invPsi01 - Gamma000*Gamma301*invPsi01 - 
-            Gamma002*Gamma300*invPsi02 - Gamma000*Gamma302*invPsi02 - Gamma001*Gamma301*invPsi11 - Gamma002*Gamma301*invPsi12 - 
-            Gamma001*Gamma302*invPsi12 - Gamma002*Gamma302*invPsi22 + g11*Phi100*Phi103 + g12*Phi103*Phi200 + g12*Phi100*Phi203 + 
-            g22*Phi200*Phi203 + g13*Phi103*Phi300 + g23*Phi203*Phi300 + g13*Phi100*Phi303 + g23*Phi200*Phi303 + g33*Phi300*Phi303 - 
-            Pi00*Pi03) + invPsi01*(-(Gamma001*Gamma300*invPsi00) - Gamma011*Gamma300*invPsi01 - Gamma001*Gamma301*invPsi01 - 
-            Gamma012*Gamma300*invPsi02 - Gamma001*Gamma302*invPsi02 - Gamma011*Gamma301*invPsi11 - Gamma012*Gamma301*invPsi12 - 
-            Gamma011*Gamma302*invPsi12 - Gamma012*Gamma302*invPsi22 + g11*Phi101*Phi103 + g12*Phi103*Phi201 + g12*Phi101*Phi203 + 
-            g22*Phi201*Phi203 + g13*Phi103*Phi301 + g23*Phi203*Phi301 + g13*Phi101*Phi303 + g23*Phi201*Phi303 + g33*Phi301*Phi303 - 
-            Pi01*Pi03) + invPsi02*(-(Gamma002*Gamma300*invPsi00) - Gamma012*Gamma300*invPsi01 - Gamma002*Gamma301*invPsi01 - 
-            Gamma022*Gamma300*invPsi02 - Gamma002*Gamma302*invPsi02 - Gamma012*Gamma301*invPsi11 - Gamma022*Gamma301*invPsi12 - 
-            Gamma012*Gamma302*invPsi12 - Gamma022*Gamma302*invPsi22 + g11*Phi102*Phi103 + g12*Phi103*Phi202 + g12*Phi102*Phi203 + 
-            g22*Phi202*Phi203 + g13*Phi103*Phi302 + g23*Phi203*Phi302 + g13*Phi102*Phi303 + g23*Phi202*Phi303 + g33*Phi302*Phi303 - 
-            Pi02*Pi03) + invPsi03*(-(Gamma003*Gamma300*invPsi00) - Gamma013*Gamma300*invPsi01 - Gamma003*Gamma301*invPsi01 - 
-            Gamma023*Gamma300*invPsi02 - Gamma003*Gamma302*invPsi02 - Gamma013*Gamma301*invPsi11 - Gamma023*Gamma301*invPsi12 - 
-            Gamma013*Gamma302*invPsi12 - Gamma023*Gamma302*invPsi22 + g11*Power(Phi103,2) + 2*g12*Phi103*Phi203 + 
-            g22*Power(Phi203,2) + 2*g13*Phi103*Phi303 + 2*g23*Phi203*Phi303 + g33*Power(Phi303,2) - Power(Pi03,2)) + 
-         invPsi01*(-(Gamma000*Gamma301*invPsi00) - Gamma001*Gamma301*invPsi01 - Gamma000*Gamma311*invPsi01 - 
-            Gamma002*Gamma301*invPsi02 - Gamma000*Gamma312*invPsi02 - Gamma001*Gamma311*invPsi11 - Gamma002*Gamma311*invPsi12 - 
-            Gamma001*Gamma312*invPsi12 - Gamma002*Gamma312*invPsi22 + g11*Phi100*Phi113 + g12*Phi113*Phi200 + g12*Phi100*Phi213 + 
-            g22*Phi200*Phi213 + g13*Phi113*Phi300 + g23*Phi213*Phi300 + g13*Phi100*Phi313 + g23*Phi200*Phi313 + g33*Phi300*Phi313 - 
-            Pi00*Pi13) + invPsi11*(-(Gamma001*Gamma301*invPsi00) - Gamma011*Gamma301*invPsi01 - Gamma001*Gamma311*invPsi01 - 
-            Gamma012*Gamma301*invPsi02 - Gamma001*Gamma312*invPsi02 - Gamma011*Gamma311*invPsi11 - Gamma012*Gamma311*invPsi12 - 
-            Gamma011*Gamma312*invPsi12 - Gamma012*Gamma312*invPsi22 + g11*Phi101*Phi113 + g12*Phi113*Phi201 + g12*Phi101*Phi213 + 
-            g22*Phi201*Phi213 + g13*Phi113*Phi301 + g23*Phi213*Phi301 + g13*Phi101*Phi313 + g23*Phi201*Phi313 + g33*Phi301*Phi313 - 
-            Pi01*Pi13) + invPsi12*(-(Gamma002*Gamma301*invPsi00) - Gamma012*Gamma301*invPsi01 - Gamma002*Gamma311*invPsi01 - 
-            Gamma022*Gamma301*invPsi02 - Gamma002*Gamma312*invPsi02 - Gamma012*Gamma311*invPsi11 - Gamma022*Gamma311*invPsi12 - 
-            Gamma012*Gamma312*invPsi12 - Gamma022*Gamma312*invPsi22 + g11*Phi102*Phi113 + g12*Phi113*Phi202 + g12*Phi102*Phi213 + 
-            g22*Phi202*Phi213 + g13*Phi113*Phi302 + g23*Phi213*Phi302 + g13*Phi102*Phi313 + g23*Phi202*Phi313 + g33*Phi302*Phi313 - 
-            Pi02*Pi13) + invPsi13*(-(Gamma003*Gamma301*invPsi00) - Gamma013*Gamma301*invPsi01 - Gamma003*Gamma311*invPsi01 - 
-            Gamma023*Gamma301*invPsi02 - Gamma003*Gamma312*invPsi02 - Gamma013*Gamma311*invPsi11 - Gamma023*Gamma311*invPsi12 - 
-            Gamma013*Gamma312*invPsi12 - Gamma023*Gamma312*invPsi22 + g11*Phi103*Phi113 + g12*Phi113*Phi203 + g12*Phi103*Phi213 + 
-            g22*Phi203*Phi213 + g13*Phi113*Phi303 + g23*Phi213*Phi303 + g13*Phi103*Phi313 + g23*Phi203*Phi313 + g33*Phi303*Phi313 - 
-            Pi03*Pi13) + invPsi02*(-(Gamma000*Gamma302*invPsi00) - Gamma001*Gamma302*invPsi01 - Gamma000*Gamma312*invPsi01 - 
-            Gamma002*Gamma302*invPsi02 - Gamma000*Gamma322*invPsi02 - Gamma001*Gamma312*invPsi11 - Gamma002*Gamma312*invPsi12 - 
-            Gamma001*Gamma322*invPsi12 - Gamma002*Gamma322*invPsi22 + g11*Phi100*Phi123 + g12*Phi123*Phi200 + g12*Phi100*Phi223 + 
-            g22*Phi200*Phi223 + g13*Phi123*Phi300 + g23*Phi223*Phi300 + g13*Phi100*Phi323 + g23*Phi200*Phi323 + g33*Phi300*Phi323 - 
-            Pi00*Pi23) + invPsi12*(-(Gamma001*Gamma302*invPsi00) - Gamma011*Gamma302*invPsi01 - Gamma001*Gamma312*invPsi01 - 
-            Gamma012*Gamma302*invPsi02 - Gamma001*Gamma322*invPsi02 - Gamma011*Gamma312*invPsi11 - Gamma012*Gamma312*invPsi12 - 
-            Gamma011*Gamma322*invPsi12 - Gamma012*Gamma322*invPsi22 + g11*Phi101*Phi123 + g12*Phi123*Phi201 + g12*Phi101*Phi223 + 
-            g22*Phi201*Phi223 + g13*Phi123*Phi301 + g23*Phi223*Phi301 + g13*Phi101*Phi323 + g23*Phi201*Phi323 + g33*Phi301*Phi323 - 
-            Pi01*Pi23) + invPsi22*(-(Gamma002*Gamma302*invPsi00) - Gamma012*Gamma302*invPsi01 - Gamma002*Gamma312*invPsi01 - 
-            Gamma022*Gamma302*invPsi02 - Gamma002*Gamma322*invPsi02 - Gamma012*Gamma312*invPsi11 - Gamma022*Gamma312*invPsi12 - 
-            Gamma012*Gamma322*invPsi12 - Gamma022*Gamma322*invPsi22 + g11*Phi102*Phi123 + g12*Phi123*Phi202 + g12*Phi102*Phi223 + 
-            g22*Phi202*Phi223 + g13*Phi123*Phi302 + g23*Phi223*Phi302 + g13*Phi102*Phi323 + g23*Phi202*Phi323 + g33*Phi302*Phi323 - 
-            Pi02*Pi23) + invPsi23*(-(Gamma003*Gamma302*invPsi00) - Gamma013*Gamma302*invPsi01 - Gamma003*Gamma312*invPsi01 - 
-            Gamma023*Gamma302*invPsi02 - Gamma003*Gamma322*invPsi02 - Gamma013*Gamma312*invPsi11 - Gamma023*Gamma312*invPsi12 - 
-            Gamma013*Gamma322*invPsi12 - Gamma023*Gamma322*invPsi22 + g11*Phi103*Phi123 + g12*Phi123*Phi203 + g12*Phi103*Phi223 + 
-            g22*Phi203*Phi223 + g13*Phi123*Phi303 + g23*Phi223*Phi303 + g13*Phi103*Phi323 + g23*Phi203*Phi323 + g33*Phi303*Phi323 - 
-            Pi03*Pi23) + invPsi03*(-(Gamma000*Gamma303*invPsi00) - Gamma001*Gamma303*invPsi01 - Gamma000*Gamma313*invPsi01 - 
-            Gamma002*Gamma303*invPsi02 - Gamma000*Gamma323*invPsi02 - Gamma001*Gamma313*invPsi11 - Gamma002*Gamma313*invPsi12 - 
-            Gamma001*Gamma323*invPsi12 - Gamma002*Gamma323*invPsi22 + g11*Phi100*Phi133 + g12*Phi133*Phi200 + g12*Phi100*Phi233 + 
-            g22*Phi200*Phi233 + g13*Phi133*Phi300 + g23*Phi233*Phi300 + g13*Phi100*Phi333 + g23*Phi200*Phi333 + g33*Phi300*Phi333 - 
-            Pi00*Pi33) + invPsi13*(-(Gamma001*Gamma303*invPsi00) - Gamma011*Gamma303*invPsi01 - Gamma001*Gamma313*invPsi01 - 
-            Gamma012*Gamma303*invPsi02 - Gamma001*Gamma323*invPsi02 - Gamma011*Gamma313*invPsi11 - Gamma012*Gamma313*invPsi12 - 
-            Gamma011*Gamma323*invPsi12 - Gamma012*Gamma323*invPsi22 + g11*Phi101*Phi133 + g12*Phi133*Phi201 + g12*Phi101*Phi233 + 
-            g22*Phi201*Phi233 + g13*Phi133*Phi301 + g23*Phi233*Phi301 + g13*Phi101*Phi333 + g23*Phi201*Phi333 + g33*Phi301*Phi333 - 
-            Pi01*Pi33) + invPsi23*(-(Gamma002*Gamma303*invPsi00) - Gamma012*Gamma303*invPsi01 - Gamma002*Gamma313*invPsi01 - 
-            Gamma022*Gamma303*invPsi02 - Gamma002*Gamma323*invPsi02 - Gamma012*Gamma313*invPsi11 - Gamma022*Gamma313*invPsi12 - 
-            Gamma012*Gamma323*invPsi12 - Gamma022*Gamma323*invPsi22 + g11*Phi102*Phi133 + g12*Phi133*Phi202 + g12*Phi102*Phi233 + 
-            g22*Phi202*Phi233 + g13*Phi133*Phi302 + g23*Phi233*Phi302 + g13*Phi102*Phi333 + g23*Phi202*Phi333 + g33*Phi302*Phi333 - 
-            Pi02*Pi33) + invPsi33*(-(Gamma003*Gamma303*invPsi00) - Gamma013*Gamma303*invPsi01 - Gamma003*Gamma313*invPsi01 - 
-            Gamma023*Gamma303*invPsi02 - Gamma003*Gamma323*invPsi02 - Gamma013*Gamma313*invPsi11 - Gamma023*Gamma313*invPsi12 - 
-            Gamma013*Gamma323*invPsi12 - Gamma023*Gamma323*invPsi22 + g11*Phi103*Phi133 + g12*Phi133*Phi203 + g12*Phi103*Phi233 + 
-            g22*Phi203*Phi233 + g13*Phi133*Phi303 + g23*Phi233*Phi303 + g13*Phi103*Phi333 + g23*Phi203*Phi333 + g33*Phi303*Phi333 - 
-            Pi03*Pi33));
+        Gamma002*Gamma300*invPsi02 - Gamma000*Gamma302*invPsi02 - Gamma003*Gamma300*invPsi03 - Gamma000*Gamma303*invPsi03 - 
+        Gamma001*Gamma301*invPsi11 - Gamma002*Gamma301*invPsi12 - Gamma001*Gamma302*invPsi12 - Gamma003*Gamma301*invPsi13 - 
+        Gamma001*Gamma303*invPsi13 - Gamma002*Gamma302*invPsi22 - Gamma003*Gamma302*invPsi23 - Gamma002*Gamma303*invPsi23 - 
+        Gamma003*Gamma303*invPsi33 + g11*Phi100*Phi103 + g12*Phi103*Phi200 + g12*Phi100*Phi203 + g22*Phi200*Phi203 + 
+        g13*Phi103*Phi300 + g23*Phi203*Phi300 + g13*Phi100*Phi303 + g23*Phi200*Phi303 + g33*Phi300*Phi303 - Pi00*Pi03) + 
+     invPsi01*(-(Gamma001*Gamma300*invPsi00) - Gamma011*Gamma300*invPsi01 - Gamma001*Gamma301*invPsi01 - 
+        Gamma012*Gamma300*invPsi02 - Gamma001*Gamma302*invPsi02 - Gamma013*Gamma300*invPsi03 - Gamma001*Gamma303*invPsi03 - 
+        Gamma011*Gamma301*invPsi11 - Gamma012*Gamma301*invPsi12 - Gamma011*Gamma302*invPsi12 - Gamma013*Gamma301*invPsi13 - 
+        Gamma011*Gamma303*invPsi13 - Gamma012*Gamma302*invPsi22 - Gamma013*Gamma302*invPsi23 - Gamma012*Gamma303*invPsi23 - 
+        Gamma013*Gamma303*invPsi33 + g11*Phi101*Phi103 + g12*Phi103*Phi201 + g12*Phi101*Phi203 + g22*Phi201*Phi203 + 
+        g13*Phi103*Phi301 + g23*Phi203*Phi301 + g13*Phi101*Phi303 + g23*Phi201*Phi303 + g33*Phi301*Phi303 - Pi01*Pi03) + 
+     invPsi02*(-(Gamma002*Gamma300*invPsi00) - Gamma012*Gamma300*invPsi01 - Gamma002*Gamma301*invPsi01 - 
+        Gamma022*Gamma300*invPsi02 - Gamma002*Gamma302*invPsi02 - Gamma023*Gamma300*invPsi03 - Gamma002*Gamma303*invPsi03 - 
+        Gamma012*Gamma301*invPsi11 - Gamma022*Gamma301*invPsi12 - Gamma012*Gamma302*invPsi12 - Gamma023*Gamma301*invPsi13 - 
+        Gamma012*Gamma303*invPsi13 - Gamma022*Gamma302*invPsi22 - Gamma023*Gamma302*invPsi23 - Gamma022*Gamma303*invPsi23 - 
+        Gamma023*Gamma303*invPsi33 + g11*Phi102*Phi103 + g12*Phi103*Phi202 + g12*Phi102*Phi203 + g22*Phi202*Phi203 + 
+        g13*Phi103*Phi302 + g23*Phi203*Phi302 + g13*Phi102*Phi303 + g23*Phi202*Phi303 + g33*Phi302*Phi303 - Pi02*Pi03) + 
+     invPsi03*(-(Gamma003*Gamma300*invPsi00) - Gamma013*Gamma300*invPsi01 - Gamma003*Gamma301*invPsi01 - 
+        Gamma023*Gamma300*invPsi02 - Gamma003*Gamma302*invPsi02 - Gamma033*Gamma300*invPsi03 - Gamma003*Gamma303*invPsi03 - 
+        Gamma013*Gamma301*invPsi11 - Gamma023*Gamma301*invPsi12 - Gamma013*Gamma302*invPsi12 - Gamma033*Gamma301*invPsi13 - 
+        Gamma013*Gamma303*invPsi13 - Gamma023*Gamma302*invPsi22 - Gamma033*Gamma302*invPsi23 - Gamma023*Gamma303*invPsi23 - 
+        Gamma033*Gamma303*invPsi33 + g11*Power(Phi103,2) + 2*g12*Phi103*Phi203 + g22*Power(Phi203,2) + 2*g13*Phi103*Phi303 + 
+        2*g23*Phi203*Phi303 + g33*Power(Phi303,2) - Power(Pi03,2)) + 
+     invPsi01*(-(Gamma000*Gamma301*invPsi00) - Gamma001*Gamma301*invPsi01 - Gamma000*Gamma311*invPsi01 - 
+        Gamma002*Gamma301*invPsi02 - Gamma000*Gamma312*invPsi02 - Gamma003*Gamma301*invPsi03 - Gamma000*Gamma313*invPsi03 - 
+        Gamma001*Gamma311*invPsi11 - Gamma002*Gamma311*invPsi12 - Gamma001*Gamma312*invPsi12 - Gamma003*Gamma311*invPsi13 - 
+        Gamma001*Gamma313*invPsi13 - Gamma002*Gamma312*invPsi22 - Gamma003*Gamma312*invPsi23 - Gamma002*Gamma313*invPsi23 - 
+        Gamma003*Gamma313*invPsi33 + g11*Phi100*Phi113 + g12*Phi113*Phi200 + g12*Phi100*Phi213 + g22*Phi200*Phi213 + 
+        g13*Phi113*Phi300 + g23*Phi213*Phi300 + g13*Phi100*Phi313 + g23*Phi200*Phi313 + g33*Phi300*Phi313 - Pi00*Pi13) + 
+     invPsi11*(-(Gamma001*Gamma301*invPsi00) - Gamma011*Gamma301*invPsi01 - Gamma001*Gamma311*invPsi01 - 
+        Gamma012*Gamma301*invPsi02 - Gamma001*Gamma312*invPsi02 - Gamma013*Gamma301*invPsi03 - Gamma001*Gamma313*invPsi03 - 
+        Gamma011*Gamma311*invPsi11 - Gamma012*Gamma311*invPsi12 - Gamma011*Gamma312*invPsi12 - Gamma013*Gamma311*invPsi13 - 
+        Gamma011*Gamma313*invPsi13 - Gamma012*Gamma312*invPsi22 - Gamma013*Gamma312*invPsi23 - Gamma012*Gamma313*invPsi23 - 
+        Gamma013*Gamma313*invPsi33 + g11*Phi101*Phi113 + g12*Phi113*Phi201 + g12*Phi101*Phi213 + g22*Phi201*Phi213 + 
+        g13*Phi113*Phi301 + g23*Phi213*Phi301 + g13*Phi101*Phi313 + g23*Phi201*Phi313 + g33*Phi301*Phi313 - Pi01*Pi13) + 
+     invPsi12*(-(Gamma002*Gamma301*invPsi00) - Gamma012*Gamma301*invPsi01 - Gamma002*Gamma311*invPsi01 - 
+        Gamma022*Gamma301*invPsi02 - Gamma002*Gamma312*invPsi02 - Gamma023*Gamma301*invPsi03 - Gamma002*Gamma313*invPsi03 - 
+        Gamma012*Gamma311*invPsi11 - Gamma022*Gamma311*invPsi12 - Gamma012*Gamma312*invPsi12 - Gamma023*Gamma311*invPsi13 - 
+        Gamma012*Gamma313*invPsi13 - Gamma022*Gamma312*invPsi22 - Gamma023*Gamma312*invPsi23 - Gamma022*Gamma313*invPsi23 - 
+        Gamma023*Gamma313*invPsi33 + g11*Phi102*Phi113 + g12*Phi113*Phi202 + g12*Phi102*Phi213 + g22*Phi202*Phi213 + 
+        g13*Phi113*Phi302 + g23*Phi213*Phi302 + g13*Phi102*Phi313 + g23*Phi202*Phi313 + g33*Phi302*Phi313 - Pi02*Pi13) + 
+     invPsi13*(-(Gamma003*Gamma301*invPsi00) - Gamma013*Gamma301*invPsi01 - Gamma003*Gamma311*invPsi01 - 
+        Gamma023*Gamma301*invPsi02 - Gamma003*Gamma312*invPsi02 - Gamma033*Gamma301*invPsi03 - Gamma003*Gamma313*invPsi03 - 
+        Gamma013*Gamma311*invPsi11 - Gamma023*Gamma311*invPsi12 - Gamma013*Gamma312*invPsi12 - Gamma033*Gamma311*invPsi13 - 
+        Gamma013*Gamma313*invPsi13 - Gamma023*Gamma312*invPsi22 - Gamma033*Gamma312*invPsi23 - Gamma023*Gamma313*invPsi23 - 
+        Gamma033*Gamma313*invPsi33 + g11*Phi103*Phi113 + g12*Phi113*Phi203 + g12*Phi103*Phi213 + g22*Phi203*Phi213 + 
+        g13*Phi113*Phi303 + g23*Phi213*Phi303 + g13*Phi103*Phi313 + g23*Phi203*Phi313 + g33*Phi303*Phi313 - Pi03*Pi13) + 
+     invPsi02*(-(Gamma000*Gamma302*invPsi00) - Gamma001*Gamma302*invPsi01 - Gamma000*Gamma312*invPsi01 - 
+        Gamma002*Gamma302*invPsi02 - Gamma000*Gamma322*invPsi02 - Gamma003*Gamma302*invPsi03 - Gamma000*Gamma323*invPsi03 - 
+        Gamma001*Gamma312*invPsi11 - Gamma002*Gamma312*invPsi12 - Gamma001*Gamma322*invPsi12 - Gamma003*Gamma312*invPsi13 - 
+        Gamma001*Gamma323*invPsi13 - Gamma002*Gamma322*invPsi22 - Gamma003*Gamma322*invPsi23 - Gamma002*Gamma323*invPsi23 - 
+        Gamma003*Gamma323*invPsi33 + g11*Phi100*Phi123 + g12*Phi123*Phi200 + g12*Phi100*Phi223 + g22*Phi200*Phi223 + 
+        g13*Phi123*Phi300 + g23*Phi223*Phi300 + g13*Phi100*Phi323 + g23*Phi200*Phi323 + g33*Phi300*Phi323 - Pi00*Pi23) + 
+     invPsi12*(-(Gamma001*Gamma302*invPsi00) - Gamma011*Gamma302*invPsi01 - Gamma001*Gamma312*invPsi01 - 
+        Gamma012*Gamma302*invPsi02 - Gamma001*Gamma322*invPsi02 - Gamma013*Gamma302*invPsi03 - Gamma001*Gamma323*invPsi03 - 
+        Gamma011*Gamma312*invPsi11 - Gamma012*Gamma312*invPsi12 - Gamma011*Gamma322*invPsi12 - Gamma013*Gamma312*invPsi13 - 
+        Gamma011*Gamma323*invPsi13 - Gamma012*Gamma322*invPsi22 - Gamma013*Gamma322*invPsi23 - Gamma012*Gamma323*invPsi23 - 
+        Gamma013*Gamma323*invPsi33 + g11*Phi101*Phi123 + g12*Phi123*Phi201 + g12*Phi101*Phi223 + g22*Phi201*Phi223 + 
+        g13*Phi123*Phi301 + g23*Phi223*Phi301 + g13*Phi101*Phi323 + g23*Phi201*Phi323 + g33*Phi301*Phi323 - Pi01*Pi23) + 
+     invPsi22*(-(Gamma002*Gamma302*invPsi00) - Gamma012*Gamma302*invPsi01 - Gamma002*Gamma312*invPsi01 - 
+        Gamma022*Gamma302*invPsi02 - Gamma002*Gamma322*invPsi02 - Gamma023*Gamma302*invPsi03 - Gamma002*Gamma323*invPsi03 - 
+        Gamma012*Gamma312*invPsi11 - Gamma022*Gamma312*invPsi12 - Gamma012*Gamma322*invPsi12 - Gamma023*Gamma312*invPsi13 - 
+        Gamma012*Gamma323*invPsi13 - Gamma022*Gamma322*invPsi22 - Gamma023*Gamma322*invPsi23 - Gamma022*Gamma323*invPsi23 - 
+        Gamma023*Gamma323*invPsi33 + g11*Phi102*Phi123 + g12*Phi123*Phi202 + g12*Phi102*Phi223 + g22*Phi202*Phi223 + 
+        g13*Phi123*Phi302 + g23*Phi223*Phi302 + g13*Phi102*Phi323 + g23*Phi202*Phi323 + g33*Phi302*Phi323 - Pi02*Pi23) + 
+     invPsi23*(-(Gamma003*Gamma302*invPsi00) - Gamma013*Gamma302*invPsi01 - Gamma003*Gamma312*invPsi01 - 
+        Gamma023*Gamma302*invPsi02 - Gamma003*Gamma322*invPsi02 - Gamma033*Gamma302*invPsi03 - Gamma003*Gamma323*invPsi03 - 
+        Gamma013*Gamma312*invPsi11 - Gamma023*Gamma312*invPsi12 - Gamma013*Gamma322*invPsi12 - Gamma033*Gamma312*invPsi13 - 
+        Gamma013*Gamma323*invPsi13 - Gamma023*Gamma322*invPsi22 - Gamma033*Gamma322*invPsi23 - Gamma023*Gamma323*invPsi23 - 
+        Gamma033*Gamma323*invPsi33 + g11*Phi103*Phi123 + g12*Phi123*Phi203 + g12*Phi103*Phi223 + g22*Phi203*Phi223 + 
+        g13*Phi123*Phi303 + g23*Phi223*Phi303 + g13*Phi103*Phi323 + g23*Phi203*Phi323 + g33*Phi303*Phi323 - Pi03*Pi23) + 
+     invPsi03*(-(Gamma000*Gamma303*invPsi00) - Gamma001*Gamma303*invPsi01 - Gamma000*Gamma313*invPsi01 - 
+        Gamma002*Gamma303*invPsi02 - Gamma000*Gamma323*invPsi02 - Gamma003*Gamma303*invPsi03 - Gamma000*Gamma333*invPsi03 - 
+        Gamma001*Gamma313*invPsi11 - Gamma002*Gamma313*invPsi12 - Gamma001*Gamma323*invPsi12 - Gamma003*Gamma313*invPsi13 - 
+        Gamma001*Gamma333*invPsi13 - Gamma002*Gamma323*invPsi22 - Gamma003*Gamma323*invPsi23 - Gamma002*Gamma333*invPsi23 - 
+        Gamma003*Gamma333*invPsi33 + g11*Phi100*Phi133 + g12*Phi133*Phi200 + g12*Phi100*Phi233 + g22*Phi200*Phi233 + 
+        g13*Phi133*Phi300 + g23*Phi233*Phi300 + g13*Phi100*Phi333 + g23*Phi200*Phi333 + g33*Phi300*Phi333 - Pi00*Pi33) + 
+     invPsi13*(-(Gamma001*Gamma303*invPsi00) - Gamma011*Gamma303*invPsi01 - Gamma001*Gamma313*invPsi01 - 
+        Gamma012*Gamma303*invPsi02 - Gamma001*Gamma323*invPsi02 - Gamma013*Gamma303*invPsi03 - Gamma001*Gamma333*invPsi03 - 
+        Gamma011*Gamma313*invPsi11 - Gamma012*Gamma313*invPsi12 - Gamma011*Gamma323*invPsi12 - Gamma013*Gamma313*invPsi13 - 
+        Gamma011*Gamma333*invPsi13 - Gamma012*Gamma323*invPsi22 - Gamma013*Gamma323*invPsi23 - Gamma012*Gamma333*invPsi23 - 
+        Gamma013*Gamma333*invPsi33 + g11*Phi101*Phi133 + g12*Phi133*Phi201 + g12*Phi101*Phi233 + g22*Phi201*Phi233 + 
+        g13*Phi133*Phi301 + g23*Phi233*Phi301 + g13*Phi101*Phi333 + g23*Phi201*Phi333 + g33*Phi301*Phi333 - Pi01*Pi33) + 
+     invPsi23*(-(Gamma002*Gamma303*invPsi00) - Gamma012*Gamma303*invPsi01 - Gamma002*Gamma313*invPsi01 - 
+        Gamma022*Gamma303*invPsi02 - Gamma002*Gamma323*invPsi02 - Gamma023*Gamma303*invPsi03 - Gamma002*Gamma333*invPsi03 - 
+        Gamma012*Gamma313*invPsi11 - Gamma022*Gamma313*invPsi12 - Gamma012*Gamma323*invPsi12 - Gamma023*Gamma313*invPsi13 - 
+        Gamma012*Gamma333*invPsi13 - Gamma022*Gamma323*invPsi22 - Gamma023*Gamma323*invPsi23 - Gamma022*Gamma333*invPsi23 - 
+        Gamma023*Gamma333*invPsi33 + g11*Phi102*Phi133 + g12*Phi133*Phi202 + g12*Phi102*Phi233 + g22*Phi202*Phi233 + 
+        g13*Phi133*Phi302 + g23*Phi233*Phi302 + g13*Phi102*Phi333 + g23*Phi202*Phi333 + g33*Phi302*Phi333 - Pi02*Pi33) + 
+     invPsi33*(-(Gamma003*Gamma303*invPsi00) - Gamma013*Gamma303*invPsi01 - Gamma003*Gamma313*invPsi01 - 
+        Gamma023*Gamma303*invPsi02 - Gamma003*Gamma323*invPsi02 - Gamma033*Gamma303*invPsi03 - Gamma003*Gamma333*invPsi03 - 
+        Gamma013*Gamma313*invPsi11 - Gamma023*Gamma313*invPsi12 - Gamma013*Gamma323*invPsi12 - Gamma033*Gamma313*invPsi13 - 
+        Gamma013*Gamma333*invPsi13 - Gamma023*Gamma323*invPsi22 - Gamma033*Gamma323*invPsi23 - Gamma023*Gamma333*invPsi23 - 
+        Gamma033*Gamma333*invPsi33 + g11*Phi103*Phi133 + g12*Phi133*Phi203 + g12*Phi103*Phi233 + g22*Phi203*Phi233 + 
+        g13*Phi133*Phi303 + g23*Phi233*Phi303 + g13*Phi103*Phi333 + g23*Phi203*Phi333 + g33*Phi303*Phi333 - Pi03*Pi33));
     
     t1srcPi11 = 2*N*(invPsi00*(-(Power(Gamma100,2)*invPsi00) - 2*Gamma100*Gamma101*invPsi01 - 2*Gamma100*Gamma102*invPsi02 - 
-            Power(Gamma101,2)*invPsi11 - 2*Gamma101*Gamma102*invPsi12 - Power(Gamma102,2)*invPsi22 + g11*Power(Phi101,2) + 
-            2*g12*Phi101*Phi201 + g22*Power(Phi201,2) + 2*g13*Phi101*Phi301 + 2*g23*Phi201*Phi301 + g33*Power(Phi301,2) - 
-            Power(Pi01,2)) + 2*invPsi01*(-(Gamma100*Gamma101*invPsi00) - Power(Gamma101,2)*invPsi01 - Gamma100*Gamma111*invPsi01 - 
-            Gamma101*Gamma102*invPsi02 - Gamma100*Gamma112*invPsi02 - Gamma101*Gamma111*invPsi11 - Gamma102*Gamma111*invPsi12 - 
-            Gamma101*Gamma112*invPsi12 - Gamma102*Gamma112*invPsi22 + g11*Phi101*Phi111 + g12*Phi111*Phi201 + g12*Phi101*Phi211 + 
-            g22*Phi201*Phi211 + g13*Phi111*Phi301 + g23*Phi211*Phi301 + g13*Phi101*Phi311 + g23*Phi201*Phi311 + g33*Phi301*Phi311 - 
-            Pi01*Pi11) + invPsi11*(-(Power(Gamma101,2)*invPsi00) - 2*Gamma101*Gamma111*invPsi01 - 2*Gamma101*Gamma112*invPsi02 - 
-            Power(Gamma111,2)*invPsi11 - 2*Gamma111*Gamma112*invPsi12 - Power(Gamma112,2)*invPsi22 + g11*Power(Phi111,2) + 
-            2*g12*Phi111*Phi211 + g22*Power(Phi211,2) + 2*g13*Phi111*Phi311 + 2*g23*Phi211*Phi311 + g33*Power(Phi311,2) - 
-            Power(Pi11,2)) + 2*invPsi02*(-(Gamma100*Gamma102*invPsi00) - Gamma101*Gamma102*invPsi01 - Gamma100*Gamma112*invPsi01 - 
-            Power(Gamma102,2)*invPsi02 - Gamma100*Gamma122*invPsi02 - Gamma101*Gamma112*invPsi11 - Gamma102*Gamma112*invPsi12 - 
-            Gamma101*Gamma122*invPsi12 - Gamma102*Gamma122*invPsi22 + g11*Phi101*Phi112 + g12*Phi112*Phi201 + g12*Phi101*Phi212 + 
-            g22*Phi201*Phi212 + g13*Phi112*Phi301 + g23*Phi212*Phi301 + g13*Phi101*Phi312 + g23*Phi201*Phi312 + g33*Phi301*Phi312 - 
-            Pi01*Pi12) + 2*invPsi12*(-(Gamma101*Gamma102*invPsi00) - Gamma102*Gamma111*invPsi01 - Gamma101*Gamma112*invPsi01 - 
-            Gamma102*Gamma112*invPsi02 - Gamma101*Gamma122*invPsi02 - Gamma111*Gamma112*invPsi11 - Power(Gamma112,2)*invPsi12 - 
-            Gamma111*Gamma122*invPsi12 - Gamma112*Gamma122*invPsi22 + g11*Phi111*Phi112 + g12*Phi112*Phi211 + g12*Phi111*Phi212 + 
-            g22*Phi211*Phi212 + g13*Phi112*Phi311 + g23*Phi212*Phi311 + g13*Phi111*Phi312 + g23*Phi211*Phi312 + g33*Phi311*Phi312 - 
-            Pi11*Pi12) + invPsi22*(-(Power(Gamma102,2)*invPsi00) - 2*Gamma102*Gamma112*invPsi01 - 2*Gamma102*Gamma122*invPsi02 - 
-            Power(Gamma112,2)*invPsi11 - 2*Gamma112*Gamma122*invPsi12 - Power(Gamma122,2)*invPsi22 + g11*Power(Phi112,2) + 
-            2*g12*Phi112*Phi212 + g22*Power(Phi212,2) + 2*g13*Phi112*Phi312 + 2*g23*Phi212*Phi312 + g33*Power(Phi312,2) - 
-            Power(Pi12,2)) + 2*invPsi03*(-(Gamma100*Gamma103*invPsi00) - Gamma101*Gamma103*invPsi01 - Gamma100*Gamma113*invPsi01 - 
-            Gamma102*Gamma103*invPsi02 - Gamma100*Gamma123*invPsi02 - Gamma101*Gamma113*invPsi11 - Gamma102*Gamma113*invPsi12 - 
-            Gamma101*Gamma123*invPsi12 - Gamma102*Gamma123*invPsi22 + g11*Phi101*Phi113 + g12*Phi113*Phi201 + g12*Phi101*Phi213 + 
-            g22*Phi201*Phi213 + g13*Phi113*Phi301 + g23*Phi213*Phi301 + g13*Phi101*Phi313 + g23*Phi201*Phi313 + g33*Phi301*Phi313 - 
-            Pi01*Pi13) + 2*invPsi13*(-(Gamma101*Gamma103*invPsi00) - Gamma103*Gamma111*invPsi01 - Gamma101*Gamma113*invPsi01 - 
-            Gamma103*Gamma112*invPsi02 - Gamma101*Gamma123*invPsi02 - Gamma111*Gamma113*invPsi11 - Gamma112*Gamma113*invPsi12 - 
-            Gamma111*Gamma123*invPsi12 - Gamma112*Gamma123*invPsi22 + g11*Phi111*Phi113 + g12*Phi113*Phi211 + g12*Phi111*Phi213 + 
-            g22*Phi211*Phi213 + g13*Phi113*Phi311 + g23*Phi213*Phi311 + g13*Phi111*Phi313 + g23*Phi211*Phi313 + g33*Phi311*Phi313 - 
-            Pi11*Pi13) + 2*invPsi23*(-(Gamma102*Gamma103*invPsi00) - Gamma103*Gamma112*invPsi01 - Gamma102*Gamma113*invPsi01 - 
-            Gamma103*Gamma122*invPsi02 - Gamma102*Gamma123*invPsi02 - Gamma112*Gamma113*invPsi11 - Gamma113*Gamma122*invPsi12 - 
-            Gamma112*Gamma123*invPsi12 - Gamma122*Gamma123*invPsi22 + g11*Phi112*Phi113 + g12*Phi113*Phi212 + g12*Phi112*Phi213 + 
-            g22*Phi212*Phi213 + g13*Phi113*Phi312 + g23*Phi213*Phi312 + g13*Phi112*Phi313 + g23*Phi212*Phi313 + g33*Phi312*Phi313 - 
-            Pi12*Pi13) + invPsi33*(-(Power(Gamma103,2)*invPsi00) - 2*Gamma103*Gamma113*invPsi01 - 2*Gamma103*Gamma123*invPsi02 - 
-            Power(Gamma113,2)*invPsi11 - 2*Gamma113*Gamma123*invPsi12 - Power(Gamma123,2)*invPsi22 + g11*Power(Phi113,2) + 
-            2*g12*Phi113*Phi213 + g22*Power(Phi213,2) + 2*g13*Phi113*Phi313 + 2*g23*Phi213*Phi313 + g33*Power(Phi313,2) - 
-            Power(Pi13,2)));
+        2*Gamma100*Gamma103*invPsi03 - Power(Gamma101,2)*invPsi11 - 2*Gamma101*Gamma102*invPsi12 - 
+        2*Gamma101*Gamma103*invPsi13 - Power(Gamma102,2)*invPsi22 - 2*Gamma102*Gamma103*invPsi23 - Power(Gamma103,2)*invPsi33 + 
+        g11*Power(Phi101,2) + 2*g12*Phi101*Phi201 + g22*Power(Phi201,2) + 2*g13*Phi101*Phi301 + 2*g23*Phi201*Phi301 + 
+        g33*Power(Phi301,2) - Power(Pi01,2)) + 2*invPsi01*
+      (-(Gamma100*Gamma101*invPsi00) - Power(Gamma101,2)*invPsi01 - Gamma100*Gamma111*invPsi01 - Gamma101*Gamma102*invPsi02 - 
+        Gamma100*Gamma112*invPsi02 - Gamma101*Gamma103*invPsi03 - Gamma100*Gamma113*invPsi03 - Gamma101*Gamma111*invPsi11 - 
+        Gamma102*Gamma111*invPsi12 - Gamma101*Gamma112*invPsi12 - Gamma103*Gamma111*invPsi13 - Gamma101*Gamma113*invPsi13 - 
+        Gamma102*Gamma112*invPsi22 - Gamma103*Gamma112*invPsi23 - Gamma102*Gamma113*invPsi23 - Gamma103*Gamma113*invPsi33 + 
+        g11*Phi101*Phi111 + g12*Phi111*Phi201 + g12*Phi101*Phi211 + g22*Phi201*Phi211 + g13*Phi111*Phi301 + g23*Phi211*Phi301 + 
+        g13*Phi101*Phi311 + g23*Phi201*Phi311 + g33*Phi301*Phi311 - Pi01*Pi11) + 
+     invPsi11*(-(Power(Gamma101,2)*invPsi00) - 2*Gamma101*Gamma111*invPsi01 - 2*Gamma101*Gamma112*invPsi02 - 
+        2*Gamma101*Gamma113*invPsi03 - Power(Gamma111,2)*invPsi11 - 2*Gamma111*Gamma112*invPsi12 - 
+        2*Gamma111*Gamma113*invPsi13 - Power(Gamma112,2)*invPsi22 - 2*Gamma112*Gamma113*invPsi23 - Power(Gamma113,2)*invPsi33 + 
+        g11*Power(Phi111,2) + 2*g12*Phi111*Phi211 + g22*Power(Phi211,2) + 2*g13*Phi111*Phi311 + 2*g23*Phi211*Phi311 + 
+        g33*Power(Phi311,2) - Power(Pi11,2)) + 2*invPsi02*
+      (-(Gamma100*Gamma102*invPsi00) - Gamma101*Gamma102*invPsi01 - Gamma100*Gamma112*invPsi01 - Power(Gamma102,2)*invPsi02 - 
+        Gamma100*Gamma122*invPsi02 - Gamma102*Gamma103*invPsi03 - Gamma100*Gamma123*invPsi03 - Gamma101*Gamma112*invPsi11 - 
+        Gamma102*Gamma112*invPsi12 - Gamma101*Gamma122*invPsi12 - Gamma103*Gamma112*invPsi13 - Gamma101*Gamma123*invPsi13 - 
+        Gamma102*Gamma122*invPsi22 - Gamma103*Gamma122*invPsi23 - Gamma102*Gamma123*invPsi23 - Gamma103*Gamma123*invPsi33 + 
+        g11*Phi101*Phi112 + g12*Phi112*Phi201 + g12*Phi101*Phi212 + g22*Phi201*Phi212 + g13*Phi112*Phi301 + g23*Phi212*Phi301 + 
+        g13*Phi101*Phi312 + g23*Phi201*Phi312 + g33*Phi301*Phi312 - Pi01*Pi12) + 
+     2*invPsi12*(-(Gamma101*Gamma102*invPsi00) - Gamma102*Gamma111*invPsi01 - Gamma101*Gamma112*invPsi01 - 
+        Gamma102*Gamma112*invPsi02 - Gamma101*Gamma122*invPsi02 - Gamma102*Gamma113*invPsi03 - Gamma101*Gamma123*invPsi03 - 
+        Gamma111*Gamma112*invPsi11 - Power(Gamma112,2)*invPsi12 - Gamma111*Gamma122*invPsi12 - Gamma112*Gamma113*invPsi13 - 
+        Gamma111*Gamma123*invPsi13 - Gamma112*Gamma122*invPsi22 - Gamma113*Gamma122*invPsi23 - Gamma112*Gamma123*invPsi23 - 
+        Gamma113*Gamma123*invPsi33 + g11*Phi111*Phi112 + g12*Phi112*Phi211 + g12*Phi111*Phi212 + g22*Phi211*Phi212 + 
+        g13*Phi112*Phi311 + g23*Phi212*Phi311 + g13*Phi111*Phi312 + g23*Phi211*Phi312 + g33*Phi311*Phi312 - Pi11*Pi12) + 
+     invPsi22*(-(Power(Gamma102,2)*invPsi00) - 2*Gamma102*Gamma112*invPsi01 - 2*Gamma102*Gamma122*invPsi02 - 
+        2*Gamma102*Gamma123*invPsi03 - Power(Gamma112,2)*invPsi11 - 2*Gamma112*Gamma122*invPsi12 - 
+        2*Gamma112*Gamma123*invPsi13 - Power(Gamma122,2)*invPsi22 - 2*Gamma122*Gamma123*invPsi23 - Power(Gamma123,2)*invPsi33 + 
+        g11*Power(Phi112,2) + 2*g12*Phi112*Phi212 + g22*Power(Phi212,2) + 2*g13*Phi112*Phi312 + 2*g23*Phi212*Phi312 + 
+        g33*Power(Phi312,2) - Power(Pi12,2)) + 2*invPsi03*
+      (-(Gamma100*Gamma103*invPsi00) - Gamma101*Gamma103*invPsi01 - Gamma100*Gamma113*invPsi01 - Gamma102*Gamma103*invPsi02 - 
+        Gamma100*Gamma123*invPsi02 - Power(Gamma103,2)*invPsi03 - Gamma100*Gamma133*invPsi03 - Gamma101*Gamma113*invPsi11 - 
+        Gamma102*Gamma113*invPsi12 - Gamma101*Gamma123*invPsi12 - Gamma103*Gamma113*invPsi13 - Gamma101*Gamma133*invPsi13 - 
+        Gamma102*Gamma123*invPsi22 - Gamma103*Gamma123*invPsi23 - Gamma102*Gamma133*invPsi23 - Gamma103*Gamma133*invPsi33 + 
+        g11*Phi101*Phi113 + g12*Phi113*Phi201 + g12*Phi101*Phi213 + g22*Phi201*Phi213 + g13*Phi113*Phi301 + g23*Phi213*Phi301 + 
+        g13*Phi101*Phi313 + g23*Phi201*Phi313 + g33*Phi301*Phi313 - Pi01*Pi13) + 
+     2*invPsi13*(-(Gamma101*Gamma103*invPsi00) - Gamma103*Gamma111*invPsi01 - Gamma101*Gamma113*invPsi01 - 
+        Gamma103*Gamma112*invPsi02 - Gamma101*Gamma123*invPsi02 - Gamma103*Gamma113*invPsi03 - Gamma101*Gamma133*invPsi03 - 
+        Gamma111*Gamma113*invPsi11 - Gamma112*Gamma113*invPsi12 - Gamma111*Gamma123*invPsi12 - Power(Gamma113,2)*invPsi13 - 
+        Gamma111*Gamma133*invPsi13 - Gamma112*Gamma123*invPsi22 - Gamma113*Gamma123*invPsi23 - Gamma112*Gamma133*invPsi23 - 
+        Gamma113*Gamma133*invPsi33 + g11*Phi111*Phi113 + g12*Phi113*Phi211 + g12*Phi111*Phi213 + g22*Phi211*Phi213 + 
+        g13*Phi113*Phi311 + g23*Phi213*Phi311 + g13*Phi111*Phi313 + g23*Phi211*Phi313 + g33*Phi311*Phi313 - Pi11*Pi13) + 
+     2*invPsi23*(-(Gamma102*Gamma103*invPsi00) - Gamma103*Gamma112*invPsi01 - Gamma102*Gamma113*invPsi01 - 
+        Gamma103*Gamma122*invPsi02 - Gamma102*Gamma123*invPsi02 - Gamma103*Gamma123*invPsi03 - Gamma102*Gamma133*invPsi03 - 
+        Gamma112*Gamma113*invPsi11 - Gamma113*Gamma122*invPsi12 - Gamma112*Gamma123*invPsi12 - Gamma113*Gamma123*invPsi13 - 
+        Gamma112*Gamma133*invPsi13 - Gamma122*Gamma123*invPsi22 - Power(Gamma123,2)*invPsi23 - Gamma122*Gamma133*invPsi23 - 
+        Gamma123*Gamma133*invPsi33 + g11*Phi112*Phi113 + g12*Phi113*Phi212 + g12*Phi112*Phi213 + g22*Phi212*Phi213 + 
+        g13*Phi113*Phi312 + g23*Phi213*Phi312 + g13*Phi112*Phi313 + g23*Phi212*Phi313 + g33*Phi312*Phi313 - Pi12*Pi13) + 
+     invPsi33*(-(Power(Gamma103,2)*invPsi00) - 2*Gamma103*Gamma113*invPsi01 - 2*Gamma103*Gamma123*invPsi02 - 
+        2*Gamma103*Gamma133*invPsi03 - Power(Gamma113,2)*invPsi11 - 2*Gamma113*Gamma123*invPsi12 - 
+        2*Gamma113*Gamma133*invPsi13 - Power(Gamma123,2)*invPsi22 - 2*Gamma123*Gamma133*invPsi23 - Power(Gamma133,2)*invPsi33 + 
+        g11*Power(Phi113,2) + 2*g12*Phi113*Phi213 + g22*Power(Phi213,2) + 2*g13*Phi113*Phi313 + 2*g23*Phi213*Phi313 + 
+        g33*Power(Phi313,2) - Power(Pi13,2)));
     
     t1srcPi12 = 2*N*(invPsi00*(-(Gamma100*Gamma200*invPsi00) - Gamma101*Gamma200*invPsi01 - Gamma100*Gamma201*invPsi01 - 
-            Gamma102*Gamma200*invPsi02 - Gamma100*Gamma202*invPsi02 - Gamma101*Gamma201*invPsi11 - Gamma102*Gamma201*invPsi12 - 
-            Gamma101*Gamma202*invPsi12 - Gamma102*Gamma202*invPsi22 + g11*Phi101*Phi102 + g12*Phi102*Phi201 + g12*Phi101*Phi202 + 
-            g22*Phi201*Phi202 + g13*Phi102*Phi301 + g23*Phi202*Phi301 + g13*Phi101*Phi302 + g23*Phi201*Phi302 + g33*Phi301*Phi302 - 
-            Pi01*Pi02) + invPsi01*(-(Gamma101*Gamma200*invPsi00) - Gamma111*Gamma200*invPsi01 - Gamma101*Gamma201*invPsi01 - 
-            Gamma112*Gamma200*invPsi02 - Gamma101*Gamma202*invPsi02 - Gamma111*Gamma201*invPsi11 - Gamma112*Gamma201*invPsi12 - 
-            Gamma111*Gamma202*invPsi12 - Gamma112*Gamma202*invPsi22 + g11*Phi102*Phi111 + g12*Phi111*Phi202 + g12*Phi102*Phi211 + 
-            g22*Phi202*Phi211 + g13*Phi111*Phi302 + g23*Phi211*Phi302 + g13*Phi102*Phi311 + g23*Phi202*Phi311 + g33*Phi302*Phi311 - 
-            Pi02*Pi11) + invPsi01*(-(Gamma100*Gamma201*invPsi00) - Gamma101*Gamma201*invPsi01 - Gamma100*Gamma211*invPsi01 - 
-            Gamma102*Gamma201*invPsi02 - Gamma100*Gamma212*invPsi02 - Gamma101*Gamma211*invPsi11 - Gamma102*Gamma211*invPsi12 - 
-            Gamma101*Gamma212*invPsi12 - Gamma102*Gamma212*invPsi22 + g11*Phi101*Phi112 + g12*Phi112*Phi201 + g12*Phi101*Phi212 + 
-            g22*Phi201*Phi212 + g13*Phi112*Phi301 + g23*Phi212*Phi301 + g13*Phi101*Phi312 + g23*Phi201*Phi312 + g33*Phi301*Phi312 - 
-            Pi01*Pi12) + invPsi02*(-(Gamma102*Gamma200*invPsi00) - Gamma112*Gamma200*invPsi01 - Gamma102*Gamma201*invPsi01 - 
-            Gamma122*Gamma200*invPsi02 - Gamma102*Gamma202*invPsi02 - Gamma112*Gamma201*invPsi11 - Gamma122*Gamma201*invPsi12 - 
-            Gamma112*Gamma202*invPsi12 - Gamma122*Gamma202*invPsi22 + g11*Phi102*Phi112 + g12*Phi112*Phi202 + g12*Phi102*Phi212 + 
-            g22*Phi202*Phi212 + g13*Phi112*Phi302 + g23*Phi212*Phi302 + g13*Phi102*Phi312 + g23*Phi202*Phi312 + g33*Phi302*Phi312 - 
-            Pi02*Pi12) + invPsi11*(-(Gamma101*Gamma201*invPsi00) - Gamma111*Gamma201*invPsi01 - Gamma101*Gamma211*invPsi01 - 
-            Gamma112*Gamma201*invPsi02 - Gamma101*Gamma212*invPsi02 - Gamma111*Gamma211*invPsi11 - Gamma112*Gamma211*invPsi12 - 
-            Gamma111*Gamma212*invPsi12 - Gamma112*Gamma212*invPsi22 + g11*Phi111*Phi112 + g12*Phi112*Phi211 + g12*Phi111*Phi212 + 
-            g22*Phi211*Phi212 + g13*Phi112*Phi311 + g23*Phi212*Phi311 + g13*Phi111*Phi312 + g23*Phi211*Phi312 + g33*Phi311*Phi312 - 
-            Pi11*Pi12) + invPsi12*(-(Gamma102*Gamma201*invPsi00) - Gamma112*Gamma201*invPsi01 - Gamma102*Gamma211*invPsi01 - 
-            Gamma122*Gamma201*invPsi02 - Gamma102*Gamma212*invPsi02 - Gamma112*Gamma211*invPsi11 - Gamma122*Gamma211*invPsi12 - 
-            Gamma112*Gamma212*invPsi12 - Gamma122*Gamma212*invPsi22 + g11*Power(Phi112,2) + 2*g12*Phi112*Phi212 + 
-            g22*Power(Phi212,2) + 2*g13*Phi112*Phi312 + 2*g23*Phi212*Phi312 + g33*Power(Phi312,2) - Power(Pi12,2)) + 
-         invPsi03*(-(Gamma103*Gamma200*invPsi00) - Gamma113*Gamma200*invPsi01 - Gamma103*Gamma201*invPsi01 - 
-            Gamma123*Gamma200*invPsi02 - Gamma103*Gamma202*invPsi02 - Gamma113*Gamma201*invPsi11 - Gamma123*Gamma201*invPsi12 - 
-            Gamma113*Gamma202*invPsi12 - Gamma123*Gamma202*invPsi22 + g11*Phi102*Phi113 + g12*Phi113*Phi202 + g12*Phi102*Phi213 + 
-            g22*Phi202*Phi213 + g13*Phi113*Phi302 + g23*Phi213*Phi302 + g13*Phi102*Phi313 + g23*Phi202*Phi313 + g33*Phi302*Phi313 - 
-            Pi02*Pi13) + invPsi13*(-(Gamma103*Gamma201*invPsi00) - Gamma113*Gamma201*invPsi01 - Gamma103*Gamma211*invPsi01 - 
-            Gamma123*Gamma201*invPsi02 - Gamma103*Gamma212*invPsi02 - Gamma113*Gamma211*invPsi11 - Gamma123*Gamma211*invPsi12 - 
-            Gamma113*Gamma212*invPsi12 - Gamma123*Gamma212*invPsi22 + g11*Phi112*Phi113 + g12*Phi113*Phi212 + g12*Phi112*Phi213 + 
-            g22*Phi212*Phi213 + g13*Phi113*Phi312 + g23*Phi213*Phi312 + g13*Phi112*Phi313 + g23*Phi212*Phi313 + g33*Phi312*Phi313 - 
-            Pi12*Pi13) + invPsi02*(-(Gamma100*Gamma202*invPsi00) - Gamma101*Gamma202*invPsi01 - Gamma100*Gamma212*invPsi01 - 
-            Gamma102*Gamma202*invPsi02 - Gamma100*Gamma222*invPsi02 - Gamma101*Gamma212*invPsi11 - Gamma102*Gamma212*invPsi12 - 
-            Gamma101*Gamma222*invPsi12 - Gamma102*Gamma222*invPsi22 + g11*Phi101*Phi122 + g12*Phi122*Phi201 + g12*Phi101*Phi222 + 
-            g22*Phi201*Phi222 + g13*Phi122*Phi301 + g23*Phi222*Phi301 + g13*Phi101*Phi322 + g23*Phi201*Phi322 + g33*Phi301*Phi322 - 
-            Pi01*Pi22) + invPsi12*(-(Gamma101*Gamma202*invPsi00) - Gamma111*Gamma202*invPsi01 - Gamma101*Gamma212*invPsi01 - 
-            Gamma112*Gamma202*invPsi02 - Gamma101*Gamma222*invPsi02 - Gamma111*Gamma212*invPsi11 - Gamma112*Gamma212*invPsi12 - 
-            Gamma111*Gamma222*invPsi12 - Gamma112*Gamma222*invPsi22 + g11*Phi111*Phi122 + g12*Phi122*Phi211 + g12*Phi111*Phi222 + 
-            g22*Phi211*Phi222 + g13*Phi122*Phi311 + g23*Phi222*Phi311 + g13*Phi111*Phi322 + g23*Phi211*Phi322 + g33*Phi311*Phi322 - 
-            Pi11*Pi22) + invPsi22*(-(Gamma102*Gamma202*invPsi00) - Gamma112*Gamma202*invPsi01 - Gamma102*Gamma212*invPsi01 - 
-            Gamma122*Gamma202*invPsi02 - Gamma102*Gamma222*invPsi02 - Gamma112*Gamma212*invPsi11 - Gamma122*Gamma212*invPsi12 - 
-            Gamma112*Gamma222*invPsi12 - Gamma122*Gamma222*invPsi22 + g11*Phi112*Phi122 + g12*Phi122*Phi212 + g12*Phi112*Phi222 + 
-            g22*Phi212*Phi222 + g13*Phi122*Phi312 + g23*Phi222*Phi312 + g13*Phi112*Phi322 + g23*Phi212*Phi322 + g33*Phi312*Phi322 - 
-            Pi12*Pi22) + invPsi23*(-(Gamma103*Gamma202*invPsi00) - Gamma113*Gamma202*invPsi01 - Gamma103*Gamma212*invPsi01 - 
-            Gamma123*Gamma202*invPsi02 - Gamma103*Gamma222*invPsi02 - Gamma113*Gamma212*invPsi11 - Gamma123*Gamma212*invPsi12 - 
-            Gamma113*Gamma222*invPsi12 - Gamma123*Gamma222*invPsi22 + g11*Phi113*Phi122 + g12*Phi122*Phi213 + g12*Phi113*Phi222 + 
-            g22*Phi213*Phi222 + g13*Phi122*Phi313 + g23*Phi222*Phi313 + g13*Phi113*Phi322 + g23*Phi213*Phi322 + g33*Phi313*Phi322 - 
-            Pi13*Pi22) + invPsi03*(-(Gamma100*Gamma203*invPsi00) - Gamma101*Gamma203*invPsi01 - Gamma100*Gamma213*invPsi01 - 
-            Gamma102*Gamma203*invPsi02 - Gamma100*Gamma223*invPsi02 - Gamma101*Gamma213*invPsi11 - Gamma102*Gamma213*invPsi12 - 
-            Gamma101*Gamma223*invPsi12 - Gamma102*Gamma223*invPsi22 + g11*Phi101*Phi123 + g12*Phi123*Phi201 + g12*Phi101*Phi223 + 
-            g22*Phi201*Phi223 + g13*Phi123*Phi301 + g23*Phi223*Phi301 + g13*Phi101*Phi323 + g23*Phi201*Phi323 + g33*Phi301*Phi323 - 
-            Pi01*Pi23) + invPsi13*(-(Gamma101*Gamma203*invPsi00) - Gamma111*Gamma203*invPsi01 - Gamma101*Gamma213*invPsi01 - 
-            Gamma112*Gamma203*invPsi02 - Gamma101*Gamma223*invPsi02 - Gamma111*Gamma213*invPsi11 - Gamma112*Gamma213*invPsi12 - 
-            Gamma111*Gamma223*invPsi12 - Gamma112*Gamma223*invPsi22 + g11*Phi111*Phi123 + g12*Phi123*Phi211 + g12*Phi111*Phi223 + 
-            g22*Phi211*Phi223 + g13*Phi123*Phi311 + g23*Phi223*Phi311 + g13*Phi111*Phi323 + g23*Phi211*Phi323 + g33*Phi311*Phi323 - 
-            Pi11*Pi23) + invPsi23*(-(Gamma102*Gamma203*invPsi00) - Gamma112*Gamma203*invPsi01 - Gamma102*Gamma213*invPsi01 - 
-            Gamma122*Gamma203*invPsi02 - Gamma102*Gamma223*invPsi02 - Gamma112*Gamma213*invPsi11 - Gamma122*Gamma213*invPsi12 - 
-            Gamma112*Gamma223*invPsi12 - Gamma122*Gamma223*invPsi22 + g11*Phi112*Phi123 + g12*Phi123*Phi212 + g12*Phi112*Phi223 + 
-            g22*Phi212*Phi223 + g13*Phi123*Phi312 + g23*Phi223*Phi312 + g13*Phi112*Phi323 + g23*Phi212*Phi323 + g33*Phi312*Phi323 - 
-            Pi12*Pi23) + invPsi33*(-(Gamma103*Gamma203*invPsi00) - Gamma113*Gamma203*invPsi01 - Gamma103*Gamma213*invPsi01 - 
-            Gamma123*Gamma203*invPsi02 - Gamma103*Gamma223*invPsi02 - Gamma113*Gamma213*invPsi11 - Gamma123*Gamma213*invPsi12 - 
-            Gamma113*Gamma223*invPsi12 - Gamma123*Gamma223*invPsi22 + g11*Phi113*Phi123 + g12*Phi123*Phi213 + g12*Phi113*Phi223 + 
-            g22*Phi213*Phi223 + g13*Phi123*Phi313 + g23*Phi223*Phi313 + g13*Phi113*Phi323 + g23*Phi213*Phi323 + g33*Phi313*Phi323 - 
-            Pi13*Pi23));
+        Gamma102*Gamma200*invPsi02 - Gamma100*Gamma202*invPsi02 - Gamma103*Gamma200*invPsi03 - Gamma100*Gamma203*invPsi03 - 
+        Gamma101*Gamma201*invPsi11 - Gamma102*Gamma201*invPsi12 - Gamma101*Gamma202*invPsi12 - Gamma103*Gamma201*invPsi13 - 
+        Gamma101*Gamma203*invPsi13 - Gamma102*Gamma202*invPsi22 - Gamma103*Gamma202*invPsi23 - Gamma102*Gamma203*invPsi23 - 
+        Gamma103*Gamma203*invPsi33 + g11*Phi101*Phi102 + g12*Phi102*Phi201 + g12*Phi101*Phi202 + g22*Phi201*Phi202 + 
+        g13*Phi102*Phi301 + g23*Phi202*Phi301 + g13*Phi101*Phi302 + g23*Phi201*Phi302 + g33*Phi301*Phi302 - Pi01*Pi02) + 
+     invPsi01*(-(Gamma101*Gamma200*invPsi00) - Gamma111*Gamma200*invPsi01 - Gamma101*Gamma201*invPsi01 - 
+        Gamma112*Gamma200*invPsi02 - Gamma101*Gamma202*invPsi02 - Gamma113*Gamma200*invPsi03 - Gamma101*Gamma203*invPsi03 - 
+        Gamma111*Gamma201*invPsi11 - Gamma112*Gamma201*invPsi12 - Gamma111*Gamma202*invPsi12 - Gamma113*Gamma201*invPsi13 - 
+        Gamma111*Gamma203*invPsi13 - Gamma112*Gamma202*invPsi22 - Gamma113*Gamma202*invPsi23 - Gamma112*Gamma203*invPsi23 - 
+        Gamma113*Gamma203*invPsi33 + g11*Phi102*Phi111 + g12*Phi111*Phi202 + g12*Phi102*Phi211 + g22*Phi202*Phi211 + 
+        g13*Phi111*Phi302 + g23*Phi211*Phi302 + g13*Phi102*Phi311 + g23*Phi202*Phi311 + g33*Phi302*Phi311 - Pi02*Pi11) + 
+     invPsi01*(-(Gamma100*Gamma201*invPsi00) - Gamma101*Gamma201*invPsi01 - Gamma100*Gamma211*invPsi01 - 
+        Gamma102*Gamma201*invPsi02 - Gamma100*Gamma212*invPsi02 - Gamma103*Gamma201*invPsi03 - Gamma100*Gamma213*invPsi03 - 
+        Gamma101*Gamma211*invPsi11 - Gamma102*Gamma211*invPsi12 - Gamma101*Gamma212*invPsi12 - Gamma103*Gamma211*invPsi13 - 
+        Gamma101*Gamma213*invPsi13 - Gamma102*Gamma212*invPsi22 - Gamma103*Gamma212*invPsi23 - Gamma102*Gamma213*invPsi23 - 
+        Gamma103*Gamma213*invPsi33 + g11*Phi101*Phi112 + g12*Phi112*Phi201 + g12*Phi101*Phi212 + g22*Phi201*Phi212 + 
+        g13*Phi112*Phi301 + g23*Phi212*Phi301 + g13*Phi101*Phi312 + g23*Phi201*Phi312 + g33*Phi301*Phi312 - Pi01*Pi12) + 
+     invPsi02*(-(Gamma102*Gamma200*invPsi00) - Gamma112*Gamma200*invPsi01 - Gamma102*Gamma201*invPsi01 - 
+        Gamma122*Gamma200*invPsi02 - Gamma102*Gamma202*invPsi02 - Gamma123*Gamma200*invPsi03 - Gamma102*Gamma203*invPsi03 - 
+        Gamma112*Gamma201*invPsi11 - Gamma122*Gamma201*invPsi12 - Gamma112*Gamma202*invPsi12 - Gamma123*Gamma201*invPsi13 - 
+        Gamma112*Gamma203*invPsi13 - Gamma122*Gamma202*invPsi22 - Gamma123*Gamma202*invPsi23 - Gamma122*Gamma203*invPsi23 - 
+        Gamma123*Gamma203*invPsi33 + g11*Phi102*Phi112 + g12*Phi112*Phi202 + g12*Phi102*Phi212 + g22*Phi202*Phi212 + 
+        g13*Phi112*Phi302 + g23*Phi212*Phi302 + g13*Phi102*Phi312 + g23*Phi202*Phi312 + g33*Phi302*Phi312 - Pi02*Pi12) + 
+     invPsi11*(-(Gamma101*Gamma201*invPsi00) - Gamma111*Gamma201*invPsi01 - Gamma101*Gamma211*invPsi01 - 
+        Gamma112*Gamma201*invPsi02 - Gamma101*Gamma212*invPsi02 - Gamma113*Gamma201*invPsi03 - Gamma101*Gamma213*invPsi03 - 
+        Gamma111*Gamma211*invPsi11 - Gamma112*Gamma211*invPsi12 - Gamma111*Gamma212*invPsi12 - Gamma113*Gamma211*invPsi13 - 
+        Gamma111*Gamma213*invPsi13 - Gamma112*Gamma212*invPsi22 - Gamma113*Gamma212*invPsi23 - Gamma112*Gamma213*invPsi23 - 
+        Gamma113*Gamma213*invPsi33 + g11*Phi111*Phi112 + g12*Phi112*Phi211 + g12*Phi111*Phi212 + g22*Phi211*Phi212 + 
+        g13*Phi112*Phi311 + g23*Phi212*Phi311 + g13*Phi111*Phi312 + g23*Phi211*Phi312 + g33*Phi311*Phi312 - Pi11*Pi12) + 
+     invPsi12*(-(Gamma102*Gamma201*invPsi00) - Gamma112*Gamma201*invPsi01 - Gamma102*Gamma211*invPsi01 - 
+        Gamma122*Gamma201*invPsi02 - Gamma102*Gamma212*invPsi02 - Gamma123*Gamma201*invPsi03 - Gamma102*Gamma213*invPsi03 - 
+        Gamma112*Gamma211*invPsi11 - Gamma122*Gamma211*invPsi12 - Gamma112*Gamma212*invPsi12 - Gamma123*Gamma211*invPsi13 - 
+        Gamma112*Gamma213*invPsi13 - Gamma122*Gamma212*invPsi22 - Gamma123*Gamma212*invPsi23 - Gamma122*Gamma213*invPsi23 - 
+        Gamma123*Gamma213*invPsi33 + g11*Power(Phi112,2) + 2*g12*Phi112*Phi212 + g22*Power(Phi212,2) + 2*g13*Phi112*Phi312 + 
+        2*g23*Phi212*Phi312 + g33*Power(Phi312,2) - Power(Pi12,2)) + 
+     invPsi03*(-(Gamma103*Gamma200*invPsi00) - Gamma113*Gamma200*invPsi01 - Gamma103*Gamma201*invPsi01 - 
+        Gamma123*Gamma200*invPsi02 - Gamma103*Gamma202*invPsi02 - Gamma133*Gamma200*invPsi03 - Gamma103*Gamma203*invPsi03 - 
+        Gamma113*Gamma201*invPsi11 - Gamma123*Gamma201*invPsi12 - Gamma113*Gamma202*invPsi12 - Gamma133*Gamma201*invPsi13 - 
+        Gamma113*Gamma203*invPsi13 - Gamma123*Gamma202*invPsi22 - Gamma133*Gamma202*invPsi23 - Gamma123*Gamma203*invPsi23 - 
+        Gamma133*Gamma203*invPsi33 + g11*Phi102*Phi113 + g12*Phi113*Phi202 + g12*Phi102*Phi213 + g22*Phi202*Phi213 + 
+        g13*Phi113*Phi302 + g23*Phi213*Phi302 + g13*Phi102*Phi313 + g23*Phi202*Phi313 + g33*Phi302*Phi313 - Pi02*Pi13) + 
+     invPsi13*(-(Gamma103*Gamma201*invPsi00) - Gamma113*Gamma201*invPsi01 - Gamma103*Gamma211*invPsi01 - 
+        Gamma123*Gamma201*invPsi02 - Gamma103*Gamma212*invPsi02 - Gamma133*Gamma201*invPsi03 - Gamma103*Gamma213*invPsi03 - 
+        Gamma113*Gamma211*invPsi11 - Gamma123*Gamma211*invPsi12 - Gamma113*Gamma212*invPsi12 - Gamma133*Gamma211*invPsi13 - 
+        Gamma113*Gamma213*invPsi13 - Gamma123*Gamma212*invPsi22 - Gamma133*Gamma212*invPsi23 - Gamma123*Gamma213*invPsi23 - 
+        Gamma133*Gamma213*invPsi33 + g11*Phi112*Phi113 + g12*Phi113*Phi212 + g12*Phi112*Phi213 + g22*Phi212*Phi213 + 
+        g13*Phi113*Phi312 + g23*Phi213*Phi312 + g13*Phi112*Phi313 + g23*Phi212*Phi313 + g33*Phi312*Phi313 - Pi12*Pi13) + 
+     invPsi02*(-(Gamma100*Gamma202*invPsi00) - Gamma101*Gamma202*invPsi01 - Gamma100*Gamma212*invPsi01 - 
+        Gamma102*Gamma202*invPsi02 - Gamma100*Gamma222*invPsi02 - Gamma103*Gamma202*invPsi03 - Gamma100*Gamma223*invPsi03 - 
+        Gamma101*Gamma212*invPsi11 - Gamma102*Gamma212*invPsi12 - Gamma101*Gamma222*invPsi12 - Gamma103*Gamma212*invPsi13 - 
+        Gamma101*Gamma223*invPsi13 - Gamma102*Gamma222*invPsi22 - Gamma103*Gamma222*invPsi23 - Gamma102*Gamma223*invPsi23 - 
+        Gamma103*Gamma223*invPsi33 + g11*Phi101*Phi122 + g12*Phi122*Phi201 + g12*Phi101*Phi222 + g22*Phi201*Phi222 + 
+        g13*Phi122*Phi301 + g23*Phi222*Phi301 + g13*Phi101*Phi322 + g23*Phi201*Phi322 + g33*Phi301*Phi322 - Pi01*Pi22) + 
+     invPsi12*(-(Gamma101*Gamma202*invPsi00) - Gamma111*Gamma202*invPsi01 - Gamma101*Gamma212*invPsi01 - 
+        Gamma112*Gamma202*invPsi02 - Gamma101*Gamma222*invPsi02 - Gamma113*Gamma202*invPsi03 - Gamma101*Gamma223*invPsi03 - 
+        Gamma111*Gamma212*invPsi11 - Gamma112*Gamma212*invPsi12 - Gamma111*Gamma222*invPsi12 - Gamma113*Gamma212*invPsi13 - 
+        Gamma111*Gamma223*invPsi13 - Gamma112*Gamma222*invPsi22 - Gamma113*Gamma222*invPsi23 - Gamma112*Gamma223*invPsi23 - 
+        Gamma113*Gamma223*invPsi33 + g11*Phi111*Phi122 + g12*Phi122*Phi211 + g12*Phi111*Phi222 + g22*Phi211*Phi222 + 
+        g13*Phi122*Phi311 + g23*Phi222*Phi311 + g13*Phi111*Phi322 + g23*Phi211*Phi322 + g33*Phi311*Phi322 - Pi11*Pi22) + 
+     invPsi22*(-(Gamma102*Gamma202*invPsi00) - Gamma112*Gamma202*invPsi01 - Gamma102*Gamma212*invPsi01 - 
+        Gamma122*Gamma202*invPsi02 - Gamma102*Gamma222*invPsi02 - Gamma123*Gamma202*invPsi03 - Gamma102*Gamma223*invPsi03 - 
+        Gamma112*Gamma212*invPsi11 - Gamma122*Gamma212*invPsi12 - Gamma112*Gamma222*invPsi12 - Gamma123*Gamma212*invPsi13 - 
+        Gamma112*Gamma223*invPsi13 - Gamma122*Gamma222*invPsi22 - Gamma123*Gamma222*invPsi23 - Gamma122*Gamma223*invPsi23 - 
+        Gamma123*Gamma223*invPsi33 + g11*Phi112*Phi122 + g12*Phi122*Phi212 + g12*Phi112*Phi222 + g22*Phi212*Phi222 + 
+        g13*Phi122*Phi312 + g23*Phi222*Phi312 + g13*Phi112*Phi322 + g23*Phi212*Phi322 + g33*Phi312*Phi322 - Pi12*Pi22) + 
+     invPsi23*(-(Gamma103*Gamma202*invPsi00) - Gamma113*Gamma202*invPsi01 - Gamma103*Gamma212*invPsi01 - 
+        Gamma123*Gamma202*invPsi02 - Gamma103*Gamma222*invPsi02 - Gamma133*Gamma202*invPsi03 - Gamma103*Gamma223*invPsi03 - 
+        Gamma113*Gamma212*invPsi11 - Gamma123*Gamma212*invPsi12 - Gamma113*Gamma222*invPsi12 - Gamma133*Gamma212*invPsi13 - 
+        Gamma113*Gamma223*invPsi13 - Gamma123*Gamma222*invPsi22 - Gamma133*Gamma222*invPsi23 - Gamma123*Gamma223*invPsi23 - 
+        Gamma133*Gamma223*invPsi33 + g11*Phi113*Phi122 + g12*Phi122*Phi213 + g12*Phi113*Phi222 + g22*Phi213*Phi222 + 
+        g13*Phi122*Phi313 + g23*Phi222*Phi313 + g13*Phi113*Phi322 + g23*Phi213*Phi322 + g33*Phi313*Phi322 - Pi13*Pi22) + 
+     invPsi03*(-(Gamma100*Gamma203*invPsi00) - Gamma101*Gamma203*invPsi01 - Gamma100*Gamma213*invPsi01 - 
+        Gamma102*Gamma203*invPsi02 - Gamma100*Gamma223*invPsi02 - Gamma103*Gamma203*invPsi03 - Gamma100*Gamma233*invPsi03 - 
+        Gamma101*Gamma213*invPsi11 - Gamma102*Gamma213*invPsi12 - Gamma101*Gamma223*invPsi12 - Gamma103*Gamma213*invPsi13 - 
+        Gamma101*Gamma233*invPsi13 - Gamma102*Gamma223*invPsi22 - Gamma103*Gamma223*invPsi23 - Gamma102*Gamma233*invPsi23 - 
+        Gamma103*Gamma233*invPsi33 + g11*Phi101*Phi123 + g12*Phi123*Phi201 + g12*Phi101*Phi223 + g22*Phi201*Phi223 + 
+        g13*Phi123*Phi301 + g23*Phi223*Phi301 + g13*Phi101*Phi323 + g23*Phi201*Phi323 + g33*Phi301*Phi323 - Pi01*Pi23) + 
+     invPsi13*(-(Gamma101*Gamma203*invPsi00) - Gamma111*Gamma203*invPsi01 - Gamma101*Gamma213*invPsi01 - 
+        Gamma112*Gamma203*invPsi02 - Gamma101*Gamma223*invPsi02 - Gamma113*Gamma203*invPsi03 - Gamma101*Gamma233*invPsi03 - 
+        Gamma111*Gamma213*invPsi11 - Gamma112*Gamma213*invPsi12 - Gamma111*Gamma223*invPsi12 - Gamma113*Gamma213*invPsi13 - 
+        Gamma111*Gamma233*invPsi13 - Gamma112*Gamma223*invPsi22 - Gamma113*Gamma223*invPsi23 - Gamma112*Gamma233*invPsi23 - 
+        Gamma113*Gamma233*invPsi33 + g11*Phi111*Phi123 + g12*Phi123*Phi211 + g12*Phi111*Phi223 + g22*Phi211*Phi223 + 
+        g13*Phi123*Phi311 + g23*Phi223*Phi311 + g13*Phi111*Phi323 + g23*Phi211*Phi323 + g33*Phi311*Phi323 - Pi11*Pi23) + 
+     invPsi23*(-(Gamma102*Gamma203*invPsi00) - Gamma112*Gamma203*invPsi01 - Gamma102*Gamma213*invPsi01 - 
+        Gamma122*Gamma203*invPsi02 - Gamma102*Gamma223*invPsi02 - Gamma123*Gamma203*invPsi03 - Gamma102*Gamma233*invPsi03 - 
+        Gamma112*Gamma213*invPsi11 - Gamma122*Gamma213*invPsi12 - Gamma112*Gamma223*invPsi12 - Gamma123*Gamma213*invPsi13 - 
+        Gamma112*Gamma233*invPsi13 - Gamma122*Gamma223*invPsi22 - Gamma123*Gamma223*invPsi23 - Gamma122*Gamma233*invPsi23 - 
+        Gamma123*Gamma233*invPsi33 + g11*Phi112*Phi123 + g12*Phi123*Phi212 + g12*Phi112*Phi223 + g22*Phi212*Phi223 + 
+        g13*Phi123*Phi312 + g23*Phi223*Phi312 + g13*Phi112*Phi323 + g23*Phi212*Phi323 + g33*Phi312*Phi323 - Pi12*Pi23) + 
+     invPsi33*(-(Gamma103*Gamma203*invPsi00) - Gamma113*Gamma203*invPsi01 - Gamma103*Gamma213*invPsi01 - 
+        Gamma123*Gamma203*invPsi02 - Gamma103*Gamma223*invPsi02 - Gamma133*Gamma203*invPsi03 - Gamma103*Gamma233*invPsi03 - 
+        Gamma113*Gamma213*invPsi11 - Gamma123*Gamma213*invPsi12 - Gamma113*Gamma223*invPsi12 - Gamma133*Gamma213*invPsi13 - 
+        Gamma113*Gamma233*invPsi13 - Gamma123*Gamma223*invPsi22 - Gamma133*Gamma223*invPsi23 - Gamma123*Gamma233*invPsi23 - 
+        Gamma133*Gamma233*invPsi33 + g11*Phi113*Phi123 + g12*Phi123*Phi213 + g12*Phi113*Phi223 + g22*Phi213*Phi223 + 
+        g13*Phi123*Phi313 + g23*Phi223*Phi313 + g13*Phi113*Phi323 + g23*Phi213*Phi323 + g33*Phi313*Phi323 - Pi13*Pi23));
     
     t1srcPi13 = 2*N*(invPsi00*(-(Gamma100*Gamma300*invPsi00) - Gamma101*Gamma300*invPsi01 - Gamma100*Gamma301*invPsi01 - 
-            Gamma102*Gamma300*invPsi02 - Gamma100*Gamma302*invPsi02 - Gamma101*Gamma301*invPsi11 - Gamma102*Gamma301*invPsi12 - 
-            Gamma101*Gamma302*invPsi12 - Gamma102*Gamma302*invPsi22 + g11*Phi101*Phi103 + g12*Phi103*Phi201 + g12*Phi101*Phi203 + 
-            g22*Phi201*Phi203 + g13*Phi103*Phi301 + g23*Phi203*Phi301 + g13*Phi101*Phi303 + g23*Phi201*Phi303 + g33*Phi301*Phi303 - 
-            Pi01*Pi03) + invPsi01*(-(Gamma101*Gamma300*invPsi00) - Gamma111*Gamma300*invPsi01 - Gamma101*Gamma301*invPsi01 - 
-            Gamma112*Gamma300*invPsi02 - Gamma101*Gamma302*invPsi02 - Gamma111*Gamma301*invPsi11 - Gamma112*Gamma301*invPsi12 - 
-            Gamma111*Gamma302*invPsi12 - Gamma112*Gamma302*invPsi22 + g11*Phi103*Phi111 + g12*Phi111*Phi203 + g12*Phi103*Phi211 + 
-            g22*Phi203*Phi211 + g13*Phi111*Phi303 + g23*Phi211*Phi303 + g13*Phi103*Phi311 + g23*Phi203*Phi311 + g33*Phi303*Phi311 - 
-            Pi03*Pi11) + invPsi02*(-(Gamma102*Gamma300*invPsi00) - Gamma112*Gamma300*invPsi01 - Gamma102*Gamma301*invPsi01 - 
-            Gamma122*Gamma300*invPsi02 - Gamma102*Gamma302*invPsi02 - Gamma112*Gamma301*invPsi11 - Gamma122*Gamma301*invPsi12 - 
-            Gamma112*Gamma302*invPsi12 - Gamma122*Gamma302*invPsi22 + g11*Phi103*Phi112 + g12*Phi112*Phi203 + g12*Phi103*Phi212 + 
-            g22*Phi203*Phi212 + g13*Phi112*Phi303 + g23*Phi212*Phi303 + g13*Phi103*Phi312 + g23*Phi203*Phi312 + g33*Phi303*Phi312 - 
-            Pi03*Pi12) + invPsi01*(-(Gamma100*Gamma301*invPsi00) - Gamma101*Gamma301*invPsi01 - Gamma100*Gamma311*invPsi01 - 
-            Gamma102*Gamma301*invPsi02 - Gamma100*Gamma312*invPsi02 - Gamma101*Gamma311*invPsi11 - Gamma102*Gamma311*invPsi12 - 
-            Gamma101*Gamma312*invPsi12 - Gamma102*Gamma312*invPsi22 + g11*Phi101*Phi113 + g12*Phi113*Phi201 + g12*Phi101*Phi213 + 
-            g22*Phi201*Phi213 + g13*Phi113*Phi301 + g23*Phi213*Phi301 + g13*Phi101*Phi313 + g23*Phi201*Phi313 + g33*Phi301*Phi313 - 
-            Pi01*Pi13) + invPsi03*(-(Gamma103*Gamma300*invPsi00) - Gamma113*Gamma300*invPsi01 - Gamma103*Gamma301*invPsi01 - 
-            Gamma123*Gamma300*invPsi02 - Gamma103*Gamma302*invPsi02 - Gamma113*Gamma301*invPsi11 - Gamma123*Gamma301*invPsi12 - 
-            Gamma113*Gamma302*invPsi12 - Gamma123*Gamma302*invPsi22 + g11*Phi103*Phi113 + g12*Phi113*Phi203 + g12*Phi103*Phi213 + 
-            g22*Phi203*Phi213 + g13*Phi113*Phi303 + g23*Phi213*Phi303 + g13*Phi103*Phi313 + g23*Phi203*Phi313 + g33*Phi303*Phi313 - 
-            Pi03*Pi13) + invPsi11*(-(Gamma101*Gamma301*invPsi00) - Gamma111*Gamma301*invPsi01 - Gamma101*Gamma311*invPsi01 - 
-            Gamma112*Gamma301*invPsi02 - Gamma101*Gamma312*invPsi02 - Gamma111*Gamma311*invPsi11 - Gamma112*Gamma311*invPsi12 - 
-            Gamma111*Gamma312*invPsi12 - Gamma112*Gamma312*invPsi22 + g11*Phi111*Phi113 + g12*Phi113*Phi211 + g12*Phi111*Phi213 + 
-            g22*Phi211*Phi213 + g13*Phi113*Phi311 + g23*Phi213*Phi311 + g13*Phi111*Phi313 + g23*Phi211*Phi313 + g33*Phi311*Phi313 - 
-            Pi11*Pi13) + invPsi12*(-(Gamma102*Gamma301*invPsi00) - Gamma112*Gamma301*invPsi01 - Gamma102*Gamma311*invPsi01 - 
-            Gamma122*Gamma301*invPsi02 - Gamma102*Gamma312*invPsi02 - Gamma112*Gamma311*invPsi11 - Gamma122*Gamma311*invPsi12 - 
-            Gamma112*Gamma312*invPsi12 - Gamma122*Gamma312*invPsi22 + g11*Phi112*Phi113 + g12*Phi113*Phi212 + g12*Phi112*Phi213 + 
-            g22*Phi212*Phi213 + g13*Phi113*Phi312 + g23*Phi213*Phi312 + g13*Phi112*Phi313 + g23*Phi212*Phi313 + g33*Phi312*Phi313 - 
-            Pi12*Pi13) + invPsi13*(-(Gamma103*Gamma301*invPsi00) - Gamma113*Gamma301*invPsi01 - Gamma103*Gamma311*invPsi01 - 
-            Gamma123*Gamma301*invPsi02 - Gamma103*Gamma312*invPsi02 - Gamma113*Gamma311*invPsi11 - Gamma123*Gamma311*invPsi12 - 
-            Gamma113*Gamma312*invPsi12 - Gamma123*Gamma312*invPsi22 + g11*Power(Phi113,2) + 2*g12*Phi113*Phi213 + 
-            g22*Power(Phi213,2) + 2*g13*Phi113*Phi313 + 2*g23*Phi213*Phi313 + g33*Power(Phi313,2) - Power(Pi13,2)) + 
-         invPsi02*(-(Gamma100*Gamma302*invPsi00) - Gamma101*Gamma302*invPsi01 - Gamma100*Gamma312*invPsi01 - 
-            Gamma102*Gamma302*invPsi02 - Gamma100*Gamma322*invPsi02 - Gamma101*Gamma312*invPsi11 - Gamma102*Gamma312*invPsi12 - 
-            Gamma101*Gamma322*invPsi12 - Gamma102*Gamma322*invPsi22 + g11*Phi101*Phi123 + g12*Phi123*Phi201 + g12*Phi101*Phi223 + 
-            g22*Phi201*Phi223 + g13*Phi123*Phi301 + g23*Phi223*Phi301 + g13*Phi101*Phi323 + g23*Phi201*Phi323 + g33*Phi301*Phi323 - 
-            Pi01*Pi23) + invPsi12*(-(Gamma101*Gamma302*invPsi00) - Gamma111*Gamma302*invPsi01 - Gamma101*Gamma312*invPsi01 - 
-            Gamma112*Gamma302*invPsi02 - Gamma101*Gamma322*invPsi02 - Gamma111*Gamma312*invPsi11 - Gamma112*Gamma312*invPsi12 - 
-            Gamma111*Gamma322*invPsi12 - Gamma112*Gamma322*invPsi22 + g11*Phi111*Phi123 + g12*Phi123*Phi211 + g12*Phi111*Phi223 + 
-            g22*Phi211*Phi223 + g13*Phi123*Phi311 + g23*Phi223*Phi311 + g13*Phi111*Phi323 + g23*Phi211*Phi323 + g33*Phi311*Phi323 - 
-            Pi11*Pi23) + invPsi22*(-(Gamma102*Gamma302*invPsi00) - Gamma112*Gamma302*invPsi01 - Gamma102*Gamma312*invPsi01 - 
-            Gamma122*Gamma302*invPsi02 - Gamma102*Gamma322*invPsi02 - Gamma112*Gamma312*invPsi11 - Gamma122*Gamma312*invPsi12 - 
-            Gamma112*Gamma322*invPsi12 - Gamma122*Gamma322*invPsi22 + g11*Phi112*Phi123 + g12*Phi123*Phi212 + g12*Phi112*Phi223 + 
-            g22*Phi212*Phi223 + g13*Phi123*Phi312 + g23*Phi223*Phi312 + g13*Phi112*Phi323 + g23*Phi212*Phi323 + g33*Phi312*Phi323 - 
-            Pi12*Pi23) + invPsi23*(-(Gamma103*Gamma302*invPsi00) - Gamma113*Gamma302*invPsi01 - Gamma103*Gamma312*invPsi01 - 
-            Gamma123*Gamma302*invPsi02 - Gamma103*Gamma322*invPsi02 - Gamma113*Gamma312*invPsi11 - Gamma123*Gamma312*invPsi12 - 
-            Gamma113*Gamma322*invPsi12 - Gamma123*Gamma322*invPsi22 + g11*Phi113*Phi123 + g12*Phi123*Phi213 + g12*Phi113*Phi223 + 
-            g22*Phi213*Phi223 + g13*Phi123*Phi313 + g23*Phi223*Phi313 + g13*Phi113*Phi323 + g23*Phi213*Phi323 + g33*Phi313*Phi323 - 
-            Pi13*Pi23) + invPsi03*(-(Gamma100*Gamma303*invPsi00) - Gamma101*Gamma303*invPsi01 - Gamma100*Gamma313*invPsi01 - 
-            Gamma102*Gamma303*invPsi02 - Gamma100*Gamma323*invPsi02 - Gamma101*Gamma313*invPsi11 - Gamma102*Gamma313*invPsi12 - 
-            Gamma101*Gamma323*invPsi12 - Gamma102*Gamma323*invPsi22 + g11*Phi101*Phi133 + g12*Phi133*Phi201 + g12*Phi101*Phi233 + 
-            g22*Phi201*Phi233 + g13*Phi133*Phi301 + g23*Phi233*Phi301 + g13*Phi101*Phi333 + g23*Phi201*Phi333 + g33*Phi301*Phi333 - 
-            Pi01*Pi33) + invPsi13*(-(Gamma101*Gamma303*invPsi00) - Gamma111*Gamma303*invPsi01 - Gamma101*Gamma313*invPsi01 - 
-            Gamma112*Gamma303*invPsi02 - Gamma101*Gamma323*invPsi02 - Gamma111*Gamma313*invPsi11 - Gamma112*Gamma313*invPsi12 - 
-            Gamma111*Gamma323*invPsi12 - Gamma112*Gamma323*invPsi22 + g11*Phi111*Phi133 + g12*Phi133*Phi211 + g12*Phi111*Phi233 + 
-            g22*Phi211*Phi233 + g13*Phi133*Phi311 + g23*Phi233*Phi311 + g13*Phi111*Phi333 + g23*Phi211*Phi333 + g33*Phi311*Phi333 - 
-            Pi11*Pi33) + invPsi23*(-(Gamma102*Gamma303*invPsi00) - Gamma112*Gamma303*invPsi01 - Gamma102*Gamma313*invPsi01 - 
-            Gamma122*Gamma303*invPsi02 - Gamma102*Gamma323*invPsi02 - Gamma112*Gamma313*invPsi11 - Gamma122*Gamma313*invPsi12 - 
-            Gamma112*Gamma323*invPsi12 - Gamma122*Gamma323*invPsi22 + g11*Phi112*Phi133 + g12*Phi133*Phi212 + g12*Phi112*Phi233 + 
-            g22*Phi212*Phi233 + g13*Phi133*Phi312 + g23*Phi233*Phi312 + g13*Phi112*Phi333 + g23*Phi212*Phi333 + g33*Phi312*Phi333 - 
-            Pi12*Pi33) + invPsi33*(-(Gamma103*Gamma303*invPsi00) - Gamma113*Gamma303*invPsi01 - Gamma103*Gamma313*invPsi01 - 
-            Gamma123*Gamma303*invPsi02 - Gamma103*Gamma323*invPsi02 - Gamma113*Gamma313*invPsi11 - Gamma123*Gamma313*invPsi12 - 
-            Gamma113*Gamma323*invPsi12 - Gamma123*Gamma323*invPsi22 + g11*Phi113*Phi133 + g12*Phi133*Phi213 + g12*Phi113*Phi233 + 
-            g22*Phi213*Phi233 + g13*Phi133*Phi313 + g23*Phi233*Phi313 + g13*Phi113*Phi333 + g23*Phi213*Phi333 + g33*Phi313*Phi333 - 
-            Pi13*Pi33));
+        Gamma102*Gamma300*invPsi02 - Gamma100*Gamma302*invPsi02 - Gamma103*Gamma300*invPsi03 - Gamma100*Gamma303*invPsi03 - 
+        Gamma101*Gamma301*invPsi11 - Gamma102*Gamma301*invPsi12 - Gamma101*Gamma302*invPsi12 - Gamma103*Gamma301*invPsi13 - 
+        Gamma101*Gamma303*invPsi13 - Gamma102*Gamma302*invPsi22 - Gamma103*Gamma302*invPsi23 - Gamma102*Gamma303*invPsi23 - 
+        Gamma103*Gamma303*invPsi33 + g11*Phi101*Phi103 + g12*Phi103*Phi201 + g12*Phi101*Phi203 + g22*Phi201*Phi203 + 
+        g13*Phi103*Phi301 + g23*Phi203*Phi301 + g13*Phi101*Phi303 + g23*Phi201*Phi303 + g33*Phi301*Phi303 - Pi01*Pi03) + 
+     invPsi01*(-(Gamma101*Gamma300*invPsi00) - Gamma111*Gamma300*invPsi01 - Gamma101*Gamma301*invPsi01 - 
+        Gamma112*Gamma300*invPsi02 - Gamma101*Gamma302*invPsi02 - Gamma113*Gamma300*invPsi03 - Gamma101*Gamma303*invPsi03 - 
+        Gamma111*Gamma301*invPsi11 - Gamma112*Gamma301*invPsi12 - Gamma111*Gamma302*invPsi12 - Gamma113*Gamma301*invPsi13 - 
+        Gamma111*Gamma303*invPsi13 - Gamma112*Gamma302*invPsi22 - Gamma113*Gamma302*invPsi23 - Gamma112*Gamma303*invPsi23 - 
+        Gamma113*Gamma303*invPsi33 + g11*Phi103*Phi111 + g12*Phi111*Phi203 + g12*Phi103*Phi211 + g22*Phi203*Phi211 + 
+        g13*Phi111*Phi303 + g23*Phi211*Phi303 + g13*Phi103*Phi311 + g23*Phi203*Phi311 + g33*Phi303*Phi311 - Pi03*Pi11) + 
+     invPsi02*(-(Gamma102*Gamma300*invPsi00) - Gamma112*Gamma300*invPsi01 - Gamma102*Gamma301*invPsi01 - 
+        Gamma122*Gamma300*invPsi02 - Gamma102*Gamma302*invPsi02 - Gamma123*Gamma300*invPsi03 - Gamma102*Gamma303*invPsi03 - 
+        Gamma112*Gamma301*invPsi11 - Gamma122*Gamma301*invPsi12 - Gamma112*Gamma302*invPsi12 - Gamma123*Gamma301*invPsi13 - 
+        Gamma112*Gamma303*invPsi13 - Gamma122*Gamma302*invPsi22 - Gamma123*Gamma302*invPsi23 - Gamma122*Gamma303*invPsi23 - 
+        Gamma123*Gamma303*invPsi33 + g11*Phi103*Phi112 + g12*Phi112*Phi203 + g12*Phi103*Phi212 + g22*Phi203*Phi212 + 
+        g13*Phi112*Phi303 + g23*Phi212*Phi303 + g13*Phi103*Phi312 + g23*Phi203*Phi312 + g33*Phi303*Phi312 - Pi03*Pi12) + 
+     invPsi01*(-(Gamma100*Gamma301*invPsi00) - Gamma101*Gamma301*invPsi01 - Gamma100*Gamma311*invPsi01 - 
+        Gamma102*Gamma301*invPsi02 - Gamma100*Gamma312*invPsi02 - Gamma103*Gamma301*invPsi03 - Gamma100*Gamma313*invPsi03 - 
+        Gamma101*Gamma311*invPsi11 - Gamma102*Gamma311*invPsi12 - Gamma101*Gamma312*invPsi12 - Gamma103*Gamma311*invPsi13 - 
+        Gamma101*Gamma313*invPsi13 - Gamma102*Gamma312*invPsi22 - Gamma103*Gamma312*invPsi23 - Gamma102*Gamma313*invPsi23 - 
+        Gamma103*Gamma313*invPsi33 + g11*Phi101*Phi113 + g12*Phi113*Phi201 + g12*Phi101*Phi213 + g22*Phi201*Phi213 + 
+        g13*Phi113*Phi301 + g23*Phi213*Phi301 + g13*Phi101*Phi313 + g23*Phi201*Phi313 + g33*Phi301*Phi313 - Pi01*Pi13) + 
+     invPsi03*(-(Gamma103*Gamma300*invPsi00) - Gamma113*Gamma300*invPsi01 - Gamma103*Gamma301*invPsi01 - 
+        Gamma123*Gamma300*invPsi02 - Gamma103*Gamma302*invPsi02 - Gamma133*Gamma300*invPsi03 - Gamma103*Gamma303*invPsi03 - 
+        Gamma113*Gamma301*invPsi11 - Gamma123*Gamma301*invPsi12 - Gamma113*Gamma302*invPsi12 - Gamma133*Gamma301*invPsi13 - 
+        Gamma113*Gamma303*invPsi13 - Gamma123*Gamma302*invPsi22 - Gamma133*Gamma302*invPsi23 - Gamma123*Gamma303*invPsi23 - 
+        Gamma133*Gamma303*invPsi33 + g11*Phi103*Phi113 + g12*Phi113*Phi203 + g12*Phi103*Phi213 + g22*Phi203*Phi213 + 
+        g13*Phi113*Phi303 + g23*Phi213*Phi303 + g13*Phi103*Phi313 + g23*Phi203*Phi313 + g33*Phi303*Phi313 - Pi03*Pi13) + 
+     invPsi11*(-(Gamma101*Gamma301*invPsi00) - Gamma111*Gamma301*invPsi01 - Gamma101*Gamma311*invPsi01 - 
+        Gamma112*Gamma301*invPsi02 - Gamma101*Gamma312*invPsi02 - Gamma113*Gamma301*invPsi03 - Gamma101*Gamma313*invPsi03 - 
+        Gamma111*Gamma311*invPsi11 - Gamma112*Gamma311*invPsi12 - Gamma111*Gamma312*invPsi12 - Gamma113*Gamma311*invPsi13 - 
+        Gamma111*Gamma313*invPsi13 - Gamma112*Gamma312*invPsi22 - Gamma113*Gamma312*invPsi23 - Gamma112*Gamma313*invPsi23 - 
+        Gamma113*Gamma313*invPsi33 + g11*Phi111*Phi113 + g12*Phi113*Phi211 + g12*Phi111*Phi213 + g22*Phi211*Phi213 + 
+        g13*Phi113*Phi311 + g23*Phi213*Phi311 + g13*Phi111*Phi313 + g23*Phi211*Phi313 + g33*Phi311*Phi313 - Pi11*Pi13) + 
+     invPsi12*(-(Gamma102*Gamma301*invPsi00) - Gamma112*Gamma301*invPsi01 - Gamma102*Gamma311*invPsi01 - 
+        Gamma122*Gamma301*invPsi02 - Gamma102*Gamma312*invPsi02 - Gamma123*Gamma301*invPsi03 - Gamma102*Gamma313*invPsi03 - 
+        Gamma112*Gamma311*invPsi11 - Gamma122*Gamma311*invPsi12 - Gamma112*Gamma312*invPsi12 - Gamma123*Gamma311*invPsi13 - 
+        Gamma112*Gamma313*invPsi13 - Gamma122*Gamma312*invPsi22 - Gamma123*Gamma312*invPsi23 - Gamma122*Gamma313*invPsi23 - 
+        Gamma123*Gamma313*invPsi33 + g11*Phi112*Phi113 + g12*Phi113*Phi212 + g12*Phi112*Phi213 + g22*Phi212*Phi213 + 
+        g13*Phi113*Phi312 + g23*Phi213*Phi312 + g13*Phi112*Phi313 + g23*Phi212*Phi313 + g33*Phi312*Phi313 - Pi12*Pi13) + 
+     invPsi13*(-(Gamma103*Gamma301*invPsi00) - Gamma113*Gamma301*invPsi01 - Gamma103*Gamma311*invPsi01 - 
+        Gamma123*Gamma301*invPsi02 - Gamma103*Gamma312*invPsi02 - Gamma133*Gamma301*invPsi03 - Gamma103*Gamma313*invPsi03 - 
+        Gamma113*Gamma311*invPsi11 - Gamma123*Gamma311*invPsi12 - Gamma113*Gamma312*invPsi12 - Gamma133*Gamma311*invPsi13 - 
+        Gamma113*Gamma313*invPsi13 - Gamma123*Gamma312*invPsi22 - Gamma133*Gamma312*invPsi23 - Gamma123*Gamma313*invPsi23 - 
+        Gamma133*Gamma313*invPsi33 + g11*Power(Phi113,2) + 2*g12*Phi113*Phi213 + g22*Power(Phi213,2) + 2*g13*Phi113*Phi313 + 
+        2*g23*Phi213*Phi313 + g33*Power(Phi313,2) - Power(Pi13,2)) + 
+     invPsi02*(-(Gamma100*Gamma302*invPsi00) - Gamma101*Gamma302*invPsi01 - Gamma100*Gamma312*invPsi01 - 
+        Gamma102*Gamma302*invPsi02 - Gamma100*Gamma322*invPsi02 - Gamma103*Gamma302*invPsi03 - Gamma100*Gamma323*invPsi03 - 
+        Gamma101*Gamma312*invPsi11 - Gamma102*Gamma312*invPsi12 - Gamma101*Gamma322*invPsi12 - Gamma103*Gamma312*invPsi13 - 
+        Gamma101*Gamma323*invPsi13 - Gamma102*Gamma322*invPsi22 - Gamma103*Gamma322*invPsi23 - Gamma102*Gamma323*invPsi23 - 
+        Gamma103*Gamma323*invPsi33 + g11*Phi101*Phi123 + g12*Phi123*Phi201 + g12*Phi101*Phi223 + g22*Phi201*Phi223 + 
+        g13*Phi123*Phi301 + g23*Phi223*Phi301 + g13*Phi101*Phi323 + g23*Phi201*Phi323 + g33*Phi301*Phi323 - Pi01*Pi23) + 
+     invPsi12*(-(Gamma101*Gamma302*invPsi00) - Gamma111*Gamma302*invPsi01 - Gamma101*Gamma312*invPsi01 - 
+        Gamma112*Gamma302*invPsi02 - Gamma101*Gamma322*invPsi02 - Gamma113*Gamma302*invPsi03 - Gamma101*Gamma323*invPsi03 - 
+        Gamma111*Gamma312*invPsi11 - Gamma112*Gamma312*invPsi12 - Gamma111*Gamma322*invPsi12 - Gamma113*Gamma312*invPsi13 - 
+        Gamma111*Gamma323*invPsi13 - Gamma112*Gamma322*invPsi22 - Gamma113*Gamma322*invPsi23 - Gamma112*Gamma323*invPsi23 - 
+        Gamma113*Gamma323*invPsi33 + g11*Phi111*Phi123 + g12*Phi123*Phi211 + g12*Phi111*Phi223 + g22*Phi211*Phi223 + 
+        g13*Phi123*Phi311 + g23*Phi223*Phi311 + g13*Phi111*Phi323 + g23*Phi211*Phi323 + g33*Phi311*Phi323 - Pi11*Pi23) + 
+     invPsi22*(-(Gamma102*Gamma302*invPsi00) - Gamma112*Gamma302*invPsi01 - Gamma102*Gamma312*invPsi01 - 
+        Gamma122*Gamma302*invPsi02 - Gamma102*Gamma322*invPsi02 - Gamma123*Gamma302*invPsi03 - Gamma102*Gamma323*invPsi03 - 
+        Gamma112*Gamma312*invPsi11 - Gamma122*Gamma312*invPsi12 - Gamma112*Gamma322*invPsi12 - Gamma123*Gamma312*invPsi13 - 
+        Gamma112*Gamma323*invPsi13 - Gamma122*Gamma322*invPsi22 - Gamma123*Gamma322*invPsi23 - Gamma122*Gamma323*invPsi23 - 
+        Gamma123*Gamma323*invPsi33 + g11*Phi112*Phi123 + g12*Phi123*Phi212 + g12*Phi112*Phi223 + g22*Phi212*Phi223 + 
+        g13*Phi123*Phi312 + g23*Phi223*Phi312 + g13*Phi112*Phi323 + g23*Phi212*Phi323 + g33*Phi312*Phi323 - Pi12*Pi23) + 
+     invPsi23*(-(Gamma103*Gamma302*invPsi00) - Gamma113*Gamma302*invPsi01 - Gamma103*Gamma312*invPsi01 - 
+        Gamma123*Gamma302*invPsi02 - Gamma103*Gamma322*invPsi02 - Gamma133*Gamma302*invPsi03 - Gamma103*Gamma323*invPsi03 - 
+        Gamma113*Gamma312*invPsi11 - Gamma123*Gamma312*invPsi12 - Gamma113*Gamma322*invPsi12 - Gamma133*Gamma312*invPsi13 - 
+        Gamma113*Gamma323*invPsi13 - Gamma123*Gamma322*invPsi22 - Gamma133*Gamma322*invPsi23 - Gamma123*Gamma323*invPsi23 - 
+        Gamma133*Gamma323*invPsi33 + g11*Phi113*Phi123 + g12*Phi123*Phi213 + g12*Phi113*Phi223 + g22*Phi213*Phi223 + 
+        g13*Phi123*Phi313 + g23*Phi223*Phi313 + g13*Phi113*Phi323 + g23*Phi213*Phi323 + g33*Phi313*Phi323 - Pi13*Pi23) + 
+     invPsi03*(-(Gamma100*Gamma303*invPsi00) - Gamma101*Gamma303*invPsi01 - Gamma100*Gamma313*invPsi01 - 
+        Gamma102*Gamma303*invPsi02 - Gamma100*Gamma323*invPsi02 - Gamma103*Gamma303*invPsi03 - Gamma100*Gamma333*invPsi03 - 
+        Gamma101*Gamma313*invPsi11 - Gamma102*Gamma313*invPsi12 - Gamma101*Gamma323*invPsi12 - Gamma103*Gamma313*invPsi13 - 
+        Gamma101*Gamma333*invPsi13 - Gamma102*Gamma323*invPsi22 - Gamma103*Gamma323*invPsi23 - Gamma102*Gamma333*invPsi23 - 
+        Gamma103*Gamma333*invPsi33 + g11*Phi101*Phi133 + g12*Phi133*Phi201 + g12*Phi101*Phi233 + g22*Phi201*Phi233 + 
+        g13*Phi133*Phi301 + g23*Phi233*Phi301 + g13*Phi101*Phi333 + g23*Phi201*Phi333 + g33*Phi301*Phi333 - Pi01*Pi33) + 
+     invPsi13*(-(Gamma101*Gamma303*invPsi00) - Gamma111*Gamma303*invPsi01 - Gamma101*Gamma313*invPsi01 - 
+        Gamma112*Gamma303*invPsi02 - Gamma101*Gamma323*invPsi02 - Gamma113*Gamma303*invPsi03 - Gamma101*Gamma333*invPsi03 - 
+        Gamma111*Gamma313*invPsi11 - Gamma112*Gamma313*invPsi12 - Gamma111*Gamma323*invPsi12 - Gamma113*Gamma313*invPsi13 - 
+        Gamma111*Gamma333*invPsi13 - Gamma112*Gamma323*invPsi22 - Gamma113*Gamma323*invPsi23 - Gamma112*Gamma333*invPsi23 - 
+        Gamma113*Gamma333*invPsi33 + g11*Phi111*Phi133 + g12*Phi133*Phi211 + g12*Phi111*Phi233 + g22*Phi211*Phi233 + 
+        g13*Phi133*Phi311 + g23*Phi233*Phi311 + g13*Phi111*Phi333 + g23*Phi211*Phi333 + g33*Phi311*Phi333 - Pi11*Pi33) + 
+     invPsi23*(-(Gamma102*Gamma303*invPsi00) - Gamma112*Gamma303*invPsi01 - Gamma102*Gamma313*invPsi01 - 
+        Gamma122*Gamma303*invPsi02 - Gamma102*Gamma323*invPsi02 - Gamma123*Gamma303*invPsi03 - Gamma102*Gamma333*invPsi03 - 
+        Gamma112*Gamma313*invPsi11 - Gamma122*Gamma313*invPsi12 - Gamma112*Gamma323*invPsi12 - Gamma123*Gamma313*invPsi13 - 
+        Gamma112*Gamma333*invPsi13 - Gamma122*Gamma323*invPsi22 - Gamma123*Gamma323*invPsi23 - Gamma122*Gamma333*invPsi23 - 
+        Gamma123*Gamma333*invPsi33 + g11*Phi112*Phi133 + g12*Phi133*Phi212 + g12*Phi112*Phi233 + g22*Phi212*Phi233 + 
+        g13*Phi133*Phi312 + g23*Phi233*Phi312 + g13*Phi112*Phi333 + g23*Phi212*Phi333 + g33*Phi312*Phi333 - Pi12*Pi33) + 
+     invPsi33*(-(Gamma103*Gamma303*invPsi00) - Gamma113*Gamma303*invPsi01 - Gamma103*Gamma313*invPsi01 - 
+        Gamma123*Gamma303*invPsi02 - Gamma103*Gamma323*invPsi02 - Gamma133*Gamma303*invPsi03 - Gamma103*Gamma333*invPsi03 - 
+        Gamma113*Gamma313*invPsi11 - Gamma123*Gamma313*invPsi12 - Gamma113*Gamma323*invPsi12 - Gamma133*Gamma313*invPsi13 - 
+        Gamma113*Gamma333*invPsi13 - Gamma123*Gamma323*invPsi22 - Gamma133*Gamma323*invPsi23 - Gamma123*Gamma333*invPsi23 - 
+        Gamma133*Gamma333*invPsi33 + g11*Phi113*Phi133 + g12*Phi133*Phi213 + g12*Phi113*Phi233 + g22*Phi213*Phi233 + 
+        g13*Phi133*Phi313 + g23*Phi233*Phi313 + g13*Phi113*Phi333 + g23*Phi213*Phi333 + g33*Phi313*Phi333 - Pi13*Pi33));
     
     t1srcPi22 = 2*N*(invPsi00*(-(Power(Gamma200,2)*invPsi00) - 2*Gamma200*Gamma201*invPsi01 - 2*Gamma200*Gamma202*invPsi02 - 
-            Power(Gamma201,2)*invPsi11 - 2*Gamma201*Gamma202*invPsi12 - Power(Gamma202,2)*invPsi22 + g11*Power(Phi102,2) + 
-            2*g12*Phi102*Phi202 + g22*Power(Phi202,2) + 2*g13*Phi102*Phi302 + 2*g23*Phi202*Phi302 + g33*Power(Phi302,2) - 
-            Power(Pi02,2)) + 2*invPsi01*(-(Gamma200*Gamma201*invPsi00) - Power(Gamma201,2)*invPsi01 - Gamma200*Gamma211*invPsi01 - 
-            Gamma201*Gamma202*invPsi02 - Gamma200*Gamma212*invPsi02 - Gamma201*Gamma211*invPsi11 - Gamma202*Gamma211*invPsi12 - 
-            Gamma201*Gamma212*invPsi12 - Gamma202*Gamma212*invPsi22 + g11*Phi102*Phi112 + g12*Phi112*Phi202 + g12*Phi102*Phi212 + 
-            g22*Phi202*Phi212 + g13*Phi112*Phi302 + g23*Phi212*Phi302 + g13*Phi102*Phi312 + g23*Phi202*Phi312 + g33*Phi302*Phi312 - 
-            Pi02*Pi12) + invPsi11*(-(Power(Gamma201,2)*invPsi00) - 2*Gamma201*Gamma211*invPsi01 - 2*Gamma201*Gamma212*invPsi02 - 
-            Power(Gamma211,2)*invPsi11 - 2*Gamma211*Gamma212*invPsi12 - Power(Gamma212,2)*invPsi22 + g11*Power(Phi112,2) + 
-            2*g12*Phi112*Phi212 + g22*Power(Phi212,2) + 2*g13*Phi112*Phi312 + 2*g23*Phi212*Phi312 + g33*Power(Phi312,2) - 
-            Power(Pi12,2)) + 2*invPsi02*(-(Gamma200*Gamma202*invPsi00) - Gamma201*Gamma202*invPsi01 - Gamma200*Gamma212*invPsi01 - 
-            Power(Gamma202,2)*invPsi02 - Gamma200*Gamma222*invPsi02 - Gamma201*Gamma212*invPsi11 - Gamma202*Gamma212*invPsi12 - 
-            Gamma201*Gamma222*invPsi12 - Gamma202*Gamma222*invPsi22 + g11*Phi102*Phi122 + g12*Phi122*Phi202 + g12*Phi102*Phi222 + 
-            g22*Phi202*Phi222 + g13*Phi122*Phi302 + g23*Phi222*Phi302 + g13*Phi102*Phi322 + g23*Phi202*Phi322 + g33*Phi302*Phi322 - 
-            Pi02*Pi22) + 2*invPsi12*(-(Gamma201*Gamma202*invPsi00) - Gamma202*Gamma211*invPsi01 - Gamma201*Gamma212*invPsi01 - 
-            Gamma202*Gamma212*invPsi02 - Gamma201*Gamma222*invPsi02 - Gamma211*Gamma212*invPsi11 - Power(Gamma212,2)*invPsi12 - 
-            Gamma211*Gamma222*invPsi12 - Gamma212*Gamma222*invPsi22 + g11*Phi112*Phi122 + g12*Phi122*Phi212 + g12*Phi112*Phi222 + 
-            g22*Phi212*Phi222 + g13*Phi122*Phi312 + g23*Phi222*Phi312 + g13*Phi112*Phi322 + g23*Phi212*Phi322 + g33*Phi312*Phi322 - 
-            Pi12*Pi22) + invPsi22*(-(Power(Gamma202,2)*invPsi00) - 2*Gamma202*Gamma212*invPsi01 - 2*Gamma202*Gamma222*invPsi02 - 
-            Power(Gamma212,2)*invPsi11 - 2*Gamma212*Gamma222*invPsi12 - Power(Gamma222,2)*invPsi22 + g11*Power(Phi122,2) + 
-            2*g12*Phi122*Phi222 + g22*Power(Phi222,2) + 2*g13*Phi122*Phi322 + 2*g23*Phi222*Phi322 + g33*Power(Phi322,2) - 
-            Power(Pi22,2)) + 2*invPsi03*(-(Gamma200*Gamma203*invPsi00) - Gamma201*Gamma203*invPsi01 - Gamma200*Gamma213*invPsi01 - 
-            Gamma202*Gamma203*invPsi02 - Gamma200*Gamma223*invPsi02 - Gamma201*Gamma213*invPsi11 - Gamma202*Gamma213*invPsi12 - 
-            Gamma201*Gamma223*invPsi12 - Gamma202*Gamma223*invPsi22 + g11*Phi102*Phi123 + g12*Phi123*Phi202 + g12*Phi102*Phi223 + 
-            g22*Phi202*Phi223 + g13*Phi123*Phi302 + g23*Phi223*Phi302 + g13*Phi102*Phi323 + g23*Phi202*Phi323 + g33*Phi302*Phi323 - 
-            Pi02*Pi23) + 2*invPsi13*(-(Gamma201*Gamma203*invPsi00) - Gamma203*Gamma211*invPsi01 - Gamma201*Gamma213*invPsi01 - 
-            Gamma203*Gamma212*invPsi02 - Gamma201*Gamma223*invPsi02 - Gamma211*Gamma213*invPsi11 - Gamma212*Gamma213*invPsi12 - 
-            Gamma211*Gamma223*invPsi12 - Gamma212*Gamma223*invPsi22 + g11*Phi112*Phi123 + g12*Phi123*Phi212 + g12*Phi112*Phi223 + 
-            g22*Phi212*Phi223 + g13*Phi123*Phi312 + g23*Phi223*Phi312 + g13*Phi112*Phi323 + g23*Phi212*Phi323 + g33*Phi312*Phi323 - 
-            Pi12*Pi23) + 2*invPsi23*(-(Gamma202*Gamma203*invPsi00) - Gamma203*Gamma212*invPsi01 - Gamma202*Gamma213*invPsi01 - 
-            Gamma203*Gamma222*invPsi02 - Gamma202*Gamma223*invPsi02 - Gamma212*Gamma213*invPsi11 - Gamma213*Gamma222*invPsi12 - 
-            Gamma212*Gamma223*invPsi12 - Gamma222*Gamma223*invPsi22 + g11*Phi122*Phi123 + g12*Phi123*Phi222 + g12*Phi122*Phi223 + 
-            g22*Phi222*Phi223 + g13*Phi123*Phi322 + g23*Phi223*Phi322 + g13*Phi122*Phi323 + g23*Phi222*Phi323 + g33*Phi322*Phi323 - 
-            Pi22*Pi23) + invPsi33*(-(Power(Gamma203,2)*invPsi00) - 2*Gamma203*Gamma213*invPsi01 - 2*Gamma203*Gamma223*invPsi02 - 
-            Power(Gamma213,2)*invPsi11 - 2*Gamma213*Gamma223*invPsi12 - Power(Gamma223,2)*invPsi22 + g11*Power(Phi123,2) + 
-            2*g12*Phi123*Phi223 + g22*Power(Phi223,2) + 2*g13*Phi123*Phi323 + 2*g23*Phi223*Phi323 + g33*Power(Phi323,2) - 
-            Power(Pi23,2)));
+        2*Gamma200*Gamma203*invPsi03 - Power(Gamma201,2)*invPsi11 - 2*Gamma201*Gamma202*invPsi12 - 
+        2*Gamma201*Gamma203*invPsi13 - Power(Gamma202,2)*invPsi22 - 2*Gamma202*Gamma203*invPsi23 - Power(Gamma203,2)*invPsi33 + 
+        g11*Power(Phi102,2) + 2*g12*Phi102*Phi202 + g22*Power(Phi202,2) + 2*g13*Phi102*Phi302 + 2*g23*Phi202*Phi302 + 
+        g33*Power(Phi302,2) - Power(Pi02,2)) + 2*invPsi01*
+      (-(Gamma200*Gamma201*invPsi00) - Power(Gamma201,2)*invPsi01 - Gamma200*Gamma211*invPsi01 - Gamma201*Gamma202*invPsi02 - 
+        Gamma200*Gamma212*invPsi02 - Gamma201*Gamma203*invPsi03 - Gamma200*Gamma213*invPsi03 - Gamma201*Gamma211*invPsi11 - 
+        Gamma202*Gamma211*invPsi12 - Gamma201*Gamma212*invPsi12 - Gamma203*Gamma211*invPsi13 - Gamma201*Gamma213*invPsi13 - 
+        Gamma202*Gamma212*invPsi22 - Gamma203*Gamma212*invPsi23 - Gamma202*Gamma213*invPsi23 - Gamma203*Gamma213*invPsi33 + 
+        g11*Phi102*Phi112 + g12*Phi112*Phi202 + g12*Phi102*Phi212 + g22*Phi202*Phi212 + g13*Phi112*Phi302 + g23*Phi212*Phi302 + 
+        g13*Phi102*Phi312 + g23*Phi202*Phi312 + g33*Phi302*Phi312 - Pi02*Pi12) + 
+     invPsi11*(-(Power(Gamma201,2)*invPsi00) - 2*Gamma201*Gamma211*invPsi01 - 2*Gamma201*Gamma212*invPsi02 - 
+        2*Gamma201*Gamma213*invPsi03 - Power(Gamma211,2)*invPsi11 - 2*Gamma211*Gamma212*invPsi12 - 
+        2*Gamma211*Gamma213*invPsi13 - Power(Gamma212,2)*invPsi22 - 2*Gamma212*Gamma213*invPsi23 - Power(Gamma213,2)*invPsi33 + 
+        g11*Power(Phi112,2) + 2*g12*Phi112*Phi212 + g22*Power(Phi212,2) + 2*g13*Phi112*Phi312 + 2*g23*Phi212*Phi312 + 
+        g33*Power(Phi312,2) - Power(Pi12,2)) + 2*invPsi02*
+      (-(Gamma200*Gamma202*invPsi00) - Gamma201*Gamma202*invPsi01 - Gamma200*Gamma212*invPsi01 - Power(Gamma202,2)*invPsi02 - 
+        Gamma200*Gamma222*invPsi02 - Gamma202*Gamma203*invPsi03 - Gamma200*Gamma223*invPsi03 - Gamma201*Gamma212*invPsi11 - 
+        Gamma202*Gamma212*invPsi12 - Gamma201*Gamma222*invPsi12 - Gamma203*Gamma212*invPsi13 - Gamma201*Gamma223*invPsi13 - 
+        Gamma202*Gamma222*invPsi22 - Gamma203*Gamma222*invPsi23 - Gamma202*Gamma223*invPsi23 - Gamma203*Gamma223*invPsi33 + 
+        g11*Phi102*Phi122 + g12*Phi122*Phi202 + g12*Phi102*Phi222 + g22*Phi202*Phi222 + g13*Phi122*Phi302 + g23*Phi222*Phi302 + 
+        g13*Phi102*Phi322 + g23*Phi202*Phi322 + g33*Phi302*Phi322 - Pi02*Pi22) + 
+     2*invPsi12*(-(Gamma201*Gamma202*invPsi00) - Gamma202*Gamma211*invPsi01 - Gamma201*Gamma212*invPsi01 - 
+        Gamma202*Gamma212*invPsi02 - Gamma201*Gamma222*invPsi02 - Gamma202*Gamma213*invPsi03 - Gamma201*Gamma223*invPsi03 - 
+        Gamma211*Gamma212*invPsi11 - Power(Gamma212,2)*invPsi12 - Gamma211*Gamma222*invPsi12 - Gamma212*Gamma213*invPsi13 - 
+        Gamma211*Gamma223*invPsi13 - Gamma212*Gamma222*invPsi22 - Gamma213*Gamma222*invPsi23 - Gamma212*Gamma223*invPsi23 - 
+        Gamma213*Gamma223*invPsi33 + g11*Phi112*Phi122 + g12*Phi122*Phi212 + g12*Phi112*Phi222 + g22*Phi212*Phi222 + 
+        g13*Phi122*Phi312 + g23*Phi222*Phi312 + g13*Phi112*Phi322 + g23*Phi212*Phi322 + g33*Phi312*Phi322 - Pi12*Pi22) + 
+     invPsi22*(-(Power(Gamma202,2)*invPsi00) - 2*Gamma202*Gamma212*invPsi01 - 2*Gamma202*Gamma222*invPsi02 - 
+        2*Gamma202*Gamma223*invPsi03 - Power(Gamma212,2)*invPsi11 - 2*Gamma212*Gamma222*invPsi12 - 
+        2*Gamma212*Gamma223*invPsi13 - Power(Gamma222,2)*invPsi22 - 2*Gamma222*Gamma223*invPsi23 - Power(Gamma223,2)*invPsi33 + 
+        g11*Power(Phi122,2) + 2*g12*Phi122*Phi222 + g22*Power(Phi222,2) + 2*g13*Phi122*Phi322 + 2*g23*Phi222*Phi322 + 
+        g33*Power(Phi322,2) - Power(Pi22,2)) + 2*invPsi03*
+      (-(Gamma200*Gamma203*invPsi00) - Gamma201*Gamma203*invPsi01 - Gamma200*Gamma213*invPsi01 - Gamma202*Gamma203*invPsi02 - 
+        Gamma200*Gamma223*invPsi02 - Power(Gamma203,2)*invPsi03 - Gamma200*Gamma233*invPsi03 - Gamma201*Gamma213*invPsi11 - 
+        Gamma202*Gamma213*invPsi12 - Gamma201*Gamma223*invPsi12 - Gamma203*Gamma213*invPsi13 - Gamma201*Gamma233*invPsi13 - 
+        Gamma202*Gamma223*invPsi22 - Gamma203*Gamma223*invPsi23 - Gamma202*Gamma233*invPsi23 - Gamma203*Gamma233*invPsi33 + 
+        g11*Phi102*Phi123 + g12*Phi123*Phi202 + g12*Phi102*Phi223 + g22*Phi202*Phi223 + g13*Phi123*Phi302 + g23*Phi223*Phi302 + 
+        g13*Phi102*Phi323 + g23*Phi202*Phi323 + g33*Phi302*Phi323 - Pi02*Pi23) + 
+     2*invPsi13*(-(Gamma201*Gamma203*invPsi00) - Gamma203*Gamma211*invPsi01 - Gamma201*Gamma213*invPsi01 - 
+        Gamma203*Gamma212*invPsi02 - Gamma201*Gamma223*invPsi02 - Gamma203*Gamma213*invPsi03 - Gamma201*Gamma233*invPsi03 - 
+        Gamma211*Gamma213*invPsi11 - Gamma212*Gamma213*invPsi12 - Gamma211*Gamma223*invPsi12 - Power(Gamma213,2)*invPsi13 - 
+        Gamma211*Gamma233*invPsi13 - Gamma212*Gamma223*invPsi22 - Gamma213*Gamma223*invPsi23 - Gamma212*Gamma233*invPsi23 - 
+        Gamma213*Gamma233*invPsi33 + g11*Phi112*Phi123 + g12*Phi123*Phi212 + g12*Phi112*Phi223 + g22*Phi212*Phi223 + 
+        g13*Phi123*Phi312 + g23*Phi223*Phi312 + g13*Phi112*Phi323 + g23*Phi212*Phi323 + g33*Phi312*Phi323 - Pi12*Pi23) + 
+     2*invPsi23*(-(Gamma202*Gamma203*invPsi00) - Gamma203*Gamma212*invPsi01 - Gamma202*Gamma213*invPsi01 - 
+        Gamma203*Gamma222*invPsi02 - Gamma202*Gamma223*invPsi02 - Gamma203*Gamma223*invPsi03 - Gamma202*Gamma233*invPsi03 - 
+        Gamma212*Gamma213*invPsi11 - Gamma213*Gamma222*invPsi12 - Gamma212*Gamma223*invPsi12 - Gamma213*Gamma223*invPsi13 - 
+        Gamma212*Gamma233*invPsi13 - Gamma222*Gamma223*invPsi22 - Power(Gamma223,2)*invPsi23 - Gamma222*Gamma233*invPsi23 - 
+        Gamma223*Gamma233*invPsi33 + g11*Phi122*Phi123 + g12*Phi123*Phi222 + g12*Phi122*Phi223 + g22*Phi222*Phi223 + 
+        g13*Phi123*Phi322 + g23*Phi223*Phi322 + g13*Phi122*Phi323 + g23*Phi222*Phi323 + g33*Phi322*Phi323 - Pi22*Pi23) + 
+     invPsi33*(-(Power(Gamma203,2)*invPsi00) - 2*Gamma203*Gamma213*invPsi01 - 2*Gamma203*Gamma223*invPsi02 - 
+        2*Gamma203*Gamma233*invPsi03 - Power(Gamma213,2)*invPsi11 - 2*Gamma213*Gamma223*invPsi12 - 
+        2*Gamma213*Gamma233*invPsi13 - Power(Gamma223,2)*invPsi22 - 2*Gamma223*Gamma233*invPsi23 - Power(Gamma233,2)*invPsi33 + 
+        g11*Power(Phi123,2) + 2*g12*Phi123*Phi223 + g22*Power(Phi223,2) + 2*g13*Phi123*Phi323 + 2*g23*Phi223*Phi323 + 
+        g33*Power(Phi323,2) - Power(Pi23,2)));
     
     t1srcPi23 = 2*N*(invPsi00*(-(Gamma200*Gamma300*invPsi00) - Gamma201*Gamma300*invPsi01 - Gamma200*Gamma301*invPsi01 - 
-            Gamma202*Gamma300*invPsi02 - Gamma200*Gamma302*invPsi02 - Gamma201*Gamma301*invPsi11 - Gamma202*Gamma301*invPsi12 - 
-            Gamma201*Gamma302*invPsi12 - Gamma202*Gamma302*invPsi22 + g11*Phi102*Phi103 + g12*Phi103*Phi202 + g12*Phi102*Phi203 + 
-            g22*Phi202*Phi203 + g13*Phi103*Phi302 + g23*Phi203*Phi302 + g13*Phi102*Phi303 + g23*Phi202*Phi303 + g33*Phi302*Phi303 - 
-            Pi02*Pi03) + invPsi01*(-(Gamma201*Gamma300*invPsi00) - Gamma211*Gamma300*invPsi01 - Gamma201*Gamma301*invPsi01 - 
-            Gamma212*Gamma300*invPsi02 - Gamma201*Gamma302*invPsi02 - Gamma211*Gamma301*invPsi11 - Gamma212*Gamma301*invPsi12 - 
-            Gamma211*Gamma302*invPsi12 - Gamma212*Gamma302*invPsi22 + g11*Phi103*Phi112 + g12*Phi112*Phi203 + g12*Phi103*Phi212 + 
-            g22*Phi203*Phi212 + g13*Phi112*Phi303 + g23*Phi212*Phi303 + g13*Phi103*Phi312 + g23*Phi203*Phi312 + g33*Phi303*Phi312 - 
-            Pi03*Pi12) + invPsi01*(-(Gamma200*Gamma301*invPsi00) - Gamma201*Gamma301*invPsi01 - Gamma200*Gamma311*invPsi01 - 
-            Gamma202*Gamma301*invPsi02 - Gamma200*Gamma312*invPsi02 - Gamma201*Gamma311*invPsi11 - Gamma202*Gamma311*invPsi12 - 
-            Gamma201*Gamma312*invPsi12 - Gamma202*Gamma312*invPsi22 + g11*Phi102*Phi113 + g12*Phi113*Phi202 + g12*Phi102*Phi213 + 
-            g22*Phi202*Phi213 + g13*Phi113*Phi302 + g23*Phi213*Phi302 + g13*Phi102*Phi313 + g23*Phi202*Phi313 + g33*Phi302*Phi313 - 
-            Pi02*Pi13) + invPsi11*(-(Gamma201*Gamma301*invPsi00) - Gamma211*Gamma301*invPsi01 - Gamma201*Gamma311*invPsi01 - 
-            Gamma212*Gamma301*invPsi02 - Gamma201*Gamma312*invPsi02 - Gamma211*Gamma311*invPsi11 - Gamma212*Gamma311*invPsi12 - 
-            Gamma211*Gamma312*invPsi12 - Gamma212*Gamma312*invPsi22 + g11*Phi112*Phi113 + g12*Phi113*Phi212 + g12*Phi112*Phi213 + 
-            g22*Phi212*Phi213 + g13*Phi113*Phi312 + g23*Phi213*Phi312 + g13*Phi112*Phi313 + g23*Phi212*Phi313 + g33*Phi312*Phi313 - 
-            Pi12*Pi13) + invPsi02*(-(Gamma202*Gamma300*invPsi00) - Gamma212*Gamma300*invPsi01 - Gamma202*Gamma301*invPsi01 - 
-            Gamma222*Gamma300*invPsi02 - Gamma202*Gamma302*invPsi02 - Gamma212*Gamma301*invPsi11 - Gamma222*Gamma301*invPsi12 - 
-            Gamma212*Gamma302*invPsi12 - Gamma222*Gamma302*invPsi22 + g11*Phi103*Phi122 + g12*Phi122*Phi203 + g12*Phi103*Phi222 + 
-            g22*Phi203*Phi222 + g13*Phi122*Phi303 + g23*Phi222*Phi303 + g13*Phi103*Phi322 + g23*Phi203*Phi322 + g33*Phi303*Phi322 - 
-            Pi03*Pi22) + invPsi12*(-(Gamma202*Gamma301*invPsi00) - Gamma212*Gamma301*invPsi01 - Gamma202*Gamma311*invPsi01 - 
-            Gamma222*Gamma301*invPsi02 - Gamma202*Gamma312*invPsi02 - Gamma212*Gamma311*invPsi11 - Gamma222*Gamma311*invPsi12 - 
-            Gamma212*Gamma312*invPsi12 - Gamma222*Gamma312*invPsi22 + g11*Phi113*Phi122 + g12*Phi122*Phi213 + g12*Phi113*Phi222 + 
-            g22*Phi213*Phi222 + g13*Phi122*Phi313 + g23*Phi222*Phi313 + g13*Phi113*Phi322 + g23*Phi213*Phi322 + g33*Phi313*Phi322 - 
-            Pi13*Pi22) + invPsi02*(-(Gamma200*Gamma302*invPsi00) - Gamma201*Gamma302*invPsi01 - Gamma200*Gamma312*invPsi01 - 
-            Gamma202*Gamma302*invPsi02 - Gamma200*Gamma322*invPsi02 - Gamma201*Gamma312*invPsi11 - Gamma202*Gamma312*invPsi12 - 
-            Gamma201*Gamma322*invPsi12 - Gamma202*Gamma322*invPsi22 + g11*Phi102*Phi123 + g12*Phi123*Phi202 + g12*Phi102*Phi223 + 
-            g22*Phi202*Phi223 + g13*Phi123*Phi302 + g23*Phi223*Phi302 + g13*Phi102*Phi323 + g23*Phi202*Phi323 + g33*Phi302*Phi323 - 
-            Pi02*Pi23) + invPsi03*(-(Gamma203*Gamma300*invPsi00) - Gamma213*Gamma300*invPsi01 - Gamma203*Gamma301*invPsi01 - 
-            Gamma223*Gamma300*invPsi02 - Gamma203*Gamma302*invPsi02 - Gamma213*Gamma301*invPsi11 - Gamma223*Gamma301*invPsi12 - 
-            Gamma213*Gamma302*invPsi12 - Gamma223*Gamma302*invPsi22 + g11*Phi103*Phi123 + g12*Phi123*Phi203 + g12*Phi103*Phi223 + 
-            g22*Phi203*Phi223 + g13*Phi123*Phi303 + g23*Phi223*Phi303 + g13*Phi103*Phi323 + g23*Phi203*Phi323 + g33*Phi303*Phi323 - 
-            Pi03*Pi23) + invPsi12*(-(Gamma201*Gamma302*invPsi00) - Gamma211*Gamma302*invPsi01 - Gamma201*Gamma312*invPsi01 - 
-            Gamma212*Gamma302*invPsi02 - Gamma201*Gamma322*invPsi02 - Gamma211*Gamma312*invPsi11 - Gamma212*Gamma312*invPsi12 - 
-            Gamma211*Gamma322*invPsi12 - Gamma212*Gamma322*invPsi22 + g11*Phi112*Phi123 + g12*Phi123*Phi212 + g12*Phi112*Phi223 + 
-            g22*Phi212*Phi223 + g13*Phi123*Phi312 + g23*Phi223*Phi312 + g13*Phi112*Phi323 + g23*Phi212*Phi323 + g33*Phi312*Phi323 - 
-            Pi12*Pi23) + invPsi13*(-(Gamma203*Gamma301*invPsi00) - Gamma213*Gamma301*invPsi01 - Gamma203*Gamma311*invPsi01 - 
-            Gamma223*Gamma301*invPsi02 - Gamma203*Gamma312*invPsi02 - Gamma213*Gamma311*invPsi11 - Gamma223*Gamma311*invPsi12 - 
-            Gamma213*Gamma312*invPsi12 - Gamma223*Gamma312*invPsi22 + g11*Phi113*Phi123 + g12*Phi123*Phi213 + g12*Phi113*Phi223 + 
-            g22*Phi213*Phi223 + g13*Phi123*Phi313 + g23*Phi223*Phi313 + g13*Phi113*Phi323 + g23*Phi213*Phi323 + g33*Phi313*Phi323 - 
-            Pi13*Pi23) + invPsi22*(-(Gamma202*Gamma302*invPsi00) - Gamma212*Gamma302*invPsi01 - Gamma202*Gamma312*invPsi01 - 
-            Gamma222*Gamma302*invPsi02 - Gamma202*Gamma322*invPsi02 - Gamma212*Gamma312*invPsi11 - Gamma222*Gamma312*invPsi12 - 
-            Gamma212*Gamma322*invPsi12 - Gamma222*Gamma322*invPsi22 + g11*Phi122*Phi123 + g12*Phi123*Phi222 + g12*Phi122*Phi223 + 
-            g22*Phi222*Phi223 + g13*Phi123*Phi322 + g23*Phi223*Phi322 + g13*Phi122*Phi323 + g23*Phi222*Phi323 + g33*Phi322*Phi323 - 
-            Pi22*Pi23) + invPsi23*(-(Gamma203*Gamma302*invPsi00) - Gamma213*Gamma302*invPsi01 - Gamma203*Gamma312*invPsi01 - 
-            Gamma223*Gamma302*invPsi02 - Gamma203*Gamma322*invPsi02 - Gamma213*Gamma312*invPsi11 - Gamma223*Gamma312*invPsi12 - 
-            Gamma213*Gamma322*invPsi12 - Gamma223*Gamma322*invPsi22 + g11*Power(Phi123,2) + 2*g12*Phi123*Phi223 + 
-            g22*Power(Phi223,2) + 2*g13*Phi123*Phi323 + 2*g23*Phi223*Phi323 + g33*Power(Phi323,2) - Power(Pi23,2)) + 
-         invPsi03*(-(Gamma200*Gamma303*invPsi00) - Gamma201*Gamma303*invPsi01 - Gamma200*Gamma313*invPsi01 - 
-            Gamma202*Gamma303*invPsi02 - Gamma200*Gamma323*invPsi02 - Gamma201*Gamma313*invPsi11 - Gamma202*Gamma313*invPsi12 - 
-            Gamma201*Gamma323*invPsi12 - Gamma202*Gamma323*invPsi22 + g11*Phi102*Phi133 + g12*Phi133*Phi202 + g12*Phi102*Phi233 + 
-            g22*Phi202*Phi233 + g13*Phi133*Phi302 + g23*Phi233*Phi302 + g13*Phi102*Phi333 + g23*Phi202*Phi333 + g33*Phi302*Phi333 - 
-            Pi02*Pi33) + invPsi13*(-(Gamma201*Gamma303*invPsi00) - Gamma211*Gamma303*invPsi01 - Gamma201*Gamma313*invPsi01 - 
-            Gamma212*Gamma303*invPsi02 - Gamma201*Gamma323*invPsi02 - Gamma211*Gamma313*invPsi11 - Gamma212*Gamma313*invPsi12 - 
-            Gamma211*Gamma323*invPsi12 - Gamma212*Gamma323*invPsi22 + g11*Phi112*Phi133 + g12*Phi133*Phi212 + g12*Phi112*Phi233 + 
-            g22*Phi212*Phi233 + g13*Phi133*Phi312 + g23*Phi233*Phi312 + g13*Phi112*Phi333 + g23*Phi212*Phi333 + g33*Phi312*Phi333 - 
-            Pi12*Pi33) + invPsi23*(-(Gamma202*Gamma303*invPsi00) - Gamma212*Gamma303*invPsi01 - Gamma202*Gamma313*invPsi01 - 
-            Gamma222*Gamma303*invPsi02 - Gamma202*Gamma323*invPsi02 - Gamma212*Gamma313*invPsi11 - Gamma222*Gamma313*invPsi12 - 
-            Gamma212*Gamma323*invPsi12 - Gamma222*Gamma323*invPsi22 + g11*Phi122*Phi133 + g12*Phi133*Phi222 + g12*Phi122*Phi233 + 
-            g22*Phi222*Phi233 + g13*Phi133*Phi322 + g23*Phi233*Phi322 + g13*Phi122*Phi333 + g23*Phi222*Phi333 + g33*Phi322*Phi333 - 
-            Pi22*Pi33) + invPsi33*(-(Gamma203*Gamma303*invPsi00) - Gamma213*Gamma303*invPsi01 - Gamma203*Gamma313*invPsi01 - 
-            Gamma223*Gamma303*invPsi02 - Gamma203*Gamma323*invPsi02 - Gamma213*Gamma313*invPsi11 - Gamma223*Gamma313*invPsi12 - 
-            Gamma213*Gamma323*invPsi12 - Gamma223*Gamma323*invPsi22 + g11*Phi123*Phi133 + g12*Phi133*Phi223 + g12*Phi123*Phi233 + 
-            g22*Phi223*Phi233 + g13*Phi133*Phi323 + g23*Phi233*Phi323 + g13*Phi123*Phi333 + g23*Phi223*Phi333 + g33*Phi323*Phi333 - 
-            Pi23*Pi33));
+        Gamma202*Gamma300*invPsi02 - Gamma200*Gamma302*invPsi02 - Gamma203*Gamma300*invPsi03 - Gamma200*Gamma303*invPsi03 - 
+        Gamma201*Gamma301*invPsi11 - Gamma202*Gamma301*invPsi12 - Gamma201*Gamma302*invPsi12 - Gamma203*Gamma301*invPsi13 - 
+        Gamma201*Gamma303*invPsi13 - Gamma202*Gamma302*invPsi22 - Gamma203*Gamma302*invPsi23 - Gamma202*Gamma303*invPsi23 - 
+        Gamma203*Gamma303*invPsi33 + g11*Phi102*Phi103 + g12*Phi103*Phi202 + g12*Phi102*Phi203 + g22*Phi202*Phi203 + 
+        g13*Phi103*Phi302 + g23*Phi203*Phi302 + g13*Phi102*Phi303 + g23*Phi202*Phi303 + g33*Phi302*Phi303 - Pi02*Pi03) + 
+     invPsi01*(-(Gamma201*Gamma300*invPsi00) - Gamma211*Gamma300*invPsi01 - Gamma201*Gamma301*invPsi01 - 
+        Gamma212*Gamma300*invPsi02 - Gamma201*Gamma302*invPsi02 - Gamma213*Gamma300*invPsi03 - Gamma201*Gamma303*invPsi03 - 
+        Gamma211*Gamma301*invPsi11 - Gamma212*Gamma301*invPsi12 - Gamma211*Gamma302*invPsi12 - Gamma213*Gamma301*invPsi13 - 
+        Gamma211*Gamma303*invPsi13 - Gamma212*Gamma302*invPsi22 - Gamma213*Gamma302*invPsi23 - Gamma212*Gamma303*invPsi23 - 
+        Gamma213*Gamma303*invPsi33 + g11*Phi103*Phi112 + g12*Phi112*Phi203 + g12*Phi103*Phi212 + g22*Phi203*Phi212 + 
+        g13*Phi112*Phi303 + g23*Phi212*Phi303 + g13*Phi103*Phi312 + g23*Phi203*Phi312 + g33*Phi303*Phi312 - Pi03*Pi12) + 
+     invPsi01*(-(Gamma200*Gamma301*invPsi00) - Gamma201*Gamma301*invPsi01 - Gamma200*Gamma311*invPsi01 - 
+        Gamma202*Gamma301*invPsi02 - Gamma200*Gamma312*invPsi02 - Gamma203*Gamma301*invPsi03 - Gamma200*Gamma313*invPsi03 - 
+        Gamma201*Gamma311*invPsi11 - Gamma202*Gamma311*invPsi12 - Gamma201*Gamma312*invPsi12 - Gamma203*Gamma311*invPsi13 - 
+        Gamma201*Gamma313*invPsi13 - Gamma202*Gamma312*invPsi22 - Gamma203*Gamma312*invPsi23 - Gamma202*Gamma313*invPsi23 - 
+        Gamma203*Gamma313*invPsi33 + g11*Phi102*Phi113 + g12*Phi113*Phi202 + g12*Phi102*Phi213 + g22*Phi202*Phi213 + 
+        g13*Phi113*Phi302 + g23*Phi213*Phi302 + g13*Phi102*Phi313 + g23*Phi202*Phi313 + g33*Phi302*Phi313 - Pi02*Pi13) + 
+     invPsi11*(-(Gamma201*Gamma301*invPsi00) - Gamma211*Gamma301*invPsi01 - Gamma201*Gamma311*invPsi01 - 
+        Gamma212*Gamma301*invPsi02 - Gamma201*Gamma312*invPsi02 - Gamma213*Gamma301*invPsi03 - Gamma201*Gamma313*invPsi03 - 
+        Gamma211*Gamma311*invPsi11 - Gamma212*Gamma311*invPsi12 - Gamma211*Gamma312*invPsi12 - Gamma213*Gamma311*invPsi13 - 
+        Gamma211*Gamma313*invPsi13 - Gamma212*Gamma312*invPsi22 - Gamma213*Gamma312*invPsi23 - Gamma212*Gamma313*invPsi23 - 
+        Gamma213*Gamma313*invPsi33 + g11*Phi112*Phi113 + g12*Phi113*Phi212 + g12*Phi112*Phi213 + g22*Phi212*Phi213 + 
+        g13*Phi113*Phi312 + g23*Phi213*Phi312 + g13*Phi112*Phi313 + g23*Phi212*Phi313 + g33*Phi312*Phi313 - Pi12*Pi13) + 
+     invPsi02*(-(Gamma202*Gamma300*invPsi00) - Gamma212*Gamma300*invPsi01 - Gamma202*Gamma301*invPsi01 - 
+        Gamma222*Gamma300*invPsi02 - Gamma202*Gamma302*invPsi02 - Gamma223*Gamma300*invPsi03 - Gamma202*Gamma303*invPsi03 - 
+        Gamma212*Gamma301*invPsi11 - Gamma222*Gamma301*invPsi12 - Gamma212*Gamma302*invPsi12 - Gamma223*Gamma301*invPsi13 - 
+        Gamma212*Gamma303*invPsi13 - Gamma222*Gamma302*invPsi22 - Gamma223*Gamma302*invPsi23 - Gamma222*Gamma303*invPsi23 - 
+        Gamma223*Gamma303*invPsi33 + g11*Phi103*Phi122 + g12*Phi122*Phi203 + g12*Phi103*Phi222 + g22*Phi203*Phi222 + 
+        g13*Phi122*Phi303 + g23*Phi222*Phi303 + g13*Phi103*Phi322 + g23*Phi203*Phi322 + g33*Phi303*Phi322 - Pi03*Pi22) + 
+     invPsi12*(-(Gamma202*Gamma301*invPsi00) - Gamma212*Gamma301*invPsi01 - Gamma202*Gamma311*invPsi01 - 
+        Gamma222*Gamma301*invPsi02 - Gamma202*Gamma312*invPsi02 - Gamma223*Gamma301*invPsi03 - Gamma202*Gamma313*invPsi03 - 
+        Gamma212*Gamma311*invPsi11 - Gamma222*Gamma311*invPsi12 - Gamma212*Gamma312*invPsi12 - Gamma223*Gamma311*invPsi13 - 
+        Gamma212*Gamma313*invPsi13 - Gamma222*Gamma312*invPsi22 - Gamma223*Gamma312*invPsi23 - Gamma222*Gamma313*invPsi23 - 
+        Gamma223*Gamma313*invPsi33 + g11*Phi113*Phi122 + g12*Phi122*Phi213 + g12*Phi113*Phi222 + g22*Phi213*Phi222 + 
+        g13*Phi122*Phi313 + g23*Phi222*Phi313 + g13*Phi113*Phi322 + g23*Phi213*Phi322 + g33*Phi313*Phi322 - Pi13*Pi22) + 
+     invPsi02*(-(Gamma200*Gamma302*invPsi00) - Gamma201*Gamma302*invPsi01 - Gamma200*Gamma312*invPsi01 - 
+        Gamma202*Gamma302*invPsi02 - Gamma200*Gamma322*invPsi02 - Gamma203*Gamma302*invPsi03 - Gamma200*Gamma323*invPsi03 - 
+        Gamma201*Gamma312*invPsi11 - Gamma202*Gamma312*invPsi12 - Gamma201*Gamma322*invPsi12 - Gamma203*Gamma312*invPsi13 - 
+        Gamma201*Gamma323*invPsi13 - Gamma202*Gamma322*invPsi22 - Gamma203*Gamma322*invPsi23 - Gamma202*Gamma323*invPsi23 - 
+        Gamma203*Gamma323*invPsi33 + g11*Phi102*Phi123 + g12*Phi123*Phi202 + g12*Phi102*Phi223 + g22*Phi202*Phi223 + 
+        g13*Phi123*Phi302 + g23*Phi223*Phi302 + g13*Phi102*Phi323 + g23*Phi202*Phi323 + g33*Phi302*Phi323 - Pi02*Pi23) + 
+     invPsi03*(-(Gamma203*Gamma300*invPsi00) - Gamma213*Gamma300*invPsi01 - Gamma203*Gamma301*invPsi01 - 
+        Gamma223*Gamma300*invPsi02 - Gamma203*Gamma302*invPsi02 - Gamma233*Gamma300*invPsi03 - Gamma203*Gamma303*invPsi03 - 
+        Gamma213*Gamma301*invPsi11 - Gamma223*Gamma301*invPsi12 - Gamma213*Gamma302*invPsi12 - Gamma233*Gamma301*invPsi13 - 
+        Gamma213*Gamma303*invPsi13 - Gamma223*Gamma302*invPsi22 - Gamma233*Gamma302*invPsi23 - Gamma223*Gamma303*invPsi23 - 
+        Gamma233*Gamma303*invPsi33 + g11*Phi103*Phi123 + g12*Phi123*Phi203 + g12*Phi103*Phi223 + g22*Phi203*Phi223 + 
+        g13*Phi123*Phi303 + g23*Phi223*Phi303 + g13*Phi103*Phi323 + g23*Phi203*Phi323 + g33*Phi303*Phi323 - Pi03*Pi23) + 
+     invPsi12*(-(Gamma201*Gamma302*invPsi00) - Gamma211*Gamma302*invPsi01 - Gamma201*Gamma312*invPsi01 - 
+        Gamma212*Gamma302*invPsi02 - Gamma201*Gamma322*invPsi02 - Gamma213*Gamma302*invPsi03 - Gamma201*Gamma323*invPsi03 - 
+        Gamma211*Gamma312*invPsi11 - Gamma212*Gamma312*invPsi12 - Gamma211*Gamma322*invPsi12 - Gamma213*Gamma312*invPsi13 - 
+        Gamma211*Gamma323*invPsi13 - Gamma212*Gamma322*invPsi22 - Gamma213*Gamma322*invPsi23 - Gamma212*Gamma323*invPsi23 - 
+        Gamma213*Gamma323*invPsi33 + g11*Phi112*Phi123 + g12*Phi123*Phi212 + g12*Phi112*Phi223 + g22*Phi212*Phi223 + 
+        g13*Phi123*Phi312 + g23*Phi223*Phi312 + g13*Phi112*Phi323 + g23*Phi212*Phi323 + g33*Phi312*Phi323 - Pi12*Pi23) + 
+     invPsi13*(-(Gamma203*Gamma301*invPsi00) - Gamma213*Gamma301*invPsi01 - Gamma203*Gamma311*invPsi01 - 
+        Gamma223*Gamma301*invPsi02 - Gamma203*Gamma312*invPsi02 - Gamma233*Gamma301*invPsi03 - Gamma203*Gamma313*invPsi03 - 
+        Gamma213*Gamma311*invPsi11 - Gamma223*Gamma311*invPsi12 - Gamma213*Gamma312*invPsi12 - Gamma233*Gamma311*invPsi13 - 
+        Gamma213*Gamma313*invPsi13 - Gamma223*Gamma312*invPsi22 - Gamma233*Gamma312*invPsi23 - Gamma223*Gamma313*invPsi23 - 
+        Gamma233*Gamma313*invPsi33 + g11*Phi113*Phi123 + g12*Phi123*Phi213 + g12*Phi113*Phi223 + g22*Phi213*Phi223 + 
+        g13*Phi123*Phi313 + g23*Phi223*Phi313 + g13*Phi113*Phi323 + g23*Phi213*Phi323 + g33*Phi313*Phi323 - Pi13*Pi23) + 
+     invPsi22*(-(Gamma202*Gamma302*invPsi00) - Gamma212*Gamma302*invPsi01 - Gamma202*Gamma312*invPsi01 - 
+        Gamma222*Gamma302*invPsi02 - Gamma202*Gamma322*invPsi02 - Gamma223*Gamma302*invPsi03 - Gamma202*Gamma323*invPsi03 - 
+        Gamma212*Gamma312*invPsi11 - Gamma222*Gamma312*invPsi12 - Gamma212*Gamma322*invPsi12 - Gamma223*Gamma312*invPsi13 - 
+        Gamma212*Gamma323*invPsi13 - Gamma222*Gamma322*invPsi22 - Gamma223*Gamma322*invPsi23 - Gamma222*Gamma323*invPsi23 - 
+        Gamma223*Gamma323*invPsi33 + g11*Phi122*Phi123 + g12*Phi123*Phi222 + g12*Phi122*Phi223 + g22*Phi222*Phi223 + 
+        g13*Phi123*Phi322 + g23*Phi223*Phi322 + g13*Phi122*Phi323 + g23*Phi222*Phi323 + g33*Phi322*Phi323 - Pi22*Pi23) + 
+     invPsi23*(-(Gamma203*Gamma302*invPsi00) - Gamma213*Gamma302*invPsi01 - Gamma203*Gamma312*invPsi01 - 
+        Gamma223*Gamma302*invPsi02 - Gamma203*Gamma322*invPsi02 - Gamma233*Gamma302*invPsi03 - Gamma203*Gamma323*invPsi03 - 
+        Gamma213*Gamma312*invPsi11 - Gamma223*Gamma312*invPsi12 - Gamma213*Gamma322*invPsi12 - Gamma233*Gamma312*invPsi13 - 
+        Gamma213*Gamma323*invPsi13 - Gamma223*Gamma322*invPsi22 - Gamma233*Gamma322*invPsi23 - Gamma223*Gamma323*invPsi23 - 
+        Gamma233*Gamma323*invPsi33 + g11*Power(Phi123,2) + 2*g12*Phi123*Phi223 + g22*Power(Phi223,2) + 2*g13*Phi123*Phi323 + 
+        2*g23*Phi223*Phi323 + g33*Power(Phi323,2) - Power(Pi23,2)) + 
+     invPsi03*(-(Gamma200*Gamma303*invPsi00) - Gamma201*Gamma303*invPsi01 - Gamma200*Gamma313*invPsi01 - 
+        Gamma202*Gamma303*invPsi02 - Gamma200*Gamma323*invPsi02 - Gamma203*Gamma303*invPsi03 - Gamma200*Gamma333*invPsi03 - 
+        Gamma201*Gamma313*invPsi11 - Gamma202*Gamma313*invPsi12 - Gamma201*Gamma323*invPsi12 - Gamma203*Gamma313*invPsi13 - 
+        Gamma201*Gamma333*invPsi13 - Gamma202*Gamma323*invPsi22 - Gamma203*Gamma323*invPsi23 - Gamma202*Gamma333*invPsi23 - 
+        Gamma203*Gamma333*invPsi33 + g11*Phi102*Phi133 + g12*Phi133*Phi202 + g12*Phi102*Phi233 + g22*Phi202*Phi233 + 
+        g13*Phi133*Phi302 + g23*Phi233*Phi302 + g13*Phi102*Phi333 + g23*Phi202*Phi333 + g33*Phi302*Phi333 - Pi02*Pi33) + 
+     invPsi13*(-(Gamma201*Gamma303*invPsi00) - Gamma211*Gamma303*invPsi01 - Gamma201*Gamma313*invPsi01 - 
+        Gamma212*Gamma303*invPsi02 - Gamma201*Gamma323*invPsi02 - Gamma213*Gamma303*invPsi03 - Gamma201*Gamma333*invPsi03 - 
+        Gamma211*Gamma313*invPsi11 - Gamma212*Gamma313*invPsi12 - Gamma211*Gamma323*invPsi12 - Gamma213*Gamma313*invPsi13 - 
+        Gamma211*Gamma333*invPsi13 - Gamma212*Gamma323*invPsi22 - Gamma213*Gamma323*invPsi23 - Gamma212*Gamma333*invPsi23 - 
+        Gamma213*Gamma333*invPsi33 + g11*Phi112*Phi133 + g12*Phi133*Phi212 + g12*Phi112*Phi233 + g22*Phi212*Phi233 + 
+        g13*Phi133*Phi312 + g23*Phi233*Phi312 + g13*Phi112*Phi333 + g23*Phi212*Phi333 + g33*Phi312*Phi333 - Pi12*Pi33) + 
+     invPsi23*(-(Gamma202*Gamma303*invPsi00) - Gamma212*Gamma303*invPsi01 - Gamma202*Gamma313*invPsi01 - 
+        Gamma222*Gamma303*invPsi02 - Gamma202*Gamma323*invPsi02 - Gamma223*Gamma303*invPsi03 - Gamma202*Gamma333*invPsi03 - 
+        Gamma212*Gamma313*invPsi11 - Gamma222*Gamma313*invPsi12 - Gamma212*Gamma323*invPsi12 - Gamma223*Gamma313*invPsi13 - 
+        Gamma212*Gamma333*invPsi13 - Gamma222*Gamma323*invPsi22 - Gamma223*Gamma323*invPsi23 - Gamma222*Gamma333*invPsi23 - 
+        Gamma223*Gamma333*invPsi33 + g11*Phi122*Phi133 + g12*Phi133*Phi222 + g12*Phi122*Phi233 + g22*Phi222*Phi233 + 
+        g13*Phi133*Phi322 + g23*Phi233*Phi322 + g13*Phi122*Phi333 + g23*Phi222*Phi333 + g33*Phi322*Phi333 - Pi22*Pi33) + 
+     invPsi33*(-(Gamma203*Gamma303*invPsi00) - Gamma213*Gamma303*invPsi01 - Gamma203*Gamma313*invPsi01 - 
+        Gamma223*Gamma303*invPsi02 - Gamma203*Gamma323*invPsi02 - Gamma233*Gamma303*invPsi03 - Gamma203*Gamma333*invPsi03 - 
+        Gamma213*Gamma313*invPsi11 - Gamma223*Gamma313*invPsi12 - Gamma213*Gamma323*invPsi12 - Gamma233*Gamma313*invPsi13 - 
+        Gamma213*Gamma333*invPsi13 - Gamma223*Gamma323*invPsi22 - Gamma233*Gamma323*invPsi23 - Gamma223*Gamma333*invPsi23 - 
+        Gamma233*Gamma333*invPsi33 + g11*Phi123*Phi133 + g12*Phi133*Phi223 + g12*Phi123*Phi233 + g22*Phi223*Phi233 + 
+        g13*Phi133*Phi323 + g23*Phi233*Phi323 + g13*Phi123*Phi333 + g23*Phi223*Phi333 + g33*Phi323*Phi333 - Pi23*Pi33));
     
     t1srcPi33 = 2*N*(invPsi00*(-(Power(Gamma300,2)*invPsi00) - 2*Gamma300*Gamma301*invPsi01 - 2*Gamma300*Gamma302*invPsi02 - 
-            Power(Gamma301,2)*invPsi11 - 2*Gamma301*Gamma302*invPsi12 - Power(Gamma302,2)*invPsi22 + g11*Power(Phi103,2) + 
-            2*g12*Phi103*Phi203 + g22*Power(Phi203,2) + 2*g13*Phi103*Phi303 + 2*g23*Phi203*Phi303 + g33*Power(Phi303,2) - 
-            Power(Pi03,2)) + 2*invPsi01*(-(Gamma300*Gamma301*invPsi00) - Power(Gamma301,2)*invPsi01 - Gamma300*Gamma311*invPsi01 - 
-            Gamma301*Gamma302*invPsi02 - Gamma300*Gamma312*invPsi02 - Gamma301*Gamma311*invPsi11 - Gamma302*Gamma311*invPsi12 - 
-            Gamma301*Gamma312*invPsi12 - Gamma302*Gamma312*invPsi22 + g11*Phi103*Phi113 + g12*Phi113*Phi203 + g12*Phi103*Phi213 + 
-            g22*Phi203*Phi213 + g13*Phi113*Phi303 + g23*Phi213*Phi303 + g13*Phi103*Phi313 + g23*Phi203*Phi313 + g33*Phi303*Phi313 - 
-            Pi03*Pi13) + invPsi11*(-(Power(Gamma301,2)*invPsi00) - 2*Gamma301*Gamma311*invPsi01 - 2*Gamma301*Gamma312*invPsi02 - 
-            Power(Gamma311,2)*invPsi11 - 2*Gamma311*Gamma312*invPsi12 - Power(Gamma312,2)*invPsi22 + g11*Power(Phi113,2) + 
-            2*g12*Phi113*Phi213 + g22*Power(Phi213,2) + 2*g13*Phi113*Phi313 + 2*g23*Phi213*Phi313 + g33*Power(Phi313,2) - 
-            Power(Pi13,2)) + 2*invPsi02*(-(Gamma300*Gamma302*invPsi00) - Gamma301*Gamma302*invPsi01 - Gamma300*Gamma312*invPsi01 - 
-            Power(Gamma302,2)*invPsi02 - Gamma300*Gamma322*invPsi02 - Gamma301*Gamma312*invPsi11 - Gamma302*Gamma312*invPsi12 - 
-            Gamma301*Gamma322*invPsi12 - Gamma302*Gamma322*invPsi22 + g11*Phi103*Phi123 + g12*Phi123*Phi203 + g12*Phi103*Phi223 + 
-            g22*Phi203*Phi223 + g13*Phi123*Phi303 + g23*Phi223*Phi303 + g13*Phi103*Phi323 + g23*Phi203*Phi323 + g33*Phi303*Phi323 - 
-            Pi03*Pi23) + 2*invPsi12*(-(Gamma301*Gamma302*invPsi00) - Gamma302*Gamma311*invPsi01 - Gamma301*Gamma312*invPsi01 - 
-            Gamma302*Gamma312*invPsi02 - Gamma301*Gamma322*invPsi02 - Gamma311*Gamma312*invPsi11 - Power(Gamma312,2)*invPsi12 - 
-            Gamma311*Gamma322*invPsi12 - Gamma312*Gamma322*invPsi22 + g11*Phi113*Phi123 + g12*Phi123*Phi213 + g12*Phi113*Phi223 + 
-            g22*Phi213*Phi223 + g13*Phi123*Phi313 + g23*Phi223*Phi313 + g13*Phi113*Phi323 + g23*Phi213*Phi323 + g33*Phi313*Phi323 - 
-            Pi13*Pi23) + invPsi22*(-(Power(Gamma302,2)*invPsi00) - 2*Gamma302*Gamma312*invPsi01 - 2*Gamma302*Gamma322*invPsi02 - 
-            Power(Gamma312,2)*invPsi11 - 2*Gamma312*Gamma322*invPsi12 - Power(Gamma322,2)*invPsi22 + g11*Power(Phi123,2) + 
-            2*g12*Phi123*Phi223 + g22*Power(Phi223,2) + 2*g13*Phi123*Phi323 + 2*g23*Phi223*Phi323 + g33*Power(Phi323,2) - 
-            Power(Pi23,2)) + 2*invPsi03*(-(Gamma300*Gamma303*invPsi00) - Gamma301*Gamma303*invPsi01 - Gamma300*Gamma313*invPsi01 - 
-            Gamma302*Gamma303*invPsi02 - Gamma300*Gamma323*invPsi02 - Gamma301*Gamma313*invPsi11 - Gamma302*Gamma313*invPsi12 - 
-            Gamma301*Gamma323*invPsi12 - Gamma302*Gamma323*invPsi22 + g11*Phi103*Phi133 + g12*Phi133*Phi203 + g12*Phi103*Phi233 + 
-            g22*Phi203*Phi233 + g13*Phi133*Phi303 + g23*Phi233*Phi303 + g13*Phi103*Phi333 + g23*Phi203*Phi333 + g33*Phi303*Phi333 - 
-            Pi03*Pi33) + 2*invPsi13*(-(Gamma301*Gamma303*invPsi00) - Gamma303*Gamma311*invPsi01 - Gamma301*Gamma313*invPsi01 - 
-            Gamma303*Gamma312*invPsi02 - Gamma301*Gamma323*invPsi02 - Gamma311*Gamma313*invPsi11 - Gamma312*Gamma313*invPsi12 - 
-            Gamma311*Gamma323*invPsi12 - Gamma312*Gamma323*invPsi22 + g11*Phi113*Phi133 + g12*Phi133*Phi213 + g12*Phi113*Phi233 + 
-            g22*Phi213*Phi233 + g13*Phi133*Phi313 + g23*Phi233*Phi313 + g13*Phi113*Phi333 + g23*Phi213*Phi333 + g33*Phi313*Phi333 - 
-            Pi13*Pi33) + 2*invPsi23*(-(Gamma302*Gamma303*invPsi00) - Gamma303*Gamma312*invPsi01 - Gamma302*Gamma313*invPsi01 - 
-            Gamma303*Gamma322*invPsi02 - Gamma302*Gamma323*invPsi02 - Gamma312*Gamma313*invPsi11 - Gamma313*Gamma322*invPsi12 - 
-            Gamma312*Gamma323*invPsi12 - Gamma322*Gamma323*invPsi22 + g11*Phi123*Phi133 + g12*Phi133*Phi223 + g12*Phi123*Phi233 + 
-            g22*Phi223*Phi233 + g13*Phi133*Phi323 + g23*Phi233*Phi323 + g13*Phi123*Phi333 + g23*Phi223*Phi333 + g33*Phi323*Phi333 - 
-            Pi23*Pi33) + invPsi33*(-(Power(Gamma303,2)*invPsi00) - 2*Gamma303*Gamma313*invPsi01 - 2*Gamma303*Gamma323*invPsi02 - 
-            Power(Gamma313,2)*invPsi11 - 2*Gamma313*Gamma323*invPsi12 - Power(Gamma323,2)*invPsi22 + g11*Power(Phi133,2) + 
-            2*g12*Phi133*Phi233 + g22*Power(Phi233,2) + 2*g13*Phi133*Phi333 + 2*g23*Phi233*Phi333 + g33*Power(Phi333,2) - 
-            Power(Pi33,2)));
+        2*Gamma300*Gamma303*invPsi03 - Power(Gamma301,2)*invPsi11 - 2*Gamma301*Gamma302*invPsi12 - 
+        2*Gamma301*Gamma303*invPsi13 - Power(Gamma302,2)*invPsi22 - 2*Gamma302*Gamma303*invPsi23 - Power(Gamma303,2)*invPsi33 + 
+        g11*Power(Phi103,2) + 2*g12*Phi103*Phi203 + g22*Power(Phi203,2) + 2*g13*Phi103*Phi303 + 2*g23*Phi203*Phi303 + 
+        g33*Power(Phi303,2) - Power(Pi03,2)) + 2*invPsi01*
+      (-(Gamma300*Gamma301*invPsi00) - Power(Gamma301,2)*invPsi01 - Gamma300*Gamma311*invPsi01 - Gamma301*Gamma302*invPsi02 - 
+        Gamma300*Gamma312*invPsi02 - Gamma301*Gamma303*invPsi03 - Gamma300*Gamma313*invPsi03 - Gamma301*Gamma311*invPsi11 - 
+        Gamma302*Gamma311*invPsi12 - Gamma301*Gamma312*invPsi12 - Gamma303*Gamma311*invPsi13 - Gamma301*Gamma313*invPsi13 - 
+        Gamma302*Gamma312*invPsi22 - Gamma303*Gamma312*invPsi23 - Gamma302*Gamma313*invPsi23 - Gamma303*Gamma313*invPsi33 + 
+        g11*Phi103*Phi113 + g12*Phi113*Phi203 + g12*Phi103*Phi213 + g22*Phi203*Phi213 + g13*Phi113*Phi303 + g23*Phi213*Phi303 + 
+        g13*Phi103*Phi313 + g23*Phi203*Phi313 + g33*Phi303*Phi313 - Pi03*Pi13) + 
+     invPsi11*(-(Power(Gamma301,2)*invPsi00) - 2*Gamma301*Gamma311*invPsi01 - 2*Gamma301*Gamma312*invPsi02 - 
+        2*Gamma301*Gamma313*invPsi03 - Power(Gamma311,2)*invPsi11 - 2*Gamma311*Gamma312*invPsi12 - 
+        2*Gamma311*Gamma313*invPsi13 - Power(Gamma312,2)*invPsi22 - 2*Gamma312*Gamma313*invPsi23 - Power(Gamma313,2)*invPsi33 + 
+        g11*Power(Phi113,2) + 2*g12*Phi113*Phi213 + g22*Power(Phi213,2) + 2*g13*Phi113*Phi313 + 2*g23*Phi213*Phi313 + 
+        g33*Power(Phi313,2) - Power(Pi13,2)) + 2*invPsi02*
+      (-(Gamma300*Gamma302*invPsi00) - Gamma301*Gamma302*invPsi01 - Gamma300*Gamma312*invPsi01 - Power(Gamma302,2)*invPsi02 - 
+        Gamma300*Gamma322*invPsi02 - Gamma302*Gamma303*invPsi03 - Gamma300*Gamma323*invPsi03 - Gamma301*Gamma312*invPsi11 - 
+        Gamma302*Gamma312*invPsi12 - Gamma301*Gamma322*invPsi12 - Gamma303*Gamma312*invPsi13 - Gamma301*Gamma323*invPsi13 - 
+        Gamma302*Gamma322*invPsi22 - Gamma303*Gamma322*invPsi23 - Gamma302*Gamma323*invPsi23 - Gamma303*Gamma323*invPsi33 + 
+        g11*Phi103*Phi123 + g12*Phi123*Phi203 + g12*Phi103*Phi223 + g22*Phi203*Phi223 + g13*Phi123*Phi303 + g23*Phi223*Phi303 + 
+        g13*Phi103*Phi323 + g23*Phi203*Phi323 + g33*Phi303*Phi323 - Pi03*Pi23) + 
+     2*invPsi12*(-(Gamma301*Gamma302*invPsi00) - Gamma302*Gamma311*invPsi01 - Gamma301*Gamma312*invPsi01 - 
+        Gamma302*Gamma312*invPsi02 - Gamma301*Gamma322*invPsi02 - Gamma302*Gamma313*invPsi03 - Gamma301*Gamma323*invPsi03 - 
+        Gamma311*Gamma312*invPsi11 - Power(Gamma312,2)*invPsi12 - Gamma311*Gamma322*invPsi12 - Gamma312*Gamma313*invPsi13 - 
+        Gamma311*Gamma323*invPsi13 - Gamma312*Gamma322*invPsi22 - Gamma313*Gamma322*invPsi23 - Gamma312*Gamma323*invPsi23 - 
+        Gamma313*Gamma323*invPsi33 + g11*Phi113*Phi123 + g12*Phi123*Phi213 + g12*Phi113*Phi223 + g22*Phi213*Phi223 + 
+        g13*Phi123*Phi313 + g23*Phi223*Phi313 + g13*Phi113*Phi323 + g23*Phi213*Phi323 + g33*Phi313*Phi323 - Pi13*Pi23) + 
+     invPsi22*(-(Power(Gamma302,2)*invPsi00) - 2*Gamma302*Gamma312*invPsi01 - 2*Gamma302*Gamma322*invPsi02 - 
+        2*Gamma302*Gamma323*invPsi03 - Power(Gamma312,2)*invPsi11 - 2*Gamma312*Gamma322*invPsi12 - 
+        2*Gamma312*Gamma323*invPsi13 - Power(Gamma322,2)*invPsi22 - 2*Gamma322*Gamma323*invPsi23 - Power(Gamma323,2)*invPsi33 + 
+        g11*Power(Phi123,2) + 2*g12*Phi123*Phi223 + g22*Power(Phi223,2) + 2*g13*Phi123*Phi323 + 2*g23*Phi223*Phi323 + 
+        g33*Power(Phi323,2) - Power(Pi23,2)) + 2*invPsi03*
+      (-(Gamma300*Gamma303*invPsi00) - Gamma301*Gamma303*invPsi01 - Gamma300*Gamma313*invPsi01 - Gamma302*Gamma303*invPsi02 - 
+        Gamma300*Gamma323*invPsi02 - Power(Gamma303,2)*invPsi03 - Gamma300*Gamma333*invPsi03 - Gamma301*Gamma313*invPsi11 - 
+        Gamma302*Gamma313*invPsi12 - Gamma301*Gamma323*invPsi12 - Gamma303*Gamma313*invPsi13 - Gamma301*Gamma333*invPsi13 - 
+        Gamma302*Gamma323*invPsi22 - Gamma303*Gamma323*invPsi23 - Gamma302*Gamma333*invPsi23 - Gamma303*Gamma333*invPsi33 + 
+        g11*Phi103*Phi133 + g12*Phi133*Phi203 + g12*Phi103*Phi233 + g22*Phi203*Phi233 + g13*Phi133*Phi303 + g23*Phi233*Phi303 + 
+        g13*Phi103*Phi333 + g23*Phi203*Phi333 + g33*Phi303*Phi333 - Pi03*Pi33) + 
+     2*invPsi13*(-(Gamma301*Gamma303*invPsi00) - Gamma303*Gamma311*invPsi01 - Gamma301*Gamma313*invPsi01 - 
+        Gamma303*Gamma312*invPsi02 - Gamma301*Gamma323*invPsi02 - Gamma303*Gamma313*invPsi03 - Gamma301*Gamma333*invPsi03 - 
+        Gamma311*Gamma313*invPsi11 - Gamma312*Gamma313*invPsi12 - Gamma311*Gamma323*invPsi12 - Power(Gamma313,2)*invPsi13 - 
+        Gamma311*Gamma333*invPsi13 - Gamma312*Gamma323*invPsi22 - Gamma313*Gamma323*invPsi23 - Gamma312*Gamma333*invPsi23 - 
+        Gamma313*Gamma333*invPsi33 + g11*Phi113*Phi133 + g12*Phi133*Phi213 + g12*Phi113*Phi233 + g22*Phi213*Phi233 + 
+        g13*Phi133*Phi313 + g23*Phi233*Phi313 + g13*Phi113*Phi333 + g23*Phi213*Phi333 + g33*Phi313*Phi333 - Pi13*Pi33) + 
+     2*invPsi23*(-(Gamma302*Gamma303*invPsi00) - Gamma303*Gamma312*invPsi01 - Gamma302*Gamma313*invPsi01 - 
+        Gamma303*Gamma322*invPsi02 - Gamma302*Gamma323*invPsi02 - Gamma303*Gamma323*invPsi03 - Gamma302*Gamma333*invPsi03 - 
+        Gamma312*Gamma313*invPsi11 - Gamma313*Gamma322*invPsi12 - Gamma312*Gamma323*invPsi12 - Gamma313*Gamma323*invPsi13 - 
+        Gamma312*Gamma333*invPsi13 - Gamma322*Gamma323*invPsi22 - Power(Gamma323,2)*invPsi23 - Gamma322*Gamma333*invPsi23 - 
+        Gamma323*Gamma333*invPsi33 + g11*Phi123*Phi133 + g12*Phi133*Phi223 + g12*Phi123*Phi233 + g22*Phi223*Phi233 + 
+        g13*Phi133*Phi323 + g23*Phi233*Phi323 + g13*Phi123*Phi333 + g23*Phi223*Phi333 + g33*Phi323*Phi333 - Pi23*Pi33) + 
+     invPsi33*(-(Power(Gamma303,2)*invPsi00) - 2*Gamma303*Gamma313*invPsi01 - 2*Gamma303*Gamma323*invPsi02 - 
+        2*Gamma303*Gamma333*invPsi03 - Power(Gamma313,2)*invPsi11 - 2*Gamma313*Gamma323*invPsi12 - 
+        2*Gamma313*Gamma333*invPsi13 - Power(Gamma323,2)*invPsi22 - 2*Gamma323*Gamma333*invPsi23 - Power(Gamma333,2)*invPsi33 + 
+        g11*Power(Phi133,2) + 2*g12*Phi133*Phi233 + g22*Power(Phi233,2) + 2*g13*Phi133*Phi333 + 2*g23*Phi233*Phi333 + 
+        g33*Power(Phi333,2) - Power(Pi33,2)));
     
     //TERM 2
     t2srcPi00 = -((2*dH00 - 2*Gamma000*H0*invPsi00 - 2*Gamma100*H0*invPsi01 - 2*Gamma000*H1*invPsi01 - 2*Gamma200*H0*invPsi02 - 
@@ -1061,38 +1323,35 @@ get_values_src(FLOAT *values_var, FLOAT *values)
     
     //TERM 5
     
-    t5srcPi00 = gamma0*N*((2*t0 - Psi00*t0)*(H0 + vecGamma0) - Psi00*t1*(H1 + vecGamma1) - Psi00*t2*(H2 + vecGamma2) - 
-           Psi00*t3*(H3 + vecGamma3));
+    t5srcPi00 = gamma0*N*((Psi00*t0 + 2*Psi01*t1 + 2*Psi02*t2 + 2*Psi03*t3)*(H0 + vecGamma0) - Psi00*t1*(H1 + vecGamma1) - 
+      Psi00*t2*(H2 + vecGamma2) - Psi00*t3*(H3 + vecGamma3)); 
+
+    t5srcPi01 = gamma0*N*((Psi11*t1 + Psi12*t2 + Psi13*t3)*(H0 + vecGamma0) + (Psi00*t0 + Psi02*t2 + Psi03*t3)*(H1 + vecGamma1) - 
+      Psi01*t2*(H2 + vecGamma2) - Psi01*t3*(H3 + vecGamma3));
     
-    t5srcPi01 = gamma0*N*((-(Psi01*t0) + t1)*(H0 + vecGamma0) + (t0 - Psi01*t1)*(H1 + vecGamma1) - 
-           Psi01*t2*(H2 + vecGamma2) - Psi01*t3*(H3 + vecGamma3));
+    t5srcPi02 = gamma0*N*((Psi12*t1 + Psi22*t2 + Psi23*t3)*(H0 + vecGamma0) - Psi02*t1*(H1 + vecGamma1) + 
+      (Psi00*t0 + Psi01*t1 + Psi03*t3)*(H2 + vecGamma2) - Psi02*t3*(H3 + vecGamma3));
     
-    t5srcPi02 = gamma0*N*((-(Psi02*t0) + t2)*(H0 + vecGamma0) - Psi02*t1*(H1 + vecGamma1) + (t0 - Psi02*t2)*(H2 + vecGamma2) - 
-           Psi02*t3*(H3 + vecGamma3));
+    t5srcPi03 = gamma0*N*((Psi13*t1 + Psi23*t2 + Psi33*t3)*(H0 + vecGamma0) - Psi03*t1*(H1 + vecGamma1) - Psi03*t2*(H2 + vecGamma2) + 
+      (Psi00*t0 + Psi01*t1 + Psi02*t2)*(H3 + vecGamma3));
     
-    t5srcPi03 = gamma0*N*((-(Psi03*t0) + t3)*(H0 + vecGamma0) - Psi03*t1*(H1 + vecGamma1) - 
-           Psi03*t2*(H2 + vecGamma2) + (t0 - Psi03*t3)*(H3 + vecGamma3));
+    t5srcPi11 = gamma0*N*(-(Psi11*t0*(H0 + vecGamma0)) + (2*Psi01*t0 + Psi11*t1 + 2*Psi12*t2 + 2*Psi13*t3)*(H1 + vecGamma1) - 
+      Psi11*t2*(H2 + vecGamma2) - Psi11*t3*(H3 + vecGamma3));
     
+    t5srcPi12 = gamma0*N*(-(Psi12*t0*(H0 + vecGamma0)) + (Psi02*t0 + Psi22*t2 + Psi23*t3)*(H1 + vecGamma1) + 
+      (Psi01*t0 + Psi11*t1 + Psi13*t3)*(H2 + vecGamma2) - Psi12*t3*(H3 + vecGamma3));
     
-    t5srcPi11 = gamma0*N*(-(Psi11*t0*(H0 + vecGamma0)) + (2*t1 - Psi11*t1)*(H1 + vecGamma1) - 
-           Psi11*t2*(H2 + vecGamma2) - Psi11*t3*(H3 + vecGamma3));
+    t5srcPi13 = gamma0*N*(-(Psi13*t0*(H0 + vecGamma0)) + (Psi03*t0 + Psi23*t2 + Psi33*t3)*(H1 + vecGamma1) - Psi13*t2*(H2 + vecGamma2) + 
+      (Psi01*t0 + Psi11*t1 + Psi12*t2)*(H3 + vecGamma3));
+    
+    t5srcPi22 = gamma0*N*(-(Psi22*t0*(H0 + vecGamma0)) - Psi22*t1*(H1 + vecGamma1) + 
+     (2*Psi02*t0 + 2*Psi12*t1 + Psi22*t2 + 2*Psi23*t3)*(H2 + vecGamma2) - Psi22*t3*(H3 + vecGamma3));
+    
+    t5srcPi23 = gamma0*N*(-(Psi23*t0*(H0 + vecGamma0)) - Psi23*t1*(H1 + vecGamma1) + (Psi03*t0 + Psi13*t1 + Psi33*t3)*(H2 + vecGamma2) + 
+     (Psi02*t0 + Psi12*t1 + Psi22*t2)*(H3 + vecGamma3));
      
-    
-    t5srcPi12 = gamma0*N*(-(Psi12*t0*(H0 + vecGamma0)) + (-(Psi12*t1) + t2)*(H1 + vecGamma1) + (t1 - Psi12*t2)*(H2 + vecGamma2) - 
-           Psi12*t3*(H3 + vecGamma3));
-    
-    
-    t5srcPi13 = gamma0*N*(-(Psi13*t0*(H0 + vecGamma0)) + (-(Psi13*t1) + t3)*(H1 + vecGamma1) - 
-           Psi13*t2*(H2 + vecGamma2) + (t1 - Psi13*t3)*(H3 + vecGamma3));
-    
-    t5srcPi22 = gamma0*N*(-(Psi22*t0*(H0 + vecGamma0)) - Psi22*t1*(H1 + vecGamma1) + (2*t2 - Psi22*t2)*(H2 + vecGamma2) - 
-           Psi22*t3*(H3 + vecGamma3));
-    
-    t5srcPi23 = gamma0*N*(-(Psi23*t0*(H0 + vecGamma0)) - Psi23*t1*(H1 + vecGamma1) + 
-           (-(Psi23*t2) + t3)*(H2 + vecGamma2) + (t2 - Psi23*t3)*(H3 + vecGamma3));
-     
-    t5srcPi33 = gamma0*N*(-(Psi33*t0*(H0 + vecGamma0)) - Psi33*t1*(H1 + vecGamma1) - 
-           Psi33*t2*(H2 + vecGamma2) + (2*t3 - Psi33*t3)*(H3 + vecGamma3));
+    t5srcPi33 = gamma0*N*(-(Psi33*t0*(H0 + vecGamma0)) - Psi33*t1*(H1 + vecGamma1) - Psi33*t2*(H2 + vecGamma2) + 
+     (2*Psi03*t0 + 2*Psi13*t1 + 2*Psi23*t2 + Psi33*t3)*(H3 + vecGamma3));
     
     //TERM 6
     t6srcPi00 = -(gamma1*gamma2*(N1*Phi100 + N2*Phi200 + N3*Phi300));

@@ -26,6 +26,7 @@ main(int argc, char * argv[])
 
     g = phgNewGrid(-1); 
     phgImport(g, meshfile, FALSE);
+    phgRefineAllElements(g, 2);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
 
     /*creat dofs for all the functions to be solved*/ 
