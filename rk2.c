@@ -4,13 +4,20 @@ get_dofs_rhs(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, DOF **
 {
     get_dofs_auxi(dofs_var, dofs_g, dofs_N, dofs_src); 
     printf("test 0\n\n");
+    phgExportVTKn(dofs_src[0]->g, "src_dg5.vtk", NVAR, dofs_src);
+    printf("test 1\n\n");
+    phgExportVTKn(dofs_g[0]->g, "g_dg5.vtk", 6, dofs_g);
+    printf("test 2\n\n");
+    phgExportVTKn(dofs_N[0]->g, "N_dg5.vtk", 4, dofs_N);
+
+
     get_dofs_Hhat(dofs_var, dofs_bdry, dofs_g, dofs_N, 
             dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat);
-    printf("test 1\n\n");
+    printf("test 3\n\n");
     for(int i=0;i<NVAR;i++){
         dofs_rhs[i] = phgDofAXPBY(-1.0, dofs_Hhat[i], 1.0, dofs_src + i);
     }
-    printf("test 2\n\n");
+    printf("test 4\n\n");
 }
 static void
 ssp_rk2(FLOAT dt, DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, DOF **dofs_src,
