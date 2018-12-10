@@ -3,6 +3,7 @@
 #include <math.h>
 
 #define NVAR 50
+#define DG_TYPE DOF_DG3
 
 #include "hdw.c"
 #include "auxi_dofs.c"
@@ -16,7 +17,6 @@ main(int argc, char * argv[])
 {
     char *meshfile ="./mesh/hollowed_icosahedron.mesh";
     GRID *g; 
-    DOF_TYPE *dof_tp = DOF_DG5;
     FLOAT t0 = 0.0, t1 = 0.0;
     FLOAT dt = 0.01, max_time = 1.0;
     INT max_step = ceil(max_time/dt);
@@ -26,30 +26,30 @@ main(int argc, char * argv[])
 
     g = phgNewGrid(-1); 
     phgImport(g, meshfile, FALSE);
-    phgRefineAllElements(g, 2);
+    phgRefineAllElements(g, 1);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
     DOF *dofs_sol[50], *dofs_bdry[50], *dofs_diff[NVAR];
-    create_dofs(g, dof_tp, 1, dofs_Psi, "Psi", 10);
-    create_dofs(g, dof_tp, 1, dofs_Pi, "Pi", 10);
-    create_dofs(g, dof_tp, 1, dofs_Phi, "Phi", 30);
-    create_dofs(g, dof_tp, 1, dofs_sol, "sol", 50);
-    create_dofs(g, dof_tp, 1, dofs_bdry, "bdry", NVAR);
-    create_dofs(g, dof_tp, 1, dofs_diff, "diff", NVAR);
+    create_dofs(g, DG_TYPE, 1, dofs_Psi, "Psi", 10);
+    create_dofs(g, DG_TYPE, 1, dofs_Pi, "Pi", 10);
+    create_dofs(g, DG_TYPE, 1, dofs_Phi, "Phi", 30);
+    create_dofs(g, DG_TYPE, 1, dofs_sol, "sol", 50);
+    create_dofs(g, DG_TYPE, 1, dofs_bdry, "bdry", NVAR);
+    create_dofs(g, DG_TYPE, 1, dofs_diff, "diff", NVAR);
 
     /*create dofs for all source terms*/
     DOF *dofs_srcPsi[10], *dofs_srcPi[10], *dofs_srcPhi[30];
-    create_dofs(g, dof_tp, 1, dofs_srcPsi, "srcPsi", 10);
-    create_dofs(g, dof_tp, 1, dofs_srcPi, "srcPi", 10);
-    create_dofs(g, dof_tp, 1, dofs_srcPhi, "srcPhi", 30);
+    create_dofs(g, DG_TYPE, 1, dofs_srcPsi, "srcPsi", 10);
+    create_dofs(g, DG_TYPE, 1, dofs_srcPi, "srcPi", 10);
+    create_dofs(g, DG_TYPE, 1, dofs_srcPhi, "srcPhi", 30);
     
     /*create dofs for derivatives of vars*/ 
     DOF *dofs_gradPsi[30], *dofs_gradPi[30], *dofs_gradPhi[90];
-    create_dofs(g, dof_tp, 2, dofs_gradPsi, "gradPsi", 30);
-    create_dofs(g, dof_tp, 2, dofs_gradPi, "gradPi", 30);
-    create_dofs(g, dof_tp, 2, dofs_gradPhi, "gradPhi", 90);
+    create_dofs(g, DG_TYPE, 2, dofs_gradPsi, "gradPsi", 30);
+    create_dofs(g, DG_TYPE, 2, dofs_gradPi, "gradPi", 30);
+    create_dofs(g, DG_TYPE, 2, dofs_gradPhi, "gradPhi", 90);
 
     //create lists to store dofs of var, src
     DOF *dofs_var[NVAR], *dofs_src[NVAR];
@@ -69,9 +69,9 @@ main(int argc, char * argv[])
 
     /*create auxi dofs*/
     DOF *dofs_g[6], *dofs_N[4], *dofs_Hhat[NVAR], *dofs_rhs[NVAR];
-    create_dofs(g, dof_tp, 1, dofs_g, "g", 6);
-    create_dofs(g, dof_tp, 1, dofs_N, "N", 4);
-    create_dofs(g, dof_tp, 1, dofs_Hhat, "Hhat", NVAR);  
+    create_dofs(g, DG_TYPE, 1, dofs_g, "g", 6);
+    create_dofs(g, DG_TYPE, 1, dofs_N, "N", 4);
+    create_dofs(g, DG_TYPE, 1, dofs_Hhat, "Hhat", NVAR);  
 
     //set dof data
     set_data_dofs(dofs_var);

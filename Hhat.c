@@ -50,14 +50,10 @@ get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT value
                 (*p_yPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][1][a][b];
                 (*p_zPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][2][a][b];
 
-                printf("*p_Pi: %f", *p_Pi);
                 for(j=0;j<3;j++){
                     (*p_Pi) += values_N[0]*tensor_g[i][j]*tensor_gradPhi_ave[i][j][a][b];
-                    printf("lapse: %f, g[%d][%d]: %f, gradPhi_ave[%d][%d][%d][%d]: %f\n", values_N[0], i, j, tensor_g[i][j], i, j, a, b, tensor_gradPhi_ave[i][j][a][b]); 
-                    printf("*p_Pi: %f", *p_Pi);
                 }
             }
-            printf("\n\n");
 
             *(p_xPhi++) = values_N[0]*tensor_gradPi_ave[0][a][b] - values_N[0]*gamma2*tensor_gradPsi_ave[0][a][b];
             *(p_yPhi++) = values_N[0]*tensor_gradPi_ave[1][a][b] - values_N[0]*gamma2*tensor_gradPsi_ave[1][a][b];
@@ -76,12 +72,7 @@ get_dofs_Hhat(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N,
     get_dofs_grad_hat(dofs_var, dofs_bdry, dofs_gradPsi, 10);
     get_dofs_grad_hat(dofs_var + 10, dofs_bdry + 10, dofs_gradPi, 10);
     get_dofs_grad_hat(dofs_var + 20, dofs_bdry+ 20, dofs_gradPhi, 30);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradPsi_dg5.vtk", 30, dofs_gradPsi);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradPi_dg5.vtk", 30, dofs_gradPi);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradxPhi_dg5.vtk", 30, dofs_gradPhi);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradyPhi_dg5.vtk", 30, dofs_gradPhi + 30);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradzPhi_dg5.vtk", 30, dofs_gradPhi + 60);
-
+    
     INT i, j, n, data_count = DofGetDataCount(dofs_N[0]);
     FLOAT *p_gradPsi[30], *p_gradPi[30], *p_gradPhi[90], *p_g[6], *p_N[4], *p_Hhat[NVAR];
     FLOAT v_gradPsi[30][2], v_gradPi[30][2], v_gradPhi[90][2];
