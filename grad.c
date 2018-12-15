@@ -36,16 +36,32 @@ phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)
 static void
 set_neighbour_dof(DOF *u, DOF *neigh_u)
 { 
+    ELEMENT *e;
+    SHORT s, i, nbasface;
+    FLOAT *ele_data;
     NEIGHBOUR_DATA *nd;
     nd = phgDofInitNeighbourData(u, NULL); 
-   
+    ForAllElements(u->g, e){
+        ele_data = DofElementData(neigh_u, e->index);
+        for(s=0;s<4;s++){
+            if(e->bound_type[s] & INTERIOR){
+                nbasface = phgDofNeighbourNBas(nd, e, s, NULL);
+                SHORT bases[nbasface];
+                phgDofGetBasesOnFace(u, e, s, bases);
+                for(i=0;i<nbasface;i++){
+                    ele_data[bases[i]] = *phgDofNeighbourData(nd, e, s, i, NULL);   
+                }  
+            }
+        }
+    }
+    //phgDofDump(neigh_u);
     phgDofReleaseNeighbourData(&nd); 
 }
 
 static void
 build_linear_system(SOLVER *solver, DOF *u_h, DOF *dof_bdry, int coord)
 {
-    int n, k, i, j, s, ss, in_out;
+    int n, k, i, j, s, in_out;
     GRID *g = u_h->g;
     DOF *neigh_u;
     ELEMENT *e;
@@ -94,12 +110,7 @@ build_linear_system(SOLVER *solver, DOF *u_h, DOF *dof_bdry, int coord)
                    
                     /*分是否边界面来计算u^+*/ 
                     if(e->bound_type[s] & INTERIOR){//如果s是内部面,则利用neigh_u来计算u^+
-                        //neigh_e = (ELEMENT *)e->neighbours[s];
-                        //for(ss = 0; ss < 4; ss++){ 
-                        //    if(neigh_e->faces[ss] == e->faces[s]) break; 
-                        //}               
-        
-                        val_ext = dgQuadFaceDofDotBas(e, s, neigh_u, DOF_PROJ_NONE, 
+                        val_ext = phgQuadFaceDofDotBas(e, s, neigh_u, DOF_PROJ_NONE, 
                                 u_h, n, QUAD_DEFAULT); 
                     } 
                     else{//s是边界面时,则施加边界条件 
@@ -145,16 +156,23 @@ static void
 get_dof_grad_hat(DOF *dof_grad)
 {
     
-    INT i, npair = DofGetDataCount(dof_grad)/2;
     FLOAT grad_plus, grad_minus;
-    FLOAT *p = DofData(dof_grad);
+    FLOAT *p;
+    GRID *g = dof_grad->g;
+    ELEMENT *e;
+    int idx;
     
-    for(i=0;i<npair;i++){
-        grad_plus = *p, grad_minus = *(p+1); 
-        *p = 0.5 * (grad_plus + grad_minus);
-        *(++p) = 0.5 * (grad_plus - grad_minus); 
-        p++;
-    } 
+    int np = dof_grad->type->np_elem;
+    ForAllElements(g, e){
+        idx = e->index;
+        p = DofElementData(dof_grad, idx);
+        for(int i=0;i<np;i++){
+            grad_plus = *p, grad_minus = *(p+1); 
+            *p = 0.5 * (grad_plus + grad_minus);
+            *(++p) = 0.5 * (grad_plus - grad_minus); 
+            p++;
+        } 
+    }
 }
 
 static void
@@ -168,7 +186,7 @@ get_dofs_grad_hat(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad_hat, INT ndof)
 }
 
 
-/* Old function, didn't consider parallel and the logic to get the quad is complicated*/
+/* Old function, no parallel and the logic to get the quad is complicate*/
 //FLOAT
 //dgQuadFaceNeighDofDotBas(ELEMENT *e, DOF *u, int face, int N, ELEMENT *neigh_e, 
 //DOF *v, int neigh_face, int order)
