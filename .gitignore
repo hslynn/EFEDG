@@ -4,3 +4,4 @@ Einstein_DG
 *.vtk
 *.txt
 Makefile
+sub.sh

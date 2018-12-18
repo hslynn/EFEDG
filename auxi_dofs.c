@@ -90,12 +90,14 @@ get_dofs_N(DOF **dofs_Psi, DOF **dofs_g, DOF **dofs_N)
             g23 = *(p_g[4]);
             g33 = *(p_g[5]);
 
-            N = Power(-Psi00 + g11*Power(Psi01,2) + 2*g12*Psi01*Psi02 
-                + g22*Power(Psi02,2) + 2*g13*Psi01*Psi03 + 2*g23*Psi02*Psi03 
-                + g33*Power(Psi03,2),0.5);
+            //N = Power(-Psi00 + g11*Power(Psi01,2) + 2*g12*Psi01*Psi02 
+            //    + g22*Power(Psi02,2) + 2*g13*Psi01*Psi03 + 2*g23*Psi02*Psi03 
+            //    + g33*Power(Psi03,2),0.5);
+
             N1 = g11*Psi01 + g12*Psi02 + g13*Psi03;
             N2 = g12*Psi01 + g22*Psi02 + g23*Psi03;
             N3 = g13*Psi01 + g23*Psi02 + g33*Psi03;
+            N = Power(-Psi00 + N1*Psi01 + N2*Psi02 + N3*Psi03,0.5);
 
             *p_N[0] = N;
             *p_N[1] = N1;

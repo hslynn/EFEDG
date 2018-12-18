@@ -79,9 +79,7 @@ main(int argc, char * argv[])
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
    
-    if(phgRank == 0){    
-        t0 = phgGetTime(NULL);
-    }   
+    t0 = phgGetTime(NULL);
 
     get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
@@ -106,10 +104,9 @@ main(int argc, char * argv[])
         //        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
       
-    if(phgRank == 0){ 
-        t1 = phgGetTime(NULL);
-        phgPrintf("Total time cost = %f\n\n", t1 - t0);
-    }
+    phgPrintf("Total processes = %d\n\n", phgNProcs);
+    t1 = phgGetTime(NULL);
+    phgPrintf("Total time cost = %f\n\n", t1 - t0);
 
     FLOAT err[50];
     for(i=0;i<50;i++){
