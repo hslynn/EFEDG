@@ -1,7 +1,7 @@
+Makefile
 Einstein_DG
 *.o
 */*.vtk  
 *.vtk
 *.txt
-Makefile
 sub.sh
