@@ -7,18 +7,38 @@
 #define Power(x,y) (Pow((FLOAT) (x), (FLOAT) (y)))
 
 static void 
-get_values_src(FLOAT *values_var, FLOAT *values)
+get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *values)
 { 
     FLOAT invPsi00, invPsi01, invPsi02, invPsi03, invPsi11, invPsi12, invPsi13, invPsi22, invPsi23, invPsi33;
-    FLOAT g11, g12, g13, g22, g23, g33;
-    FLOAT N, N1, N2, N3;
-    FLOAT t0, t1, t2, t3;
     FLOAT Gamma000,Gamma001,Gamma002,Gamma003,Gamma011,Gamma012,Gamma013,Gamma022,Gamma023,Gamma033;
     FLOAT Gamma100,Gamma101,Gamma102,Gamma103,Gamma111,Gamma112,Gamma113,Gamma122,Gamma123,Gamma133;
     FLOAT Gamma200,Gamma201,Gamma202,Gamma203,Gamma211,Gamma212,Gamma213,Gamma222,Gamma223,Gamma233;
     FLOAT Gamma300,Gamma301,Gamma302,Gamma303,Gamma311,Gamma312,Gamma313,Gamma322,Gamma323,Gamma333;
     FLOAT vecGamma0, vecGamma1, vecGamma2, vecGamma3;
-    
+   
+    //inverse space metric
+    FLOAT g11 = values_g[0];
+    FLOAT g12 = values_g[1];
+    FLOAT g13 = values_g[2];
+    FLOAT g22 = values_g[3];
+    FLOAT g23 = values_g[4];
+    FLOAT g33 = values_g[5];
+   
+    //Lapse
+    FLOAT N = values_N[0];
+
+    //Shift
+    FLOAT N1 = values_N[1]; 
+    FLOAT N2 = values_N[2];
+    FLOAT N3 = values_N[3];
+ 
+    //unit normal vector t^a
+    FLOAT t0 = 1/N;
+    FLOAT t1 = -N1/N;
+    FLOAT t2 = -N2/N;
+    FLOAT t3 = -N3/N;
+   
+    //Psi, Pi, Phi 
     FLOAT *Psi = values_var, *Pi = values_var + 10, *Phi = values_var + 20; 
     FLOAT Psi00 = Psi[0], Psi01 = Psi[1], Psi02 = Psi[2], Psi03 = Psi[3], Psi11 = Psi[4];
     FLOAT Psi12 = Psi[5], Psi13 = Psi[6], Psi22 = Psi[7], Psi23 = Psi[8], Psi33 = Psi[9]; 
@@ -37,7 +57,8 @@ get_values_src(FLOAT *values_var, FLOAT *values)
                                                                                      
     FLOAT Phi300 = Phi[20], Phi301 = Phi[21], Phi302 = Phi[22], Phi303 = Phi[23], Phi311 = Phi[24];
     FLOAT Phi312 = Phi[25], Phi313 = Phi[26], Phi322 = Phi[27], Phi323 = Phi[28], Phi333 = Phi[29]; 
-    
+   
+    //source terms 
     FLOAT srcPsi00,srcPsi01,srcPsi02,srcPsi03,srcPsi11,srcPsi12,srcPsi13,srcPsi22,srcPsi23,srcPsi33;
     
     FLOAT srcPi00, t1srcPi00, t2srcPi00, t3srcPi00, t4srcPi00, t5srcPi00, t6srcPi00;
@@ -190,42 +211,9 @@ get_values_src(FLOAT *values_var, FLOAT *values)
            Power(Psi02,2)*Psi11*Psi33 + 2*Psi01*Psi02*Psi12*Psi33 - Psi00*Power(Psi12,2)*Psi33 - Power(Psi01,2)*Psi22*Psi33 + 
            Psi00*Psi11*Psi22*Psi33);
      
-    //inverse space metric
-    g11 = (-Power(Psi23,2) + Psi22*Psi33)/
-            (-(Power(Psi13,2)*Psi22) + 2*Psi12*Psi13*Psi23 - Psi11*Power(Psi23,2) - Power(Psi12,2)*Psi33 + Psi11*Psi22*Psi33);
-
-    g12 = (Psi13*Psi23 - Psi12*Psi33)/
-         (-(Power(Psi13,2)*Psi22) + 2*Psi12*Psi13*Psi23 - Psi11*Power(Psi23,2) - Power(Psi12,2)*Psi33 + Psi11*Psi22*Psi33);
     
-    g13 = (-(Psi13*Psi22) + Psi12*Psi23)/
-         (-(Power(Psi13,2)*Psi22) + 2*Psi12*Psi13*Psi23 - Psi11*Power(Psi23,2) - Power(Psi12,2)*Psi33 + Psi11*Psi22*Psi33);
-    
-    g22 = (-Power(Psi13,2) + Psi11*Psi33)/
-         (-(Power(Psi13,2)*Psi22) + 2*Psi12*Psi13*Psi23 - Psi11*Power(Psi23,2) - Power(Psi12,2)*Psi33 + Psi11*Psi22*Psi33);
-    
-    g23 = (Psi12*Psi13 - Psi11*Psi23)/
-         (-(Power(Psi13,2)*Psi22) + 2*Psi12*Psi13*Psi23 - Psi11*Power(Psi23,2) - Power(Psi12,2)*Psi33 + Psi11*Psi22*Psi33);
-    
-    g33 = (-Power(Psi12,2) + Psi11*Psi22)/
-         (-(Power(Psi13,2)*Psi22) + 2*Psi12*Psi13*Psi23 - Psi11*Power(Psi23,2) - Power(Psi12,2)*Psi33 + Psi11*Psi22*Psi33);
-    
-    //Shift
-    N1 = g11*Psi01 + g12*Psi02 + g13*Psi03;
-    N2 = g12*Psi01 + g22*Psi02 + g23*Psi03;
-    N3 = g13*Psi01 + g23*Psi02 + g33*Psi03;
-    
-    //Lapse
-    N = Power(-Psi00 + g11*Power(Psi01,2) + 2*g12*Psi01*Psi02 + g22*Power(Psi02,2) + 2*g13*Psi01*Psi03 + 2*g23*Psi02*Psi03 + 
-        g33*Power(Psi03,2),0.5);
-    
-    //unit normal vector t^a
-    t0 = 1/N;
-    t1 = -N1/N;
-    t2 = -N2/N;
-    t3 = -N3/N;
 
     //time derivative of Psi, i.e, Phi0ab
-
     Phi000 = N1*Phi100 + N2*Phi200 + N3*Phi300 - N*Pi00;
     Phi001 = N1*Phi101 + N2*Phi201 + N3*Phi301 - N*Pi01;
     Phi002 = N1*Phi102 + N2*Phi202 + N3*Phi302 - N*Pi02;

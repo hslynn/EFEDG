@@ -92,13 +92,13 @@ get_dofs_Hhat(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N,
         }    
 
         for(i=0; i<NVAR; i++){
-            p_Hhat[i] = DofData(dofs_Hhat[i]);
+            p_Hhat[i] = DofElementData(dofs_Hhat[i], idx);
         }
         for(i=0; i<6; i++){
-            p_g[i] = DofData(dofs_g[i]);
+            p_g[i] = DofElementData(dofs_g[i], idx);
         }
         for(i=0;i<4;i++){
-            p_N[i] = DofData(dofs_N[i]);
+            p_N[i] = DofElementData(dofs_N[i], idx);
         }
    
         //get Hhat values at every data point 

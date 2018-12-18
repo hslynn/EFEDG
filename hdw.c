@@ -3,8 +3,9 @@
 static void
 create_dofs(GRID *g, DOF_TYPE *type, INT dim, DOF **dofs_list, char *name_head, INT ndof)
 {
+    short i;
     char name[15], name_idx[5];
-    for(INT i=0; i<ndof; i++){
+    for(i=0; i<ndof; i++){
         strcpy(name, name_head);
         sprintf(name_idx, "_%d", i);
         strcat(name, name_idx);
@@ -15,8 +16,9 @@ create_dofs(GRID *g, DOF_TYPE *type, INT dim, DOF **dofs_list, char *name_head, 
 static void
 copy_dofs(DOF **dofs_A, DOF **dofs_B, char *name_head, INT ndof)
 {
+    short i;
     char name[15], name_idx[5];
-    for(INT i=0;i<ndof;i++){
+    for(i=0;i<ndof;i++){
         strcpy(name, name_head);
         sprintf(name_idx, "_%d", i);
         strcat(name, name_idx);
@@ -27,7 +29,8 @@ copy_dofs(DOF **dofs_A, DOF **dofs_B, char *name_head, INT ndof)
 static void
 free_dofs(DOF **dofs, INT ndof)
 {
-    for(INT i=0;i<ndof;i++){
+    short i;
+    for(i=0;i<ndof;i++){
         phgDofFree(dofs + i);
     } 
 }

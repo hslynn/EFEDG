@@ -123,7 +123,8 @@ get_dofs_auxi(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_src)
     INT i, n, np, idx;
     GRID *g = dofs_var[0]->g;
     ELEMENT *e;
-    FLOAT *p_var[50], *p_src[50], values_var[50], values_src[50];
+    FLOAT *p_var[50], *p_src[50], *p_g[6], *p_N[4];
+    FLOAT values_var[50], values_src[50], values_g[6], values_N[4];
 
     np = dofs_var[0]->type->np_elem;
     ForAllElements(g, e){
@@ -132,19 +133,29 @@ get_dofs_auxi(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_src)
             p_var[i] = DofElementData(dofs_var[i], idx);
             p_src[i] = DofElementData(dofs_src[i], idx); 
         }
+        for(i=0; i<6; i++){
+            p_g[i] = DofElementData(dofs_g[i], idx);
+        }
+        for(i=0; i<4; i++){
+            p_N[i] = DofElementData(dofs_N[i], idx);
+        }
         //evaluate dofs values at every data point
         for(n=0;n<np;n++){
             //compute src values at data point
             for(i=0; i < 50; i++){
-                values_var[i] = *(p_var[i]);
+                values_var[i] = *(p_var[i]++);
             }
-            
-            get_values_src(values_var, values_src); 
+            for(i=0; i < 6; i++){
+                values_g[i] = *(p_g[i]++);
+            }
+            for(i=0; i < 4; i++){
+                values_N[i] = *(p_N[i]++);
+            } 
+            get_values_src(values_var, values_g, values_N, values_src); 
 
             for(i=0; i<50; i++){
                 *p_src[i] = values_src[i];
                 p_src[i]++;
-                p_var[i]++; 
             }
         }
     }

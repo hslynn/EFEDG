@@ -3,7 +3,7 @@
 #include <math.h>
 
 #define NVAR 50
-#define DG_TYPE DOF_DG3
+#define DG_TYPE DOF_DG2
 
 #include "hdw.c"
 #include "auxi_dofs.c"
@@ -26,7 +26,7 @@ main(int argc, char * argv[])
 
     g = phgNewGrid(-1); 
     phgImport(g, meshfile, FALSE);
-    phgRefineAllElements(g, 1);
+    //phgRefineAllElements(g, 4);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
 
     /*creat dofs for all the functions to be solved*/ 
@@ -96,8 +96,8 @@ main(int argc, char * argv[])
         strcat(Hhat_name, ".vtk");
         strcat(rhs_name, ".vtk");
         //strcat(diff_name, ".vtk");
-        printf("step %d completed\n", i);
-        printf("time length: %f\n\n", i*dt);
+        //printf("step %d completed\n", i);
+        //printf("time length: %f\n\n", i*dt);
         phgExportVTKn(g, Hhat_name, 50, dofs_Hhat + 0);
         phgExportVTKn(g, rhs_name, 50, dofs_rhs + 0);
         //phgExportVTKn(g, diff_name, 10, dofs_diff);
@@ -111,7 +111,17 @@ main(int argc, char * argv[])
         phgPrintf("Total time cost = %f\n\n", t1 - t0);
     }
 
-     
+    FLOAT err[50];
+    for(i=0;i<50;i++){
+        err[i] = phgDofNormL2(dofs_rhs[i]);
+        if(phgRank == 0){
+            printf("L2 error of rhs[%d]: %f\n", i, err[i]);
+        }
+    }
+
+    //compute the L2 error of rhs terms
+    
+   
     /*release the mem*/
     free_dofs(dofs_var, NVAR);
     free_dofs(dofs_src, NVAR);

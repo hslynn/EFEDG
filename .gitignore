@@ -1,0 +1,5 @@
+Einstein_DG
+*.o
+*.vtk
+*.txt
+Makefile

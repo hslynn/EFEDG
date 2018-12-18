@@ -145,7 +145,8 @@ dgHJGradDof(DOF *u_h, DOF *dof_bdry, DOF *dof_grad, int coord)
 static void
 get_dofs_grad(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad, int ndof)
 {
-    for(INT i=0;i<ndof;i++){ 
+    short i;
+    for(i=0;i<ndof;i++){ 
         dgHJGradDof(dofs[i], dofs_bdry[i], dofs_grad[i], 0);
         dgHJGradDof(dofs[i], dofs_bdry[i], dofs_grad[ndof + i], 1);
         dgHJGradDof(dofs[i], dofs_bdry[i], dofs_grad[2*ndof + i], 2);
@@ -160,13 +161,13 @@ get_dof_grad_hat(DOF *dof_grad)
     FLOAT *p;
     GRID *g = dof_grad->g;
     ELEMENT *e;
-    int idx;
+    int i, idx;
     
     int np = dof_grad->type->np_elem;
     ForAllElements(g, e){
         idx = e->index;
         p = DofElementData(dof_grad, idx);
-        for(int i=0;i<np;i++){
+        for(i=0;i<np;i++){
             grad_plus = *p, grad_minus = *(p+1); 
             *p = 0.5 * (grad_plus + grad_minus);
             *(++p) = 0.5 * (grad_plus - grad_minus); 
@@ -179,10 +180,14 @@ static void
 get_dofs_grad_hat(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad_hat, INT ndof) 
 {
     get_dofs_grad(dofs, dofs_bdry, dofs_grad_hat, ndof);
+    //phgExportVTKn(dofs[0]->g, "grad.vtk", 3*ndof, dofs_grad_hat);
     
-    for(int i=0;i<3*ndof;i++){
+    short i; 
+    for(i=0;i<3*ndof;i++){
         get_dof_grad_hat(dofs_grad_hat[i]);
     }    
+    //phgExportVTKn(dofs[0]->g, "gradhat.vtk", 3*ndof, dofs_grad_hat);
+ 
 }
 
 
