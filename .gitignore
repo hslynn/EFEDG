@@ -1,5 +1,6 @@
 Einstein_DG
 *.o
+*/*.vtk  
 *.vtk
 *.txt
 Makefile
