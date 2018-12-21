@@ -1,0 +1,352 @@
+Sender: LSF System <lsfadmin@c6u05n03>
+Subject: Job 184983: <32> in cluster <hpc.lsec.cc.ac.cn> Done
+
+Job <32> was submitted from host <ln02> by user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+Job was executed on host(s) <32*c6u05n03>, in queue <batch>, as user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+</share/home/hslynn> was used as the home directory.
+</share/home/hslynn/Einstein_DG> was used as the working directory.
+Started at Thu Dec 20 13:44:48 2018
+Results reported on Thu Dec 20 13:45:50 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+mpijob -t openmpi ./Einstein_DG
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1887.25 sec.
+    Max Memory :                                 1409 MB
+    Average Memory :                             1273.78 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              36
+    Max Threads :                                105
+
+The output (if any) follows:
+
+Parallel Hierarchical Grid (version 0.9.4).
+step 0 completed
+time length: 0.000000
+
+step 1 completed
+time length: 0.010000
+
+step 2 completed
+time length: 0.020000
+
+step 3 completed
+time length: 0.030000
+
+step 4 completed
+time length: 0.040000
+
+step 5 completed
+time length: 0.050000
+
+step 6 completed
+time length: 0.060000
+
+step 7 completed
+time length: 0.070000
+
+step 8 completed
+time length: 0.080000
+
+step 9 completed
+time length: 0.090000
+
+step 10 completed
+time length: 0.100000
+
+step 11 completed
+time length: 0.110000
+
+step 12 completed
+time length: 0.120000
+
+step 13 completed
+time length: 0.130000
+
+step 14 completed
+time length: 0.140000
+
+step 15 completed
+time length: 0.150000
+
+step 16 completed
+time length: 0.160000
+
+step 17 completed
+time length: 0.170000
+
+step 18 completed
+time length: 0.180000
+
+step 19 completed
+time length: 0.190000
+
+step 20 completed
+time length: 0.200000
+
+step 21 completed
+time length: 0.210000
+
+step 22 completed
+time length: 0.220000
+
+step 23 completed
+time length: 0.230000
+
+step 24 completed
+time length: 0.240000
+
+step 25 completed
+time length: 0.250000
+
+step 26 completed
+time length: 0.260000
+
+step 27 completed
+time length: 0.270000
+
+step 28 completed
+time length: 0.280000
+
+step 29 completed
+time length: 0.290000
+
+step 30 completed
+time length: 0.300000
+
+step 31 completed
+time length: 0.310000
+
+step 32 completed
+time length: 0.320000
+
+step 33 completed
+time length: 0.330000
+
+step 34 completed
+time length: 0.340000
+
+step 35 completed
+time length: 0.350000
+
+step 36 completed
+time length: 0.360000
+
+step 37 completed
+time length: 0.370000
+
+step 38 completed
+time length: 0.380000
+
+step 39 completed
+time length: 0.390000
+
+step 40 completed
+time length: 0.400000
+
+step 41 completed
+time length: 0.410000
+
+step 42 completed
+time length: 0.420000
+
+step 43 completed
+time length: 0.430000
+
+step 44 completed
+time length: 0.440000
+
+step 45 completed
+time length: 0.450000
+
+step 46 completed
+time length: 0.460000
+
+step 47 completed
+time length: 0.470000
+
+step 48 completed
+time length: 0.480000
+
+step 49 completed
+time length: 0.490000
+
+step 50 completed
+time length: 0.500000
+
+step 51 completed
+time length: 0.510000
+
+step 52 completed
+time length: 0.520000
+
+step 53 completed
+time length: 0.530000
+
+step 54 completed
+time length: 0.540000
+
+step 55 completed
+time length: 0.550000
+
+step 56 completed
+time length: 0.560000
+
+step 57 completed
+time length: 0.570000
+
+step 58 completed
+time length: 0.580000
+
+step 59 completed
+time length: 0.590000
+
+step 60 completed
+time length: 0.600000
+
+step 61 completed
+time length: 0.610000
+
+step 62 completed
+time length: 0.620000
+
+step 63 completed
+time length: 0.630000
+
+step 64 completed
+time length: 0.640000
+
+step 65 completed
+time length: 0.650000
+
+step 66 completed
+time length: 0.660000
+
+step 67 completed
+time length: 0.670000
+
+step 68 completed
+time length: 0.680000
+
+step 69 completed
+time length: 0.690000
+
+step 70 completed
+time length: 0.700000
+
+step 71 completed
+time length: 0.710000
+
+step 72 completed
+time length: 0.720000
+
+step 73 completed
+time length: 0.730000
+
+step 74 completed
+time length: 0.740000
+
+step 75 completed
+time length: 0.750000
+
+step 76 completed
+time length: 0.760000
+
+step 77 completed
+time length: 0.770000
+
+step 78 completed
+time length: 0.780000
+
+step 79 completed
+time length: 0.790000
+
+step 80 completed
+time length: 0.800000
+
+step 81 completed
+time length: 0.810000
+
+step 82 completed
+time length: 0.820000
+
+step 83 completed
+time length: 0.830000
+
+step 84 completed
+time length: 0.840000
+
+step 85 completed
+time length: 0.850000
+
+step 86 completed
+time length: 0.860000
+
+step 87 completed
+time length: 0.870000
+
+step 88 completed
+time length: 0.880000
+
+step 89 completed
+time length: 0.890000
+
+step 90 completed
+time length: 0.900000
+
+step 91 completed
+time length: 0.910000
+
+step 92 completed
+time length: 0.920000
+
+step 93 completed
+time length: 0.930000
+
+step 94 completed
+time length: 0.940000
+
+step 95 completed
+time length: 0.950000
+
+step 96 completed
+time length: 0.960000
+
+step 97 completed
+time length: 0.970000
+
+step 98 completed
+time length: 0.980000
+
+step 99 completed
+time length: 0.990000
+
+Total processes = 32
+
+Total time cost = 59.194922
+
+L2 error of psi[0]: 0.022730
+L2 error of psi[1]: 0.034976
+L2 error of psi[2]: 0.041947
+L2 error of psi[3]: 0.033811
+L2 error of psi[4]: 0.262204
+L2 error of psi[5]: 0.183037
+L2 error of psi[6]: 0.186170
+L2 error of psi[7]: 0.277953
+L2 error of psi[8]: 0.178537
+L2 error of psi[9]: 0.267936
+
+
+PS:
+
+Read file <32.err> for stderr output of this job.
+

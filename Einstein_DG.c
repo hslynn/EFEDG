@@ -18,7 +18,7 @@ main(int argc, char * argv[])
     char *meshfile ="./mesh/hollowed_icosahedron.mesh";
     GRID *g; 
     FLOAT t0 = 0.0, t1 = 0.0;
-    FLOAT dt = 0.01, max_time = 1.0;
+    FLOAT dt = 0.01, max_time = 0.1;
     INT max_step = ceil(max_time/dt);
     INT i;
 
@@ -26,7 +26,7 @@ main(int argc, char * argv[])
 
     g = phgNewGrid(-1); 
     phgImport(g, meshfile, FALSE);
-    //phgRefineAllElements(g, 4);
+    phgRefineAllElements(g, 2);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
 
     /*creat dofs for all the functions to be solved*/ 
@@ -80,43 +80,44 @@ main(int argc, char * argv[])
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
    
     t0 = phgGetTime(NULL);
-
+    
     get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     
-    char Hhat_name[30], rhs_name[30], diff_name[30]; 
-    for(i=max_step-1;i<max_step;i++){
-        get_dofs_diff(dofs_var, dofs_sol, dofs_diff); 
+    char Hhat_name[30], rhs_name[30]; 
+    for(i=0;i<max_step;i++){
         
-        sprintf(Hhat_name, "Hhat_%f", i*dt);
-        sprintf(rhs_name, "rhs_%f", i*dt);
-        //sprintf(diff_name, "diff_%f", i*dt);
-        strcat(Hhat_name, ".vtk");
-        strcat(rhs_name, ".vtk");
-        //strcat(diff_name, ".vtk");
-        //printf("step %d completed\n", i);
-        //printf("time length: %f\n\n", i*dt);
-        phgExportVTKn(g, Hhat_name, 50, dofs_Hhat + 0);
-        phgExportVTKn(g, rhs_name, 50, dofs_rhs + 0);
-        //phgExportVTKn(g, diff_name, 10, dofs_diff);
+        //sprintf(Hhat_name, "Hhat_%f", i*dt);
+        //sprintf(rhs_name, "rhs_%f", i*dt);
+        //strcat(Hhat_name, ".vtk");
+        //strcat(rhs_name, ".vtk");
+        if(phgRank==0){
+            printf("step %d completed\n", i);
+            printf("time length: %f\n\n", i*dt);
+        }
+        //phgExportVTKn(g, Hhat_name, 50, dofs_Hhat + 0);
+        //phgExportVTKn(g, rhs_name, 50, dofs_rhs + 0);
         
-        //ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
-        //        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+        ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
+               dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
-      
+     
     phgPrintf("Total processes = %d\n\n", phgNProcs);
+    phgPrintf("Total elements = %d\n\n", dofs_var[0]->g->nelem_global);
     t1 = phgGetTime(NULL);
     phgPrintf("Total time cost = %f\n\n", t1 - t0);
 
-    FLOAT err[50];
-    for(i=0;i<50;i++){
-        err[i] = phgDofNormL2(dofs_rhs[i]);
+    get_dofs_diff(dofs_var, dofs_sol, dofs_diff); 
+    phgExportVTKn(g, "diff.vtk", 10, dofs_diff);
+    //compute the L2 error of dofs_diff terms
+    FLOAT err[10];
+    for(i=0;i<10;i++){
+        err[i] = phgDofNormL2(dofs_diff[i]);
         if(phgRank == 0){
-            printf("L2 error of rhs[%d]: %f\n", i, err[i]);
+            printf("L2 error of psi[%d]: %f\n", i, err[i]);
         }
     }
 
-    //compute the L2 error of rhs terms
     
    
     /*release the mem*/
