@@ -3,7 +3,6 @@
 #include <math.h>
 
 #define NVAR 50
-#define DG_TYPE DOF_DG2
 
 #include "hdw.c"
 #include "auxi_dofs.c"
@@ -20,36 +19,79 @@ main(int argc, char * argv[])
     FLOAT t0 = 0.0, t1 = 0.0;
     FLOAT dt = 0.01, max_time = 0.1;
     INT max_step = ceil(max_time/dt);
-    INT i;
+    DOF_TYPE *dg_type;
+    INT i, p_order = 2, refine_time = 0;
+    
+    //command line options
+    phgOptionsRegisterInt("p", "polynomial order of DG basis, default is 2", &p_order);
+    phgOptionsRegisterString("m", "name of the mesh file, default is \"./mesh/hollowed_icsahedron.mesh\"", 
+            &meshfile);
+    phgOptionsRegisterInt("r", "mesh refine times, default is 0", &refine_time);
 
     phgInit(&argc, &argv);	
+    switch(p_order){
+        case 0: dg_type = DOF_DG0;
+            break;
+        case 1: dg_type = DOF_DG1;
+            break;
+        case 2: dg_type = DOF_DG2; 
+            break;                
+        case 3: dg_type = DOF_DG3;
+            break;
+        case 4: dg_type = DOF_DG4;
+            break;                
+        case 5: dg_type = DOF_DG5;
+            break;
+        case 6: dg_type = DOF_DG6;
+            break;                
+        case 7: dg_type = DOF_DG7;
+            break;
+        case 8: dg_type = DOF_DG8;
+            break;                
+        case 9: dg_type = DOF_DG9;
+            break;
+        case 10: dg_type = DOF_DG10;
+            break;
+        case 11: dg_type = DOF_DG11;
+            break;
+        case 12: dg_type = DOF_DG12;
+            break;
+        case 13: dg_type = DOF_DG13;
+            break;
+        case 14: dg_type = DOF_DG14;
+            break;
+        case 15: dg_type = DOF_DG15;
+            break;
+        default: dg_type = DOF_DG2;
+            printf("Unavailable polynomial order, using default set DOF_DG2\n\n");
+    }
 
     g = phgNewGrid(-1); 
     phgImport(g, meshfile, FALSE);
-    phgRefineAllElements(g, 2);
+    phgRefineAllElements(g, refine_time);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
     DOF *dofs_sol[50], *dofs_bdry[50], *dofs_diff[NVAR];
-    create_dofs(g, DG_TYPE, 1, dofs_Psi, "Psi", 10);
-    create_dofs(g, DG_TYPE, 1, dofs_Pi, "Pi", 10);
-    create_dofs(g, DG_TYPE, 1, dofs_Phi, "Phi", 30);
-    create_dofs(g, DG_TYPE, 1, dofs_sol, "sol", 50);
-    create_dofs(g, DG_TYPE, 1, dofs_bdry, "bdry", NVAR);
-    create_dofs(g, DG_TYPE, 1, dofs_diff, "diff", NVAR);
+    create_dofs(g, dg_type, 1, dofs_Psi, "Psi", 10);
+    create_dofs(g, dg_type, 1, dofs_Pi, "Pi", 10);
+    create_dofs(g, dg_type, 1, dofs_Phi, "Phi", 30);
+    create_dofs(g, dg_type, 1, dofs_sol, "sol", 50);
+    create_dofs(g, dg_type, 1, dofs_bdry, "bdry", NVAR);
+    create_dofs(g, dg_type, 1, dofs_diff, "diff", NVAR);
 
     /*create dofs for all source terms*/
     DOF *dofs_srcPsi[10], *dofs_srcPi[10], *dofs_srcPhi[30];
-    create_dofs(g, DG_TYPE, 1, dofs_srcPsi, "srcPsi", 10);
-    create_dofs(g, DG_TYPE, 1, dofs_srcPi, "srcPi", 10);
-    create_dofs(g, DG_TYPE, 1, dofs_srcPhi, "srcPhi", 30);
+    create_dofs(g, dg_type, 1, dofs_srcPsi, "srcPsi", 10);
+    create_dofs(g, dg_type, 1, dofs_srcPi, "srcPi", 10);
+    create_dofs(g, dg_type, 1, dofs_srcPhi, "srcPhi", 30);
     
     /*create dofs for derivatives of vars*/ 
     DOF *dofs_gradPsi[30], *dofs_gradPi[30], *dofs_gradPhi[90];
-    create_dofs(g, DG_TYPE, 2, dofs_gradPsi, "gradPsi", 30);
-    create_dofs(g, DG_TYPE, 2, dofs_gradPi, "gradPi", 30);
-    create_dofs(g, DG_TYPE, 2, dofs_gradPhi, "gradPhi", 90);
+    create_dofs(g, dg_type, 2, dofs_gradPsi, "gradPsi", 30);
+    create_dofs(g, dg_type, 2, dofs_gradPi, "gradPi", 30);
+    create_dofs(g, dg_type, 2, dofs_gradPhi, "gradPhi", 90);
 
     //create lists to store dofs of var, src
     DOF *dofs_var[NVAR], *dofs_src[NVAR];
@@ -69,9 +111,9 @@ main(int argc, char * argv[])
 
     /*create auxi dofs*/
     DOF *dofs_g[6], *dofs_N[4], *dofs_Hhat[NVAR], *dofs_rhs[NVAR];
-    create_dofs(g, DG_TYPE, 1, dofs_g, "g", 6);
-    create_dofs(g, DG_TYPE, 1, dofs_N, "N", 4);
-    create_dofs(g, DG_TYPE, 1, dofs_Hhat, "Hhat", NVAR);  
+    create_dofs(g, dg_type, 1, dofs_g, "g", 6);
+    create_dofs(g, dg_type, 1, dofs_N, "N", 4);
+    create_dofs(g, dg_type, 1, dofs_Hhat, "Hhat", NVAR);  
 
     //set dof data
     set_data_dofs(dofs_var);
@@ -102,8 +144,11 @@ main(int argc, char * argv[])
                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
      
-    phgPrintf("Total processes = %d\n\n", phgNProcs);
-    phgPrintf("Total elements = %d\n\n", dofs_var[0]->g->nelem_global);
+    phgPrintf("Using mesh file: %s\n", meshfile);
+    phgPrintf("Refine times: %d\n", refine_time);
+    phgPrintf("Highest polymonial order: %d\n", dg_type->order);
+    phgPrintf("Total elements = %d\n", dofs_var[0]->g->nelem_global);
+    phgPrintf("Total processes = %d\n", phgNProcs);
     t1 = phgGetTime(NULL);
     phgPrintf("Total time cost = %f\n\n", t1 - t0);
 

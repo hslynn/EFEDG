@@ -5,3 +5,5 @@ Einstein_DG
 *.vtk
 *.txt
 sub.sh
+.ycm_extra_conf.py
+.gitignore
