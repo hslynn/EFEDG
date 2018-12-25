@@ -5,7 +5,7 @@ Code was modified from:
 http://www.andrewnoske.com/wiki/Generating_a_sphere_as_a_3D_mesh
 """
 
-RADIUS = 1.1
+RADIUS = 1.5
 
 BASE_VERTS = [[ 0.000,  1.000,  0.000],   
                 [ 0.894,  0.447,  0.000],

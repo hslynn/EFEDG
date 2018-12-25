@@ -16,12 +16,13 @@ main(int argc, char * argv[])
 {
     char *meshfile ="./mesh/hollowed_icosahedron.mesh";
     GRID *g; 
-    FLOAT t0 = 0.0, t1 = 0.0;
-    FLOAT dt = 0.01, max_time = 0.1;
-    INT max_step = ceil(max_time/dt);
+    ELEMENT *e;
+    FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0, t0 = 0.0, t1 = 0.0;
+    FLOAT dt, max_time = M;
     DOF_TYPE *dg_type;
     INT i, p_order = 2, refine_time = 0;
-    
+    MPI_Status status; 
+
     //command line options
     phgOptionsRegisterInt("p", "polynomial order of DG basis, default is 2", &p_order);
     phgOptionsRegisterString("m", "name of the mesh file, default is \"./mesh/hollowed_icsahedron.mesh\"", 
@@ -71,6 +72,39 @@ main(int argc, char * argv[])
     phgRefineAllElements(g, refine_time);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
 
+    /*find the max and min diameter of all elements*/
+    ForAllElements(g, e){
+        ele_diam = phgGeomGetDiameter(g ,e);
+        max_diam = (max_diam > ele_diam)?max_diam:ele_diam;
+        min_diam = (min_diam < ele_diam)?min_diam:ele_diam;
+    }
+    if(phgRank!=0){
+        MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm);
+        MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm);
+    }
+    if(phgRank==0){
+        FLOAT recv_diam;
+        for(i=1;i<phgNProcs;i++){
+            MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, i, phgComm, &status);
+            max_diam = (max_diam > recv_diam)?max_diam:recv_diam;
+            
+            MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm, &status);
+            min_diam = (min_diam < recv_diam)?min_diam:recv_diam;
+        } 
+        for(i=1;i<phgNProcs;i++){
+            MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, i, i, phgComm);
+            MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm);
+        }
+    }
+    if(phgRank!=0){
+        MPI_Recv(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm, &status);
+        MPI_Recv(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm, &status);
+    }
+    
+    dt = min_diam / 10.; 
+    printf("\nmax_diam = %f\n", max_diam);
+    printf("min_diam = %f\n\n", min_diam);
+
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
     DOF *dofs_sol[50], *dofs_bdry[50], *dofs_diff[NVAR];
@@ -95,7 +129,7 @@ main(int argc, char * argv[])
 
     //create lists to store dofs of var, src
     DOF *dofs_var[NVAR], *dofs_src[NVAR];
-    for(i =0;i<10;i++){
+    for(i=0;i<10;i++){
         dofs_var[i] = dofs_Psi[i];
         dofs_var[10+i] = dofs_Pi[i];
         dofs_var[20+i] = dofs_Phi[i]; 
@@ -127,18 +161,18 @@ main(int argc, char * argv[])
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     
     char Hhat_name[30], rhs_name[30]; 
-    for(i=0;i<max_step;i++){
+    for(i=0;i*dt<max_time;i++){
         
-        //sprintf(Hhat_name, "Hhat_%f", i*dt);
-        //sprintf(rhs_name, "rhs_%f", i*dt);
-        //strcat(Hhat_name, ".vtk");
-        //strcat(rhs_name, ".vtk");
+        sprintf(Hhat_name, "Hhat_%f", i*dt);
+        sprintf(rhs_name, "rhs_%f", i*dt);
+        strcat(Hhat_name, ".vtk");
+        strcat(rhs_name, ".vtk");
         if(phgRank==0){
             printf("step %d completed\n", i);
             printf("time length: %f\n\n", i*dt);
         }
-        //phgExportVTKn(g, Hhat_name, 50, dofs_Hhat + 0);
-        //phgExportVTKn(g, rhs_name, 50, dofs_rhs + 0);
+        phgExportVTKn(g, Hhat_name, 50, dofs_Hhat + 0);
+        phgExportVTKn(g, rhs_name, 50, dofs_rhs + 0);
         
         ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
@@ -150,8 +184,9 @@ main(int argc, char * argv[])
     phgPrintf("Total elements = %d\n", dofs_var[0]->g->nelem_global);
     phgPrintf("Total processes = %d\n", phgNProcs);
     t1 = phgGetTime(NULL);
-    phgPrintf("Total time cost = %f\n\n", t1 - t0);
-
+    if(phgRank==0){
+        phgPrintf("Total time cost = %f\n\n", t1 - t0);
+    }
     get_dofs_diff(dofs_var, dofs_sol, dofs_diff); 
     phgExportVTKn(g, "diff.vtk", 10, dofs_diff);
     //compute the L2 error of dofs_diff terms
