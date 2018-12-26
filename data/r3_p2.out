@@ -1,0 +1,100 @@
+Sender: LSF System <lsfadmin@c4u10n03>
+Subject: Job 206860: <r3_p2> in cluster <hpc.lsec.cc.ac.cn> Done
+
+Job <r3_p2> was submitted from host <ln02> by user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+Job was executed on host(s) <36*c4u10n03>, in queue <batch>, as user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+                            <36*c1u26n02>
+                            <36*c4u03n03>
+                            <36*a6u01n04>
+                            <36*c3u12n01>
+                            <36*c1u10n02>
+                            <36*c6u24n02>
+                            <36*c6u24n03>
+                            <36*c3u12n03>
+                            <36*a6u03n04>
+                            <36*a6u08n01>
+                            <36*c2u03n02>
+                            <36*c1u08n04>
+                            <36*a6u10n04>
+                            <36*a6u03n02>
+                            <36*a6u17n03>
+                            <36*c3u17n01>
+                            <36*a6u12n01>
+                            <36*c6u08n03>
+                            <36*c2u05n01>
+                            <36*a6u05n03>
+                            <36*c2u17n02>
+                            <30*c1u19n02>
+</share/home/hslynn> was used as the home directory.
+</share/home/hslynn/Einstein_DG> was used as the working directory.
+Started at Wed Dec 26 15:25:40 2018
+Results reported on Wed Dec 26 15:29:38 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+mpijob -t openmpi ./Einstein_DG -r 3
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   125127.53 sec.
+    Max Memory :                                 58302 MB
+    Average Memory :                             31817.33 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              808
+    Max Threads :                                2446
+
+The output (if any) follows:
+
+Parallel Hierarchical Grid (version 0.9.4).
+
+Using mesh file: ./mesh/hollowed_icosahedron.mesh
+Refine times: 3
+Highest polymonial order: 2
+Total elements = 99800
+Total processes = 822
+
+max_diam = 0.213484
+min_diam = 0.009201
+
+L2 error of gradPsi[0] = 0.002772
+L2 error of gradPsi[10] = 0.002773
+L2 error of gradPsi[20] = 0.002790
+L2 error of gradPsi[1] = 0.000000
+L2 error of gradPsi[11] = 0.000000
+L2 error of gradPsi[21] = 0.000000
+L2 error of gradPsi[2] = 0.000000
+L2 error of gradPsi[12] = 0.000000
+L2 error of gradPsi[22] = 0.000000
+L2 error of gradPsi[3] = 0.000000
+L2 error of gradPsi[13] = 0.000000
+L2 error of gradPsi[23] = 0.000000
+L2 error of gradPsi[4] = 0.053581
+L2 error of gradPsi[14] = 0.053973
+L2 error of gradPsi[24] = 0.053821
+L2 error of gradPsi[5] = 0.028721
+L2 error of gradPsi[15] = 0.028438
+L2 error of gradPsi[25] = 0.029477
+L2 error of gradPsi[6] = 0.028331
+L2 error of gradPsi[16] = 0.029278
+L2 error of gradPsi[26] = 0.028303
+L2 error of gradPsi[7] = 0.052452
+L2 error of gradPsi[17] = 0.052777
+L2 error of gradPsi[27] = 0.053116
+L2 error of gradPsi[8] = 0.028440
+L2 error of gradPsi[18] = 0.027849
+L2 error of gradPsi[28] = 0.028400
+L2 error of gradPsi[9] = 0.051942
+L2 error of gradPsi[19] = 0.051899
+L2 error of gradPsi[29] = 0.051967
+
+
+PS:
+
+Read file <r3_p2.err> for stderr output of this job.
+

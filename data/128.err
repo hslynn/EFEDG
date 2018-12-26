@@ -1,1 +1,0 @@
-Running /soft/openmpi-3.0.0-gcc/bin/mpirun.openmpi -hostfile /share/home/hslynn/.lsbatch/1545284741.184987.hostfile ./Einstein_DG

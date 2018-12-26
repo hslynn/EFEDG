@@ -20,7 +20,7 @@ main(int argc, char * argv[])
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0, t0 = 0.0, t1 = 0.0;
     FLOAT dt, max_time = M;
     DOF_TYPE *dg_type;
-    INT i, p_order = 2, refine_time = 0;
+    INT i, j, p_order = 2, refine_time = 0;
     MPI_Status status; 
 
     //command line options
@@ -69,8 +69,14 @@ main(int argc, char * argv[])
 
     g = phgNewGrid(-1); 
     phgImport(g, meshfile, FALSE);
-    phgRefineAllElements(g, refine_time);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
+    phgRefineAllElements(g, refine_time);
+
+    phgPrintf("\nUsing mesh file: %s\n", meshfile);
+    phgPrintf("Refine times: %d\n", refine_time);
+    phgPrintf("Highest polymonial order: %d\n", dg_type->order);
+    phgPrintf("Total elements = %d\n", g->nelem_global);
+    phgPrintf("Total processes = %d\n", phgNProcs);
 
     /*find the max and min diameter of all elements*/
     ForAllElements(g, e){
@@ -102,18 +108,18 @@ main(int argc, char * argv[])
     }
     
     dt = min_diam / 10.; 
-    printf("\nmax_diam = %f\n", max_diam);
-    printf("min_diam = %f\n\n", min_diam);
+    phgPrintf("\nmax_diam = %f\n", max_diam);
+    phgPrintf("min_diam = %f\n\n", min_diam);
 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
-    DOF *dofs_sol[50], *dofs_bdry[50], *dofs_diff[NVAR];
+    DOF *dofs_sol[50], *dofs_bdry[50], *dofs_err[NVAR];
     create_dofs(g, dg_type, 1, dofs_Psi, "Psi", 10);
     create_dofs(g, dg_type, 1, dofs_Pi, "Pi", 10);
     create_dofs(g, dg_type, 1, dofs_Phi, "Phi", 30);
     create_dofs(g, dg_type, 1, dofs_sol, "sol", 50);
     create_dofs(g, dg_type, 1, dofs_bdry, "bdry", NVAR);
-    create_dofs(g, dg_type, 1, dofs_diff, "diff", NVAR);
+    create_dofs(g, dg_type, 1, dofs_err, "err", NVAR);
 
     /*create dofs for all source terms*/
     DOF *dofs_srcPsi[10], *dofs_srcPi[10], *dofs_srcPhi[30];
@@ -123,9 +129,14 @@ main(int argc, char * argv[])
     
     /*create dofs for derivatives of vars*/ 
     DOF *dofs_gradPsi[30], *dofs_gradPi[30], *dofs_gradPhi[90];
+    DOF *dofs_gradPsi_ave[30], *dofs_gradPsi_diff[30], *dofs_gradPsi_err[30];
     create_dofs(g, dg_type, 2, dofs_gradPsi, "gradPsi", 30);
     create_dofs(g, dg_type, 2, dofs_gradPi, "gradPi", 30);
     create_dofs(g, dg_type, 2, dofs_gradPhi, "gradPhi", 90);
+    create_dofs(g, dg_type, 1, dofs_gradPsi_ave, "gradPsi_ave", 30);
+    create_dofs(g, dg_type, 1, dofs_gradPsi_diff, "gradPsi_diff", 30);
+    create_dofs(g, dg_type, 1, dofs_gradPsi_err, "gradPsi_err", 30);
+
 
     //create lists to store dofs of var, src
     DOF *dofs_var[NVAR], *dofs_src[NVAR];
@@ -159,46 +170,50 @@ main(int argc, char * argv[])
     
     get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-    
-    char Hhat_name[30], rhs_name[30]; 
+
+    for(i=0;i<30;i++){
+        split_dof(dofs_gradPsi[i], dofs_gradPsi_ave[i], dofs_gradPsi_diff[i]);
+    }
+    get_dofs_diff(dofs_gradPsi_ave, dofs_var + 20, dofs_gradPsi_err, 30);
+    for(j=0;j<10;j++){
+        phgPrintf("L2 error of gradPsi[%d] = %f\n", j, phgDofNormL2(dofs_gradPsi_err[j]));
+        phgPrintf("L2 error of gradPsi[%d] = %f\n", j + 10, phgDofNormL2(dofs_gradPsi_err[j+10]));
+        phgPrintf("L2 error of gradPsi[%d] = %f\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
+    }
+
+    phgAbort(0);
+    char Hhat_name[30], rhs_name[30], err_name[30]; 
+    FLOAT err[10], l2_err;
     for(i=0;i*dt<max_time;i++){
-        
-        sprintf(Hhat_name, "Hhat_%f", i*dt);
         sprintf(rhs_name, "rhs_%f", i*dt);
-        strcat(Hhat_name, ".vtk");
+        sprintf(Hhat_name, "Hhat_%f", i*dt);
+        sprintf(err_name, "err_%f", i*dt);
         strcat(rhs_name, ".vtk");
-        if(phgRank==0){
-            printf("step %d completed\n", i);
-            printf("time length: %f\n\n", i*dt);
+        strcat(Hhat_name, ".vtk");
+        strcat(err_name, ".vtk");
+
+        get_dofs_diff(dofs_var, dofs_sol, dofs_err, NVAR); 
+
+        l2_err = 0.;
+        for(j=0;j<10;j++){
+            err[j] = phgDofNormL2(dofs_err[j]);
+            l2_err += err[j];
         }
-        phgExportVTKn(g, Hhat_name, 50, dofs_Hhat + 0);
-        phgExportVTKn(g, rhs_name, 50, dofs_rhs + 0);
-        
+        l2_err = Sqrt(l2_err);
+       
+        phgPrintf("step %d completed\n", i);
+        phgPrintf("time length: %f\n", i*dt);
+        phgPrintf("L2 error of psi: %f\n\n", l2_err);
+        //phgExportVTKn(g, Hhat_name, 50, dofs_Hhat + 0);
+        //phgExportVTKn(g, rhs_name, 50, dofs_rhs + 0);
+        //phgExportVTKn(g, diff_name, 10, dofs_err + 0);
+            
         ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
      
-    phgPrintf("Using mesh file: %s\n", meshfile);
-    phgPrintf("Refine times: %d\n", refine_time);
-    phgPrintf("Highest polymonial order: %d\n", dg_type->order);
-    phgPrintf("Total elements = %d\n", dofs_var[0]->g->nelem_global);
-    phgPrintf("Total processes = %d\n", phgNProcs);
     t1 = phgGetTime(NULL);
-    if(phgRank==0){
-        phgPrintf("Total time cost = %f\n\n", t1 - t0);
-    }
-    get_dofs_diff(dofs_var, dofs_sol, dofs_diff); 
-    phgExportVTKn(g, "diff.vtk", 10, dofs_diff);
-    //compute the L2 error of dofs_diff terms
-    FLOAT err[10];
-    for(i=0;i<10;i++){
-        err[i] = phgDofNormL2(dofs_diff[i]);
-        if(phgRank == 0){
-            printf("L2 error of psi[%d]: %f\n", i, err[i]);
-        }
-    }
-
-    
+    phgPrintf("Total time cost = %f\n", t1 - t0);
    
     /*release the mem*/
     free_dofs(dofs_var, NVAR);
@@ -206,9 +221,13 @@ main(int argc, char * argv[])
     free_dofs(dofs_Hhat, NVAR);
     free_dofs(dofs_sol, NVAR);
     free_dofs(dofs_bdry, NVAR);
-    free_dofs(dofs_diff, NVAR);
+    free_dofs(dofs_err, NVAR);
 
+    
     free_dofs(dofs_gradPsi, 30);
+    free_dofs(dofs_gradPsi_ave, 30);
+    free_dofs(dofs_gradPsi_diff, 30);
+    free_dofs(dofs_gradPsi_err, 30);
     free_dofs(dofs_gradPi, 30);
     free_dofs(dofs_gradPhi, 90);
 

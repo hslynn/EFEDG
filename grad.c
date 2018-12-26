@@ -120,7 +120,7 @@ build_linear_system(SOLVER *solver, DOF *u_h, DOF *dof_bdry, int coord)
                     }
 
                     boundary_term = 0.5 * normal[coord] * (val_ext + val_int) + (0.5 - in_out) * 
-                            fabs(normal[coord]) * (val_ext - val_int);//数值通量, in_out = 0 对应于取plus  
+                            Fabs(normal[coord]) * (val_ext - val_int);//数值通量, in_out = 0 对应于取plus  
                     /*添加到解法器相应右端项*/
                     phgSolverAddRHSEntry(solver, I[i], boundary_term);
                 } 
