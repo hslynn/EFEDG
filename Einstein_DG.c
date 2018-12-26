@@ -64,7 +64,7 @@ main(int argc, char * argv[])
         case 15: dg_type = DOF_DG15;
             break;
         default: dg_type = DOF_DG2;
-            printf("Unavailable polynomial order, using default set DOF_DG2\n\n");
+            phgPrintf("\nUnavailable polynomial order, using default set DOF_DG2\n");
     }
 
     g = phgNewGrid(-1); 
@@ -127,6 +127,7 @@ main(int argc, char * argv[])
     create_dofs(g, dg_type, 1, dofs_srcPi, "srcPi", 10);
     create_dofs(g, dg_type, 1, dofs_srcPhi, "srcPhi", 30);
     
+    phgPrintf("\ntp2\n\n");
     /*create dofs for derivatives of vars*/ 
     DOF *dofs_gradPsi[30], *dofs_gradPi[30], *dofs_gradPhi[90];
     DOF *dofs_gradPsi_ave[30], *dofs_gradPsi_diff[30], *dofs_gradPsi_err[30];
@@ -137,7 +138,7 @@ main(int argc, char * argv[])
     create_dofs(g, dg_type, 1, dofs_gradPsi_diff, "gradPsi_diff", 30);
     create_dofs(g, dg_type, 1, dofs_gradPsi_err, "gradPsi_err", 30);
 
-
+    phgPrintf("\ntp3\n\n");
     //create lists to store dofs of var, src
     DOF *dofs_var[NVAR], *dofs_src[NVAR];
     for(i=0;i<10;i++){
@@ -178,7 +179,7 @@ main(int argc, char * argv[])
     for(j=0;j<10;j++){
         phgPrintf("L2 error of gradPsi[%d] = %f\n", j, phgDofNormL2(dofs_gradPsi_err[j]));
         phgPrintf("L2 error of gradPsi[%d] = %f\n", j + 10, phgDofNormL2(dofs_gradPsi_err[j+10]));
-        phgPrintf("L2 error of gradPsi[%d] = %f\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
+        phgPrintf("L2 error of gradPsi[%d] = %f\n\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
     }
 
     phgAbort(0);
