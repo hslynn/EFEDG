@@ -9,9 +9,9 @@ phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)
     assert(!SpecialDofType(v->type));
     assert(p->dim == 1);
 
-    if (order < 0) 
-	    order = DofTypeOrder(p, e);
-	 
+    if (order < 0){
+	    order = DofTypeOrder(p, e) + DofTypeOrder(v, e);
+	}
     quad = phgQuadGetQuad3D(order);
     g1 = phgQuadGetDofValues(e, p, quad);
  
@@ -34,32 +34,37 @@ phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)
 }
 
 static void
-set_neighbour_dof(DOF *u, DOF *neigh_u)
+set_neighbour_data(DOF *u, ELEMENT *e, INT s, DOF *neigh_u, NEIGHBOUR_DATA *nd)
 { 
-    ELEMENT *e;
-    SHORT s, i, nbasface;
+    assert(e->bound_type[s] & INTERIOR); 
+    SHORT i, nbasface;
     FLOAT *ele_data;
-    NEIGHBOUR_DATA *nd;
-    nd = phgDofInitNeighbourData(u, NULL); 
-    ForAllElements(u->g, e){
-        ele_data = DofElementData(neigh_u, e->index);
-        for(s=0;s<4;s++){
-            if(e->bound_type[s] & INTERIOR){
-                nbasface = phgDofNeighbourNBas(nd, e, s, NULL);
-                SHORT bases[nbasface];
-                phgDofGetBasesOnFace(u, e, s, bases);
-                for(i=0;i<nbasface;i++){
-                    ele_data[bases[i]] = *phgDofNeighbourData(nd, e, s, i, NULL);   
-                }  
-            }
-        }
+
+    ele_data = DofElementData(neigh_u, e->index);
+    nbasface = phgDofNeighbourNBas(nd, e, s, NULL);
+    SHORT bases[nbasface];
+    phgDofGetBasesOnFace(u, e, s, bases);
+    for(i=0;i<nbasface;i++){
+        ele_data[bases[i]] = *phgDofNeighbourData(nd, e, s, i, NULL);
     }
-    //phgDofDump(neigh_u);
-    phgDofReleaseNeighbourData(&nd); 
 }
 
 static void
-build_linear_system(SOLVER *solver, DOF *u_h, DOF *dof_bdry, int coord)
+reset_neighbour_data(DOF *neigh_u, ELEMENT *e, INT s)
+{
+    assert(e->bound_type[s] & INTERIOR); 
+    SHORT i, nbasface, bases[DofGetNBas(neigh_u, e)];
+    FLOAT *ele_data;
+
+    ele_data = DofElementData(neigh_u, e->index);
+    nbasface = phgDofGetBasesOnFace(neigh_u, e, s, bases);
+    for(i=0;i<nbasface;i++){
+        ele_data[bases[i]] = 0.;   
+    }
+}
+
+static void
+build_linear_system(SOLVER *solver, DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry, int coord)
 {
     int n, k, i, j, s, in_out;
     GRID *g = u_h->g;
@@ -68,7 +73,6 @@ build_linear_system(SOLVER *solver, DOF *u_h, DOF *dof_bdry, int coord)
     FLOAT val_ext, val_int, mass_term, boundary_term, stiff_term[3];
    
     neigh_u = phgDofNew(g, u_h->type, 1, "neigh_u", DofInterpolation); 
-    set_neighbour_dof(u_h, neigh_u); 
 
     ForAllElements(g, e){ 
     int nbas = DofGetNBas(u_h, e); 
@@ -110,8 +114,10 @@ build_linear_system(SOLVER *solver, DOF *u_h, DOF *dof_bdry, int coord)
                    
                     /*分是否边界面来计算u^+*/ 
                     if(e->bound_type[s] & INTERIOR){//如果s是内部面,则利用neigh_u来计算u^+
+                        set_neighbour_data(u_h, e, s, neigh_u, nd); 
                         val_ext = phgQuadFaceDofDotBas(e, s, neigh_u, DOF_PROJ_NONE, 
                                 u_h, n, QUAD_DEFAULT); 
+                        reset_neighbour_data(neigh_u, e, s);
                     } 
                     else{//s是边界面时,则施加边界条件 
                         val_ext = phgQuadFaceDofDotBas(e, s, dof_bdry, DOF_PROJ_NONE, 
@@ -131,12 +137,12 @@ build_linear_system(SOLVER *solver, DOF *u_h, DOF *dof_bdry, int coord)
 }
 
 static void
-dgHJGradDof(DOF *u_h, DOF *dof_bdry, DOF *dof_grad, int coord)
+dgHJGradDof(DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry, DOF *dof_grad, int coord)
 {
     SOLVER *solver;
     solver = phgSolverCreate(SOLVER_DEFAULT, dof_grad, NULL);
     
-    build_linear_system(solver, u_h, dof_bdry, coord);
+    build_linear_system(solver, u_h, nd, dof_bdry, coord);
     
     phgSolverSolve(solver, TRUE, dof_grad, NULL);
     phgSolverDestroy(&solver);
@@ -146,10 +152,13 @@ static void
 get_dofs_grad(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad, int ndof)
 {
     short i;
+    NEIGHBOUR_DATA *nd;
     for(i=0;i<ndof;i++){ 
-        dgHJGradDof(dofs[i], dofs_bdry[i], dofs_grad[i], 0);
-        dgHJGradDof(dofs[i], dofs_bdry[i], dofs_grad[ndof + i], 1);
-        dgHJGradDof(dofs[i], dofs_bdry[i], dofs_grad[2*ndof + i], 2);
+        nd = phgDofInitNeighbourData(dofs[i], NULL);
+        dgHJGradDof(dofs[i], nd, dofs_bdry[i], dofs_grad[i], 0);
+        dgHJGradDof(dofs[i], nd, dofs_bdry[i], dofs_grad[ndof + i], 1);
+        dgHJGradDof(dofs[i], nd, dofs_bdry[i], dofs_grad[2*ndof + i], 2);
+        phgDofReleaseNeighbourData(&nd);
     }
 }
 

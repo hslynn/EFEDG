@@ -11,6 +11,18 @@
 #include "Schwarzschild_Harmonic.c"
 #include "error.c"
 
+static void
+func_test(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = Sin(y);
+}
+
+static void
+func_test_grady(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = Cos(y);
+}
+
 int 
 main(int argc, char * argv[])
 {
@@ -127,7 +139,6 @@ main(int argc, char * argv[])
     create_dofs(g, dg_type, 1, dofs_srcPi, "srcPi", 10);
     create_dofs(g, dg_type, 1, dofs_srcPhi, "srcPhi", 30);
     
-    phgPrintf("\ntp2\n\n");
     /*create dofs for derivatives of vars*/ 
     DOF *dofs_gradPsi[30], *dofs_gradPi[30], *dofs_gradPhi[90];
     DOF *dofs_gradPsi_ave[30], *dofs_gradPsi_diff[30], *dofs_gradPsi_err[30];
@@ -138,7 +149,6 @@ main(int argc, char * argv[])
     create_dofs(g, dg_type, 1, dofs_gradPsi_diff, "gradPsi_diff", 30);
     create_dofs(g, dg_type, 1, dofs_gradPsi_err, "gradPsi_err", 30);
 
-    phgPrintf("\ntp3\n\n");
     //create lists to store dofs of var, src
     DOF *dofs_var[NVAR], *dofs_src[NVAR];
     for(i=0;i<10;i++){
@@ -166,6 +176,21 @@ main(int argc, char * argv[])
     phgExportVTKn(g, "var.vtk", 50, dofs_var);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
+
+    DOF *dof_test = phgDofNew(g, dg_type, 1, "test", func_test);
+    DOF *dof_grady = phgDofNew(g, dg_type, 1, "grady", func_test_grady);
+    DOF *dof_grady_ave = phgDofNew(g, dg_type, 1, "grady_ave", DofInterpolation);
+    DOF *dof_grady_diff = phgDofNew(g, dg_type, 1, "grady_diff", DofInterpolation);
+    DOF *dof_grady_numerical = phgDofNew(g, dg_type, 2, "grady_numerical", DofInterpolation);
+    NEIGHBOUR_DATA *nd = phgDofInitNeighbourData(dof_test, NULL);
+    dgHJGradDof(dof_test, nd, dof_test, dof_grady_numerical, 1);
+    split_dof(dof_grady_numerical, dof_grady_ave, dof_grady_diff);
+    DOF *dof_test_err = phgDofNew(g, dg_type, 1, "test_err", DofInterpolation);
+    get_dofs_diff(&dof_grady_ave, &dof_grady, &dof_test_err, 1);
+    phgPrintf("L2 error of grad y = %.16lf\n", phgDofNormL2(dof_test_err));
+
+    phgDofReleaseNeighbourData(&nd);
+    phgAbort(0);
    
     t0 = phgGetTime(NULL);
     
@@ -182,7 +207,6 @@ main(int argc, char * argv[])
         phgPrintf("L2 error of gradPsi[%d] = %f\n\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
     }
 
-    phgAbort(0);
     char Hhat_name[30], rhs_name[30], err_name[30]; 
     FLOAT err[10], l2_err;
     for(i=0;i*dt<max_time;i++){
