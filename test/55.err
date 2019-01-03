@@ -1,0 +1,1 @@
+Running /share/soft/mvapich2-2.0.1_icc/bin/mpiexec.hydra -np 55 -ppn 28 -f /share/home/hslynn/.lsbatch/1546156965.208199.hostfile -env MV2_CPU_BINDING_POLICY scatter ./simplest

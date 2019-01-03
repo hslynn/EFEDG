@@ -1,0 +1,2 @@
+Running /share/soft/openmpi-3.0.0_gcc/bin/mpirun.openmpi -hostfile /share/home/hslynn/.lsbatch/1546156566.208189.hostfile ./simplest
+mpirun.openmpi: Forwarding signal 18 to job

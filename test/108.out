@@ -1,0 +1,94 @@
+Sender: LSF System <lsfadmin@c2u26n01>
+Subject: Job 208236: <108> in cluster <hpc.lsec.cc.ac.cn> Done
+
+Job <108> was submitted from host <ln02> by user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+Job was executed on host(s) <36*c2u26n01>, in queue <batch>, as user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+                            <36*c1u24n03>
+                            <36*c1u17n01>
+</share/home/hslynn> was used as the home directory.
+</share/home/hslynn/Einstein_DG/test> was used as the working directory.
+Started at Sun Dec 30 16:18:46 2018
+Results reported on Sun Dec 30 16:19:01 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+mpijob -t mvapich2 ./simplest
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   586.33 sec.
+    Max Memory :                                 1592 MB
+    Average Memory :                             644.67 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              43
+    Max Threads :                                152
+
+The output (if any) follows:
+
+Parallel Hierarchical Grid (version 0.9.4).
+Repartition mesh, load imbalance: 1.125
+729 DOF, 384 elements, 108 submeshes, load imbalance: 1.125
+  DOF: 729, unknowns: 729, Dirichlet bdry: 386
+  nits = 20, L2 error = 2.295e-02, indicator = 1.204e+01, mem = 40.96MB
+  Wall time: 7.256e+00
+1241 DOF, 768 elements, 108 submeshes, load imbalance: 1.125
+  DOF: 1241, unknowns: 1241, Dirichlet bdry: 386
+  nits = 29, L2 error = 1.626e-02, indicator = 9.157e+00, mem = 49.96MB
+  Wall time: 1.587e-02
+2009 DOF, 1152 elements, 108 submeshes, load imbalance: 1.125
+  DOF: 2009, unknowns: 2009, Dirichlet bdry: 770
+  nits = 34, L2 error = 3.494e-03, indicator = 4.963e+00, mem = 50.45MB
+  Wall time: 1.469e-02
+Repartition mesh, load imbalance: 1.02273
+2645 DOF, 1584 elements, 108 submeshes, load imbalance: 1.02273
+  DOF: 2645, unknowns: 2645, Dirichlet bdry: 770
+  nits = 38, L2 error = 3.436e-03, indicator = 4.483e+00, mem = 53.58MB
+  Wall time: 4.051e-02
+Repartition mesh, load imbalance: 1.03125
+3953 DOF, 2304 elements, 108 submeshes, load imbalance: 1.03125
+  DOF: 3953, unknowns: 3953, Dirichlet bdry: 1538
+  nits = 41, L2 error = 3.117e-03, indicator = 3.546e+00, mem = 64.93MB
+  Wall time: 4.818e-02
+Repartition mesh, load imbalance: 1.00301
+6129 DOF, 3984 elements, 108 submeshes, load imbalance: 1.00301
+  DOF: 6129, unknowns: 6129, Dirichlet bdry: 1538
+  nits = 46, L2 error = 2.621e-03, indicator = 2.852e+00, mem = 65.53MB
+  Wall time: 2.965e-02
+Repartition mesh, load imbalance: 1.00195
+9009 DOF, 6144 elements, 108 submeshes, load imbalance: 1.00195
+  DOF: 9009, unknowns: 9009, Dirichlet bdry: 1538
+  nits = 51, L2 error = 1.732e-03, indicator = 2.213e+00, mem = 65.96MB
+  Wall time: 3.276e-02
+14769 DOF, 9600 elements, 108 submeshes, load imbalance: 1.18125
+  DOF: 14769, unknowns: 14769, Dirichlet bdry: 2690
+  nits = 62, L2 error = 1.146e-03, indicator = 1.555e+00, mem = 66.48MB
+  Wall time: 3.555e-02
+22041 DOF, 14400 elements, 108 submeshes, load imbalance: 1.1325
+  DOF: 22041, unknowns: 22041, Dirichlet bdry: 3842
+  nits = 70, L2 error = 4.832e-04, indicator = 1.065e+00, mem = 66.92MB
+  Wall time: 4.133e-02
+31209 DOF, 21120 elements, 108 submeshes, load imbalance: 1.0892
+  DOF: 31209, unknowns: 31209, Dirichlet bdry: 5378
+  nits = 70, L2 error = 3.251e-04, indicator = 8.291e-01, mem = 67.44MB
+  Wall time: 4.291e-02
+Repartition mesh, load imbalance: 1.00233
+51329 DOF, 36096 elements, 108 submeshes, load imbalance: 1.00233
+  DOF: 51329, unknowns: 51329, Dirichlet bdry: 6146
+  nits = 77, L2 error = 2.469e-04, indicator = 6.485e-01, mem = 67.95MB
+  Wall time: 5.903e-02
+82433 DOF, 57408 elements, 108 submeshes, load imbalance: 1.10242
+  DOF: 82433, unknowns: 82433, Dirichlet bdry: 8450
+  nits = 94, L2 error = 1.776e-04, indicator = 4.819e-01, mem = 68.73MB
+  Wall time: 6.766e-02
+
+
+PS:
+
+Read file <108.err> for stderr output of this job.
+

@@ -1,0 +1,148 @@
+Sender: LSF System <lsfadmin@a6u01n04>
+Subject: Job 208272: <r3_p5> in cluster <hpc.lsec.cc.ac.cn> Done
+
+Job <r3_p5> was submitted from host <ln02> by user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+Job was executed on host(s) <36*a6u01n04>, in queue <batch>, as user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+                            <36*c6u17n02>
+                            <36*c1u08n03>
+                            <36*c2u05n04>
+                            <36*c1u15n03>
+                            <20*a6u05n03>
+</share/home/hslynn> was used as the home directory.
+</share/home/hslynn/Einstein_DG> was used as the working directory.
+Started at Sun Dec 30 19:07:47 2018
+Results reported on Sun Dec 30 19:09:42 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+mpijob -t mvapich2 ./Einstein_DG -r 3 -p 5
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   3870.24 sec.
+    Max Memory :                                 1824 MB
+    Average Memory :                             1602.88 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              44
+    Max Threads :                                147
+
+The output (if any) follows:
+
+Parallel Hierarchical Grid (version 0.9.4).
+
+Using mesh file: ./mesh/hollowed_icosahedron.mesh
+Refine times: 3
+Highest polymonial order: 5
+Total elements = 4288
+Total processes = 200
+
+max_diam = 0.564691
+min_diam = 0.267538
+
+L2 error of gradPsi[0] = 0.000012
+L2 error of gradPsi[10] = 0.000011
+L2 error of gradPsi[20] = 0.000012
+
+L2 error of gradPsi[1] = 0.000000
+L2 error of gradPsi[11] = 0.000000
+L2 error of gradPsi[21] = 0.000000
+
+L2 error of gradPsi[2] = 0.000000
+L2 error of gradPsi[12] = 0.000000
+L2 error of gradPsi[22] = 0.000000
+
+L2 error of gradPsi[3] = 0.000000
+L2 error of gradPsi[13] = 0.000000
+L2 error of gradPsi[23] = 0.000000
+
+L2 error of gradPsi[4] = 0.002035
+L2 error of gradPsi[14] = 0.002189
+L2 error of gradPsi[24] = 0.002272
+
+L2 error of gradPsi[5] = 0.001407
+L2 error of gradPsi[15] = 0.001461
+L2 error of gradPsi[25] = 0.001634
+
+L2 error of gradPsi[6] = 0.001361
+L2 error of gradPsi[16] = 0.001399
+L2 error of gradPsi[26] = 0.001285
+
+L2 error of gradPsi[7] = 0.002152
+L2 error of gradPsi[17] = 0.001959
+L2 error of gradPsi[27] = 0.002316
+
+L2 error of gradPsi[8] = 0.001449
+L2 error of gradPsi[18] = 0.001333
+L2 error of gradPsi[28] = 0.001415
+
+L2 error of gradPsi[9] = 0.002171
+L2 error of gradPsi[19] = 0.002119
+L2 error of gradPsi[29] = 0.001943
+
+step 0 completed
+time length: 0.000000
+L2 error of psi: 0.000000
+
+L2 err of rhs[0]: 0.0000000000000000
+L2 err of rhs[1]: 0.0000000000000000
+L2 err of rhs[2]: 0.0000000000000000
+L2 err of rhs[3]: 0.0000000000000000
+L2 err of rhs[4]: 0.0000000000000000
+L2 err of rhs[5]: 0.0000000000000000
+L2 err of rhs[6]: 0.0000000000000000
+L2 err of rhs[7]: 0.0000000000000000
+L2 err of rhs[8]: 0.0000000000000000
+L2 err of rhs[9]: 0.0000000000000000
+L2 err of rhs[10]: 0.0000184672094861
+L2 err of rhs[11]: 0.0000000000000004
+L2 err of rhs[12]: 0.0000000000000004
+L2 err of rhs[13]: 0.0000000000000004
+L2 err of rhs[14]: 0.0050439187475387
+L2 err of rhs[15]: 0.0038258025613176
+L2 err of rhs[16]: 0.0035626911094313
+L2 err of rhs[17]: 0.0054181849305727
+L2 err of rhs[18]: 0.0037335219116507
+L2 err of rhs[19]: 0.0048763766292071
+L2 err of rhs[20]: 0.0000062286430271
+L2 err of rhs[21]: 0.0000000000000000
+L2 err of rhs[22]: 0.0000000000000000
+L2 err of rhs[23]: 0.0000000000000000
+L2 err of rhs[24]: 0.0010833483122193
+L2 err of rhs[25]: 0.0007521639040473
+L2 err of rhs[26]: 0.0007273367441454
+L2 err of rhs[27]: 0.0011635643199180
+L2 err of rhs[28]: 0.0007793235438524
+L2 err of rhs[29]: 0.0011908440132778
+L2 err of rhs[30]: 0.0000060063866328
+L2 err of rhs[31]: 0.0000000000000000
+L2 err of rhs[32]: 0.0000000000000000
+L2 err of rhs[33]: 0.0000000000000000
+L2 err of rhs[34]: 0.0011945240434743
+L2 err of rhs[35]: 0.0007769804206223
+L2 err of rhs[36]: 0.0007545218538114
+L2 err of rhs[37]: 0.0010452763231289
+L2 err of rhs[38]: 0.0007130137809223
+L2 err of rhs[39]: 0.0011645104880696
+L2 err of rhs[40]: 0.0000066391308213
+L2 err of rhs[41]: 0.0000000000000000
+L2 err of rhs[42]: 0.0000000000000000
+L2 err of rhs[43]: 0.0000000000000000
+L2 err of rhs[44]: 0.0012372515293739
+L2 err of rhs[45]: 0.0008747896396599
+L2 err of rhs[46]: 0.0006932486934645
+L2 err of rhs[47]: 0.0012470865627303
+L2 err of rhs[48]: 0.0007552444863457
+L2 err of rhs[49]: 0.0010430853043938
+Total time cost = 90.489875
+
+
+PS:
+
+Read file <r3_p5.err> for stderr output of this job.
+

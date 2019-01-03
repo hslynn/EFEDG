@@ -1,0 +1,321 @@
+Sender: LSF System <lsfadmin@c1u26n02>
+Subject: Job 208687: <r1_p6_300_50> in cluster <hpc.lsec.cc.ac.cn> Exited
+
+Job <r1_p6_300_50> was submitted from host <ln02> by user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+Job was executed on host(s) <36*c1u26n02>, in queue <batch>, as user <hslynn> in cluster <hpc.lsec.cc.ac.cn>.
+                            <36*c1u26n03>
+                            <36*c4u10n02>
+                            <36*a6u03n02>
+                            <36*c1u08n02>
+                            <36*a6u19n01>
+                            <36*c1u19n03>
+                            <36*c3u01n04>
+                            <12*c6u24n02>
+</share/home/hslynn> was used as the home directory.
+</share/home/hslynn/Einstein_DG> was used as the working directory.
+Started at Tue Jan  1 18:30:40 2019
+Results reported on Tue Jan  1 22:08:22 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+mpijob -t mvapich2 ./Einstein_DG -r 1 -p 6
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   442523.72 sec.
+    Max Memory :                                 1721 MB
+    Average Memory :                             1706.62 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              47
+    Max Threads :                                150
+
+The output (if any) follows:
+
+Parallel Hierarchical Grid (version 0.9.4).
+
+Using mesh file: ./mesh/hollowed_icosahedron.mesh
+Refine times: 1
+Highest polymonial order: 6
+Total elements = 1878
+Total processes = 300
+
+max_diam = 0.6628221745248633
+min_diam = 0.3165140671526067
+
+L2 error of gradPsi[0] = 0.0000039638779880
+L2 error of gradPsi[10] = 0.0000039029176338
+L2 error of gradPsi[20] = 0.0000038377195832
+
+L2 error of gradPsi[1] = 0.0000000000000000
+L2 error of gradPsi[11] = 0.0000000000000000
+L2 error of gradPsi[21] = 0.0000000000000000
+
+L2 error of gradPsi[2] = 0.0000000000000000
+L2 error of gradPsi[12] = 0.0000000000000000
+L2 error of gradPsi[22] = 0.0000000000000000
+
+L2 error of gradPsi[3] = 0.0000000000000000
+L2 error of gradPsi[13] = 0.0000000000000000
+L2 error of gradPsi[23] = 0.0000000000000000
+
+L2 error of gradPsi[4] = 0.0000230081843870
+L2 error of gradPsi[14] = 0.0000246787537054
+L2 error of gradPsi[24] = 0.0000242737156880
+
+L2 error of gradPsi[5] = 0.0000181610534115
+L2 error of gradPsi[15] = 0.0000177210073092
+L2 error of gradPsi[25] = 0.0000174726251263
+
+L2 error of gradPsi[6] = 0.0000146571757658
+L2 error of gradPsi[16] = 0.0000138397668679
+L2 error of gradPsi[26] = 0.0000144830270489
+
+L2 error of gradPsi[7] = 0.0000282376583956
+L2 error of gradPsi[17] = 0.0000255360282461
+L2 error of gradPsi[27] = 0.0000262887971904
+
+L2 error of gradPsi[8] = 0.0000156628721262
+L2 error of gradPsi[18] = 0.0000153261129548
+L2 error of gradPsi[28] = 0.0000150374395909
+
+L2 error of gradPsi[9] = 0.0000232791227414
+L2 error of gradPsi[19] = 0.0000220636657411
+L2 error of gradPsi[29] = 0.0000206184189338
+
+Step 0 completed
+Advanced in time: 0.000000
+Wall time past: 0.006379
+L2 error of psi: 0.0000000000000000
+
+Step 1 completed
+Advanced in time: 0.006330
+Wall time past: 289.174206
+L2 error of psi: 0.0001237172476295
+
+Step 2 completed
+Advanced in time: 0.012661
+Wall time past: 576.877802
+L2 error of psi: 0.0002430204255178
+
+Step 3 completed
+Advanced in time: 0.018991
+Wall time past: 866.243987
+L2 error of psi: 0.0003473135416417
+
+Step 4 completed
+Advanced in time: 0.025321
+Wall time past: 1158.332496
+L2 error of psi: 0.0004368331374362
+
+Step 5 completed
+Advanced in time: 0.031651
+Wall time past: 1449.831071
+L2 error of psi: 0.0005159057765330
+
+Step 6 completed
+Advanced in time: 0.037982
+Wall time past: 1740.286201
+L2 error of psi: 0.0005879558920368
+
+Step 7 completed
+Advanced in time: 0.044312
+Wall time past: 2029.361931
+L2 error of psi: 0.0006539854378155
+
+Step 8 completed
+Advanced in time: 0.050642
+Wall time past: 2317.058976
+L2 error of psi: 0.0007136881910889
+
+Step 9 completed
+Advanced in time: 0.056973
+Wall time past: 2609.798735
+L2 error of psi: 0.0007668945773757
+
+Step 10 completed
+Advanced in time: 0.063303
+Wall time past: 2899.815613
+L2 error of psi: 0.0008137930316409
+
+Step 11 completed
+Advanced in time: 0.069633
+Wall time past: 3189.238626
+L2 error of psi: 0.0008545523708865
+
+Step 12 completed
+Advanced in time: 0.075963
+Wall time past: 3477.836090
+L2 error of psi: 0.0008894057047338
+
+Step 13 completed
+Advanced in time: 0.082294
+Wall time past: 3768.860087
+L2 error of psi: 0.0009188546391101
+
+Step 14 completed
+Advanced in time: 0.088624
+Wall time past: 4058.571218
+L2 error of psi: 0.0009433772144335
+
+Step 15 completed
+Advanced in time: 0.094954
+Wall time past: 4347.600686
+L2 error of psi: 0.0009639029604467
+
+Step 16 completed
+Advanced in time: 0.101285
+Wall time past: 4635.409198
+L2 error of psi: 0.0009808505534238
+
+Step 17 completed
+Advanced in time: 0.107615
+Wall time past: 4928.063832
+L2 error of psi: 0.0009957090842259
+
+Step 18 completed
+Advanced in time: 0.113945
+Wall time past: 5217.367393
+L2 error of psi: 0.0010087449623082
+
+Step 19 completed
+Advanced in time: 0.120275
+Wall time past: 5503.449606
+L2 error of psi: 0.0010215664710331
+
+Step 20 completed
+Advanced in time: 0.126606
+Wall time past: 5795.970925
+L2 error of psi: 0.0010365087916481
+
+Step 21 completed
+Advanced in time: 0.132936
+Wall time past: 6088.229004
+L2 error of psi: 0.0010518843469757
+
+Step 22 completed
+Advanced in time: 0.139266
+Wall time past: 6380.910185
+L2 error of psi: 0.0010925023634414
+
+Step 23 completed
+Advanced in time: 0.145596
+Wall time past: 6667.720379
+L2 error of psi: 0.0011167866625465
+
+Step 24 completed
+Advanced in time: 0.151927
+Wall time past: 6956.341033
+L2 error of psi: 0.0012640036861010
+
+Step 25 completed
+Advanced in time: 0.158257
+Wall time past: 7247.377599
+L2 error of psi: 0.0013156632053275
+
+Step 26 completed
+Advanced in time: 0.164587
+Wall time past: 7537.771468
+L2 error of psi: 0.0016784211169918
+
+Step 27 completed
+Advanced in time: 0.170918
+Wall time past: 7826.430748
+L2 error of psi: 0.0018527818580570
+
+Step 28 completed
+Advanced in time: 0.177248
+Wall time past: 8117.303512
+L2 error of psi: 0.0023922542708853
+
+Step 29 completed
+Advanced in time: 0.183578
+Wall time past: 8406.908085
+L2 error of psi: 0.0029139011018927
+
+Step 30 completed
+Advanced in time: 0.189908
+Wall time past: 8694.291408
+L2 error of psi: 0.0034357506118836
+
+Step 31 completed
+Advanced in time: 0.196239
+Wall time past: 8979.301566
+L2 error of psi: 0.0046851563750223
+
+Step 32 completed
+Advanced in time: 0.202569
+Wall time past: 9266.793526
+L2 error of psi: 0.0049248310640534
+
+Step 33 completed
+Advanced in time: 0.208899
+Wall time past: 9555.840571
+L2 error of psi: 0.0074496397600529
+
+Step 34 completed
+Advanced in time: 0.215230
+Wall time past: 9845.665539
+L2 error of psi: 0.0072834531142878
+
+Step 35 completed
+Advanced in time: 0.221560
+Wall time past: 10133.331707
+L2 error of psi: 0.0115782741828876
+
+Step 36 completed
+Advanced in time: 0.227890
+Wall time past: 10420.585863
+L2 error of psi: 0.0116105179492477
+
+Step 37 completed
+Advanced in time: 0.234220
+Wall time past: 10709.628720
+L2 error of psi: 0.0175836444674166
+
+Step 38 completed
+Advanced in time: 0.240551
+Wall time past: 11000.712955
+L2 error of psi: 0.0195133749185449
+
+Step 39 completed
+Advanced in time: 0.246881
+Wall time past: 11288.973529
+L2 error of psi: 0.0256889667095243
+
+Step 40 completed
+Advanced in time: 0.253211
+Wall time past: 11574.630040
+L2 error of psi: 0.0328987470456835
+
+Step 41 completed
+Advanced in time: 0.259542
+Wall time past: 11863.733718
+L2 error of psi: 0.0377928588062473
+
+Step 42 completed
+Advanced in time: 0.265872
+Wall time past: 12153.403675
+L2 error of psi: 0.0547209070850097
+
+Step 43 completed
+Advanced in time: 0.272202
+Wall time past: 12443.428129
+L2 error of psi: 0.0572415136066597
+
+Step 44 completed
+Advanced in time: 0.278532
+Wall time past: 12734.833547
+L2 error of psi: 0.0986031822400712
+
+
+
+PS:
+
+Read file <r1_p6_300_50.err> for stderr output of this job.
+

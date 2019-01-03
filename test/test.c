@@ -3,7 +3,87 @@
 #include <math.h>
 #include "phg.h"
 
+#define Power Pow
+#define M 0.5
 #define R Pow(x*x + y*y + z*z, 0.5)
+static void
+func_Psi33(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = Pow(1.0+M/R, 2.0) + (1.0+M/R)/(1-M/R)*Pow(M, 2.0)/Pow(R, 4.0)*Pow(z, 2.0);
+}
+
+static void
+func_Phi333(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = (-2.*Power(M,3.)*Power(z,3.)*Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 2.*Power(M,3)*z*Power(Power(x,2) + Power(y,2) + 
+    Power(z,2),8.5)*Power(1. + M/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),1.) + 
+     4.*Power(M,2)*z*Power(Power(x,2) + Power(y,2) + Power(z,2),9.)*Power(1. + M/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),1.) - 
+     2.*M*z*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*Power(1. + M/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),1.) + 
+     Power(M,4.)*(4.*Power(z,3.)*Power(Power(x,2) + Power(y,2) + Power(z,2),7.) - 2.*Power(z,1.)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.)) + 
+     Power(M,2.)*(-4.*Power(z,3.)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 2.*Power(z,1.)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.)))/
+   (Power(Power(x,2) + Power(y,2) + Power(z,2),10.)*Power(-1.*M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),2));
+}
+
+dgQuadFaceNeighDofDotBas(ELEMENT *e, DOF *u, int face, int N, ELEMENT *neigh_e, 
+DOF *v, int neigh_face, int order)
+{
+    int i, j, e_v[NVert], neigh_v[NVert];
+    FLOAT d, lambda[Dim + 1], neigh_lambda[Dim + 1];
+    FLOAT *dof, *buffer;
+    const FLOAT *bas, *p, *w;
+    QUAD *quad;
+    DOF_TYPE *type;
+
+    assert(!SpecialDofType(u->type));
+    assert(face >= 0 && face <= 3);
+
+    type = (DofIsHP(u) ? u->hp->info->types[u->hp->max_order] : u->type);
+
+    if (order < 0) {
+	    i = DofTypeOrder(v, neigh_e);
+	    j = DofTypeOrder(u, e);
+	    if (i < 0)
+	        i = j;
+	    order = i + j;
+    }
+    quad = phgQuadGetQuad2D(order);
+
+    /*有更好的实现方法吗？*/
+    /*e_v[i]: face号面上的i号顶点在本单元的编号；
+      neigh_v[i]: 该顶点在face面的相邻单元的编号*/
+    for (i=0; i < NVert - 1; i++) {
+        e_v[i] = GetFaceVertex(face, i);
+        for (j=0; j < NVert; j++) {
+            if (neigh_e->verts[j] == e->verts[e_v[i]]) {
+                neigh_v[i] = j;
+                break; 
+            } 
+        }
+    }
+    lambda[face] = 0.;
+    neigh_lambda[neigh_face] = 0.;
+
+    buffer = phgAlloc(sizeof(*buffer));
+    p = quad->points;
+    w = quad->weights;
+
+    d = 0.;
+    for (i = 0; i < quad->npoints; i++) {
+        for (j = 0; j < NVert - 1; j++) {
+        lambda[e_v[j]] = *(p++);
+        neigh_lambda[neigh_v[j]] = lambda[e_v[j]];
+        }
+        
+        dof = phgDofEval(v, neigh_e, neigh_lambda, buffer);
+        bas = (FLOAT *)type->BasFuncs(u, e, N, N + 1, lambda);
+        d += *(bas++) * *(dof++) * *(w++);
+    } 
+    phgFree(buffer);
+
+    return d * phgGeomGetFaceArea(u->g, e, face);
+}
+
+
 static void
 split_dof(DOF *dof_A, DOF *dof_B, DOF *dof_C)
 {
@@ -147,10 +227,19 @@ build_linear_system(SOLVER *solver, DOF *u_h, DOF *dof_bdry, int coord)
                    
                     /*分是否边界面来计算u^+*/ 
                     if(e->bound_type[s] & INTERIOR){//如果s是内部面,则利用neigh_u来计算u^+
-                        set_neighbour_data(u_h, e, s, neigh_u, nd); 
-                        val_ext = phgQuadFaceDofDotBas(e, s, neigh_u, DOF_PROJ_NONE, 
-                                u_h, n, QUAD_DEFAULT); 
-                        reset_neighbour_data(u_h, e, s, neigh_u, nd); 
+                        //set_neighbour_data(u_h, e, s, neigh_u, nd); 
+                        //val_ext = phgQuadFaceDofDotBas(e, s, neigh_u, DOF_PROJ_NONE, 
+                        //        u_h, n, QUAD_DEFAULT); 
+                        //reset_neighbour_data(u_h, e, s, neigh_u, nd); 
+                        ELEMENT *neigh_e = e->neighbours[s];
+                        int ss;
+                        for(ss=0; ss<4; ss++){
+                            if(e->faces[s]==neigh_e->faces[ss]){
+                                break;
+                            }
+                        }
+                        val_ext = dgQuadFaceNeighDofDotBas(e, u_h, s, n, neigh_e, u_h, ss, QUAD_DEFAULT);  
+                       
                     } 
                     else{//s是边界面时,则施加边界条件 
                         val_ext = phgQuadFaceDofDotBas(e, s, dof_bdry, DOF_PROJ_NONE, 
@@ -285,31 +374,31 @@ int main(int argc, char *argv[])
     phgPrintf("Total elements = %d\n", g->nelem_global);
     phgPrintf("Total processes = %d\n\n", phgNProcs);
 
-    DOF *u, *gradx_numerical, *gradx_ave, *gradx_diff, *gradx_analytic, *gradx_err;
+    DOF *u, *gradz_numerical, *gradz_ave, *gradz_diff, *gradz_analytic, *gradz_err;
     u = phgDofNew(g, dg_type, 1, "u", DofInterpolation);
-    gradx_numerical = phgDofNew(g, dg_type, 2, "numerical", DofInterpolation);
-    gradx_ave = phgDofNew(g, dg_type, 1, "ave", DofInterpolation);
-    gradx_diff = phgDofNew(g, dg_type, 1, "diff", DofInterpolation);
-    gradx_err = phgDofNew(g, dg_type, 1, "err", DofInterpolation);
-    gradx_analytic = phgDofNew(g, dg_type, 1, "analytic", DofNoAction);
-    phgDofSetDataByFunction(u, func_u);
-    phgDofSetDataByFunction(gradx_analytic, func_gradx);
+    gradz_numerical = phgDofNew(g, dg_type, 2, "numerical", DofInterpolation);
+    gradz_ave = phgDofNew(g, dg_type, 1, "ave", DofInterpolation);
+    gradz_diff = phgDofNew(g, dg_type, 1, "diff", DofInterpolation);
+    gradz_err = phgDofNew(g, dg_type, 1, "err", DofInterpolation);
+    gradz_analytic = phgDofNew(g, dg_type, 1, "analytic", DofNoAction);
+    phgDofSetDataByFunction(u, func_Psi33);
+    phgDofSetDataByFunction(gradz_analytic, func_Phi333);
 
-    dgHJGradDof(u, u, gradx_numerical, 0);
-    get_dof_grad_hat(gradx_numerical);
+    dgHJGradDof(u, u, gradz_numerical, 2);
+    get_dof_grad_hat(gradz_numerical);
     
-    split_dof(gradx_numerical, gradx_ave, gradx_diff);
-    //phgDofDump(gradx_ave);
-    phgDofCopy(gradx_ave, &gradx_err, NULL, "err");
-    phgDofAXPBY(1.0, gradx_analytic, -1.0, &gradx_err);
-    phgPrintf("The L2 error of gradx = %f\n", phgDofNormL2(gradx_err));
+    split_dof(gradz_numerical, gradz_ave, gradz_diff);
+    //phgDofDump(gradz_ave);
+    phgDofCopy(gradz_ave, &gradz_err, NULL, "err");
+    phgDofAXPBY(1.0, gradz_analytic, -1.0, &gradz_err);
+    phgPrintf("The L2 error of gradz = %.16lf\n", phgDofNormL2(gradz_err));
     
     phgDofFree(&u);
-    phgDofFree(&gradx_numerical);
-    phgDofFree(&gradx_ave);
-    phgDofFree(&gradx_diff);
-    phgDofFree(&gradx_err);
-    phgDofFree(&gradx_analytic);
+    phgDofFree(&gradz_numerical);
+    phgDofFree(&gradz_ave);
+    phgDofFree(&gradz_diff);
+    phgDofFree(&gradz_err);
+    phgDofFree(&gradz_analytic);
 
     phgFinalize();
     return 0;
