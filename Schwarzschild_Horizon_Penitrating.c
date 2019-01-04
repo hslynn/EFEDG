@@ -2,12 +2,6 @@
 #define R (Pow(x*x + y*y + z*z, 0.5))
 
 static void
-func_zero(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
-{
-    *value = 0; 
-}
-
-static void
 func_Psi00(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
     *value = -(1.0-M/R)/(1.0+M/R);
@@ -16,19 +10,19 @@ func_Psi00(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Psi01(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = 4*Power(M, 2.0)*x/Power(R+M, 2.0)/R;
+    *value = 4*Power(M, 2.0)*x*x/Power(R+M, 2.0)/R;
 }
 
 static void
 func_Psi02(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = 4*Power(M, 2.0)*y/Power(R+M, 2.0)/R;
+    *value = 4*Power(M, 2.0)*y*y/Power(R+M, 2.0)/R;
 }
 
 static void
 func_Psi03(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = 4*Power(M, 2.0)*z/Power(R+M, 2.0)/R;
+    *value = 4*Power(M, 2.0)*z*z/Power(R+M, 2.0)/R;
 }
 
 static void
@@ -4166,7 +4160,7 @@ set_data_dofs(DOF **dofs_var)
                                              func_Pi11, func_Pi12, func_Pi13,
                                                         func_Pi22, func_Pi23,
                                                                    func_Pi33};
-    DOF_USER_FUNC funcs_Phi[30] = {func_Phi100, func_101, func_Phi102, func_Phi103,        
+    DOF_USER_FUNC funcs_Phi[30] = {func_Phi100, func_Phi101, func_Phi102, func_Phi103,        
                                                func_Phi111, func_Phi112, func_Phi113,
                                                           func_Phi122, func_Phi123,
                                                                       func_Phi133,
