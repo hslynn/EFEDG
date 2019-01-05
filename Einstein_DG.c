@@ -179,6 +179,9 @@ main(int argc, char *argv[])
         phgPrintf("L2 error of gradPsi[%d] = %.16lf\n", j + 10, phgDofNormL2(dofs_gradPsi_err[j+10]));
         phgPrintf("L2 error of gradPsi[%d] = %.16lf\n\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
     }
+    for(j=0;j<NVAR;j++){
+        phgPrintf("L2 err of rhs[%d]: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
+    }
 
     ///*test blocks*/
     //DOF *u, *gradz_numerical, *gradz_ave, *gradz_diff, *gradz_analytic, *gradz_err, *compare_err;

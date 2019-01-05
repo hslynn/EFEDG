@@ -11,7 +11,7 @@ get_dofs_rhs(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, DOF **
     get_dofs_Hhat(dofs_var, dofs_bdry, dofs_g, dofs_N, 
             dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat);
 
-    phgDofDump(dofs_gradPsi[0]);
+    //phgDofDump(dofs_gradPsi[0]);
     phgExportVTKn(dofs_gradPsi[0]->g, "gradPsi.vtk", 30, dofs_gradPsi);
     phgExportVTKn(dofs_gradPsi[0]->g, "gradPi.vtk", 30, dofs_gradPi);
     phgExportVTKn(dofs_gradPsi[0]->g, "gradxPhi.vtk", 30, dofs_gradPhi);
