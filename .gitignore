@@ -7,3 +7,5 @@ Einstein_DG
 */*.vtk  
 *.vtk
 *.txt
+*.err
+*.out

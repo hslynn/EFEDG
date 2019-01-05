@@ -1,1 +1,0 @@
-Running /share/soft/intel_2018_update1/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin/mpiexec.hydra -np 108 -ppn 36 -hostfile /share/home/hslynn/.lsbatch/1546157822.208236.hostfile -cleanup ./simplest
