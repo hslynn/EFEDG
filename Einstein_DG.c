@@ -7,7 +7,9 @@
 #include "hdw.c"
 #include "auxi_dofs.c"
 #include "Hhat.c"
+#include "rhs.c"
 #include "rk2.c"
+#include "rk4.c"
 #include "Schwarzschild_Harmonic.c"
 //#include "Schwarzschild_Horizon_Penitrating.c"
 //#include "Minkovski.c"
@@ -80,38 +82,39 @@ main(int argc, char *argv[])
     phgPrintf("Total elements = %d\n", g->nelem_global);
     phgPrintf("Total processes = %d\n", phgNProcs);
 
-    /*find the max and min diameter of all elements*/
-    ForAllElements(g, e){
-        ele_diam = phgGeomGetDiameter(g ,e);
-        max_diam = (max_diam > ele_diam)?max_diam:ele_diam;
-        min_diam = (min_diam < ele_diam)?min_diam:ele_diam;
-    }
-    if(phgRank!=0){
-        MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm);
-        MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm);
-    }
-    if(phgRank==0){
-        FLOAT recv_diam;
-        for(i=1;i<phgNProcs;i++){
-            MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, i, phgComm, &status);
-            max_diam = (max_diam > recv_diam)?max_diam:recv_diam;
-            
-            MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm, &status);
-            min_diam = (min_diam < recv_diam)?min_diam:recv_diam;
-        } 
-        for(i=1;i<phgNProcs;i++){
-            MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, i, i, phgComm);
-            MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm);
-        }
-    }
-    if(phgRank!=0){
-        MPI_Recv(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm, &status);
-        MPI_Recv(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm, &status);
-    }
+    dt = 1.0 / g->nelem_global; 
+
+    ///*find the max and min diameter of all elements*/
+    //ForAllElements(g, e){
+    //    ele_diam = phgGeomGetDiameter(g ,e);
+    //    max_diam = (max_diam > ele_diam)?max_diam:ele_diam;
+    //    min_diam = (min_diam < ele_diam)?min_diam:ele_diam;
+    //}
+    //if(phgRank!=0){
+    //    MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm);
+    //    MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm);
+    //}
+    //if(phgRank==0){
+    //    FLOAT recv_diam;
+    //    for(i=1;i<phgNProcs;i++){
+    //        MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, i, phgComm, &status);
+    //        max_diam = (max_diam > recv_diam)?max_diam:recv_diam;
+    //        
+    //        MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm, &status);
+    //        min_diam = (min_diam < recv_diam)?min_diam:recv_diam;
+    //    } 
+    //    for(i=1;i<phgNProcs;i++){
+    //        MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, i, i, phgComm);
+    //        MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm);
+    //    }
+    //}
+    //if(phgRank!=0){
+    //    MPI_Recv(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm, &status);
+    //    MPI_Recv(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm, &status);
+    //}
     
-    dt = min_diam / 50.; 
-    phgPrintf("\nmax_diam = %.16lf\n", max_diam);
-    phgPrintf("min_diam = %.16lf\n\n", min_diam);
+    //phgPrintf("\nmax_diam = %.16lf\n", max_diam);
+    //phgPrintf("min_diam = %.16lf\n\n", min_diam);
 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
@@ -160,6 +163,7 @@ main(int argc, char *argv[])
     create_dofs(g, dg_type, 1, dofs_g, "g", 6);
     create_dofs(g, dg_type, 1, dofs_N, "N", 4);
     create_dofs(g, dg_type, 1, dofs_Hhat, "Hhat", NVAR);  
+    create_dofs(g, dg_type, 1, dofs_rhs, "rhs", NVAR);  
 
     //set dof data
     set_data_dofs(dofs_var);
@@ -245,7 +249,7 @@ main(int argc, char *argv[])
         phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
         phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
             
-        ssp_rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
+        rk4(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
      
