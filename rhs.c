@@ -12,11 +12,11 @@ get_dofs_rhs(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, DOF **
             dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat);
 
     //phgDofDump(dofs_gradPsi[0]);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradPsi.vtk", 30, dofs_gradPsi);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradPi.vtk", 30, dofs_gradPi);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradxPhi.vtk", 30, dofs_gradPhi);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradyPhi.vtk", 30, dofs_gradPhi + 30);
-    phgExportVTKn(dofs_gradPsi[0]->g, "gradzPhi.vtk", 30, dofs_gradPhi + 60);
+    //phgExportVTKn(dofs_gradPsi[0]->g, "gradPsi.vtk", 30, dofs_gradPsi);
+    //phgExportVTKn(dofs_gradPsi[0]->g, "gradPi.vtk", 30, dofs_gradPi);
+    //phgExportVTKn(dofs_gradPsi[0]->g, "gradxPhi.vtk", 30, dofs_gradPhi);
+    //phgExportVTKn(dofs_gradPsi[0]->g, "gradyPhi.vtk", 30, dofs_gradPhi + 30);
+    //phgExportVTKn(dofs_gradPsi[0]->g, "gradzPhi.vtk", 30, dofs_gradPhi + 60);
 
     copy_dofs(dofs_src, dofs_rhs, "rhs", NVAR);
     for(i=0;i<NVAR;i++){
