@@ -10,8 +10,8 @@
 #include "rhs.c"
 #include "rk2.c"
 #include "rk4.c"
-#include "Schwarzschild_Harmonic.c"
-//#include "Schwarzschild_Horizon_Penitrating.c"
+//#include "Schwarzschild_Harmonic.c"
+#include "Schwarzschild_Horizon_Penitrating.c"
 //#include "Minkovski.c"
 #include "error.c"
 
