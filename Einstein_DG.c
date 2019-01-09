@@ -184,7 +184,7 @@ main(int argc, char *argv[])
         phgPrintf("L2 error of gradPsi[%d] = %.16lf\n\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
     }
     for(j=0;j<NVAR;j++){
-        phgPrintf("L2 err of rhs[%d]: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
+        phgPrintf("L2 norm of rhs[%d]: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
     }
 
     ///*test blocks*/
@@ -242,9 +242,9 @@ main(int argc, char *argv[])
         t1 = phgGetTime(NULL);
         phgPrintf("Wall time past: %lf\n", t1 - t0);
         phgPrintf("L2 error of psi: %.16lf\n\n", l2_err);
-        //for(j=0;j<NVAR;j++){
-        //    phgPrintf("L2 err of rhs[%d]: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
-        //}
+        for(j=0;j<NVAR;j++){
+            phgPrintf("L2 norm of rhs[%d]: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
+        }
         phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
         phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);

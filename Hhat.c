@@ -1,7 +1,4 @@
 #include "grad.c"
-#define alpha 1.0
-#define beta 1.0
-#define gamma 1.0
 
 static void
 get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT values_gradPhi[][2], 
