@@ -10,8 +10,8 @@
 #include "rhs.c"
 #include "rk2.c"
 #include "rk4.c"
-#include "Schwarzschild_Harmonic.c"
-//#include "Schwarzschild_Horizon_Penitrating.c"
+//#include "Schwarzschild_Harmonic.c"
+#include "Schwarzschild_Horizon_Penitrating.c"
 //#include "Minkovski.c"
 #include "error.c"
 
@@ -82,7 +82,7 @@ main(int argc, char *argv[])
     phgPrintf("Total elements = %d\n", g->nelem_global);
     phgPrintf("Total processes = %d\n", phgNProcs);
 
-    dt = 1.0 / 10000; 
+    dt = 1.0 / nelem_global; 
 
     ///*find the max and min diameter of all elements*/
     //ForAllElements(g, e){
@@ -215,8 +215,7 @@ main(int argc, char *argv[])
 
     t0 = phgGetTime(NULL);
     char Hhat_name[30], rhs_name[30], err_name[30]; 
-    FLOAT err[10], l2_err;
-    for(i=0;i*dt<0.01 * M;i++){
+    for(i=0;i<100*M;i++){
         sprintf(rhs_name, "rhs_%lf", i*dt);
         sprintf(Hhat_name, "Hhat_%lf", i*dt);
         sprintf(err_name, "err_%lf", i*dt);
@@ -231,13 +230,13 @@ main(int argc, char *argv[])
         
         t1 = phgGetTime(NULL);
         phgPrintf("Wall time past: %lf\n", t1 - t0);
-        phgPrintf("L2 error of psi: %.16lf\n\n", l2_err);
         for(j=0;j<NVAR;j++){
             phgPrintf("L2 norm of rhs[%d]: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
-            phgPrintf("L2 norm of psi[%d]: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
+            phgPrintf("L2 err of psi[%d]: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
         }
         phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
+        phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
         phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
             
         rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
