@@ -42,7 +42,7 @@ rk4(FLOAT dt, DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, DOF *
     }
 
     for(i=0;i<4;i++){
-        free_dofs(dofs_k[0], NVAR);
+        free_dofs(dofs_k[i], NVAR);
     }
     free_dofs(dofs_var_temp, NVAR);
 }

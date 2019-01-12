@@ -82,7 +82,7 @@ main(int argc, char *argv[])
     phgPrintf("Total elements = %d\n", g->nelem_global);
     phgPrintf("Total processes = %d\n", phgNProcs);
 
-    dt = 1.0 / g->nelem_global; 
+    dt = 1.0 / 10000; 
 
     ///*find the max and min diameter of all elements*/
     //ForAllElements(g, e){
@@ -183,9 +183,6 @@ main(int argc, char *argv[])
         phgPrintf("L2 error of gradPsi[%d] = %.16lf\n", j + 10, phgDofNormL2(dofs_gradPsi_err[j+10]));
         phgPrintf("L2 error of gradPsi[%d] = %.16lf\n\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
     }
-    for(j=0;j<NVAR;j++){
-        phgPrintf("L2 norm of rhs[%d]: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
-    }
 
     ///*test blocks*/
     //DOF *u, *gradz_numerical, *gradz_ave, *gradz_diff, *gradz_analytic, *gradz_err, *compare_err;
@@ -219,7 +216,7 @@ main(int argc, char *argv[])
     t0 = phgGetTime(NULL);
     char Hhat_name[30], rhs_name[30], err_name[30]; 
     FLOAT err[10], l2_err;
-    for(i=0;i*dt<max_time;i++){
+    for(i=0;i*dt<0.01 * M;i++){
         sprintf(rhs_name, "rhs_%lf", i*dt);
         sprintf(Hhat_name, "Hhat_%lf", i*dt);
         sprintf(err_name, "err_%lf", i*dt);
@@ -229,14 +226,7 @@ main(int argc, char *argv[])
 
         get_dofs_diff(dofs_var, dofs_sol, dofs_err, NVAR); 
 
-        l2_err = 0.;
-        for(j=0;j<10;j++){
-            err[j] = phgDofNormL2(dofs_err[j]);
-            l2_err += err[j];
-        }
-        l2_err = Sqrt(l2_err);
-       
-        phgPrintf("Step %d completed\n", i);
+        phgPrintf("\n\nStep %d completed\n", i);
         phgPrintf("Advanced in time: %lf\n", i*dt);
         
         t1 = phgGetTime(NULL);
@@ -244,12 +234,13 @@ main(int argc, char *argv[])
         phgPrintf("L2 error of psi: %.16lf\n\n", l2_err);
         for(j=0;j<NVAR;j++){
             phgPrintf("L2 norm of rhs[%d]: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
+            phgPrintf("L2 norm of psi[%d]: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
         }
         phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
         phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
             
-        rk4(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
+        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
      
@@ -263,6 +254,7 @@ main(int argc, char *argv[])
     free_dofs(dofs_sol, NVAR);
     free_dofs(dofs_bdry, NVAR);
     free_dofs(dofs_err, NVAR);
+    free_dofs(dofs_rhs, NVAR);
 
     
     free_dofs(dofs_gradPsi, 30);
