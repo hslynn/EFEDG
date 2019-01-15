@@ -44,49 +44,40 @@ get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT value
             *p_yPhi = 0.;
             *p_zPhi = 0.;
             for(i=0;i<3;i++){
-                (*p_Psi) += -(1+gamma1)*values_N[i+1]*tensor_gradPsi_ave[i][a][b];
+                (*p_Psi) += -(1+gamma1)*values_N[i+1]*tensor_gradPsi_ave[i][a][b]
                         /*diff part, need more look*/
-                        //- tensor_gradPsi_diff[i][a][b];
+                        - tensor_gradPsi_diff[i][a][b];
 
                 (*p_Pi) += -values_N[i+1]*tensor_gradPi_ave[i][a][b] 
-                        - gamma1*gamma2*values_N[i+1]*tensor_gradPsi_ave[i][a][b];
+                        - gamma1*gamma2*values_N[i+1]*tensor_gradPsi_ave[i][a][b]
                         /*diff part, need more look*/
-                        //- tensor_gradPi_diff[i][a][b] - tensor_gradPsi_diff[i][a][b];
+                        - tensor_gradPi_diff[i][a][b];
                 
-                (*p_xPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][0][a][b];
-                        //printf("%.10f\n", -values_N[i+1]*tensor_gradPhi_ave[i][0][a][b]);
+                (*p_xPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][0][a][b]
                         /*diff part, need more look*/
-                        //- tensor_gradPhi_diff[i][0][a][b];
+                        - tensor_gradPhi_diff[i][0][a][b];
 
-                (*p_yPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][1][a][b];
+                (*p_yPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][1][a][b]
                         /*diff part, need more look*/
-                        //- tensor_gradPhi_diff[i][1][a][b];
+                        - tensor_gradPhi_diff[i][1][a][b];
 
-                (*p_zPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][2][a][b];
+                (*p_zPhi) += -values_N[i+1]*tensor_gradPhi_ave[i][2][a][b]
                         /*diff part, need more look*/
-                        //- tensor_gradPhi_diff[i][2][a][b];
+                        - tensor_gradPhi_diff[i][2][a][b];
 
                 for(j=0;j<3;j++){
                     (*p_Pi) += values_N[0]*tensor_g[i][j]*tensor_gradPhi_ave[i][j][a][b];
-                        /*diff part, need more look*/
-                        //- tensor_gradPhi_diff[i][j][a][b];
                 }
             }
 
             *(p_xPhi++) += values_N[0]*tensor_gradPi_ave[0][a][b] 
                     - values_N[0]*gamma2*tensor_gradPsi_ave[0][a][b];
-                    /*diff part, need more look*/
-                    //- tensor_gradPi_diff[0][a][b] - tensor_gradPsi_diff[0][a][b];
 
             *(p_yPhi++) += values_N[0]*tensor_gradPi_ave[1][a][b] 
                     - values_N[0]*gamma2*tensor_gradPsi_ave[1][a][b];
-                    /*diff part, need more look*/
-                    //- tensor_gradPi_diff[1][a][b] - tensor_gradPsi_diff[1][a][b];
 
             *(p_zPhi++) += values_N[0]*tensor_gradPi_ave[2][a][b] 
                     - values_N[0]*gamma2*tensor_gradPsi_ave[2][a][b];
-                    /*diff part, need more look*/
-                    //- tensor_gradPi_diff[2][a][b] - tensor_gradPsi_diff[2][a][b];
 
             p_Psi++;
             p_Pi++;

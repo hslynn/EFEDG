@@ -271,39 +271,21 @@ get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *value
     Gamma333 = 0.5*Phi333;
  
     //Gamma contracted with metric
-    vecGamma0 = Gamma000*invPsi00 + Gamma100*invPsi00 + Gamma200*invPsi00 + Gamma300*invPsi00 + 2*Gamma001*invPsi01 + 
-                 2*Gamma101*invPsi01 + 2*Gamma201*invPsi01 + 2*Gamma301*invPsi01 + 2*Gamma002*invPsi02 + 2*Gamma102*invPsi02 + 
-                 2*Gamma202*invPsi02 + 2*Gamma302*invPsi02 + 2*Gamma003*invPsi03 + 2*Gamma103*invPsi03 + 2*Gamma203*invPsi03 + 
-                 2*Gamma303*invPsi03 + Gamma011*invPsi11 + Gamma111*invPsi11 + Gamma211*invPsi11 + Gamma311*invPsi11 + 2*Gamma012*invPsi12 + 
-                 2*Gamma112*invPsi12 + 2*Gamma212*invPsi12 + 2*Gamma312*invPsi12 + 2*Gamma013*invPsi13 + 2*Gamma113*invPsi13 + 
-                 2*Gamma213*invPsi13 + 2*Gamma313*invPsi13 + Gamma022*invPsi22 + Gamma122*invPsi22 + Gamma222*invPsi22 + Gamma322*invPsi22 + 
-                 2*Gamma023*invPsi23 + 2*Gamma123*invPsi23 + 2*Gamma223*invPsi23 + 2*Gamma323*invPsi23 + Gamma033*invPsi33 + 
-                 Gamma133*invPsi33 + Gamma233*invPsi33 + Gamma333*invPsi33;
-    vecGamma1 = Gamma000*invPsi00 + Gamma100*invPsi00 + Gamma200*invPsi00 + Gamma300*invPsi00 + 2*Gamma001*invPsi01 + 2*Gamma101*invPsi01 + 
-                2*Gamma201*invPsi01 + 2*Gamma301*invPsi01 + 2*Gamma002*invPsi02 + 2*Gamma102*invPsi02 + 2*Gamma202*invPsi02 + 
-                2*Gamma302*invPsi02 + 2*Gamma003*invPsi03 + 2*Gamma103*invPsi03 + 2*Gamma203*invPsi03 + 2*Gamma303*invPsi03 + 
-                Gamma011*invPsi11 + Gamma111*invPsi11 + Gamma211*invPsi11 + Gamma311*invPsi11 + 2*Gamma012*invPsi12 + 2*Gamma112*invPsi12 + 
-                2*Gamma212*invPsi12 + 2*Gamma312*invPsi12 + 2*Gamma013*invPsi13 + 2*Gamma113*invPsi13 + 2*Gamma213*invPsi13 + 
-                2*Gamma313*invPsi13 + Gamma022*invPsi22 + Gamma122*invPsi22 + Gamma222*invPsi22 + Gamma322*invPsi22 + 2*Gamma023*invPsi23 + 
-                2*Gamma123*invPsi23 + 2*Gamma223*invPsi23 + 2*Gamma323*invPsi23 + Gamma033*invPsi33 + Gamma133*invPsi33 + 
-                Gamma233*invPsi33 + Gamma333*invPsi33;
-    vecGamma2 = Gamma000*invPsi00 + Gamma100*invPsi00 + Gamma200*invPsi00 + Gamma300*invPsi00 + 
-                 2*Gamma001*invPsi01 + 2*Gamma101*invPsi01 + 2*Gamma201*invPsi01 + 2*Gamma301*invPsi01 + 2*Gamma002*invPsi02 + 
-                 2*Gamma102*invPsi02 + 2*Gamma202*invPsi02 + 2*Gamma302*invPsi02 + 2*Gamma003*invPsi03 + 2*Gamma103*invPsi03 + 
-                 2*Gamma203*invPsi03 + 2*Gamma303*invPsi03 + Gamma011*invPsi11 + Gamma111*invPsi11 + Gamma211*invPsi11 + Gamma311*invPsi11 + 
-                 2*Gamma012*invPsi12 + 2*Gamma112*invPsi12 + 2*Gamma212*invPsi12 + 2*Gamma312*invPsi12 + 2*Gamma013*invPsi13 + 
-                 2*Gamma113*invPsi13 + 2*Gamma213*invPsi13 + 2*Gamma313*invPsi13 + Gamma022*invPsi22 + Gamma122*invPsi22 + 
-                 Gamma222*invPsi22 + Gamma322*invPsi22 + 2*Gamma023*invPsi23 + 2*Gamma123*invPsi23 + 2*Gamma223*invPsi23 + 
-                 2*Gamma323*invPsi23 + Gamma033*invPsi33 + Gamma133*invPsi33 + Gamma233*invPsi33 + Gamma333*invPsi33;
-    vecGamma3 = Gamma000*invPsi00 + Gamma100*invPsi00 + Gamma200*invPsi00 + Gamma300*invPsi00 + 2*Gamma001*invPsi01 + 2*Gamma101*invPsi01 + 
-                 2*Gamma201*invPsi01 + 2*Gamma301*invPsi01 + 2*Gamma002*invPsi02 + 2*Gamma102*invPsi02 + 2*Gamma202*invPsi02 + 
-                 2*Gamma302*invPsi02 + 2*Gamma003*invPsi03 + 2*Gamma103*invPsi03 + 2*Gamma203*invPsi03 + 2*Gamma303*invPsi03 + 
-                 Gamma011*invPsi11 + Gamma111*invPsi11 + Gamma211*invPsi11 + Gamma311*invPsi11 + 2*Gamma012*invPsi12 + 2*Gamma112*invPsi12 + 
-                 2*Gamma212*invPsi12 + 2*Gamma312*invPsi12 + 2*Gamma013*invPsi13 + 2*Gamma113*invPsi13 + 2*Gamma213*invPsi13 + 
-                 2*Gamma313*invPsi13 + Gamma022*invPsi22 + Gamma122*invPsi22 + Gamma222*invPsi22 + Gamma322*invPsi22 + 2*Gamma023*invPsi23 + 
-                 2*Gamma123*invPsi23 + 2*Gamma223*invPsi23 + 2*Gamma323*invPsi23 + Gamma033*invPsi33 + Gamma133*invPsi33 + 
-                 Gamma233*invPsi33 + Gamma333*invPsi33;
-
+    vecGamma0 = Gamma000*invPsi00 + 2*Gamma001*invPsi01 + 2*Gamma002*invPsi02 + 2*Gamma003*invPsi03 + 
+                Gamma011*invPsi11 + 2*Gamma012*invPsi12 + 2*Gamma013*invPsi13 + Gamma022*invPsi22 + 
+                2*Gamma023*invPsi23 + Gamma033*invPsi33; 
+                
+    vecGamma1 = Gamma100*invPsi00 + 2*Gamma101*invPsi01 + 2*Gamma102*invPsi02 + 2*Gamma103*invPsi03 + 
+                Gamma111*invPsi11 + 2*Gamma112*invPsi12 + 2*Gamma113*invPsi13 + Gamma122*invPsi22 + 
+                2*Gamma123*invPsi23 + Gamma133*invPsi33; 
+                
+    vecGamma2 = Gamma200*invPsi00 + 2*Gamma201*invPsi01 + 2*Gamma202*invPsi02 + 2*Gamma203*invPsi03 + 
+                Gamma211*invPsi11 + 2*Gamma212*invPsi12 + 2*Gamma213*invPsi13 + Gamma222*invPsi22 + 
+                2*Gamma223*invPsi23 + Gamma233*invPsi33;
+                
+    vecGamma3 = Gamma300*invPsi00 + 2*Gamma301*invPsi01 + 2*Gamma302*invPsi02 + 2*Gamma303*invPsi03 + 
+                Gamma311*invPsi11 + 2*Gamma312*invPsi12 + 2*Gamma313*invPsi13 + Gamma322*invPsi22 + 
+                2*Gamma323*invPsi23 + Gamma333*invPsi33; 
     
     //RHS of Psi
     srcPsi00 = (-gamma1)*(N1*Phi100 + N2*Phi200 + N3*Phi300) - N*Pi00; 
@@ -1132,55 +1114,25 @@ get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *value
         g33*Power(Phi333,2) - Power(Pi33,2)));
     
     //TERM 2
-    t2srcPi00 = -((2*dH00 - 2*Gamma000*H0*invPsi00 - 2*Gamma100*H0*invPsi01 - 2*Gamma000*H1*invPsi01 - 2*Gamma200*H0*invPsi02 - 
-           2*Gamma000*H2*invPsi02 - 2*Gamma300*H0*invPsi03 - 2*Gamma000*H3*invPsi03 - 2*Gamma100*H1*invPsi11 - 
-           2*Gamma200*H1*invPsi12 - 2*Gamma100*H2*invPsi12 - 2*Gamma300*H1*invPsi13 - 2*Gamma100*H3*invPsi13 - 
-           2*Gamma200*H2*invPsi22 - 2*Gamma300*H2*invPsi23 - 2*Gamma200*H3*invPsi23 - 2*Gamma300*H3*invPsi33)*N);
+    t2srcPi00 = -2*dH00*N;
     
-    t2srcPi01 = -((dH01 + dH10 - 2*Gamma001*H0*invPsi00 - 2*Gamma101*H0*invPsi01 - 2*Gamma001*H1*invPsi01 - 2*Gamma201*H0*invPsi02 - 
-           2*Gamma001*H2*invPsi02 - 2*Gamma301*H0*invPsi03 - 2*Gamma001*H3*invPsi03 - 2*Gamma101*H1*invPsi11 - 
-           2*Gamma201*H1*invPsi12 - 2*Gamma101*H2*invPsi12 - 2*Gamma301*H1*invPsi13 - 2*Gamma101*H3*invPsi13 - 
-           2*Gamma201*H2*invPsi22 - 2*Gamma301*H2*invPsi23 - 2*Gamma201*H3*invPsi23 - 2*Gamma301*H3*invPsi33)*N);
+    t2srcPi01 = -((dH01 + dH10)*N);
     
-    t2srcPi02 = -((dH02 + dH20 - 2*Gamma002*H0*invPsi00 - 2*Gamma102*H0*invPsi01 - 2*Gamma002*H1*invPsi01 - 2*Gamma202*H0*invPsi02 - 
-           2*Gamma002*H2*invPsi02 - 2*Gamma302*H0*invPsi03 - 2*Gamma002*H3*invPsi03 - 2*Gamma102*H1*invPsi11 - 
-           2*Gamma202*H1*invPsi12 - 2*Gamma102*H2*invPsi12 - 2*Gamma302*H1*invPsi13 - 2*Gamma102*H3*invPsi13 - 
-           2*Gamma202*H2*invPsi22 - 2*Gamma302*H2*invPsi23 - 2*Gamma202*H3*invPsi23 - 2*Gamma302*H3*invPsi33)*N);
+    t2srcPi02 = -((dH02 + dH20)*N);
     
-    t2srcPi03 = -((dH03 + dH30 - 2*Gamma003*H0*invPsi00 - 2*Gamma103*H0*invPsi01 - 2*Gamma003*H1*invPsi01 - 2*Gamma203*H0*invPsi02 - 
-           2*Gamma003*H2*invPsi02 - 2*Gamma303*H0*invPsi03 - 2*Gamma003*H3*invPsi03 - 2*Gamma103*H1*invPsi11 - 
-           2*Gamma203*H1*invPsi12 - 2*Gamma103*H2*invPsi12 - 2*Gamma303*H1*invPsi13 - 2*Gamma103*H3*invPsi13 - 
-           2*Gamma203*H2*invPsi22 - 2*Gamma303*H2*invPsi23 - 2*Gamma203*H3*invPsi23 - 2*Gamma303*H3*invPsi33)*N);
+    t2srcPi03 = -((dH03 + dH30)*N);
     
-    t2srcPi11 = -((2*dH11 - 2*Gamma011*H0*invPsi00 - 2*Gamma111*H0*invPsi01 - 2*Gamma011*H1*invPsi01 - 2*Gamma211*H0*invPsi02 - 
-           2*Gamma011*H2*invPsi02 - 2*Gamma311*H0*invPsi03 - 2*Gamma011*H3*invPsi03 - 2*Gamma111*H1*invPsi11 - 
-           2*Gamma211*H1*invPsi12 - 2*Gamma111*H2*invPsi12 - 2*Gamma311*H1*invPsi13 - 2*Gamma111*H3*invPsi13 - 
-           2*Gamma211*H2*invPsi22 - 2*Gamma311*H2*invPsi23 - 2*Gamma211*H3*invPsi23 - 2*Gamma311*H3*invPsi33)*N);
+    t2srcPi11 = -2*dH11*N;
     
-    t2srcPi12 = -((dH12 + dH21 - 2*Gamma012*H0*invPsi00 - 2*Gamma112*H0*invPsi01 - 2*Gamma012*H1*invPsi01 - 2*Gamma212*H0*invPsi02 - 
-           2*Gamma012*H2*invPsi02 - 2*Gamma312*H0*invPsi03 - 2*Gamma012*H3*invPsi03 - 2*Gamma112*H1*invPsi11 - 
-           2*Gamma212*H1*invPsi12 - 2*Gamma112*H2*invPsi12 - 2*Gamma312*H1*invPsi13 - 2*Gamma112*H3*invPsi13 - 
-           2*Gamma212*H2*invPsi22 - 2*Gamma312*H2*invPsi23 - 2*Gamma212*H3*invPsi23 - 2*Gamma312*H3*invPsi33)*N);
+    t2srcPi12 = -((dH12 + dH21)*N);
     
-    t2srcPi13 = -((dH13 + dH31 - 2*Gamma013*H0*invPsi00 - 2*Gamma113*H0*invPsi01 - 2*Gamma013*H1*invPsi01 - 2*Gamma213*H0*invPsi02 - 
-           2*Gamma013*H2*invPsi02 - 2*Gamma313*H0*invPsi03 - 2*Gamma013*H3*invPsi03 - 2*Gamma113*H1*invPsi11 - 
-           2*Gamma213*H1*invPsi12 - 2*Gamma113*H2*invPsi12 - 2*Gamma313*H1*invPsi13 - 2*Gamma113*H3*invPsi13 - 
-           2*Gamma213*H2*invPsi22 - 2*Gamma313*H2*invPsi23 - 2*Gamma213*H3*invPsi23 - 2*Gamma313*H3*invPsi33)*N);
+    t2srcPi13 = -((dH13 + dH31)*N);
     
-    t2srcPi22 = -((2*dH22 - 2*Gamma022*H0*invPsi00 - 2*Gamma122*H0*invPsi01 - 2*Gamma022*H1*invPsi01 - 2*Gamma222*H0*invPsi02 - 
-           2*Gamma022*H2*invPsi02 - 2*Gamma322*H0*invPsi03 - 2*Gamma022*H3*invPsi03 - 2*Gamma122*H1*invPsi11 - 
-           2*Gamma222*H1*invPsi12 - 2*Gamma122*H2*invPsi12 - 2*Gamma322*H1*invPsi13 - 2*Gamma122*H3*invPsi13 - 
-           2*Gamma222*H2*invPsi22 - 2*Gamma322*H2*invPsi23 - 2*Gamma222*H3*invPsi23 - 2*Gamma322*H3*invPsi33)*N);
+    t2srcPi22 = -2*dH22*N;
     
-    t2srcPi23 = -((dH23 + dH32 - 2*Gamma023*H0*invPsi00 - 2*Gamma123*H0*invPsi01 - 2*Gamma023*H1*invPsi01 - 2*Gamma223*H0*invPsi02 - 
-           2*Gamma023*H2*invPsi02 - 2*Gamma323*H0*invPsi03 - 2*Gamma023*H3*invPsi03 - 2*Gamma123*H1*invPsi11 - 
-           2*Gamma223*H1*invPsi12 - 2*Gamma123*H2*invPsi12 - 2*Gamma323*H1*invPsi13 - 2*Gamma123*H3*invPsi13 - 
-           2*Gamma223*H2*invPsi22 - 2*Gamma323*H2*invPsi23 - 2*Gamma223*H3*invPsi23 - 2*Gamma323*H3*invPsi33)*N);
+    t2srcPi23 = -((dH23 + dH32)*N);
     
-    t2srcPi33 = -((2*dH33 - 2*Gamma033*H0*invPsi00 - 2*Gamma133*H0*invPsi01 - 2*Gamma033*H1*invPsi01 - 2*Gamma233*H0*invPsi02 - 
-           2*Gamma033*H2*invPsi02 - 2*Gamma333*H0*invPsi03 - 2*Gamma033*H3*invPsi03 - 2*Gamma133*H1*invPsi11 - 
-           2*Gamma233*H1*invPsi12 - 2*Gamma133*H2*invPsi12 - 2*Gamma333*H1*invPsi13 - 2*Gamma133*H3*invPsi13 - 
-           2*Gamma233*H2*invPsi22 - 2*Gamma333*H2*invPsi23 - 2*Gamma233*H3*invPsi23 - 2*Gamma333*H3*invPsi33)*N);
+    t2srcPi33 = -2*dH33*N;
     
     //TERM 3
     

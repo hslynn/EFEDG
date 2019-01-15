@@ -82,7 +82,7 @@ main(int argc, char *argv[])
     phgPrintf("Total elements = %d\n", g->nelem_global);
     phgPrintf("Total processes = %d\n", phgNProcs);
 
-    dt = 1.0 / nelem_global; 
+    dt = 0.1 / Pow(g->nelem_global, 1.); 
 
     ///*find the max and min diameter of all elements*/
     //ForAllElements(g, e){
@@ -215,7 +215,7 @@ main(int argc, char *argv[])
 
     t0 = phgGetTime(NULL);
     char Hhat_name[30], rhs_name[30], err_name[30]; 
-    for(i=0;i<100*M;i++){
+    for(i=0;i*dt<max_time;i++){
         sprintf(rhs_name, "rhs_%lf", i*dt);
         sprintf(Hhat_name, "Hhat_%lf", i*dt);
         sprintf(err_name, "err_%lf", i*dt);
