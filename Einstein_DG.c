@@ -75,6 +75,7 @@ main(int argc, char *argv[])
     phgImport(g, meshfile, FALSE);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
     phgRefineAllElements(g, refine_time);
+    phgBalanceGrid(g, 1.2, 1, NULL, 0.);
 
     phgPrintf("\nUsing mesh file: %s\n", meshfile);
     phgPrintf("Refine times: %d\n", refine_time);
@@ -82,7 +83,7 @@ main(int argc, char *argv[])
     phgPrintf("Total elements = %d\n", g->nelem_global);
     phgPrintf("Total processes = %d\n", phgNProcs);
 
-    dt = 0.1 / Pow(g->nelem_global, 1.); 
+    dt = 0.01 / Pow(g->nelem_global, 1./3.); 
 
     ///*find the max and min diameter of all elements*/
     //ForAllElements(g, e){
@@ -171,18 +172,18 @@ main(int argc, char *argv[])
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
 
-    get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
-        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+    //get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
+    //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
 
-    for(i=0;i<30;i++){
-        split_dof(dofs_gradPsi[i], dofs_gradPsi_ave[i], dofs_gradPsi_diff[i]);
-    }
-    get_dofs_diff(dofs_gradPsi_ave, dofs_var + 20, dofs_gradPsi_err, 30);
-    for(j=0;j<10;j++){
-        phgPrintf("L2 error of gradPsi[%d] = %.16lf\n", j, phgDofNormL2(dofs_gradPsi_err[j]));
-        phgPrintf("L2 error of gradPsi[%d] = %.16lf\n", j + 10, phgDofNormL2(dofs_gradPsi_err[j+10]));
-        phgPrintf("L2 error of gradPsi[%d] = %.16lf\n\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
-    }
+    //for(i=0;i<30;i++){
+    //    split_dof(dofs_gradPsi[i], dofs_gradPsi_ave[i], dofs_gradPsi_diff[i]);
+    //}
+    //get_dofs_diff(dofs_gradPsi_ave, dofs_var + 20, dofs_gradPsi_err, 30);
+    //for(j=0;j<10;j++){
+    //    phgPrintf("L2 error of gradPsi[%d] = %.16lf\n", j, phgDofNormL2(dofs_gradPsi_err[j]));
+    //    phgPrintf("L2 error of gradPsi[%d] = %.16lf\n", j + 10, phgDofNormL2(dofs_gradPsi_err[j+10]));
+    //    phgPrintf("L2 error of gradPsi[%d] = %.16lf\n\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
+    //}
 
     ///*test blocks*/
     //DOF *u, *gradz_numerical, *gradz_ave, *gradz_diff, *gradz_analytic, *gradz_err, *compare_err;
@@ -231,13 +232,13 @@ main(int argc, char *argv[])
         t1 = phgGetTime(NULL);
         phgPrintf("Wall time past: %lf\n", t1 - t0);
         for(j=0;j<NVAR;j++){
-            phgPrintf("L2 norm of rhs[%d]: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
-            phgPrintf("L2 err of psi[%d]: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
+            phgPrintf("L2 norm of rhs_%d: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
+            phgPrintf("L2 err of var_%d: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
         }
-        phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
-        phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
-        phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
-        phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
+        //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
+        //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
+        //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
+        //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
             
         rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
