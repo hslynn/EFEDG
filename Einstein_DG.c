@@ -10,8 +10,8 @@
 #include "rhs.c"
 #include "rk2.c"
 #include "rk4.c"
-//#include "Schwarzschild_Harmonic.c"
-#include "Schwarzschild_Horizon_Penitrating.c"
+#include "Schwarzschild_Harmonic.c"
+//#include "Schwarzschild_Horizon_Penitrating.c"
 //#include "Minkovski.c"
 #include "error.c"
 
@@ -20,12 +20,13 @@ main(int argc, char *argv[])
 {
     char *meshfile ="./mesh/hollowed_icosahedron.mesh";
     GRID *g; 
-    ELEMENT *e;
-    FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0, t0 = 0.0, t1 = 0.0;
+    //ELEMENT *e;
+    //FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
+    FLOAT t0 = 0.0, t1 = 0.0; 
     FLOAT dt, max_time = 100*M;
     DOF_TYPE *dg_type;
     INT i, j, p_order = 2, refine_time = 0;
-    MPI_Status status; 
+    //MPI_Status status; 
 
     //command line options
     phgOptionsRegisterInt("p", "polynomial order of DG basis, default is 2", &p_order);
@@ -160,14 +161,16 @@ main(int argc, char *argv[])
     }
 
     /*create auxi dofs*/
-    DOF *dofs_g[6], *dofs_N[4], *dofs_Hhat[NVAR], *dofs_rhs[NVAR];
+    DOF *dofs_g[6], *dofs_N[4], *dofs_H[4], *dofs_Hhat[NVAR], *dofs_rhs[NVAR];
     create_dofs(g, dg_type, 1, dofs_g, "g", 6);
     create_dofs(g, dg_type, 1, dofs_N, "N", 4);
+    create_dofs(g, dg_type, 1, dofs_H, "H", 4);
     create_dofs(g, dg_type, 1, dofs_Hhat, "Hhat", NVAR);  
     create_dofs(g, dg_type, 1, dofs_rhs, "rhs", NVAR);  
 
     //set dof data
-    set_data_dofs(dofs_var);
+    set_data_var(dofs_var);
+    set_data_H(dofs_H);
     //phgExportVTKn(g, "var.vtk", 50, dofs_var);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
@@ -240,7 +243,7 @@ main(int argc, char *argv[])
         //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
         //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
             
-        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
+        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_src,
                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
      

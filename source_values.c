@@ -7,7 +7,7 @@
 #define Power(x,y) (Pow((FLOAT) (x), (FLOAT) (y)))
 
 static void 
-get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *values)
+get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *values_H, FLOAT *values)
 { 
     FLOAT invPsi00, invPsi01, invPsi02, invPsi03, invPsi11, invPsi12, invPsi13, invPsi22, invPsi23, invPsi33;
     FLOAT Gamma000,Gamma001,Gamma002,Gamma003,Gamma011,Gamma012,Gamma013,Gamma022,Gamma023,Gamma033;
@@ -106,10 +106,10 @@ get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *value
     FLOAT srcPhi333, t1srcPhi333, t2srcPhi333, t3srcPhi333;
     
     //Gauge functions H^a
-    FLOAT H0 = 0;
-    FLOAT H1 = 0;
-    FLOAT H2 = 0;
-    FLOAT H3 = 0;
+    FLOAT H0 = values_H[0];
+    FLOAT H1 = values_H[1];
+    FLOAT H2 = values_H[2];
+    FLOAT H3 = values_H[3];
     
     FLOAT dH00 = 0;
     FLOAT dH01 = 0;
