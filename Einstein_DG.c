@@ -10,7 +10,8 @@
 #include "rhs.c"
 #include "rk2.c"
 #include "rk4.c"
-#include "Schwarzschild_Harmonic.c"
+#include "Sch_Kerr_Schild.c"
+//#include "Schwarzschild_Harmonic.c"
 //#include "Schwarzschild_Horizon_Penitrating.c"
 //#include "Minkovski.c"
 #include "error.c"
@@ -161,16 +162,21 @@ main(int argc, char *argv[])
     }
 
     /*create auxi dofs*/
-    DOF *dofs_g[6], *dofs_N[4], *dofs_H[4], *dofs_Hhat[NVAR], *dofs_rhs[NVAR];
+    DOF *dofs_g[6], *dofs_N[4], *dofs_Hhat[NVAR], *dofs_rhs[NVAR];
     create_dofs(g, dg_type, 1, dofs_g, "g", 6);
     create_dofs(g, dg_type, 1, dofs_N, "N", 4);
-    create_dofs(g, dg_type, 1, dofs_H, "H", 4);
     create_dofs(g, dg_type, 1, dofs_Hhat, "Hhat", NVAR);  
     create_dofs(g, dg_type, 1, dofs_rhs, "rhs", NVAR);  
+
+    /*create dofs for gauge functions H_a and their derivatives*/
+    DOF *dofs_H[4], *dofs_deriH[16];
+    create_dofs(g, dg_type, 1, dofs_H, "H", 4);
+    create_dofs(g, dg_type, 1, dofs_deriH, "deriH", 16);
 
     //set dof data
     set_data_var(dofs_var);
     set_data_H(dofs_H);
+    set_data_deriH(dofs_deriH);
     //phgExportVTKn(g, "var.vtk", 50, dofs_var);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
@@ -243,7 +249,7 @@ main(int argc, char *argv[])
         //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
         //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
             
-        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_src,
+        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src,
                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
      
@@ -258,7 +264,6 @@ main(int argc, char *argv[])
     free_dofs(dofs_bdry, NVAR);
     free_dofs(dofs_err, NVAR);
     free_dofs(dofs_rhs, NVAR);
-
     
     free_dofs(dofs_gradPsi, 30);
     free_dofs(dofs_gradPsi_ave, 30);
@@ -269,6 +274,8 @@ main(int argc, char *argv[])
 
     free_dofs(dofs_g, 6);
     free_dofs(dofs_N, 4);
+    free_dofs(dofs_H, 4);
+    free_dofs(dofs_deriH, 16);
     phgFreeGrid(&g); 
 
     phgFinalize(); 

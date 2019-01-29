@@ -7,7 +7,8 @@
 #define Power(x,y) (Pow((FLOAT) (x), (FLOAT) (y)))
 
 static void 
-get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *values_H, FLOAT *values)
+get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *values_H, FLOAT *values_deriH, 
+        FLOAT *values)
 { 
     FLOAT invPsi00, invPsi01, invPsi02, invPsi03, invPsi11, invPsi12, invPsi13, invPsi22, invPsi23, invPsi33;
     FLOAT Gamma000,Gamma001,Gamma002,Gamma003,Gamma011,Gamma012,Gamma013,Gamma022,Gamma023,Gamma033;
@@ -57,7 +58,33 @@ get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *value
                                                                                      
     FLOAT Phi300 = Phi[20], Phi301 = Phi[21], Phi302 = Phi[22], Phi303 = Phi[23], Phi311 = Phi[24];
     FLOAT Phi312 = Phi[25], Phi313 = Phi[26], Phi322 = Phi[27], Phi323 = Phi[28], Phi333 = Phi[29]; 
-   
+
+    //Gauge functions H_a and their derivatives
+    FLOAT H0 = values_H[0];
+    FLOAT H1 = values_H[1];
+    FLOAT H2 = values_H[2];
+    FLOAT H3 = values_H[3];
+    
+    FLOAT dH00 = values_deriH[0];
+    FLOAT dH01 = values_deriH[1];
+    FLOAT dH02 = values_deriH[2];
+    FLOAT dH03 = values_deriH[3];
+    
+    FLOAT dH10 = values_deriH[4];
+    FLOAT dH11 = values_deriH[5];
+    FLOAT dH12 = values_deriH[6];
+    FLOAT dH13 = values_deriH[7];
+    
+    FLOAT dH20 = values_deriH[8];
+    FLOAT dH21 = values_deriH[9];
+    FLOAT dH22 = values_deriH[10];
+    FLOAT dH23 = values_deriH[11];
+    
+    FLOAT dH30 = values_deriH[12];
+    FLOAT dH31 = values_deriH[13];
+    FLOAT dH32 = values_deriH[14];
+    FLOAT dH33 = values_deriH[15];
+
     //source terms 
     FLOAT srcPsi00,srcPsi01,srcPsi02,srcPsi03,srcPsi11,srcPsi12,srcPsi13,srcPsi22,srcPsi23,srcPsi33;
     
@@ -105,32 +132,7 @@ get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *value
     FLOAT srcPhi323, t1srcPhi323, t2srcPhi323, t3srcPhi323;
     FLOAT srcPhi333, t1srcPhi333, t2srcPhi333, t3srcPhi333;
     
-    //Gauge functions H^a
-    FLOAT H0 = values_H[0];
-    FLOAT H1 = values_H[1];
-    FLOAT H2 = values_H[2];
-    FLOAT H3 = values_H[3];
-    
-    FLOAT dH00 = 0;
-    FLOAT dH01 = 0;
-    FLOAT dH02 = 0;
-    FLOAT dH03 = 0;
-    
-    FLOAT dH10 = 0;
-    FLOAT dH11 = 0;
-    FLOAT dH12 = 0;
-    FLOAT dH13 = 0;
-    
-    FLOAT dH20 = 0;
-    FLOAT dH21 = 0;
-    FLOAT dH22 = 0;
-    FLOAT dH23 = 0;
-    
-    FLOAT dH30 = 0;
-    FLOAT dH31 = 0;
-    FLOAT dH32 = 0;
-    FLOAT dH33 = 0;
-        
+            
     //inverse spacetime metric
     invPsi00 = (-(Power(Psi13,2)*Psi22) + 2*Psi12*Psi13*Psi23 - Psi11*Power(Psi23,2) - Power(Psi12,2)*Psi33 + Psi11*Psi22*Psi33)/
          (Power(Psi03,2)*Power(Psi12,2) - 2*Psi02*Psi03*Psi12*Psi13 + Power(Psi02,2)*Power(Psi13,2) - Power(Psi03,2)*Psi11*Psi22 + 
@@ -1114,25 +1116,55 @@ get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *value
         g33*Power(Phi333,2) - Power(Pi33,2)));
     
     //TERM 2
-    t2srcPi00 = -2*dH00*N;
+    t2srcPi00 = -((2*dH00 - 2*Gamma000*H0*invPsi00 - 2*Gamma100*H0*invPsi01 - 2*Gamma000*H1*invPsi01 - 2*Gamma200*H0*invPsi02 - 
+       2*Gamma000*H2*invPsi02 - 2*Gamma300*H0*invPsi03 - 2*Gamma000*H3*invPsi03 - 2*Gamma100*H1*invPsi11 - 
+       2*Gamma200*H1*invPsi12 - 2*Gamma100*H2*invPsi12 - 2*Gamma300*H1*invPsi13 - 2*Gamma100*H3*invPsi13 - 
+       2*Gamma200*H2*invPsi22 - 2*Gamma300*H2*invPsi23 - 2*Gamma200*H3*invPsi23 - 2*Gamma300*H3*invPsi33)*N);
     
-    t2srcPi01 = -((dH01 + dH10)*N);
+    t2srcPi01 = -((dH01 + dH10 - 2*Gamma001*H0*invPsi00 - 2*Gamma101*H0*invPsi01 - 2*Gamma001*H1*invPsi01 - 2*Gamma201*H0*invPsi02 - 
+       2*Gamma001*H2*invPsi02 - 2*Gamma301*H0*invPsi03 - 2*Gamma001*H3*invPsi03 - 2*Gamma101*H1*invPsi11 - 
+       2*Gamma201*H1*invPsi12 - 2*Gamma101*H2*invPsi12 - 2*Gamma301*H1*invPsi13 - 2*Gamma101*H3*invPsi13 - 
+       2*Gamma201*H2*invPsi22 - 2*Gamma301*H2*invPsi23 - 2*Gamma201*H3*invPsi23 - 2*Gamma301*H3*invPsi33)*N);
     
-    t2srcPi02 = -((dH02 + dH20)*N);
+    t2srcPi02 = -((dH02 + dH20 - 2*Gamma002*H0*invPsi00 - 2*Gamma102*H0*invPsi01 - 2*Gamma002*H1*invPsi01 - 2*Gamma202*H0*invPsi02 - 
+       2*Gamma002*H2*invPsi02 - 2*Gamma302*H0*invPsi03 - 2*Gamma002*H3*invPsi03 - 2*Gamma102*H1*invPsi11 - 
+       2*Gamma202*H1*invPsi12 - 2*Gamma102*H2*invPsi12 - 2*Gamma302*H1*invPsi13 - 2*Gamma102*H3*invPsi13 - 
+       2*Gamma202*H2*invPsi22 - 2*Gamma302*H2*invPsi23 - 2*Gamma202*H3*invPsi23 - 2*Gamma302*H3*invPsi33)*N);
     
-    t2srcPi03 = -((dH03 + dH30)*N);
+    t2srcPi03 = -((dH03 + dH30 - 2*Gamma003*H0*invPsi00 - 2*Gamma103*H0*invPsi01 - 2*Gamma003*H1*invPsi01 - 2*Gamma203*H0*invPsi02 - 
+       2*Gamma003*H2*invPsi02 - 2*Gamma303*H0*invPsi03 - 2*Gamma003*H3*invPsi03 - 2*Gamma103*H1*invPsi11 - 
+       2*Gamma203*H1*invPsi12 - 2*Gamma103*H2*invPsi12 - 2*Gamma303*H1*invPsi13 - 2*Gamma103*H3*invPsi13 - 
+       2*Gamma203*H2*invPsi22 - 2*Gamma303*H2*invPsi23 - 2*Gamma203*H3*invPsi23 - 2*Gamma303*H3*invPsi33)*N);
     
-    t2srcPi11 = -2*dH11*N;
+    t2srcPi11 = -((2*dH11 - 2*Gamma011*H0*invPsi00 - 2*Gamma111*H0*invPsi01 - 2*Gamma011*H1*invPsi01 - 2*Gamma211*H0*invPsi02 - 
+       2*Gamma011*H2*invPsi02 - 2*Gamma311*H0*invPsi03 - 2*Gamma011*H3*invPsi03 - 2*Gamma111*H1*invPsi11 - 
+       2*Gamma211*H1*invPsi12 - 2*Gamma111*H2*invPsi12 - 2*Gamma311*H1*invPsi13 - 2*Gamma111*H3*invPsi13 - 
+       2*Gamma211*H2*invPsi22 - 2*Gamma311*H2*invPsi23 - 2*Gamma211*H3*invPsi23 - 2*Gamma311*H3*invPsi33)*N);
     
-    t2srcPi12 = -((dH12 + dH21)*N);
+    t2srcPi12 = -((dH12 + dH21 - 2*Gamma012*H0*invPsi00 - 2*Gamma112*H0*invPsi01 - 2*Gamma012*H1*invPsi01 - 2*Gamma212*H0*invPsi02 - 
+       2*Gamma012*H2*invPsi02 - 2*Gamma312*H0*invPsi03 - 2*Gamma012*H3*invPsi03 - 2*Gamma112*H1*invPsi11 - 
+       2*Gamma212*H1*invPsi12 - 2*Gamma112*H2*invPsi12 - 2*Gamma312*H1*invPsi13 - 2*Gamma112*H3*invPsi13 - 
+       2*Gamma212*H2*invPsi22 - 2*Gamma312*H2*invPsi23 - 2*Gamma212*H3*invPsi23 - 2*Gamma312*H3*invPsi33)*N);
     
-    t2srcPi13 = -((dH13 + dH31)*N);
+    t2srcPi13 = -((dH13 + dH31 - 2*Gamma013*H0*invPsi00 - 2*Gamma113*H0*invPsi01 - 2*Gamma013*H1*invPsi01 - 2*Gamma213*H0*invPsi02 - 
+       2*Gamma013*H2*invPsi02 - 2*Gamma313*H0*invPsi03 - 2*Gamma013*H3*invPsi03 - 2*Gamma113*H1*invPsi11 - 
+       2*Gamma213*H1*invPsi12 - 2*Gamma113*H2*invPsi12 - 2*Gamma313*H1*invPsi13 - 2*Gamma113*H3*invPsi13 - 
+       2*Gamma213*H2*invPsi22 - 2*Gamma313*H2*invPsi23 - 2*Gamma213*H3*invPsi23 - 2*Gamma313*H3*invPsi33)*N);
     
-    t2srcPi22 = -2*dH22*N;
+    t2srcPi22 = -((2*dH22 - 2*Gamma022*H0*invPsi00 - 2*Gamma122*H0*invPsi01 - 2*Gamma022*H1*invPsi01 - 2*Gamma222*H0*invPsi02 - 
+       2*Gamma022*H2*invPsi02 - 2*Gamma322*H0*invPsi03 - 2*Gamma022*H3*invPsi03 - 2*Gamma122*H1*invPsi11 - 
+       2*Gamma222*H1*invPsi12 - 2*Gamma122*H2*invPsi12 - 2*Gamma322*H1*invPsi13 - 2*Gamma122*H3*invPsi13 - 
+       2*Gamma222*H2*invPsi22 - 2*Gamma322*H2*invPsi23 - 2*Gamma222*H3*invPsi23 - 2*Gamma322*H3*invPsi33)*N);
     
-    t2srcPi23 = -((dH23 + dH32)*N);
+    t2srcPi23 = -((dH23 + dH32 - 2*Gamma023*H0*invPsi00 - 2*Gamma123*H0*invPsi01 - 2*Gamma023*H1*invPsi01 - 2*Gamma223*H0*invPsi02 - 
+       2*Gamma023*H2*invPsi02 - 2*Gamma323*H0*invPsi03 - 2*Gamma023*H3*invPsi03 - 2*Gamma123*H1*invPsi11 - 
+       2*Gamma223*H1*invPsi12 - 2*Gamma123*H2*invPsi12 - 2*Gamma323*H1*invPsi13 - 2*Gamma123*H3*invPsi13 - 
+       2*Gamma223*H2*invPsi22 - 2*Gamma323*H2*invPsi23 - 2*Gamma223*H3*invPsi23 - 2*Gamma323*H3*invPsi33)*N);
     
-    t2srcPi33 = -2*dH33*N;
+    t2srcPi33 = -((2*dH33 - 2*Gamma033*H0*invPsi00 - 2*Gamma133*H0*invPsi01 - 2*Gamma033*H1*invPsi01 - 2*Gamma233*H0*invPsi02 - 
+       2*Gamma033*H2*invPsi02 - 2*Gamma333*H0*invPsi03 - 2*Gamma033*H3*invPsi03 - 2*Gamma133*H1*invPsi11 - 
+       2*Gamma233*H1*invPsi12 - 2*Gamma133*H2*invPsi12 - 2*Gamma333*H1*invPsi13 - 2*Gamma133*H3*invPsi13 - 
+       2*Gamma233*H2*invPsi22 - 2*Gamma333*H2*invPsi23 - 2*Gamma233*H3*invPsi23 - 2*Gamma333*H3*invPsi33)*N);
     
     //TERM 3
     

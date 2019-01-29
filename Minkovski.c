@@ -21,7 +21,7 @@ func_minus_one(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 
 /*set dof data using above functions*/
 static void
-set_data_dofs(DOF **dofs_var)
+set_data_var(DOF **dofs_var)
 {
     int i;
     DOF_USER_FUNC funcs_Psi[10] = {func_minus_one, func_zero, func_zero, func_zero,

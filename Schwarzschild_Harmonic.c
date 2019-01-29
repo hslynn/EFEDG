@@ -281,3 +281,12 @@ set_data_H(DOF **dofs_H)
         phgDofSetDataByValue(dofs_H[i], 0);
     }
 }
+
+static void
+set_data_deriH(DOF **dofs_deriH)
+{
+    int i;
+    for(i=0; i<16; i++){
+        phgDofSetDataByValue(dofs_deriH[i], 0);
+    }
+}

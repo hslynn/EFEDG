@@ -1263,7 +1263,7 @@ func_Phi333(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 
 /*set dof data using above functions*/
 static void
-set_data_dofs(DOF **dofs_var)
+set_data_var(DOF **dofs_var)
 {
     int i;
     DOF_USER_FUNC funcs_Psi[10] = {func_Psi00, func_Psi01, func_Psi02, func_Psi03,
@@ -1296,3 +1296,20 @@ set_data_dofs(DOF **dofs_var)
     }
 }
 
+static void
+set_data_H(DOF **dofs_H)
+{
+    int i;
+    for(i=0; i<4; i++){
+        phgDofSetDataByValue(dofs_H[i], 0);
+    }
+}
+
+static void
+set_data_deriH(DOF **dofs_deriH)
+{
+    int i;
+    for(i=0; i<16; i++){
+        phgDofSetDataByValue(dofs_deriH[i], 0);
+    }
+}
