@@ -177,7 +177,9 @@ main(int argc, char *argv[])
     set_data_var(dofs_var);
     set_data_H(dofs_H);
     set_data_deriH(dofs_deriH);
-    //phgExportVTKn(g, "var.vtk", 50, dofs_var);
+    phgExportVTKn(g, "var.vtk", 50, dofs_var);
+    phgExportVTKn(g, "H.vtk", 50, dofs_H);
+    phgExportVTKn(g, "deriH.vtk", 50, dofs_deriH);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
 

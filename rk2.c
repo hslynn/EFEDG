@@ -6,6 +6,9 @@ rk2(FLOAT dt, DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, DOF *
     DOF *dofs_var_temp[NVAR];
     get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+    //phgExportVTKn(dofs_src[0]->g, "src.vtk", NVAR, dofs_src);
+    //phgExportVTKn(dofs_src[0]->g, "Hhat.vtk", NVAR, dofs_Hhat);
+    //phgExportVTKn(dofs_src[0]->g, "rhs.vtk", NVAR, dofs_rhs);
     create_dofs(dofs_var[0]->g, dofs_var[0]->type, 1, dofs_var_temp, "temp_var", NVAR); 
     copy_dofs(dofs_var, dofs_var_temp, "temp_var", NVAR);
     for(i=0;i<NVAR;i++){
