@@ -1,25 +1,25 @@
 #include <string.h>
 
-/*split a 2 dimension dof into two 1 dimension dofs*/
-static void
-split_dof(DOF *dof_A, DOF *dof_B, DOF *dof_C)
-{
-    GRID *g = dof_A->g;
-    ELEMENT *e;
-    FLOAT *p_A, *p_B, *p_C;
-    INT np = dof_A->type->np_elem;
-    INT idx, n;
-    ForAllElements(g, e){
-        idx = e->index;
-        p_A = DofElementData(dof_A, idx);
-        p_B = DofElementData(dof_B, idx);
-        p_C = DofElementData(dof_C, idx);
-        for(n=0;n<np;n++){
-           *p_B++ = *p_A++;
-           *p_C++ = *p_A++;
-        }
-    } 
-}
+///*split a 2 dimension dof into two 1 dimension dofs*/
+//static void
+//split_dof(DOF *dof_A, DOF *dof_B, DOF *dof_C)
+//{
+//    GRID *g = dof_A->g;
+//    ELEMENT *e;
+//    FLOAT *p_A, *p_B, *p_C;
+//    INT np = dof_A->type->np_elem;
+//    INT idx, n;
+//    ForAllElements(g, e){
+//        idx = e->index;
+//        p_A = DofElementData(dof_A, idx);
+//        p_B = DofElementData(dof_B, idx);
+//        p_C = DofElementData(dof_C, idx);
+//        for(n=0;n<np;n++){
+//           *p_B++ = *p_A++;
+//           *p_C++ = *p_A++;
+//        }
+//    } 
+//}
 
 static void
 create_dofs(GRID *g, DOF_TYPE *type, INT dim, DOF **dofs_list, char *name_head, INT ndof)

@@ -116,13 +116,13 @@ get_dofs_N(DOF **dofs_Psi, DOF **dofs_g, DOF **dofs_N)
 }
 
 static void
-get_dofs_src(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_H, DOF **dofs_deriH, DOF **dofs_src)
+get_dofs_src_and_C(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_H, DOF **dofs_deriH, DOF **dofs_src, DOF **dofs_C)
 {
     INT i, n, np, idx;
     GRID *g = dofs_var[0]->g;
     ELEMENT *e;
-    FLOAT *p_var[50], *p_src[50], *p_g[6], *p_N[4], *p_H[4], *p_deriH[16];
-    FLOAT values_var[50], values_src[50], values_g[6], values_N[4], values_H[4], values_deriH[16];
+    FLOAT *p_var[50], *p_src[50], *p_C[4], *p_g[6], *p_N[4], *p_H[4], *p_deriH[16];
+    FLOAT values_var[50], values_src[50], values_g[6], values_N[4], values_H[4], values_deriH[16], values_C[4];
 
     np = dofs_var[0]->type->np_elem;
     ForAllElements(g, e){
@@ -141,6 +141,9 @@ get_dofs_src(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_H, DOF **dof
         for(i=0; i<16; i++){
             p_deriH[i] = DofElementData(dofs_deriH[i], idx);
         }
+        for(i=0; i<4; i++){
+            p_C[i] = DofElementData(dofs_C[i], idx);
+        }
         //evaluate dofs values at every data point
         for(n=0;n<np;n++){
             //compute src values at data point
@@ -157,11 +160,15 @@ get_dofs_src(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_H, DOF **dof
             for(i=0; i < 16; i++){
                 values_deriH[i] = *(p_deriH[i]++);
             }
-            get_values_src(values_var, values_g, values_N, values_H, values_deriH, values_src); 
+            get_values_src(values_var, values_g, values_N, values_H, values_deriH, values_src, values_C); 
 
             for(i=0; i<50; i++){
                 *p_src[i] = values_src[i];
                 p_src[i]++;
+            }
+            for(i=0; i<4; i++){
+                *p_C[i] = values_C[i];
+                p_C[i]++;
             }
         }
     }

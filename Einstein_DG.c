@@ -9,7 +9,7 @@
 #include "Hhat.c"
 #include "rhs.c"
 #include "rk2.c"
-#include "rk4.c"
+//#include "rk4.c"
 #include "Sch_Kerr_Schild.c"
 //#include "Schwarzschild_Harmonic.c"
 //#include "Schwarzschild_Horizon_Penitrating.c"
@@ -19,15 +19,16 @@
 int 
 main(int argc, char *argv[])
 {
-    char *meshfile ="./mesh/hollowed_icosahedron.mesh";
+    //char *meshfile ="./mesh/hollowed_icosahedron.mesh";
+    char *meshfile ="./mesh/SinS.albert";
     GRID *g; 
-    //ELEMENT *e;
-    //FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
+    ELEMENT *e;
+    FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
     FLOAT t0 = 0.0, t1 = 0.0; 
     FLOAT dt, max_time = 100*M;
     DOF_TYPE *dg_type;
     INT i, j, p_order = 2, refine_time = 0;
-    //MPI_Status status; 
+    MPI_Status status; 
 
     //command line options
     phgOptionsRegisterInt("p", "polynomial order of DG basis, default is 2", &p_order);
@@ -85,39 +86,41 @@ main(int argc, char *argv[])
     phgPrintf("Total elements = %d\n", g->nelem_global);
     phgPrintf("Total processes = %d\n", phgNProcs);
 
-    dt = 0.01 / Pow(g->nelem_global, 1./3.); 
 
-    ///*find the max and min diameter of all elements*/
-    //ForAllElements(g, e){
-    //    ele_diam = phgGeomGetDiameter(g ,e);
-    //    max_diam = (max_diam > ele_diam)?max_diam:ele_diam;
-    //    min_diam = (min_diam < ele_diam)?min_diam:ele_diam;
-    //}
-    //if(phgRank!=0){
-    //    MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm);
-    //    MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm);
-    //}
-    //if(phgRank==0){
-    //    FLOAT recv_diam;
-    //    for(i=1;i<phgNProcs;i++){
-    //        MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, i, phgComm, &status);
-    //        max_diam = (max_diam > recv_diam)?max_diam:recv_diam;
-    //        
-    //        MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm, &status);
-    //        min_diam = (min_diam < recv_diam)?min_diam:recv_diam;
-    //    } 
-    //    for(i=1;i<phgNProcs;i++){
-    //        MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, i, i, phgComm);
-    //        MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm);
-    //    }
-    //}
-    //if(phgRank!=0){
-    //    MPI_Recv(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm, &status);
-    //    MPI_Recv(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm, &status);
-    //}
+    /*find the max and min diameter of all elements*/
+    ForAllElements(g, e){
+        ele_diam = phgGeomGetDiameter(g ,e);
+        max_diam = (max_diam > ele_diam)?max_diam:ele_diam;
+        min_diam = (min_diam < ele_diam)?min_diam:ele_diam;
+    }
+    if(phgRank!=0){
+        MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm);
+        MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm);
+    }
+    if(phgRank==0){
+        FLOAT recv_diam;
+        for(i=1;i<phgNProcs;i++){
+            MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, i, phgComm, &status);
+            max_diam = (max_diam > recv_diam)?max_diam:recv_diam;
+            
+            MPI_Recv(&recv_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm, &status);
+            min_diam = (min_diam < recv_diam)?min_diam:recv_diam;
+        } 
+        for(i=1;i<phgNProcs;i++){
+            MPI_Send(&max_diam, 1, PHG_MPI_FLOAT, i, i, phgComm);
+            MPI_Send(&min_diam, 1, PHG_MPI_FLOAT, i, phgNProcs + i, phgComm);
+        }
+    }
+    if(phgRank!=0){
+        MPI_Recv(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm, &status);
+        MPI_Recv(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm, &status);
+    }
     
-    //phgPrintf("\nmax_diam = %.16lf\n", max_diam);
-    //phgPrintf("min_diam = %.16lf\n\n", min_diam);
+    phgPrintf("\nmax_diam = %.16lf\n", max_diam);
+    phgPrintf("min_diam = %.16lf\n\n", min_diam);
+
+    dt = 0.3*min_diam; 
+    //dt = 0.3*Pow(10000./g->nelem_global, 1./3.); 
 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
@@ -163,10 +166,12 @@ main(int argc, char *argv[])
 
     /*create auxi dofs*/
     DOF *dofs_g[6], *dofs_N[4], *dofs_Hhat[NVAR], *dofs_rhs[NVAR];
+    DOF *dofs_C[4];
     create_dofs(g, dg_type, 1, dofs_g, "g", 6);
     create_dofs(g, dg_type, 1, dofs_N, "N", 4);
     create_dofs(g, dg_type, 1, dofs_Hhat, "Hhat", NVAR);  
     create_dofs(g, dg_type, 1, dofs_rhs, "rhs", NVAR);  
+    create_dofs(g, dg_type, 1, dofs_C, "C", 4);
 
     /*create dofs for gauge functions H_a and their derivatives*/
     DOF *dofs_H[4], *dofs_deriH[16];
@@ -177,14 +182,21 @@ main(int argc, char *argv[])
     set_data_var(dofs_var);
     set_data_H(dofs_H);
     set_data_deriH(dofs_deriH);
-    phgExportVTKn(g, "var.vtk", 50, dofs_var);
-    phgExportVTKn(g, "H.vtk", 50, dofs_H);
-    phgExportVTKn(g, "deriH.vtk", 50, dofs_deriH);
+    //phgExportVTKn(g, "var.vtk", 50, dofs_var);
+    //phgExportVTKn(g, "H.vtk", 50, dofs_H);
+    //phgExportVTKn(g, "deriH.vtk", 50, dofs_deriH);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
 
-    //get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_src,
+    //get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
     //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+
+    //for(j=0;j<NVAR;j++){
+    //        phgPrintf("L2 norm of rhs_%d: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
+    //    }
+
+    ////phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs);
+    //phgAbort(0);
 
     //for(i=0;i<30;i++){
     //    split_dof(dofs_gradPsi[i], dofs_gradPsi_ave[i], dofs_gradPsi_diff[i]);
@@ -246,12 +258,16 @@ main(int argc, char *argv[])
             phgPrintf("L2 norm of rhs_%d: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
             phgPrintf("L2 err of var_%d: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
         }
+
+        for(j=0;j<4;j++){
+            phgPrintf("L2 norm of C_%d: %.16lf\n", j, phgDofNormL2(dofs_C[j]));
+        }
         //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
         //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
         //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
             
-        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src,
+        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
      

@@ -8,7 +8,7 @@
 
 static void 
 get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *values_H, FLOAT *values_deriH, 
-        FLOAT *values)
+        FLOAT *values, FLOAT *values_C)
 { 
     FLOAT invPsi00, invPsi01, invPsi02, invPsi03, invPsi11, invPsi12, invPsi13, invPsi22, invPsi23, invPsi33;
     FLOAT Gamma000,Gamma001,Gamma002,Gamma003,Gamma011,Gamma012,Gamma013,Gamma022,Gamma023,Gamma033;
@@ -2103,4 +2103,5 @@ get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *value
     values[35] = srcPhi212; values[36] = srcPhi213; values[37] = srcPhi222; values[38] = srcPhi223; values[39] = srcPhi233;
     values[40] = srcPhi300; values[41] = srcPhi301; values[42] = srcPhi302; values[43] = srcPhi303; values[44] = srcPhi311;
     values[45] = srcPhi312; values[46] = srcPhi313; values[47] = srcPhi322; values[48] = srcPhi323; values[49] = srcPhi333;    
+    values_C[0] = H0+vecGamma0; values_C[1] = H1+vecGamma1; values_C[2] = H2+vecGamma2; values_C[3] = H3+vecGamma3;
 }

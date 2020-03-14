@@ -1,10 +1,10 @@
 static void
-rk2(FLOAT dt, DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, DOF **dofs_H, DOF **dofs_deriH, DOF **dofs_src,
+rk2(FLOAT dt, DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, DOF **dofs_H, DOF **dofs_deriH, DOF **dofs_src, DOF **dofs_C,
         DOF **dofs_gradPsi, DOF **dofs_gradPi, DOF **dofs_gradPhi, DOF **dofs_Hhat, DOF **dofs_rhs)
 {
     INT i; 
     DOF *dofs_var_temp[NVAR];
-    get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src,
+    get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     //phgExportVTKn(dofs_src[0]->g, "src.vtk", NVAR, dofs_src);
     //phgExportVTKn(dofs_src[0]->g, "Hhat.vtk", NVAR, dofs_Hhat);
@@ -14,7 +14,7 @@ rk2(FLOAT dt, DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, DOF *
     for(i=0;i<NVAR;i++){
         phgDofAXPBY(dt, dofs_rhs[i], 1.0, dofs_var_temp + i);
     }
-    get_dofs_rhs(dofs_var_temp, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src,
+    get_dofs_rhs(dofs_var_temp, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs); 
     for(i=0;i<NVAR;i++){
         phgDofAXPBY(dt, dofs_rhs[i], 1.0, dofs_var_temp + i); 
