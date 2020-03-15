@@ -1,10 +1,8 @@
-#include <math.h>
+#include "global_def.h"
 
 #define gamma0 1
 #define gamma1 -1
 #define gamma2 1
-
-#define Power(x,y) (Pow((FLOAT) (x), (FLOAT) (y)))
 
 static void 
 get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *values_H, FLOAT *values_deriH, 

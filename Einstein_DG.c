@@ -4,13 +4,14 @@
 
 #define NVAR 50
 
+#include "global_def.h"
+#include "initial_condition.h"
 #include "hdw.c"
 #include "auxi_dofs.c"
 #include "Hhat.c"
 #include "rhs.c"
 #include "rk2.c"
 //#include "rk4.c"
-#include "Sch_Kerr_Schild.c"
 //#include "Schwarzschild_Harmonic.c"
 //#include "Schwarzschild_Horizon_Penitrating.c"
 //#include "Minkovski.c"
@@ -20,7 +21,8 @@ int
 main(int argc, char *argv[])
 {
     //char *meshfile ="./mesh/hollowed_icosahedron.mesh";
-    char *meshfile ="./mesh/SinS.albert";
+    //char *meshfile ="./mesh/SinS.albert";
+    char *meshfile ="./tetgen/hol_sphere.mesh";
     GRID *g; 
     ELEMENT *e;
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
@@ -78,7 +80,9 @@ main(int argc, char *argv[])
     phgImport(g, meshfile, FALSE);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
     phgRefineAllElements(g, refine_time);
-    phgBalanceGrid(g, 1.2, 1, NULL, 0.);
+    if (refine_time > 0){
+        phgBalanceGrid(g, 1.2, 1, NULL, 0.);
+    }
 
     phgPrintf("\nUsing mesh file: %s\n", meshfile);
     phgPrintf("Refine times: %d\n", refine_time);
@@ -119,7 +123,7 @@ main(int argc, char *argv[])
     phgPrintf("\nmax_diam = %.16lf\n", max_diam);
     phgPrintf("min_diam = %.16lf\n\n", min_diam);
 
-    dt = 0.3*min_diam; 
+    dt = 0.05*min_diam; 
     //dt = 0.3*Pow(10000./g->nelem_global, 1./3.); 
 
     /*creat dofs for all the functions to be solved*/ 
@@ -235,11 +239,24 @@ main(int argc, char *argv[])
     //phgPrintf("L2 err of compare: %.16lf\n", phgDofNormL2(compare_err));
     //phgAbort(0);
 
-
+    char fn_err[50], fn_C[50];
+    FILE *fp_err, *fp_C;
+    sprintf(fn_err, "./data/L2_err_r%dp%dM%.2f.data", refine_time, p_order, M);
+    sprintf(fn_C, "./data/L2_C_r%dp%dM%.2f.data", refine_time, p_order, M);
+    fp_err=fopen(fn_err,"a");
+    fp_C=fopen(fn_C, "a");
 
     t0 = phgGetTime(NULL);
     char Hhat_name[30], rhs_name[30], err_name[30]; 
-    for(i=0;i*dt<max_time;i++){
+    FLOAT L2_err_array[NVAR], L2_C_array[4];
+    for(i=1;i*dt<max_time;i++){
+        //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
+        //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
+        //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
+        //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
+            
+        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+               dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
         sprintf(rhs_name, "rhs_%lf", i*dt);
         sprintf(Hhat_name, "Hhat_%lf", i*dt);
         sprintf(err_name, "err_%lf", i*dt);
@@ -249,34 +266,44 @@ main(int argc, char *argv[])
 
         get_dofs_diff(dofs_var, dofs_sol, dofs_err, NVAR); 
 
-        phgPrintf("\n\nStep %d completed\n", i);
+        phgPrintf("Step %d completed\n", i);
         phgPrintf("Advanced in time: %lf\n", i*dt);
-        
         t1 = phgGetTime(NULL);
-        phgPrintf("Wall time past: %lf\n", t1 - t0);
+        phgPrintf("Wall time past: %lf\n\n", t1 - t0);
+
         for(j=0;j<NVAR;j++){
-            phgPrintf("L2 norm of rhs_%d: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
-            phgPrintf("L2 err of var_%d: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
+            //phgPrintf("L2 norm of rhs_%d: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
+            //phgPrintf("L2 err of var_%d: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
+            L2_err_array[j] = phgDofNormL2(dofs_err[j]);
+        }
+        for(j=0;j<4;j++){
+            //phgPrintf("L2 norm of C_%d: %.16lf\n", j, phgDofNormL2(dofs_C[j]));
+            L2_C_array[j] = phgDofNormL2(dofs_C[j]);
         }
 
-        for(j=0;j<4;j++){
-            phgPrintf("L2 norm of C_%d: %.16lf\n", j, phgDofNormL2(dofs_C[j]));
+        if(phgRank==0){
+            fprintf(fp_err, "%.16lf ", i*dt);
+            fprintf(fp_C, "%.16lf ", i*dt);
+            for(j=0;j<NVAR;j++){
+                fprintf(fp_err, "%.16lf ", L2_err_array[j]);
+            }
+            fprintf(fp_err, "\n");
+            for(j=0;j<4;j++){
+                fprintf(fp_C, "%.16lf ", L2_C_array[j]);
+            }
+            fprintf(fp_C, "\n");
         }
-        //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
-        //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
-        //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
-        //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
-            
-        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-               dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     }
-     
+
+    fclose(fp_C);
+    fclose(fp_err);
     t1 = phgGetTime(NULL);
     phgPrintf("Total time cost = %lf\n", t1 - t0);
    
     /*release the mem*/
     free_dofs(dofs_var, NVAR);
     free_dofs(dofs_src, NVAR);
+    free_dofs(dofs_C, 4);
     free_dofs(dofs_Hhat, NVAR);
     free_dofs(dofs_sol, NVAR);
     free_dofs(dofs_bdry, NVAR);

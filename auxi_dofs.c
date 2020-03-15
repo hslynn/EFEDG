@@ -1,4 +1,3 @@
-#include <math.h>
 #include "source_values.c"
 
 static void
