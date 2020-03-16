@@ -1,5 +1,5 @@
-#define M 0.2
-#define R (Pow(x*x + y*y + z*z, 0.5))
+#include "phg.h"
+#include "global_def.h"
 
 static void
 func_zero(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
@@ -238,7 +238,7 @@ func_Phi333(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 }
 
 /*set dof data using above functions*/
-static void
+void
 set_data_var(DOF **dofs_var)
 {
     int i;
@@ -273,7 +273,7 @@ set_data_var(DOF **dofs_var)
     }
 }
 
-static void
+void
 set_data_H(DOF **dofs_H)
 {
     int i;
@@ -282,7 +282,7 @@ set_data_H(DOF **dofs_H)
     }
 }
 
-static void
+void
 set_data_deriH(DOF **dofs_deriH)
 {
     int i;

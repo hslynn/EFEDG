@@ -1,4 +1,6 @@
+#include "phg.h"
 #include <string.h>
+
 
 ///*split a 2 dimension dof into two 1 dimension dofs*/
 //static void
@@ -21,7 +23,7 @@
 //    } 
 //}
 
-static void
+void
 create_dofs(GRID *g, DOF_TYPE *type, INT dim, DOF **dofs_list, char *name_head, INT ndof)
 {
     short i;
@@ -34,7 +36,7 @@ create_dofs(GRID *g, DOF_TYPE *type, INT dim, DOF **dofs_list, char *name_head, 
     } 
 }
 
-static void
+void
 copy_dofs(DOF **dofs_A, DOF **dofs_B, char *name_head, INT ndof)
 {
     short i;
@@ -47,7 +49,7 @@ copy_dofs(DOF **dofs_A, DOF **dofs_B, char *name_head, INT ndof)
     }
 }
 
-static void
+void
 free_dofs(DOF **dofs, INT ndof)
 {
     short i;
@@ -56,7 +58,7 @@ free_dofs(DOF **dofs, INT ndof)
     } 
 }
 
-static void
+void
 list2tensor(FLOAT *list, FLOAT *tensor, int dim)
 {
     int i, j;
@@ -74,4 +76,12 @@ list2tensor(FLOAT *list, FLOAT *tensor, int dim)
     }
 }
 
-
+void
+get_dofs_diff(DOF **dofs_A, DOF **dofs_B, DOF **dofs_diff, INT ndofs)
+{
+    short i;
+    copy_dofs(dofs_B, dofs_diff, "diff", ndofs);
+    for(i = 0;i<ndofs;i++){
+        phgDofAXPBY(1.0, dofs_A[i], -1.0, dofs_diff + i);
+    }
+}

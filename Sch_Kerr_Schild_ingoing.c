@@ -1,6 +1,5 @@
 #include "phg.h"
 #include "global_def.h"
-#include "initial_condition.h"
 
 void
 func_Psi00(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)

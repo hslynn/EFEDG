@@ -1,10 +1,7 @@
 #include "global_def.h"
+#include "phg.h"
 
-#define gamma0 1
-#define gamma1 -1
-#define gamma2 1
-
-static void 
+void 
 get_values_src(FLOAT *values_var, FLOAT *values_g, FLOAT *values_N, FLOAT *values_H, FLOAT *values_deriH, 
         FLOAT *values, FLOAT *values_C)
 { 

@@ -1,6 +1,9 @@
-#include "source_values.c"
+#include "phg.h"
+#include "source_values.h"
+#include "global_def.h"
+#include <math.h>
 
-static void
+void
 get_dofs_g(DOF **dofs_Psi, DOF **dofs_g)
 {
     INT i, n, idx;
@@ -53,7 +56,7 @@ get_dofs_g(DOF **dofs_Psi, DOF **dofs_g)
 }
 
 
-static void
+void
 get_dofs_N(DOF **dofs_Psi, DOF **dofs_g, DOF **dofs_N)
 {
     INT i, n, np, idx;
@@ -114,7 +117,7 @@ get_dofs_N(DOF **dofs_Psi, DOF **dofs_g, DOF **dofs_N)
     }    
 }
 
-static void
+void
 get_dofs_src_and_C(DOF **dofs_var, DOF **dofs_g, DOF **dofs_N, DOF **dofs_H, DOF **dofs_deriH, DOF **dofs_src, DOF **dofs_C)
 {
     INT i, n, np, idx;

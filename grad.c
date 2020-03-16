@@ -1,3 +1,6 @@
+#include "phg.h"
+#include <math.h>
+
 void
 phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)
 {
@@ -33,7 +36,7 @@ phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)
     values[2] = d3 * vol;
 }
 
-static void
+void
 set_neighbour_data(DOF *u, ELEMENT *e, INT s, DOF *neigh_u, NEIGHBOUR_DATA *nd)
 { 
     assert(e->bound_type[s] & INTERIOR); 
@@ -49,7 +52,7 @@ set_neighbour_data(DOF *u, ELEMENT *e, INT s, DOF *neigh_u, NEIGHBOUR_DATA *nd)
     }
 }
 
-static void
+void
 reset_neighbour_data(DOF *neigh_u, ELEMENT *e, INT s)
 {
     assert(e->bound_type[s] & INTERIOR); 
@@ -63,7 +66,7 @@ reset_neighbour_data(DOF *neigh_u, ELEMENT *e, INT s)
     }
 }
 
-static void
+void
 build_linear_system(SOLVER *solver, DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry, int coord)
 {
     int n, k, i, j, s, in_out;
@@ -136,7 +139,7 @@ build_linear_system(SOLVER *solver, DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry,
     phgDofFree(&neigh_u);
 }
 
-static void
+void
 dgHJGradDof(DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry, DOF *dof_grad, int coord)
 {
     SOLVER *solver;
@@ -148,7 +151,7 @@ dgHJGradDof(DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry, DOF *dof_grad, int coor
     phgSolverDestroy(&solver);
 }
 
-static void
+void
 get_dofs_grad(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad, int ndof)
 {
     short i;
@@ -162,7 +165,7 @@ get_dofs_grad(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad, int ndof)
     }
 }
 
-static void
+void
 get_dof_grad_hat(DOF *dof_grad)
 {
     
@@ -185,7 +188,7 @@ get_dof_grad_hat(DOF *dof_grad)
     }
 }
 
-static void
+void
 get_dofs_grad_hat(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad_hat, INT ndof) 
 {
     get_dofs_grad(dofs, dofs_bdry, dofs_grad_hat, ndof);

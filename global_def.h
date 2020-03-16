@@ -4,5 +4,9 @@
 #define GLOBAL
 #define R (Pow(x*x + y*y + z*z, 0.5))
 #define Power(x,y) (Pow((FLOAT) (x), (FLOAT) (y)))
-extern FLOAT M;
 
+extern FLOAT M;
+extern INT gamma0;
+extern INT gamma1;
+extern INT gamma2;
+extern INT NVAR;

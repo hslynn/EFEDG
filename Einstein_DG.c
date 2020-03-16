@@ -2,20 +2,10 @@
 #include <string.h>
 #include <math.h>
 
-#define NVAR 50
-
 #include "global_def.h"
 #include "initial_condition.h"
-#include "hdw.c"
-#include "auxi_dofs.c"
-#include "Hhat.c"
-#include "rhs.c"
-#include "rk2.c"
-//#include "rk4.c"
-//#include "Schwarzschild_Harmonic.c"
-//#include "Schwarzschild_Horizon_Penitrating.c"
-//#include "Minkovski.c"
-#include "error.c"
+#include "hdw.h"
+#include "rk2.h"
 
 int 
 main(int argc, char *argv[])
@@ -27,7 +17,7 @@ main(int argc, char *argv[])
     ELEMENT *e;
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
     FLOAT t0 = 0.0, t1 = 0.0; 
-    FLOAT dt, max_time = 100*M;
+    FLOAT dt, max_time = 1000*M;
     DOF_TYPE *dg_type;
     INT i, j, p_order = 2, refine_time = 0;
     MPI_Status status; 
@@ -243,13 +233,22 @@ main(int argc, char *argv[])
     FILE *fp_err, *fp_C;
     sprintf(fn_err, "./data/L2_err_r%dp%dM%.2f.data", refine_time, p_order, M);
     sprintf(fn_C, "./data/L2_C_r%dp%dM%.2f.data", refine_time, p_order, M);
+    INT steps_complished = 0;
+    if((fp_C = fopen(fn_C, "r")) != NULL ){
+        char str_buffer[1024];
+        for(steps_complished=0; !feof(fp_C); steps_complished++){
+            fgets(str_buffer, sizeof(str_buffer), fp_C);
+        }
+        steps_complished--;
+    }
+    
     fp_err=fopen(fn_err,"a");
     fp_C=fopen(fn_C, "a");
 
     t0 = phgGetTime(NULL);
     char Hhat_name[30], rhs_name[30], err_name[30]; 
     FLOAT L2_err_array[NVAR], L2_C_array[4];
-    for(i=1;i*dt<max_time;i++){
+    for(i=steps_complished+1;i*dt<max_time;i++){
         //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
         //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
