@@ -1,4 +1,4 @@
-#define spacetime 2
+#include "global_def.h"
 
 #if (spacetime == 1)
 #include "Sch_Kerr_Schild_ingoing.c"

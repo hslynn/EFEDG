@@ -6,13 +6,14 @@
 #include "initial_condition.h"
 #include "hdw.h"
 #include "rk2.h"
+#include "rhs.h"
 
 int 
 main(int argc, char *argv[])
 {
     //char *meshfile ="./mesh/hollowed_icosahedron.mesh";
     //char *meshfile ="./mesh/SinS.albert";
-    char *meshfile ="./tetgen/hol_sphere.mesh";
+    char *meshfile ="./tetgen/hollowed_sphere.mesh";
     GRID *g; 
     ELEMENT *e;
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
@@ -113,7 +114,7 @@ main(int argc, char *argv[])
     phgPrintf("\nmax_diam = %.16lf\n", max_diam);
     phgPrintf("min_diam = %.16lf\n\n", min_diam);
 
-    dt = 0.05*min_diam; 
+    dt = 0.01/(2.*refine_time+1.)*min_diam; 
     //dt = 0.3*Pow(10000./g->nelem_global, 1./3.); 
 
     /*creat dofs for all the functions to be solved*/ 
@@ -176,9 +177,6 @@ main(int argc, char *argv[])
     set_data_var(dofs_var);
     set_data_H(dofs_H);
     set_data_deriH(dofs_deriH);
-    //phgExportVTKn(g, "var.vtk", 50, dofs_var);
-    //phgExportVTKn(g, "H.vtk", 50, dofs_H);
-    //phgExportVTKn(g, "deriH.vtk", 50, dofs_deriH);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
 
@@ -229,33 +227,36 @@ main(int argc, char *argv[])
     //phgPrintf("L2 err of compare: %.16lf\n", phgDofNormL2(compare_err));
     //phgAbort(0);
 
-    char fn_err[50], fn_C[50];
-    FILE *fp_err, *fp_C;
-    sprintf(fn_err, "./data/L2_err_r%dp%dM%.2f.data", refine_time, p_order, M);
-    sprintf(fn_C, "./data/L2_C_r%dp%dM%.2f.data", refine_time, p_order, M);
+    char fn_err[50], fn_rhs[50], fn_C[50];
+    FILE *fp_err, *fp_rhs, *fp_C;
+    sprintf(fn_err, "./data/err_r%dp%d_T%dM%.2f.data", refine_time, p_order, spacetime, M);
+    sprintf(fn_rhs, "./data/rhs_r%dp%d_T%dM%.2f.data", refine_time, p_order, spacetime, M);
+    sprintf(fn_C, "./data/C_r%dp%d_T%dM%.2f.data", refine_time, p_order, spacetime, M);
     INT steps_complished = 0;
-    if((fp_C = fopen(fn_C, "r")) != NULL ){
-        char str_buffer[1024];
-        for(steps_complished=0; !feof(fp_C); steps_complished++){
-            fgets(str_buffer, sizeof(str_buffer), fp_C);
-        }
-        steps_complished--;
-    }
+    //if((fp_C = fopen(fn_C, "r")) != NULL ){
+    //    char str_buffer[1024];
+    //    for(steps_complished=0; !feof(fp_C); steps_complished++){
+    //        fgets(str_buffer, sizeof(str_buffer), fp_C);
+    //    }
+    //    steps_complished--;
+    //}
     
-    fp_err=fopen(fn_err,"a");
-    fp_C=fopen(fn_C, "a");
+    fp_err=fopen(fn_err,"w");
+    fp_C=fopen(fn_C, "w");
+    fp_rhs=fopen(fn_rhs, "w");
 
     t0 = phgGetTime(NULL);
     char Hhat_name[30], rhs_name[30], err_name[30]; 
-    FLOAT L2_err_array[NVAR], L2_C_array[4];
-    for(i=steps_complished+1;i*dt<max_time;i++){
+    FLOAT L2_err_array[NVAR], L2_rhs_array[NVAR], L2_C_array[4];
+    get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+    phgExportVTKn(g, "var", NVAR, dofs_var);
+    for(i=steps_complished;i*dt<max_time;i++){
         //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
         //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
         //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
             
-        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-               dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
         sprintf(rhs_name, "rhs_%lf", i*dt);
         sprintf(Hhat_name, "Hhat_%lf", i*dt);
         sprintf(err_name, "err_%lf", i*dt);
@@ -274,6 +275,7 @@ main(int argc, char *argv[])
             //phgPrintf("L2 norm of rhs_%d: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
             //phgPrintf("L2 err of var_%d: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
             L2_err_array[j] = phgDofNormL2(dofs_err[j]);
+            L2_rhs_array[j] = phgDofNormL2(dofs_rhs[j]);
         }
         for(j=0;j<4;j++){
             //phgPrintf("L2 norm of C_%d: %.16lf\n", j, phgDofNormL2(dofs_C[j]));
@@ -282,16 +284,22 @@ main(int argc, char *argv[])
 
         if(phgRank==0){
             fprintf(fp_err, "%.16lf ", i*dt);
+            fprintf(fp_rhs, "%.16lf ", i*dt);
             fprintf(fp_C, "%.16lf ", i*dt);
             for(j=0;j<NVAR;j++){
                 fprintf(fp_err, "%.16lf ", L2_err_array[j]);
+                fprintf(fp_rhs, "%.16lf ", L2_rhs_array[j]);
             }
+            fprintf(fp_rhs, "\n");
             fprintf(fp_err, "\n");
             for(j=0;j<4;j++){
                 fprintf(fp_C, "%.16lf ", L2_C_array[j]);
             }
             fprintf(fp_C, "\n");
         }
+        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+               dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+
     }
 
     fclose(fp_C);

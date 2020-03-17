@@ -4,7 +4,6 @@ equilateral triangular faces, 30 edges and 12 vertices.
 Code was modified from:
 http://www.andrewnoske.com/wiki/Generating_a_sphere_as_a_3D_mesh
 """
-
 RADIUS_EXT = 10.0
 RADIUS_IN = 1.8
 NUM_VERTS = 12
@@ -69,6 +68,10 @@ for face in BASE_FACETS:
 for face in ext_facets:
     fn.write("1 0 1\n")
     fn.write(str(len(face)) + " " + " ".join([str(vert) for vert in face]) + "\n")
+
+fn.write("# num holes\n")  
+fn.write("1\n")  
+fn.write("1 0.0 .0.0 0.0\n")  
 
 
 

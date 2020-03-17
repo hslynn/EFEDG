@@ -4,6 +4,7 @@
 #define GLOBAL
 #define R (Pow(x*x + y*y + z*z, 0.5))
 #define Power(x,y) (Pow((FLOAT) (x), (FLOAT) (y)))
+#define spacetime 1
 
 extern FLOAT M;
 extern INT gamma0;

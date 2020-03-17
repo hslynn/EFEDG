@@ -76,699 +76,451 @@ func_Psi33(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Pi00(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,3)*(-0.7272727272727273*Power(x,2) - 0.7272727272727273*Power(y,2) - 
-       0.7272727272727273*Power(z,2))*
+    *value = (-0.5333333333333334*Power(M,3)*(1.*Power(x,2) + 1.*Power(y,2) + 1.*Power(z,2))*
      (M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
        Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),2.)*
      Power(1.*M + 1.*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),2)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 static void
 func_Pi01(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,4)*x*(-4.363636363636363*Power(x,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),6.) - 
-       4.363636363636363*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),6.) - 
-       4.363636363636363*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),6.) + 
-       1.4545454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),7.) + 
-       Power(M,2)*(-1.4545454545454546*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),5.) - 
-          1.4545454545454546*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.) - 
-          1.4545454545454546*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.) + 
-          1.4545454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),6.)) + 
-       M*(-5.818181818181818*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) - 
-          5.818181818181818*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) - 
-          5.818181818181818*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) + 
-          2.909090909090909*Power(Power(x,2) + Power(y,2) + Power(z,2),6.5))))/
+    *value = (Power(M,4)*x*(M*(-4.2666666666666675*Power(x,2) - 4.2666666666666675*Power(y,2) - 
+          4.2666666666666675*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) + 
+       (-3.2*Power(x,2) - 3.2*Power(y,2) - 3.2*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),6.) + 
+       2.1333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),6.5) + 
+       1.0666666666666669*Power(Power(x,2) + Power(y,2) + Power(z,2),7.) + 
+       Power(M,2)*((-1.0666666666666669*Power(x,2) - 1.0666666666666669*Power(y,2) - 
+             1.0666666666666669*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),5.)\
+           + 1.0666666666666669*Power(Power(x,2) + Power(y,2) + Power(z,2),6.))))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),7.)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),3)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 static void
 func_Pi02(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,4)*y*(-4.363636363636363*Power(x,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),6.) - 
-       4.363636363636363*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),6.) - 
-       4.363636363636363*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),6.) + 
-       1.4545454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),7.) + 
-       Power(M,2)*(-1.4545454545454546*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),5.) - 
-          1.4545454545454546*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.) - 
-          1.4545454545454546*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.) + 
-          1.4545454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),6.)) + 
-       M*(-5.818181818181818*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) - 
-          5.818181818181818*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) - 
-          5.818181818181818*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) + 
-          2.909090909090909*Power(Power(x,2) + Power(y,2) + Power(z,2),6.5))))/
+    *value = (Power(M,4)*y*(M*(-4.2666666666666675*Power(x,2) - 4.2666666666666675*Power(y,2) - 
+          4.2666666666666675*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) + 
+       (-3.2*Power(x,2) - 3.2*Power(y,2) - 3.2*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),6.) + 
+       2.1333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),6.5) + 
+       1.0666666666666669*Power(Power(x,2) + Power(y,2) + Power(z,2),7.) + 
+       Power(M,2)*((-1.0666666666666669*Power(x,2) - 1.0666666666666669*Power(y,2) - 
+             1.0666666666666669*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),5.)\
+           + 1.0666666666666669*Power(Power(x,2) + Power(y,2) + Power(z,2),6.))))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),7.)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),3)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 static void
 func_Pi03(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,4)*z*(-4.363636363636363*Power(x,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),6.) - 
-       4.363636363636363*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),6.) - 
-       4.363636363636363*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),6.) + 
-       1.4545454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),7.) + 
-       Power(M,2)*(-1.4545454545454546*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),5.) - 
-          1.4545454545454546*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.) - 
-          1.4545454545454546*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.) + 
-          1.4545454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),6.)) + 
-       M*(-5.818181818181818*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) - 
-          5.818181818181818*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) - 
-          5.818181818181818*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) + 
-          2.909090909090909*Power(Power(x,2) + Power(y,2) + Power(z,2),6.5))))/
+    *value = (Power(M,4)*z*(M*(-4.2666666666666675*Power(x,2) - 4.2666666666666675*Power(y,2) - 
+          4.2666666666666675*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),5.5) + 
+       (-3.2*Power(x,2) - 3.2*Power(y,2) - 3.2*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),6.) + 
+       2.1333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),6.5) + 
+       1.0666666666666669*Power(Power(x,2) + Power(y,2) + Power(z,2),7.) + 
+       Power(M,2)*((-1.0666666666666669*Power(x,2) - 1.0666666666666669*Power(y,2) - 
+             1.0666666666666669*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),5.)\
+           + 1.0666666666666669*Power(Power(x,2) + Power(y,2) + Power(z,2),6.))))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),7.)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),3)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 static void
 func_Pi11(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,2)*(-0.7272727272727273*Power(x,4)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       0.7272727272727273*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       1.4545454545454546*Power(y,2)*Power(z,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       0.7272727272727273*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-       0.7272727272727273*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
-       0.7272727272727273*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
-       Power(x,2)*(-1.4545454545454546*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-          1.4545454545454546*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-          0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),12.)) + 
-       Power(M,7)*(-1.4545454545454546*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
-          1.4545454545454546*Power(z,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
-          Power(x,2)*(-1.4545454545454546*Power(y,2) - 1.4545454545454546*Power(z,2))*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
-          0.7272727272727273*Power(z,2)*
+    *value = (Power(M,2)*((0.5333333333333334*Power(x,2) + 0.5333333333333334*Power(y,2) + 
+          0.5333333333333334*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
+       M*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5)*
+        (3.7333333333333334*Power(x,2) + 3.7333333333333334*Power(y,2) + 
+          3.7333333333333334*Power(z,2)) + 
+       M*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)*
+        (-4.2666666666666675*Power(x,4) - 4.2666666666666675*Power(y,4) - 
+          8.533333333333335*Power(y,2)*Power(z,2) - 4.2666666666666675*Power(z,4) + 
+          Power(x,2)*(-8.533333333333335*Power(y,2) - 8.533333333333335*Power(z,2))) + 
+       Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
+        (-0.5333333333333334*Power(x,4) - 0.5333333333333334*Power(y,4) - 
+          1.0666666666666669*Power(y,2)*Power(z,2) - 0.5333333333333334*Power(z,4) + 
+          Power(x,2)*(-1.0666666666666669*Power(y,2) - 1.0666666666666669*Power(z,2))) + 
+       Power(M,3)*(Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)*
+           (22.400000000000002*Power(x,2) + 18.666666666666668*Power(y,2) + 
+             18.666666666666668*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*
+           (-34.66666666666667*Power(x,4) - 26.66666666666667*Power(y,4) - 
+             53.33333333333334*Power(y,2)*Power(z,2) - 26.66666666666667*Power(z,4) + 
+             Power(x,2)*(-61.33333333333334*Power(y,2) - 61.33333333333334*Power(z,2)))) + 
+       Power(M,4)*(Power(Power(x,2) + Power(y,2) + Power(z,2),10.)*
+           (21.866666666666667*Power(x,2) + 18.666666666666668*Power(y,2) + 
+             18.666666666666668*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.)*
+           (-30.933333333333334*Power(x,4) - 29.333333333333336*Power(y,4) - 
+             58.66666666666667*Power(y,2)*Power(z,2) - 29.333333333333336*Power(z,4) + 
+             Power(x,2)*(-60.26666666666667*Power(y,2) - 60.26666666666667*Power(z,2)))) + 
+       Power(M,2)*(Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
+           (11.733333333333334*Power(x,2) + 11.200000000000001*Power(y,2) + 
+             11.200000000000001*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),10.)*
+           (-15.466666666666667*Power(x,4) - 14.400000000000002*Power(y,4) - 
+             28.800000000000004*Power(y,2)*Power(z,2) - 14.400000000000002*Power(z,4) + 
+             Power(x,2)*(-29.866666666666667*Power(y,2) - 29.866666666666667*Power(z,2))))\
+        + Power(M,5)*(Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*
+           (8.*Power(x,2) + 11.200000000000001*Power(y,2) + 11.200000000000001*Power(z,2))\
+           + Power(Power(x,2) + Power(y,2) + Power(z,2),8.5)*
+           (-8.*Power(x,4) - 19.200000000000003*Power(y,4) - 
+             38.400000000000006*Power(y,2)*Power(z,2) - 19.200000000000003*Power(z,4) + 
+             Power(x,2)*(-27.200000000000003*Power(y,2) - 27.200000000000003*Power(z,2))))\
+        + Power(M,6)*(Power(Power(x,2) + Power(y,2) + Power(z,2),9.)*
+           (3.7333333333333334*Power(y,2) + 3.7333333333333334*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),8.)*
+           (-6.9333333333333345*Power(y,4) - 13.866666666666669*Power(y,2)*Power(z,2) - 
+             6.9333333333333345*Power(z,4) + 
+             Power(x,2)*(-6.9333333333333345*Power(y,2) - 6.9333333333333345*Power(z,2))))\
+        + Power(M,7)*((0.5333333333333334*Power(y,2) + 0.5333333333333334*Power(z,2))*
            Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          Power(y,2)*(-2.909090909090909*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
-             0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5))) + 
-       Power(M,6)*(-9.454545454545455*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.) - 
-          9.454545454545455*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
-          Power(x,2)*(-9.454545454545455*Power(y,2) - 9.454545454545455*Power(z,2))*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
-          5.090909090909091*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          Power(y,2)*(-18.90909090909091*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
-             5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),9.))) + 
-       Power(M,5)*(-10.909090909090908*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-          26.181818181818183*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-          26.181818181818183*Power(z,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          15.272727272727273*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          Power(x,2)*(-37.09090909090909*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-             37.09090909090909*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-             10.909090909090908*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)) + 
-          Power(y,2)*(-52.36363636363637*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-             15.272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5))) + 
-       Power(M,4)*(-42.18181818181818*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-          40.*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-          40.*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          25.454545454545453*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-          Power(y,2)*(-80.*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-             25.454545454545453*Power(Power(x,2) + Power(y,2) + Power(z,2),10.)) + 
-          Power(x,2)*(-82.18181818181819*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-             82.18181818181819*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-             29.818181818181817*Power(Power(x,2) + Power(y,2) + Power(z,2),10.))) + 
-       Power(M,3)*(-47.27272727272727*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-          36.36363636363637*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-          36.36363636363637*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          25.454545454545453*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-          Power(y,2)*(-72.72727272727273*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-             25.454545454545453*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)) + 
-          Power(x,2)*(-83.63636363636364*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-             83.63636363636364*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-             30.545454545454547*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5))) + 
-       Power(M,2)*(-21.09090909090909*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          19.636363636363637*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          19.636363636363637*Power(z,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-          15.272727272727273*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-          Power(y,2)*(-39.27272727272727*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-             15.272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),11.)) + 
-          Power(x,2)*(-40.72727272727273*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-             40.72727272727273*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-             16.*Power(Power(x,2) + Power(y,2) + Power(z,2),11.))) + 
-       M*(-5.818181818181818*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          5.818181818181818*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          5.818181818181818*Power(z,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-          5.090909090909091*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.5) + 
-          Power(y,2)*(-11.636363636363637*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-             5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5)) + 
-          Power(x,2)*(-11.636363636363637*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-             11.636363636363637*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-             5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5)))))/
-   (Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
+          Power(Power(x,2) + Power(y,2) + Power(z,2),7.5)*
+           (-1.0666666666666669*Power(y,4) - 2.1333333333333337*Power(y,2)*Power(z,2) - 
+             1.0666666666666669*Power(z,4) + 
+             Power(x,2)*(-1.0666666666666669*Power(y,2) - 1.0666666666666669*Power(z,2))))))
+    /(Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 static void
 func_Pi12(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,4)*x*y*(-1.4545454545454546*Power(x,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       1.4545454545454546*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       1.4545454545454546*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-       0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
-       Power(M,5)*(1.4545454545454546*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          1.4545454545454546*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          1.4545454545454546*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-          0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)) + 
-       Power(M,4)*(9.454545454545455*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          9.454545454545455*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          9.454545454545455*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-          5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),10.)) + 
-       Power(M,3)*(15.272727272727273*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          15.272727272727273*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          15.272727272727273*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-          4.363636363636363*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)) + 
-       Power(M,2)*(-2.1818181818181817*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          2.1818181818181817*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          2.1818181818181817*Power(z,2)*
+    *value = (Power(M,4)*x*y*(M*(-8.000000000000002*Power(x,2) - 8.000000000000002*Power(y,2) - 
+          8.000000000000002*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
+       (-1.0666666666666669*Power(x,2) - 1.0666666666666669*Power(y,2) - 
+          1.0666666666666669*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
+       3.7333333333333343*M*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5) + 
+       0.5333333333333334*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
+       Power(M,2)*((-1.6*Power(x,2) - 1.6*Power(y,2) - 1.6*Power(z,2))*
            Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-          4.363636363636363*Power(Power(x,2) + Power(y,2) + Power(z,2),11.)) + 
-       M*(-10.90909090909091*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          10.90909090909091*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          10.90909090909091*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-          5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5))))/
+          3.2*Power(Power(x,2) + Power(y,2) + Power(z,2),11.)) + 
+       Power(M,5)*(-0.5333333333333334*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),8.5)*
+           (1.0666666666666669*Power(x,2) + 1.0666666666666669*Power(y,2) + 
+             1.0666666666666669*Power(z,2))) + 
+       Power(M,4)*(-3.7333333333333343*Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.)*
+           (6.9333333333333345*Power(x,2) + 6.9333333333333345*Power(y,2) + 
+             6.9333333333333345*Power(z,2))) + 
+       Power(M,3)*(-3.2*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*
+           (11.200000000000003*Power(x,2) + 11.200000000000003*Power(y,2) + 
+             11.200000000000003*Power(z,2)))))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),12.)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 static void
 func_Pi13(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,4)*x*z*(-1.4545454545454546*Power(x,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       1.4545454545454546*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       1.4545454545454546*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-       0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
-       Power(M,5)*(1.4545454545454546*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          1.4545454545454546*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          1.4545454545454546*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-          0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)) + 
-       Power(M,4)*(9.454545454545455*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          9.454545454545455*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          9.454545454545455*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-          5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),10.)) + 
-       Power(M,3)*(15.272727272727273*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          15.272727272727273*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          15.272727272727273*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-          4.363636363636363*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)) + 
-       Power(M,2)*(-2.1818181818181817*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          2.1818181818181817*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          2.1818181818181817*Power(z,2)*
+    *value = (Power(M,4)*x*z*(M*(-8.000000000000002*Power(x,2) - 8.000000000000002*Power(y,2) - 
+          8.000000000000002*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
+       (-1.0666666666666669*Power(x,2) - 1.0666666666666669*Power(y,2) - 
+          1.0666666666666669*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
+       3.7333333333333343*M*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5) + 
+       0.5333333333333334*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
+       Power(M,2)*((-1.6*Power(x,2) - 1.6*Power(y,2) - 1.6*Power(z,2))*
            Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-          4.363636363636363*Power(Power(x,2) + Power(y,2) + Power(z,2),11.)) + 
-       M*(-10.90909090909091*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          10.90909090909091*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          10.90909090909091*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-          5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5))))/
+          3.2*Power(Power(x,2) + Power(y,2) + Power(z,2),11.)) + 
+       Power(M,5)*(-0.5333333333333334*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),8.5)*
+           (1.0666666666666669*Power(x,2) + 1.0666666666666669*Power(y,2) + 
+             1.0666666666666669*Power(z,2))) + 
+       Power(M,4)*(-3.7333333333333343*Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.)*
+           (6.9333333333333345*Power(x,2) + 6.9333333333333345*Power(y,2) + 
+             6.9333333333333345*Power(z,2))) + 
+       Power(M,3)*(-3.2*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*
+           (11.200000000000003*Power(x,2) + 11.200000000000003*Power(y,2) + 
+             11.200000000000003*Power(z,2)))))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),12.)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 static void
 func_Pi22(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,2)*(-0.7272727272727273*Power(x,4)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       0.7272727272727273*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       1.4545454545454546*Power(y,2)*Power(z,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       0.7272727272727273*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-       0.7272727272727273*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
-       0.7272727272727273*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
-       Power(x,2)*(-1.4545454545454546*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-          1.4545454545454546*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-          0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),12.)) + 
-       Power(M,7)*(-1.4545454545454546*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
-          Power(x,2)*(-1.4545454545454546*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
-             2.909090909090909*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
-             0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5)) + 
-          Power(z,2)*(-1.4545454545454546*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
-             1.4545454545454546*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
-             0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5))) + 
-       Power(M,6)*(-9.454545454545455*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
-          Power(x,2)*(-9.454545454545455*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.) - 
-             18.90909090909091*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
-             5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),9.)) + 
-          Power(z,2)*(-9.454545454545455*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.) - 
-             9.454545454545455*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
-             5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),9.))) + 
-       Power(M,5)*(-26.18181818181818*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-          10.90909090909091*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-          26.18181818181818*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          15.272727272727273*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          Power(y,2)*(-37.090909090909086*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-             10.90909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)) + 
-          Power(x,2)*(-37.090909090909086*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-             52.36363636363636*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-             15.272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5))) + 
-       Power(M,4)*(-40.*Power(x,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-          42.18181818181818*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-          40.*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          25.454545454545457*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-          Power(x,2)*(-82.18181818181819*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-             80.*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-             25.454545454545457*Power(Power(x,2) + Power(y,2) + Power(z,2),10.)) + 
-          Power(y,2)*(-82.18181818181819*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-             29.81818181818182*Power(Power(x,2) + Power(y,2) + Power(z,2),10.))) + 
-       Power(M,3)*(-36.36363636363637*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-          47.27272727272727*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-          36.36363636363637*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          25.454545454545457*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-          Power(x,2)*(-83.63636363636364*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-             72.72727272727273*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-             25.454545454545457*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)) + 
-          Power(y,2)*(-83.63636363636364*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-             30.545454545454547*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5))) + 
-       Power(M,2)*(-19.63636363636364*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          21.09090909090909*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          19.63636363636364*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-          15.272727272727273*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-          Power(x,2)*(-40.72727272727273*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-             39.27272727272728*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-             15.272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),11.)) + 
-          Power(y,2)*(-40.72727272727273*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-             16.*Power(Power(x,2) + Power(y,2) + Power(z,2),11.))) + 
-       M*(-5.818181818181818*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          5.818181818181818*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          5.818181818181818*Power(z,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-          5.090909090909091*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.5) + 
-          Power(y,2)*(-11.636363636363637*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-             5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5)) + 
-          Power(x,2)*(-11.636363636363637*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-             11.636363636363637*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-             5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5)))))/
-   (Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
+    *value = (Power(M,2)*((0.5333333333333333*Power(x,2) + 0.5333333333333333*Power(y,2) + 
+          0.5333333333333333*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
+       M*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5)*
+        (3.7333333333333334*Power(x,2) + 3.7333333333333334*Power(y,2) + 
+          3.7333333333333334*Power(z,2)) + 
+       M*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)*
+        (-4.266666666666667*Power(x,4) - 4.266666666666667*Power(y,4) - 
+          8.533333333333333*Power(y,2)*Power(z,2) - 4.266666666666667*Power(z,4) + 
+          Power(x,2)*(-8.533333333333333*Power(y,2) - 8.533333333333333*Power(z,2))) + 
+       Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
+        (-0.5333333333333333*Power(x,4) - 0.5333333333333333*Power(y,4) - 
+          1.0666666666666667*Power(y,2)*Power(z,2) - 0.5333333333333333*Power(z,4) + 
+          Power(x,2)*(-1.0666666666666667*Power(y,2) - 1.0666666666666667*Power(z,2))) + 
+       Power(M,4)*(Power(Power(x,2) + Power(y,2) + Power(z,2),10.)*
+           (18.666666666666668*Power(x,2) + 21.86666666666667*Power(y,2) + 
+             18.666666666666668*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.)*
+           (-29.333333333333336*Power(x,4) - 30.93333333333334*Power(y,4) - 
+             60.26666666666667*Power(y,2)*Power(z,2) - 29.333333333333336*Power(z,4) + 
+             Power(x,2)*(-60.26666666666667*Power(y,2) - 58.66666666666667*Power(z,2)))) + 
+       Power(M,3)*(Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)*
+           (18.666666666666668*Power(x,2) + 22.400000000000002*Power(y,2) + 
+             18.666666666666668*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*
+           (-26.666666666666668*Power(x,4) - 34.66666666666667*Power(y,4) - 
+             61.33333333333334*Power(y,2)*Power(z,2) - 26.666666666666668*Power(z,4) + 
+             Power(x,2)*(-61.33333333333334*Power(y,2) - 53.333333333333336*Power(z,2)))) + 
+       Power(M,5)*(Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*
+           (11.200000000000001*Power(x,2) + 8.000000000000002*Power(y,2) + 
+             11.200000000000001*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),8.5)*
+           (-19.2*Power(x,4) - 8.000000000000002*Power(y,4) - 27.2*Power(y,2)*Power(z,2) - 
+             19.2*Power(z,4) + Power(x,2)*(-27.2*Power(y,2) - 38.4*Power(z,2)))) + 
+       Power(M,2)*(Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
+           (11.200000000000001*Power(x,2) + 11.733333333333334*Power(y,2) + 
+             11.200000000000001*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),10.)*
+           (-14.400000000000002*Power(x,4) - 15.466666666666667*Power(y,4) - 
+             29.86666666666667*Power(y,2)*Power(z,2) - 14.400000000000002*Power(z,4) + 
+             Power(x,2)*(-29.86666666666667*Power(y,2) - 28.800000000000004*Power(z,2)))) + 
+       Power(M,6)*(Power(Power(x,2) + Power(y,2) + Power(z,2),9.)*
+           (3.7333333333333334*Power(x,2) + 3.7333333333333334*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),8.)*
+           (-6.9333333333333345*Power(x,4) - 6.9333333333333345*Power(y,2)*Power(z,2) - 
+             6.9333333333333345*Power(z,4) + 
+             Power(x,2)*(-6.9333333333333345*Power(y,2) - 13.866666666666669*Power(z,2))))\
+        + Power(M,7)*((0.5333333333333333*Power(x,2) + 0.5333333333333333*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),7.5)*
+           (-1.0666666666666667*Power(x,4) - 1.0666666666666667*Power(y,2)*Power(z,2) - 
+             1.0666666666666667*Power(z,4) + 
+             Power(x,2)*(-1.0666666666666667*Power(y,2) - 2.1333333333333333*Power(z,2))))))
+    /(Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 static void
 func_Pi23(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,4)*y*z*(-1.4545454545454546*Power(x,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       1.4545454545454546*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       1.4545454545454546*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-       0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
-       Power(M,5)*(1.4545454545454546*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          1.4545454545454546*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          1.4545454545454546*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-          0.7272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)) + 
-       Power(M,4)*(9.454545454545455*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          9.454545454545455*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          9.454545454545455*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-          5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),10.)) + 
-       Power(M,3)*(15.272727272727273*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          15.272727272727273*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          15.272727272727273*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-          4.363636363636363*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)) + 
-       Power(M,2)*(-2.1818181818181817*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          2.1818181818181817*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          2.1818181818181817*Power(z,2)*
+    *value = (Power(M,4)*y*z*(M*(-8.000000000000002*Power(x,2) - 8.000000000000002*Power(y,2) - 
+          8.000000000000002*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
+       (-1.0666666666666669*Power(x,2) - 1.0666666666666669*Power(y,2) - 
+          1.0666666666666669*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
+       3.7333333333333343*M*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5) + 
+       0.5333333333333334*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
+       Power(M,2)*((-1.6*Power(x,2) - 1.6*Power(y,2) - 1.6*Power(z,2))*
            Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-          4.363636363636363*Power(Power(x,2) + Power(y,2) + Power(z,2),11.)) + 
-       M*(-10.90909090909091*Power(x,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          10.90909090909091*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          10.90909090909091*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-          5.090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5))))/
+          3.2*Power(Power(x,2) + Power(y,2) + Power(z,2),11.)) + 
+       Power(M,5)*(-0.5333333333333334*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),8.5)*
+           (1.0666666666666669*Power(x,2) + 1.0666666666666669*Power(y,2) + 
+             1.0666666666666669*Power(z,2))) + 
+       Power(M,4)*(-3.7333333333333343*Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.)*
+           (6.9333333333333345*Power(x,2) + 6.9333333333333345*Power(y,2) + 
+             6.9333333333333345*Power(z,2))) + 
+       Power(M,3)*(-3.2*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*
+           (11.200000000000003*Power(x,2) + 11.200000000000003*Power(y,2) + 
+             11.200000000000003*Power(z,2)))))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),12.)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 static void
 func_Pi33(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,2)*(-0.7272727272727274*Power(x,4)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       0.7272727272727274*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       1.4545454545454548*Power(y,2)*Power(z,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-       0.7272727272727274*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-       0.7272727272727274*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
-       0.7272727272727274*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
-       Power(x,2)*(-1.4545454545454548*Power(y,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.) - 
-          1.4545454545454548*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-          0.7272727272727274*Power(Power(x,2) + Power(y,2) + Power(z,2),12.)) + 
-       Power(M,7)*(-1.4545454545454548*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
-          Power(x,2)*(-2.9090909090909096*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
-             1.4545454545454548*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
-             0.7272727272727274*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5)) + 
-          Power(y,2)*(-1.4545454545454548*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
-             1.4545454545454548*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
-             0.7272727272727274*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5))) + 
-       Power(M,6)*(-9.454545454545455*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
-          Power(x,2)*(-18.90909090909091*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.) - 
-             9.454545454545455*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
-             5.090909090909092*Power(Power(x,2) + Power(y,2) + Power(z,2),9.)) + 
-          Power(y,2)*(-9.454545454545455*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.) - 
-             9.454545454545455*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
-             5.090909090909092*Power(Power(x,2) + Power(y,2) + Power(z,2),9.))) + 
-       Power(M,5)*(-26.181818181818183*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-          26.181818181818183*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-          10.90909090909091*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-          10.90909090909091*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          Power(y,2)*(-37.09090909090909*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-             15.272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)) + 
-          Power(x,2)*(-52.36363636363637*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
-             37.09090909090909*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
-             15.272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5))) + 
-       Power(M,4)*(-40.00000000000001*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-          40.00000000000001*Power(y,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-          42.18181818181819*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-          29.818181818181824*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-          Power(y,2)*(-82.18181818181819*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-             25.45454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),10.)) + 
-          Power(x,2)*(-80.00000000000001*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.) - 
-             82.18181818181819*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
-             25.45454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),10.))) + 
-       Power(M,3)*(-36.363636363636374*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-          36.363636363636374*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-          47.27272727272727*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-          30.545454545454547*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-          Power(y,2)*(-83.63636363636364*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-             25.45454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)) + 
-          Power(x,2)*(-72.72727272727275*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) - 
-             83.63636363636364*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
-             25.45454545454546*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5))) + 
-       Power(M,2)*(-19.636363636363637*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          19.636363636363637*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-          21.09090909090909*Power(z,4)*Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-          16.*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
-          Power(y,2)*(-40.727272727272734*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-             15.272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),11.)) + 
-          Power(x,2)*(-39.27272727272727*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.) - 
-             40.727272727272734*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
-             15.272727272727273*Power(Power(x,2) + Power(y,2) + Power(z,2),11.))) + 
-       M*(-5.818181818181819*Power(x,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          5.818181818181819*Power(y,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-          5.818181818181819*Power(z,4)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-          5.090909090909092*Power(z,2)*
-           Power(Power(x,2) + Power(y,2) + Power(z,2),11.5) + 
-          Power(y,2)*(-11.636363636363638*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-             5.090909090909092*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5)) + 
-          Power(x,2)*(-11.636363636363638*Power(y,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) - 
-             11.636363636363638*Power(z,2)*
-              Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
-             5.090909090909092*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5)))))/
-   (Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
+    *value = (Power(M,2)*((0.5333333333333334*Power(x,2) + 0.5333333333333334*Power(y,2) + 
+          0.5333333333333334*Power(z,2))*Power(Power(x,2) + Power(y,2) + Power(z,2),12.) + 
+       M*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5)*
+        (3.7333333333333343*Power(x,2) + 3.7333333333333343*Power(y,2) + 
+          3.7333333333333343*Power(z,2)) + 
+       M*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)*
+        (-4.2666666666666675*Power(x,4) - 4.2666666666666675*Power(y,4) - 
+          8.533333333333335*Power(y,2)*Power(z,2) - 4.2666666666666675*Power(z,4) + 
+          Power(x,2)*(-8.533333333333335*Power(y,2) - 8.533333333333335*Power(z,2))) + 
+       Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
+        (-0.5333333333333334*Power(x,4) - 0.5333333333333334*Power(y,4) - 
+          1.0666666666666669*Power(y,2)*Power(z,2) - 0.5333333333333334*Power(z,4) + 
+          Power(x,2)*(-1.0666666666666669*Power(y,2) - 1.0666666666666669*Power(z,2))) + 
+       Power(M,3)*(Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)*
+           (18.66666666666667*Power(x,2) + 18.66666666666667*Power(y,2) + 
+             22.400000000000002*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*
+           (-26.666666666666675*Power(x,4) - 26.666666666666675*Power(y,4) - 
+             61.33333333333335*Power(y,2)*Power(z,2) - 34.66666666666667*Power(z,4) + 
+             Power(x,2)*(-53.33333333333335*Power(y,2) - 61.33333333333335*Power(z,2)))) + 
+       Power(M,4)*(Power(Power(x,2) + Power(y,2) + Power(z,2),10.)*
+           (18.66666666666667*Power(x,2) + 18.66666666666667*Power(y,2) + 
+             21.86666666666667*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),9.)*
+           (-29.333333333333343*Power(x,4) - 29.333333333333343*Power(y,4) - 
+             60.26666666666668*Power(y,2)*Power(z,2) - 30.93333333333334*Power(z,4) + 
+             Power(x,2)*(-58.666666666666686*Power(y,2) - 60.26666666666668*Power(z,2)))) + 
+       Power(M,2)*(Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
+           (11.200000000000001*Power(x,2) + 11.200000000000001*Power(y,2) + 
+             11.733333333333334*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),10.)*
+           (-14.4*Power(x,4) - 14.4*Power(y,4) - 29.86666666666667*Power(y,2)*Power(z,2) - 
+             15.466666666666669*Power(z,4) + 
+             Power(x,2)*(-28.8*Power(y,2) - 29.86666666666667*Power(z,2)))) + 
+       Power(M,5)*(Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)*
+           (11.200000000000001*Power(x,2) + 11.200000000000001*Power(y,2) + 
+             8.000000000000002*Power(z,2)) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),8.5)*
+           (-19.200000000000003*Power(x,4) - 19.200000000000003*Power(y,4) - 
+             27.200000000000006*Power(y,2)*Power(z,2) - 8.000000000000002*Power(z,4) + 
+             Power(x,2)*(-38.400000000000006*Power(y,2) - 27.200000000000006*Power(z,2))))\
+        + Power(M,6)*((3.7333333333333343*Power(x,2) + 3.7333333333333343*Power(y,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),8.)*
+           (-6.9333333333333345*Power(x,4) - 6.9333333333333345*Power(y,4) - 
+             6.9333333333333345*Power(y,2)*Power(z,2) + 
+             Power(x,2)*(-13.866666666666669*Power(y,2) - 6.9333333333333345*Power(z,2))))\
+        + Power(M,7)*((0.5333333333333334*Power(x,2) + 0.5333333333333334*Power(y,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
+          Power(Power(x,2) + Power(y,2) + Power(z,2),7.5)*
+           (-1.0666666666666669*Power(x,4) - 1.0666666666666669*Power(y,4) - 
+             1.0666666666666669*Power(y,2)*Power(z,2) + 
+             Power(x,2)*(-2.1333333333333337*Power(y,2) - 1.0666666666666669*Power(z,2))))))
+    /(Power(Power(x,2) + Power(y,2) + Power(z,2),11.)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4)*
-     (1.3636363636363635*Power(M,3) + 
-       1.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       0.45454545454545453*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       0.09090909090909091*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
-     Power((1.*Power(M,4) + 4.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         6.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         1.*Power(Power(x,2) + Power(y,2) + Power(z,2),2.))/
-       (15.*Power(M,4) + 26.*Power(M,3)*
-          Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-         16.*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-         6.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
+     (1.*Power(M,3) + 0.7333333333333334*Power(M,2)*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+       0.33333333333333337*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+       0.06666666666666668*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5))*
+     Power(1. + (M*(-2.333333333333333*Power(M,3) - 
+            3.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) - 
+            1.6666666666666665*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+            0.3333333333333333*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+        (2.5*Power(M,4) + 4.333333333333333*Power(M,3)*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
+          2.6666666666666665*Power(M,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
+          1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+          0.16666666666666666*Power(Power(x,2) + Power(y,2) + Power(z,2),2.)),0.5));
 }
 
 //nonzero funcs of Phi
@@ -793,8 +545,8 @@ func_Phi101(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi102(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (-4.*Power(M,2)*x*y*(1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       3.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+    *value = (Power(M,2)*x*y*(-4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+       12.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),2.5)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),3)); 
 }
@@ -802,8 +554,8 @@ func_Phi102(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi103(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (-4.*Power(M,2)*x*z*(1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       3.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+    *value = (Power(M,2)*x*z*(-4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+       12.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),2.5)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),3)); 
 }
@@ -811,35 +563,33 @@ func_Phi103(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi111(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (x*(-2.*Power(x,2) - 2.*Power(y,2) - 2.*Power(z,2) + 
-       2*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
-       (4.*Power(M,6)*(1.*Power(y,2) + 1.*Power(z,2)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),3.) - 
-       (22.*Power(M,5)*(1.*Power(y,2) + 1.*Power(z,2)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),2.5) + 
-       Power(M,4)*((-30.*Power(x,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-          (50.*Power(y,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-          (50.*Power(z,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) + 
-          30/Power(Power(x,2) + Power(y,2) + Power(z,2),1.)) + 
-       Power(M,3)*((-86.*Power(x,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
-          (60.*Power(y,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
-          (60.*Power(z,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-          52/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
-       (12.*M*(-1.1666666666666667*Power(x,2) - 1.1666666666666667*Power(y,2) - 
-            1.1666666666666667*Power(z,2) + 
-            Power(Power(x,2) + Power(y,2) + Power(z,2),1.)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       (32.*Power(M,2)*(-1.375*Power(x,2) - 1.25*Power(y,2) - 1.25*Power(z,2) + 
-            1.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),1.)))/
-   Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4);
+    *value = (x*(Power(M,6)*(-4.*Power(y,2) - 4.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
+       Power(M,5)*(-22.*Power(y,2) - 22.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
+       M*(-14.*Power(x,2) - 14.*Power(y,2) - 14.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
+       (-2.*Power(x,2) - 2.*Power(y,2) - 2.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
+       12.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
+       2.*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5) + 
+       Power(M,4)*((-30.*Power(x,2) - 50.*Power(y,2) - 50.*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
+          30.*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)) + 
+       Power(M,3)*((-86.*Power(x,2) - 60.*Power(y,2) - 60.*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
+          52.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.)) + 
+       Power(M,2)*((-44.*Power(x,2) - 40.*Power(y,2) - 40.*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
+          32.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5))))/
+   (Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)*
+     Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4));
 } 
 
 static void
 func_Phi112(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-   *value = (Power(M,2)*y*(20.*Power(M,2)*Power(x,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
+   *value = (Power(M,2)*y*(20.*Power(M,2)*Power(x,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
        4.*Power(x,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
        1.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
        Power(M,4)*(4.*Power(x,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
@@ -855,8 +605,7 @@ func_Phi112(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi113(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,2)*z*(20.*Power(M,2)*Power(x,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
+    *value = (Power(M,2)*z*(20.*Power(M,2)*Power(x,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
        4.*Power(x,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
        1.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
        Power(M,4)*(4.*Power(x,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
@@ -875,8 +624,11 @@ func_Phi122(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
     *value = (x*(Power(y,2)*(-3. - (45.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
           (33.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
           (15.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
-       Power(y,2)*(3. + (11.*Power(M,3))/
-           Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+       Power(y,2)*(-2. - (30.*Power(M,4))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
+          (52.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
+          (32.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+          (12.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
+       Power(y,2)*(3. + (11.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
           (21.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
           (13.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
        (2.*(Power(x,2) + Power(z,2))*
@@ -886,12 +638,6 @@ func_Phi122(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
           Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),3.) + 
        (2*Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-       (2.*Power(y,2)*(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5))*
-          (15*Power(M,3) + 11*Power(M,2)*
-             Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-            5*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-            Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)))/
    Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4);
 }
@@ -914,8 +660,11 @@ func_Phi133(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
     *value = (x*(Power(z,2)*(-3. - (45.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
           (33.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
           (15.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
-       Power(z,2)*(3. + (11.*Power(M,3))/
-           Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+       Power(z,2)*(-2. - (30.*Power(M,4))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
+          (52.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
+          (32.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+          (12.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
+       Power(z,2)*(3. + (11.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
           (21.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
           (13.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
        (2.*(Power(x,2) + Power(y,2))*
@@ -925,12 +674,6 @@ func_Phi133(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
           Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),3.) + 
        (2*Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-       (2.*Power(z,2)*(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5))*
-          (15*Power(M,3) + 11*Power(M,2)*
-             Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-            5*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-            Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)))/
    Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4);
 }
@@ -945,8 +688,8 @@ func_Phi200(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi201(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (-4.*Power(M,2)*x*y*(1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       3.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+    *value = (Power(M,2)*x*y*(-4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+       12.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),2.5)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),3));
 }
@@ -965,8 +708,8 @@ func_Phi202(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi203(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (-4.*Power(M,2)*y*z*(1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       3.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+    *value = (Power(M,2)*y*z*(-4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+       12.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),2.5)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),3));
 }
@@ -977,8 +720,11 @@ func_Phi211(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
     *value = (y*(Power(x,2)*(-3. - (45.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
           (33.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
           (15.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
-       Power(x,2)*(3. + (11.*Power(M,3))/
-           Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+       Power(x,2)*(-2. - (30.*Power(M,4))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
+          (52.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
+          (32.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+          (12.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
+       Power(x,2)*(3. + (11.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
           (21.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
           (13.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
        (2.*(Power(y,2) + Power(z,2))*
@@ -988,12 +734,6 @@ func_Phi211(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
           Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),3.) + 
        (2*Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-       (2.*Power(x,2)*(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5))*
-          (15*Power(M,3) + 11*Power(M,2)*
-             Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-            5*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-            Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)))/
    Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4); 
 }
@@ -1001,8 +741,7 @@ func_Phi211(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi212(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,2)*x*(20.*Power(M,2)*Power(y,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
+    *value = (Power(M,2)*x*(20.*Power(M,2)*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
        4.*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
        1.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
        Power(M,4)*(4.*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
@@ -1030,35 +769,33 @@ func_Phi213(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi222(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (y*(-2.*Power(x,2) - 2.*Power(y,2) - 2.*Power(z,2) + 
-       2*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
-       (4.*Power(M,6)*(1.*Power(x,2) + 1.*Power(z,2)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),3.) - 
-       (22.*Power(M,5)*(1.*Power(x,2) + 1.*Power(z,2)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),2.5) + 
-       Power(M,4)*((-50.*Power(x,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-          (30.*Power(y,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-          (50.*Power(z,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) + 
-          30/Power(Power(x,2) + Power(y,2) + Power(z,2),1.)) + 
-       Power(M,3)*((-60.*Power(x,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
-          (86.*Power(y,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
-          (60.*Power(z,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-          52/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
-       (12.*M*(-1.1666666666666667*Power(x,2) - 1.1666666666666667*Power(y,2) - 
-            1.1666666666666667*Power(z,2) + 
-            Power(Power(x,2) + Power(y,2) + Power(z,2),1.)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       (32.*Power(M,2)*(-1.25*Power(x,2) - 1.375*Power(y,2) - 1.25*Power(z,2) + 
-            1.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),1.)))/
-   Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4);
+    *value = (y*(Power(M,6)*(-4.*Power(x,2) - 4.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
+       Power(M,5)*(-22.*Power(x,2) - 22.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
+       M*(-14.*Power(x,2) - 14.*Power(y,2) - 14.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
+       (-2.*Power(x,2) - 2.*Power(y,2) - 2.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
+       12.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
+       2.*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5) + 
+       Power(M,4)*((-50.*Power(x,2) - 30.*Power(y,2) - 50.*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
+          30.*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)) + 
+       Power(M,3)*((-60.*Power(x,2) - 86.*Power(y,2) - 60.*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
+          52.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.)) + 
+       Power(M,2)*((-40.*Power(x,2) - 44.*Power(y,2) - 40.*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
+          32.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5))))/
+   (Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)*
+     Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4));
 }
 
 static void
 func_Phi223(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,2)*z*(20.*Power(M,2)*Power(y,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
+    *value = (Power(M,2)*z*(20.*Power(M,2)*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
        4.*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
        1.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
        Power(M,4)*(4.*Power(y,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
@@ -1077,8 +814,11 @@ func_Phi233(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
     *value = (y*(Power(z,2)*(-3. - (45.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
           (33.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
           (15.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
-       Power(z,2)*(3. + (11.*Power(M,3))/
-           Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+       Power(z,2)*(-2. - (30.*Power(M,4))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
+          (52.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
+          (32.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+          (12.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
+       Power(z,2)*(3. + (11.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
           (21.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
           (13.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
        (2.*(Power(x,2) + Power(y,2))*
@@ -1088,12 +828,6 @@ func_Phi233(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
           Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),3.) + 
        (2*Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-       (2.*Power(z,2)*(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5))*
-          (15*Power(M,3) + 11*Power(M,2)*
-             Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-            5*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-            Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)))/
    Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4);
 }
@@ -1108,8 +842,8 @@ func_Phi300(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi301(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (-4.*Power(M,2)*x*z*(1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       3.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+    *value = (Power(M,2)*x*z*(-4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+       12.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),2.5)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),3));
 }
@@ -1117,8 +851,8 @@ func_Phi301(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi302(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (-4.*Power(M,2)*y*z*(1.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       3.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
+    *value = (Power(M,2)*y*z*(-4.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+       12.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
    (Power(Power(x,2) + Power(y,2) + Power(z,2),2.5)*
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),3));
 }
@@ -1140,8 +874,11 @@ func_Phi311(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
     *value = (z*(Power(x,2)*(-3. - (45.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
           (33.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
           (15.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
-       Power(x,2)*(3. + (11.*Power(M,3))/
-           Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+       Power(x,2)*(-2. - (30.*Power(M,4))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
+          (52.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
+          (32.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+          (12.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
+       Power(x,2)*(3. + (11.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
           (21.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
           (13.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
        (2.*(Power(y,2) + Power(z,2))*
@@ -1151,12 +888,6 @@ func_Phi311(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
           Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),3.) + 
        (2*Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-       (2.*Power(x,2)*(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5))*
-          (15*Power(M,3) + 11*Power(M,2)*
-             Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-            5*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-            Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)))/
    Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4);
 }
@@ -1176,8 +907,7 @@ func_Phi312(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi313(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,2)*x*(20.*Power(M,2)*Power(z,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
+    *value = (Power(M,2)*x*(20.*Power(M,2)*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
        4.*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
        1.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
        Power(M,4)*(4.*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
@@ -1196,8 +926,11 @@ func_Phi322(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
     *value = (z*(Power(y,2)*(-3. - (45.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
           (33.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
           (15.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
-       Power(y,2)*(3. + (11.*Power(M,3))/
-           Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
+       Power(y,2)*(-2. - (30.*Power(M,4))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
+          (52.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
+          (32.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) - 
+          (12.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
+       Power(y,2)*(3. + (11.*Power(M,3))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
           (21.*Power(M,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
           (13.*M)/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
        (2.*(Power(x,2) + Power(z,2))*
@@ -1207,12 +940,6 @@ func_Phi322(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
           Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),3.) + 
        (2*Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),6))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-       (2.*Power(y,2)*(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5))*
-          (15*Power(M,3) + 11*Power(M,2)*
-             Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-            5*M*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-            Power(Power(x,2) + Power(y,2) + Power(z,2),1.5)))/
         Power(Power(x,2) + Power(y,2) + Power(z,2),2.)))/
    Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4);
 }
@@ -1220,8 +947,7 @@ func_Phi322(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi323(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (Power(M,2)*y*(20.*Power(M,2)*Power(z,2)*
-        Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
+    *value = (Power(M,2)*y*(20.*Power(M,2)*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) - 
        4.*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
        1.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
        Power(M,4)*(4.*Power(z,2)*Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) - 
@@ -1237,28 +963,27 @@ func_Phi323(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 static void
 func_Phi333(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    *value = (z*(-2.*Power(x,2) - 2.*Power(y,2) - 2.*Power(z,2) - 
-       (4.*Power(M,6)*(1.*Power(x,2) + 1.*Power(y,2)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),3.) - 
-       (22.*Power(M,5)*(1.*Power(x,2) + 1.*Power(y,2)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),2.5) + 
-       2*Power(Power(x,2) + Power(y,2) + Power(z,2),1.) + 
-       Power(M,4)*((-50.*Power(x,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-          (50.*Power(y,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) - 
-          (30.*Power(z,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),2.) + 
-          30/Power(Power(x,2) + Power(y,2) + Power(z,2),1.)) + 
-       Power(M,3)*((-60.*Power(x,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
-          (60.*Power(y,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) - 
-          (86.*Power(z,2))/Power(Power(x,2) + Power(y,2) + Power(z,2),1.5) + 
-          52/Power(Power(x,2) + Power(y,2) + Power(z,2),0.5)) + 
-       (12.*M*(-1.1666666666666667*Power(x,2) - 1.1666666666666667*Power(y,2) - 
-            1.1666666666666667*Power(z,2) + 
-            Power(Power(x,2) + Power(y,2) + Power(z,2),1.)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),0.5) + 
-       (32.*Power(M,2)*(-1.25*Power(x,2) - 1.25*Power(y,2) - 1.375*Power(z,2) + 
-            1.*Power(Power(x,2) + Power(y,2) + Power(z,2),1.)))/
-        Power(Power(x,2) + Power(y,2) + Power(z,2),1.)))/
-   Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4);
+    *value = (z*(Power(M,6)*(-4.*Power(x,2) - 4.*Power(y,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),7.5) + 
+       Power(M,5)*(-22.*Power(x,2) - 22.*Power(y,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),8.) + 
+       M*(-14.*Power(x,2) - 14.*Power(y,2) - 14.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),10.) + 
+       (-2.*Power(x,2) - 2.*Power(y,2) - 2.*Power(z,2))*
+        Power(Power(x,2) + Power(y,2) + Power(z,2),10.5) + 
+       12.*M*Power(Power(x,2) + Power(y,2) + Power(z,2),11.) + 
+       2.*Power(Power(x,2) + Power(y,2) + Power(z,2),11.5) + 
+       Power(M,4)*((-50.*Power(x,2) - 50.*Power(y,2) - 30.*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),8.5) + 
+          30.*Power(Power(x,2) + Power(y,2) + Power(z,2),9.5)) + 
+       Power(M,3)*((-60.*Power(x,2) - 60.*Power(y,2) - 86.*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),9.) + 
+          52.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.)) + 
+       Power(M,2)*((-40.*Power(x,2) - 40.*Power(y,2) - 44.*Power(z,2))*
+           Power(Power(x,2) + Power(y,2) + Power(z,2),9.5) + 
+          32.*Power(Power(x,2) + Power(y,2) + Power(z,2),10.5))))/
+   (Power(Power(x,2) + Power(y,2) + Power(z,2),10.5)*
+     Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4));
 }
 
 /*set dof data using above functions*/
