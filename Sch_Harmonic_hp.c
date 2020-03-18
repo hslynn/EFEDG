@@ -986,55 +986,125 @@ func_Phi333(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
      Power(M + Power(Power(x,2) + Power(y,2) + Power(z,2),0.5),4));
 }
 
-/*set dof data using above functions*/
+/*functions of H_a*/
 void
-set_data_var(DOF **dofs_var)
+func_H0(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    int i;
-    DOF_USER_FUNC funcs_Psi[10] = {func_Psi00, func_Psi01, func_Psi02, func_Psi03,
-                                                    func_Psi11, func_Psi12, func_Psi13,
-                                                                func_Psi22, func_Psi23,
-                                                                            func_Psi33};
-    DOF_USER_FUNC funcs_Pi[10] = {func_Pi00, func_Pi01, func_Pi02, func_Pi03,
-                                             func_Pi11, func_Pi12, func_Pi13,
-                                                        func_Pi22, func_Pi23,
-                                                                   func_Pi33};
-    DOF_USER_FUNC funcs_Phi[30] = {func_Phi100, func_Phi101, func_Phi102, func_Phi103,        
-                                               func_Phi111, func_Phi112, func_Phi113,
-                                                          func_Phi122, func_Phi123,
-                                                                      func_Phi133,
-                                   func_Phi200, func_Phi201, func_Phi202, func_Phi203,        
-                                               func_Phi211, func_Phi212, func_Phi213,
-                                                          func_Phi222, func_Phi223,
-                                                                      func_Phi233,
-                                   func_Phi300, func_Phi301, func_Phi302, func_Phi303,        
-                                               func_Phi311, func_Phi312, func_Phi313,
-                                                          func_Phi322, func_Phi323,
-                                                                      func_Phi333};
-    for(i=0; i<10; i++){
-        phgDofSetDataByFunction(dofs_var[i], funcs_Psi[i]);
-        phgDofSetDataByFunction(dofs_var[10 + i], funcs_Pi[i]);
-        
-        phgDofSetDataByFunction(dofs_var[20 + i], funcs_Phi[i]);
-        phgDofSetDataByFunction(dofs_var[30 + i], funcs_Phi[10 + i]);
-        phgDofSetDataByFunction(dofs_var[40 + i], funcs_Phi[20 + i]);
-    }
+    *value = 0.; 
 }
 
 void
-set_data_H(DOF **dofs_H)
+func_H1(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    int i;
-    for(i=0; i<4; i++){
-        phgDofSetDataByValue(dofs_H[i], 0);
-    }
+    *value = 0.;  
 }
 
 void
-set_data_deriH(DOF **dofs_deriH)
+func_H2(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
 {
-    int i;
-    for(i=0; i<16; i++){
-        phgDofSetDataByValue(dofs_deriH[i], 0);
-    }
+    *value = 0.;  
 }
+
+void
+func_H3(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.;  
+}
+
+/*functions of deriH*/
+void
+func_deriH00(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH01(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.;
+}
+
+void
+func_deriH02(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.;
+}
+
+void
+func_deriH03(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.;
+}
+
+void
+func_deriH10(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH11(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH12(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH13(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH20(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH21(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH22(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH23(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH30(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH31(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH32(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.; 
+}
+
+void
+func_deriH33(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)
+{
+    *value = 0.;
+}
+

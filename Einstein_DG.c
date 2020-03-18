@@ -5,7 +5,7 @@
 #include "global_def.h"
 #include "initial_condition.h"
 #include "hdw.h"
-#include "rk2.h"
+#include "rk.h"
 #include "rhs.h"
 
 int 
@@ -20,14 +20,15 @@ main(int argc, char *argv[])
     FLOAT t0 = 0.0, t1 = 0.0; 
     FLOAT dt, max_time = 1000*M;
     DOF_TYPE *dg_type;
-    INT i, j, p_order = 2, refine_time = 0;
+    INT i, j, p_order = 2, refine_time = 0, rk_order = 3;
     MPI_Status status; 
 
     //command line options
     phgOptionsRegisterInt("p", "polynomial order of DG basis, default is 2", &p_order);
-    phgOptionsRegisterString("m", "name of the mesh file, default is \"./mesh/hollowed_icsahedron.mesh\"", 
+    phgOptionsRegisterString("m", "name of the mesh file,  default is \"./mesh/hollowed_icsahedron.mesh\"", 
             &meshfile);
     phgOptionsRegisterInt("r", "mesh refine times, default is 0", &refine_time);
+    phgOptionsRegisterInt("o", "Runge-Kutta order, default is 3", &rk_order);
     
     phgInit(&argc, &argv);	
     switch(p_order){
@@ -112,9 +113,9 @@ main(int argc, char *argv[])
     }
     
     phgPrintf("\nmax_diam = %.16lf\n", max_diam);
-    phgPrintf("min_diam = %.16lf\n\n", min_diam);
+    phgPrintf("min_diam = %.16lf\n", min_diam);
 
-    dt = 0.01/(2.*refine_time+1.)*min_diam; 
+    dt = 0.05/(2.*p_order+1.)*min_diam; 
     //dt = 0.3*Pow(10000./g->nelem_global, 1./3.); 
 
     /*creat dofs for all the functions to be solved*/ 
@@ -179,6 +180,9 @@ main(int argc, char *argv[])
     set_data_deriH(dofs_deriH);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
+    phgPrintf("Spacetime type: %d\n", SPACETIME);
+    phgPrintf("Black hole mass: %.2f\n\n", M);
+    phgPrintf("Runge-Kutta order: %d\n\n", rk_order);
 
     //get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
     //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
@@ -229,9 +233,9 @@ main(int argc, char *argv[])
 
     char fn_err[50], fn_rhs[50], fn_C[50];
     FILE *fp_err, *fp_rhs, *fp_C;
-    sprintf(fn_err, "./data/err_r%dp%d_T%dM%.2f.data", refine_time, p_order, spacetime, M);
-    sprintf(fn_rhs, "./data/rhs_r%dp%d_T%dM%.2f.data", refine_time, p_order, spacetime, M);
-    sprintf(fn_C, "./data/C_r%dp%d_T%dM%.2f.data", refine_time, p_order, spacetime, M);
+    sprintf(fn_err, "./data/err_r%dp%d_T%dM%.2f.data", refine_time, p_order, SPACETIME, M);
+    sprintf(fn_rhs, "./data/rhs_r%dp%d_T%dM%.2f.data", refine_time, p_order, SPACETIME, M);
+    sprintf(fn_C, "./data/C_r%dp%d_T%dM%.2f.data", refine_time, p_order, SPACETIME, M);
     INT steps_complished = 0;
     //if((fp_C = fopen(fn_C, "r")) != NULL ){
     //    char str_buffer[1024];
@@ -297,9 +301,18 @@ main(int argc, char *argv[])
             }
             fprintf(fp_C, "\n");
         }
-        rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-               dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-
+        if(rk_order==3){
+            rk3(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+        }
+        else if(rk_order==2){
+            rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+        }
+        else {
+            phgPrintf("Wrong Runge-Kutta order parameter!");
+            phgAbort(0);
+        }
     }
 
     fclose(fp_C);

@@ -1,5 +1,5 @@
 """
-Prints a sphere as an isohedron - a regular polyedron with 20 identical
+Prints a hollowed sphere as an hollowed isohedron - a regular polyedron with 20 identical
 equilateral triangular faces, 30 edges and 12 vertices.
 Code was modified from:
 http://www.andrewnoske.com/wiki/Generating_a_sphere_as_a_3D_mesh
@@ -72,7 +72,5 @@ for face in ext_facets:
 fn.write("# num holes\n")  
 fn.write("1\n")  
 fn.write("1 0.0 .0.0 0.0\n")  
-
-
 
 fn.close()
