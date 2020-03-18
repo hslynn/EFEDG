@@ -7,6 +7,7 @@
 #include "hdw.h"
 #include "rk.h"
 #include "rhs.h"
+#include "filter.h"
 
 int 
 main(int argc, char *argv[])
@@ -19,8 +20,8 @@ main(int argc, char *argv[])
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
     FLOAT t0 = 0.0, t1 = 0.0; 
     FLOAT dt, max_time = 1000*M;
-    DOF_TYPE *dg_type;
     INT i, j, p_order = 2, refine_time = 0, rk_order = 3;
+    DOF_TYPE *dg_type = DOF_DG2, *dg_type_filter = DOF_DG1;
     MPI_Status status; 
 
     //command line options
@@ -35,36 +36,52 @@ main(int argc, char *argv[])
         case 0: dg_type = DOF_DG0;
             break;
         case 1: dg_type = DOF_DG1;
+            dg_type_filter = DOF_DG0;
             break;
         case 2: dg_type = DOF_DG2; 
+            dg_type_filter = DOF_DG1;
             break;                
         case 3: dg_type = DOF_DG3;
+            dg_type_filter = DOF_DG2;
             break;
         case 4: dg_type = DOF_DG4;
+            dg_type_filter = DOF_DG3;
             break;                
         case 5: dg_type = DOF_DG5;
+            dg_type_filter = DOF_DG4;
             break;
         case 6: dg_type = DOF_DG6;
+            dg_type_filter = DOF_DG5;
             break;                
         case 7: dg_type = DOF_DG7;
+            dg_type_filter = DOF_DG6;
             break;
         case 8: dg_type = DOF_DG8;
+            dg_type_filter = DOF_DG7;
             break;                
         case 9: dg_type = DOF_DG9;
+            dg_type_filter = DOF_DG8;
             break;
         case 10: dg_type = DOF_DG10;
+            dg_type_filter = DOF_DG9;
             break;
         case 11: dg_type = DOF_DG11;
+            dg_type_filter = DOF_DG10;
             break;
         case 12: dg_type = DOF_DG12;
+            dg_type_filter = DOF_DG11;
             break;
         case 13: dg_type = DOF_DG13;
+            dg_type_filter = DOF_DG12;
             break;
         case 14: dg_type = DOF_DG14;
+            dg_type_filter = DOF_DG13;
             break;
         case 15: dg_type = DOF_DG15;
+            dg_type_filter = DOF_DG14;
             break;
         default: dg_type = DOF_DG2;
+            dg_type_filter = DOF_DG1;
             phgPrintf("\nUnavailable polynomial order, using default set DOF_DG2\n");
     }
 
@@ -115,7 +132,7 @@ main(int argc, char *argv[])
     phgPrintf("\nmax_diam = %.16lf\n", max_diam);
     phgPrintf("min_diam = %.16lf\n", min_diam);
 
-    dt = 0.05/(2.*p_order+1.)*min_diam; 
+    dt = 0.08/(2.*p_order+1.)*min_diam; 
     //dt = 0.3*Pow(10000./g->nelem_global, 1./3.); 
 
     /*creat dofs for all the functions to be solved*/ 
@@ -250,39 +267,41 @@ main(int argc, char *argv[])
     fp_rhs=fopen(fn_rhs, "w");
 
     t0 = phgGetTime(NULL);
-    char Hhat_name[30], rhs_name[30], err_name[30]; 
     FLOAT L2_err_array[NVAR], L2_rhs_array[NVAR], L2_C_array[4];
-    get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-    phgExportVTKn(g, "var", NVAR, dofs_var);
+    //get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+    //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     for(i=steps_complished;i*dt<max_time;i++){
         //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
         //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
         //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
-            
-        sprintf(rhs_name, "rhs_%lf", i*dt);
-        sprintf(Hhat_name, "Hhat_%lf", i*dt);
-        sprintf(err_name, "err_%lf", i*dt);
-        strcat(rhs_name, ".vtk");
-        strcat(Hhat_name, ".vtk");
-        strcat(err_name, ".vtk");
-
-        get_dofs_diff(dofs_var, dofs_sol, dofs_err, NVAR); 
+        if(rk_order==3){
+            rk3(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+        }
+        else if(rk_order==2){
+            rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+        }
+        else {
+            phgPrintf("Wrong Runge-Kutta order parameter!");
+            phgAbort(0);
+        }
+        if (p_order != 0){
+            filter(dofs_var, dg_type_filter);
+        }
 
         phgPrintf("Step %d completed\n", i);
         phgPrintf("Advanced in time: %lf\n", i*dt);
         t1 = phgGetTime(NULL);
         phgPrintf("Wall time past: %lf\n\n", t1 - t0);
 
+        get_dofs_diff(dofs_var, dofs_sol, dofs_err, NVAR); 
         for(j=0;j<NVAR;j++){
-            //phgPrintf("L2 norm of rhs_%d: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
-            //phgPrintf("L2 err of var_%d: %.16lf\n\n", j, phgDofNormL2(dofs_err[j]));
             L2_err_array[j] = phgDofNormL2(dofs_err[j]);
             L2_rhs_array[j] = phgDofNormL2(dofs_rhs[j]);
         }
         for(j=0;j<4;j++){
-            //phgPrintf("L2 norm of C_%d: %.16lf\n", j, phgDofNormL2(dofs_C[j]));
             L2_C_array[j] = phgDofNormL2(dofs_C[j]);
         }
 
@@ -300,18 +319,6 @@ main(int argc, char *argv[])
                 fprintf(fp_C, "%.16lf ", L2_C_array[j]);
             }
             fprintf(fp_C, "\n");
-        }
-        if(rk_order==3){
-            rk3(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-        }
-        else if(rk_order==2){
-            rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-        }
-        else {
-            phgPrintf("Wrong Runge-Kutta order parameter!");
-            phgAbort(0);
         }
     }
 
