@@ -1,3 +1,3 @@
 void
-filter(DOF **dofs_var, DOF_TYPE *dg_type);
+filter(DOF **dofs, DOF_TYPE *dg_filter, INT ndof);
 

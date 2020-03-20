@@ -90,12 +90,12 @@ get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT value
 }
 
 void
-get_dofs_Hhat(DOF **dofs_var, DOF **dofs_bdry, DOF **dofs_g, DOF **dofs_N, 
+get_dofs_Hhat(DOF **dofs_var, DOF **dofs_bdry_in, DOF **dofs_bdry_out, DOF **dofs_g, DOF **dofs_N, 
         DOF **dofs_gradPsi, DOF **dofs_gradPi, DOF **dofs_gradPhi, DOF **dofs_Hhat)
 {
-    get_dofs_grad_hat(dofs_var, dofs_bdry, dofs_gradPsi, 10);
-    get_dofs_grad_hat(dofs_var + 10, dofs_bdry + 10, dofs_gradPi, 10);
-    get_dofs_grad_hat(dofs_var + 20, dofs_bdry+ 20, dofs_gradPhi, 30);
+    get_dofs_grad_hat(dofs_var, dofs_bdry_in, dofs_bdry_out, dofs_gradPsi, 10);
+    get_dofs_grad_hat(dofs_var + 10, dofs_bdry_in + 10, dofs_bdry_out + 10, dofs_gradPi, 10);
+    get_dofs_grad_hat(dofs_var + 20, dofs_bdry_in + 20, dofs_bdry_out + 20, dofs_gradPhi, 30);
     
     INT i, j, n, np, idx;
     GRID *g = dofs_var[0]->g; 

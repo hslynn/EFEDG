@@ -1,6 +1,6 @@
 #include "global_def.h"
 
-#define spacetime 4
+#define spacetime 1
 #if (spacetime == 1)
 #include "Sch_Kerr_Schild_ingoing.c"
 #elif (spacetime == 2)
@@ -12,7 +12,7 @@
 #endif
 
 INT SPACETIME = spacetime;
-FLOAT M = 2.0; 
+FLOAT M = 1.0; 
 INT NVAR = 50;
 INT gamma0 = 1.0;
 INT gamma1 = -1.0;

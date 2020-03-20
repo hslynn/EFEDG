@@ -25,7 +25,7 @@ with open(filename,"r") as f:
      time_list.append(float(obj_list[0]))
      value_list.append(float(obj_list[value_idx]))
 
-plt.xscale('log')
+#plt.xscale('log')
 plt.yscale('log')
 plt.plot(time_list, value_list, 'r')
 

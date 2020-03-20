@@ -8,6 +8,7 @@
 #include "rk.h"
 #include "rhs.h"
 #include "filter.h"
+#include "runtime.h"
 
 int 
 main(int argc, char *argv[])
@@ -21,7 +22,7 @@ main(int argc, char *argv[])
     FLOAT t0 = 0.0, t1 = 0.0; 
     FLOAT dt, max_time = 1000*M;
     INT i, j, p_order = 2, refine_time = 0, rk_order = 3;
-    DOF_TYPE *dg_type = DOF_DG2, *dg_type_filter = DOF_DG1;
+    DOF_TYPE *dg_type = DG_TYPE, *dg_filter = DG_FILTER;
     MPI_Status status; 
 
     //command line options
@@ -36,52 +37,52 @@ main(int argc, char *argv[])
         case 0: dg_type = DOF_DG0;
             break;
         case 1: dg_type = DOF_DG1;
-            dg_type_filter = DOF_DG0;
+            dg_filter = DOF_DG0;
             break;
         case 2: dg_type = DOF_DG2; 
-            dg_type_filter = DOF_DG1;
+            dg_filter = DOF_DG1;
             break;                
         case 3: dg_type = DOF_DG3;
-            dg_type_filter = DOF_DG2;
+            dg_filter = DOF_DG2;
             break;
         case 4: dg_type = DOF_DG4;
-            dg_type_filter = DOF_DG3;
+            dg_filter = DOF_DG3;
             break;                
         case 5: dg_type = DOF_DG5;
-            dg_type_filter = DOF_DG4;
+            dg_filter = DOF_DG4;
             break;
         case 6: dg_type = DOF_DG6;
-            dg_type_filter = DOF_DG5;
+            dg_filter = DOF_DG5;
             break;                
         case 7: dg_type = DOF_DG7;
-            dg_type_filter = DOF_DG6;
+            dg_filter = DOF_DG6;
             break;
         case 8: dg_type = DOF_DG8;
-            dg_type_filter = DOF_DG7;
+            dg_filter = DOF_DG7;
             break;                
         case 9: dg_type = DOF_DG9;
-            dg_type_filter = DOF_DG8;
+            dg_filter = DOF_DG8;
             break;
         case 10: dg_type = DOF_DG10;
-            dg_type_filter = DOF_DG9;
+            dg_filter = DOF_DG9;
             break;
         case 11: dg_type = DOF_DG11;
-            dg_type_filter = DOF_DG10;
+            dg_filter = DOF_DG10;
             break;
         case 12: dg_type = DOF_DG12;
-            dg_type_filter = DOF_DG11;
+            dg_filter = DOF_DG11;
             break;
         case 13: dg_type = DOF_DG13;
-            dg_type_filter = DOF_DG12;
+            dg_filter = DOF_DG12;
             break;
         case 14: dg_type = DOF_DG14;
-            dg_type_filter = DOF_DG13;
+            dg_filter = DOF_DG13;
             break;
         case 15: dg_type = DOF_DG15;
-            dg_type_filter = DOF_DG14;
+            dg_filter = DOF_DG14;
             break;
         default: dg_type = DOF_DG2;
-            dg_type_filter = DOF_DG1;
+            dg_filter = DOF_DG1;
             phgPrintf("\nUnavailable polynomial order, using default set DOF_DG2\n");
     }
 
@@ -132,17 +133,17 @@ main(int argc, char *argv[])
     phgPrintf("\nmax_diam = %.16lf\n", max_diam);
     phgPrintf("min_diam = %.16lf\n", min_diam);
 
-    dt = 0.08/(2.*p_order+1.)*min_diam; 
+    dt = 0.05/(2.*p_order+1.)*min_diam; 
     //dt = 0.3*Pow(10000./g->nelem_global, 1./3.); 
 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
-    DOF *dofs_sol[50], *dofs_bdry[50], *dofs_err[NVAR];
+    DOF *dofs_sol[50], *dofs_exact[50], *dofs_err[NVAR];
     create_dofs(g, dg_type, 1, dofs_Psi, "Psi", 10);
     create_dofs(g, dg_type, 1, dofs_Pi, "Pi", 10);
     create_dofs(g, dg_type, 1, dofs_Phi, "Phi", 30);
     create_dofs(g, dg_type, 1, dofs_sol, "sol", 50);
-    create_dofs(g, dg_type, 1, dofs_bdry, "bdry", NVAR);
+    create_dofs(g, dg_type, 1, dofs_exact, "exact", NVAR);
     create_dofs(g, dg_type, 1, dofs_err, "err", NVAR);
 
     /*create dofs for all source terms*/
@@ -196,20 +197,11 @@ main(int argc, char *argv[])
     set_data_H(dofs_H);
     set_data_deriH(dofs_deriH);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
-    copy_dofs(dofs_var, dofs_bdry, "bdry", NVAR);
+    copy_dofs(dofs_var, dofs_exact, "exact", NVAR);
     phgPrintf("Spacetime type: %d\n", SPACETIME);
     phgPrintf("Black hole mass: %.2f\n\n", M);
     phgPrintf("Runge-Kutta order: %d\n\n", rk_order);
 
-    //get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-    //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-
-    //for(j=0;j<NVAR;j++){
-    //        phgPrintf("L2 norm of rhs_%d: %.16lf\n", j, phgDofNormL2(dofs_rhs[j]));
-    //    }
-
-    ////phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs);
-    //phgAbort(0);
 
     //for(i=0;i<30;i++){
     //    split_dof(dofs_gradPsi[i], dofs_gradPsi_ave[i], dofs_gradPsi_diff[i]);
@@ -262,36 +254,37 @@ main(int argc, char *argv[])
     //    steps_complished--;
     //}
     
-    fp_err=fopen(fn_err,"w");
-    fp_C=fopen(fn_C, "w");
-    fp_rhs=fopen(fn_rhs, "w");
-
     t0 = phgGetTime(NULL);
     FLOAT L2_err_array[NVAR], L2_rhs_array[NVAR], L2_C_array[4];
-    //get_dofs_rhs(dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-    //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+    get_dofs_rhs(dofs_var, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+    phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs);
     for(i=steps_complished;i*dt<max_time;i++){
         //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
         //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
         //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
         if(rk_order==3){
-            rk3(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+            rk3(dt, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
                 dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
         }
         else if(rk_order==2){
-            rk2(dt, dofs_var, dofs_bdry, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+            rk2(dt, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+        }
+        else if(rk_order==1){
+            rk1(dt, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
                 dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
         }
         else {
             phgPrintf("Wrong Runge-Kutta order parameter!");
             phgAbort(0);
         }
-        if (p_order != 0){
-            filter(dofs_var, dg_type_filter);
+        if (USE_FILTER && p_order != 0){
+            filter(dofs_var, dg_filter, NVAR);
         }
 
-        phgPrintf("Step %d completed\n", i);
+        phgPrintf("Step %d completed\n", i + 1);
         phgPrintf("Advanced in time: %lf\n", i*dt);
         t1 = phgGetTime(NULL);
         phgPrintf("Wall time past: %lf\n\n", t1 - t0);
@@ -306,6 +299,10 @@ main(int argc, char *argv[])
         }
 
         if(phgRank==0){
+            fp_err=fopen(fn_err,"a");
+            fp_C=fopen(fn_C, "a");
+            fp_rhs=fopen(fn_rhs, "a");
+
             fprintf(fp_err, "%.16lf ", i*dt);
             fprintf(fp_rhs, "%.16lf ", i*dt);
             fprintf(fp_C, "%.16lf ", i*dt);
@@ -319,11 +316,12 @@ main(int argc, char *argv[])
                 fprintf(fp_C, "%.16lf ", L2_C_array[j]);
             }
             fprintf(fp_C, "\n");
+
+            fclose(fp_C);
+            fclose(fp_err);
+            fclose(fp_rhs);
         }
     }
-
-    fclose(fp_C);
-    fclose(fp_err);
     t1 = phgGetTime(NULL);
     phgPrintf("Total time cost = %lf\n", t1 - t0);
    
@@ -333,7 +331,7 @@ main(int argc, char *argv[])
     free_dofs(dofs_C, 4);
     free_dofs(dofs_Hhat, NVAR);
     free_dofs(dofs_sol, NVAR);
-    free_dofs(dofs_bdry, NVAR);
+    free_dofs(dofs_exact, NVAR);
     free_dofs(dofs_err, NVAR);
     free_dofs(dofs_rhs, NVAR);
     

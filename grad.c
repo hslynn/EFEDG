@@ -1,4 +1,7 @@
 #include "phg.h"
+#include "runtime.h"
+#include "filter.h"
+#include "global_def.h"
 #include <math.h>
 
 void
@@ -67,7 +70,7 @@ reset_neighbour_data(DOF *neigh_u, ELEMENT *e, INT s)
 }
 
 void
-build_linear_system(SOLVER *solver, DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry, int coord)
+build_linear_system(SOLVER *solver, DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry_in, DOF *dof_bdry_out, INT coord)
 {
     int n, k, i, j, s, in_out;
     GRID *g = u_h->g;
@@ -122,10 +125,13 @@ build_linear_system(SOLVER *solver, DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry,
                                 u_h, n, QUAD_DEFAULT); 
                         reset_neighbour_data(neigh_u, e, s);
                     } 
-                    else{//s是边界面时,则施加边界条件 
-                        val_ext = phgQuadFaceDofDotBas(e, s, dof_bdry, DOF_PROJ_NONE, 
+                    else if(e->bound_type[s] & DIRICHLET){//s是外边界面,tetgen中设置边界类型为１,PHG处理为DIRICHLET
+                        val_ext = phgQuadFaceDofDotBas(e, s, dof_bdry_out, DOF_PROJ_NONE, 
                                 u_h, n, QUAD_DEFAULT);
-                        
+                    }
+                    else{
+                        val_ext = phgQuadFaceDofDotBas(e, s, dof_bdry_in, DOF_PROJ_NONE, 
+                                u_h, n, QUAD_DEFAULT);
                     }
 
                     boundary_term = 0.5 * normal[coord] * (val_ext + val_int) + (0.5 - in_out) * 
@@ -140,27 +146,27 @@ build_linear_system(SOLVER *solver, DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry,
 }
 
 void
-dgHJGradDof(DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry, DOF *dof_grad, int coord)
+dgHJGradDof(DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry_in, DOF *dof_bdry_out, DOF *dof_grad, int coord)
 {
     SOLVER *solver;
     solver = phgSolverCreate(SOLVER_DEFAULT, dof_grad, NULL);
     
-    build_linear_system(solver, u_h, nd, dof_bdry, coord);
+    build_linear_system(solver, u_h, nd, dof_bdry_in, dof_bdry_out, coord);
     
     phgSolverSolve(solver, TRUE, dof_grad, NULL);
     phgSolverDestroy(&solver);
 }
 
 void
-get_dofs_grad(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad, int ndof)
+get_dofs_grad(DOF **dofs, DOF **dofs_bdry_in, DOF **dofs_bdry_out, DOF **dofs_grad, int ndof)
 {
     short i;
     NEIGHBOUR_DATA *nd;
     for(i=0;i<ndof;i++){ 
         nd = phgDofInitNeighbourData(dofs[i], NULL);
-        dgHJGradDof(dofs[i], nd, dofs_bdry[i], dofs_grad[i], 0);
-        dgHJGradDof(dofs[i], nd, dofs_bdry[i], dofs_grad[ndof + i], 1);
-        dgHJGradDof(dofs[i], nd, dofs_bdry[i], dofs_grad[2*ndof + i], 2);
+        dgHJGradDof(dofs[i], nd, dofs_bdry_in[i], dofs_bdry_out[i], dofs_grad[i], 0);
+        dgHJGradDof(dofs[i], nd, dofs_bdry_in[i], dofs_bdry_out[i], dofs_grad[ndof + i], 1);
+        dgHJGradDof(dofs[i], nd, dofs_bdry_in[i], dofs_bdry_out[i], dofs_grad[2*ndof + i], 2);
         phgDofReleaseNeighbourData(&nd);
     }
 }
@@ -189,9 +195,9 @@ get_dof_grad_hat(DOF *dof_grad)
 }
 
 void
-get_dofs_grad_hat(DOF **dofs, DOF **dofs_bdry, DOF **dofs_grad_hat, INT ndof) 
+get_dofs_grad_hat(DOF **dofs, DOF **dofs_bdry_in, DOF **dofs_bdry_out, DOF **dofs_grad_hat, INT ndof) 
 {
-    get_dofs_grad(dofs, dofs_bdry, dofs_grad_hat, ndof);
+    get_dofs_grad(dofs, dofs_bdry_in, dofs_bdry_out, dofs_grad_hat, ndof);
     //phgExportVTKn(dofs[0]->g, "grad.vtk", 3*ndof, dofs_grad_hat);
     
     short i; 
