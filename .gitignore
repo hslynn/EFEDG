@@ -1,6 +1,5 @@
 sub.sh
 .ycm_extra_conf.py
-Makefile
 Einstein_DG
 *.data
 *.o

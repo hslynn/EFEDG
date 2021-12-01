@@ -113,7 +113,8 @@ build_linear_system(SOLVER *solver, DOF *u_h, NEIGHBOUR_DATA *nd, DOF *dof_bdry_
             
                 /*boundary term, using numerical flux*/ 
                 for (s=0; s<4; s++){
-                    const FLOAT *normal = phgGeomGetFaceOutNormal(g, e, s);                        
+                    FLOAT normal[Dim];
+                    phgGeomGetFaceOutNormal(g, e, s, normal);                        
 
                     val_int = phgQuadFaceDofDotBas(e, s, u_h, DOF_PROJ_NONE, 
                                 u_h, n, QUAD_DEFAULT); //计算u^-

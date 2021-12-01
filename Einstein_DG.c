@@ -21,7 +21,7 @@ main(int argc, char *argv[])
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
     FLOAT t0 = 0.0, t1 = 0.0; 
     FLOAT dt, max_time = 1000*M;
-    INT i, j, p_order = 2, refine_time = 0, rk_order = 3;
+    INT i, j, p_order = 0, refine_time = 0, rk_order = 3;
     DOF_TYPE *dg_type = DG_TYPE, *dg_filter = DG_FILTER;
     MPI_Status status; 
 
