@@ -12,7 +12,7 @@
 #endif
 
 INT SPACETIME = spacetime;
-FLOAT M = 1.0; 
+FLOAT M = 0.5; 
 INT NVAR = 50;
 INT gamma0 = 1.0;
 INT gamma1 = -1.0;

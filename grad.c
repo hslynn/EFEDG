@@ -1,5 +1,4 @@
 #include "phg.h"
-#include "runtime.h"
 #include "filter.h"
 #include "global_def.h"
 #include <math.h>
@@ -210,7 +209,7 @@ get_dofs_grad_hat(DOF **dofs, DOF **dofs_bdry_in, DOF **dofs_bdry_out, DOF **dof
 }
 
 
-/* Old function, no parallel and the logic to get the quad is complicate*/
+/* Old function, no parallel and the logic to get the quad is too complicated*/
 //FLOAT
 //dgQuadFaceNeighDofDotBas(ELEMENT *e, DOF *u, int face, int N, ELEMENT *neigh_e, 
 //DOF *v, int neigh_face, int order)
