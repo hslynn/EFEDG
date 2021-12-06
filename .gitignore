@@ -1,6 +1,6 @@
 sub.sh
 .ycm_extra_conf.py
-Einstein_DG
+EFEDG
 *.data
 *.o
 */*.vtk  
