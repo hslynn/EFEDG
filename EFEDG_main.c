@@ -14,8 +14,8 @@ int
 main(int argc, char *argv[])
 {
     //char *meshfile ="./mesh/hollowed_icosahedron.mesh";
-    //char *meshfile ="./mesh/SinS.albert";
-    char *meshfile ="./tetgen/hollowed_sphere.mesh";
+    char *meshfile ="./mesh/SinS_fine_moderate.albert";
+    //char *meshfile ="./tetgen/hollowed_sphere.mesh";
     GRID *g; 
     ELEMENT *e;
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
