@@ -1,6 +1,6 @@
 #include "global_def.h"
 
-#define spacetime 1
+#define spacetime 5
 #if (spacetime == 1)
 #include "Sch_Kerr_Schild_ingoing.c"
 #elif (spacetime == 2)
@@ -9,14 +9,11 @@
 #include "Sch_Harmonic_non_hp.c"
 #elif (spacetime == 4)
 #include "Sch_Harmonic_hp.c"
+#elif (spacetime == 5)
+#include "Kerr_Kerr_Schild_ingoing.c"
 #endif
 
 INT SPACETIME = spacetime;
-FLOAT M = 1.0; 
-INT NVAR = 50;
-INT gamma0 = 1.0;
-INT gamma1 = -1.0;
-INT gamma2 = 1.0;
 
 void
 set_data_var(DOF **dofs_var)

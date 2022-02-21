@@ -15,7 +15,7 @@ main(int argc, char *argv[])
 {
     //char *meshfile ="./mesh/hollowed_icosahedron.mesh";
     char *meshfile ="./mesh/SinS_fine_moderate.albert";
-    //char *meshfile ="./tetgen/hollowed_sphere.mesh";
+    //char *meshfile ="./mesh/SinS.albert";
     GRID *g; 
     ELEMENT *e;
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
@@ -89,8 +89,8 @@ main(int argc, char *argv[])
     g = phgNewGrid(-1); 
     phgImport(g, meshfile, FALSE);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
-    phgRefineAllElements(g, refine_time);
     if (refine_time > 0){
+        phgRefineAllElements(g, refine_time);
         phgBalanceGrid(g, 1.2, 1, NULL, 0.);
     }
 
@@ -200,6 +200,7 @@ main(int argc, char *argv[])
     copy_dofs(dofs_var, dofs_exact, "exact", NVAR);
     phgPrintf("Spacetime type: %d\n", SPACETIME);
     phgPrintf("Black hole mass: %.2f\n\n", M);
+    phgPrintf("Black hole spin: %.2f\n\n", A);
     phgPrintf("Runge-Kutta order: %d\n\n", rk_order);
 
 
@@ -212,33 +213,6 @@ main(int argc, char *argv[])
     //    phgPrintf("L2 error of gradPsi[%d] = %.16lf\n", j + 10, phgDofNormL2(dofs_gradPsi_err[j+10]));
     //    phgPrintf("L2 error of gradPsi[%d] = %.16lf\n\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
     //}
-
-    ///*test blocks*/
-    //DOF *u, *gradz_numerical, *gradz_ave, *gradz_diff, *gradz_analytic, *gradz_err, *compare_err;
-    //u = phgDofNew(g, dg_type, 1, "u", DofInterpolation);
-    //gradz_numerical = phgDofNew(g, dg_type, 2, "numerical", DofInterpolation);
-    //gradz_ave = phgDofNew(g, dg_type, 1, "ave", DofInterpolation);
-    //gradz_diff = phgDofNew(g, dg_type, 1, "diff", DofInterpolation);
-    //gradz_analytic = phgDofNew(g, dg_type, 1, "analytic", DofNoAction);
-    //gradz_err = phgDofNew(g, dg_type, 1, "err", DofInterpolation);
-    //compare_err = phgDofNew(g, dg_type, 1, "compare_err", DofInterpolation);
-    //phgDofSetDataByFunction(u, func_Psi33);
-    //phgDofSetDataByFunction(gradz_analytic, func_Phi333);
-    //
-    //NEIGHBOUR_DATA *nd = phgDofInitNeighbourData(u, NULL);
-    //dgHJGradDof(u, nd, u, gradz_numerical, 2);
-    //get_dof_grad_hat(gradz_numerical);
-    //
-    //split_dof(gradz_numerical, gradz_ave, gradz_diff);
-    ////phgDofDump(gradz_ave);
-    //phgDofCopy(gradz_ave, &gradz_err, NULL, "err");
-    //phgDofCopy(dofs_gradPsi_ave[29], &compare_err, NULL, "compare_err");
-    //phgDofAXPBY(1.0, gradz_analytic, -1.0, &gradz_err);
-    //phgDofAXPBY(1.0, gradz_ave, -1.0, &compare_err);
-    //
-    //phgPrintf("L2 err of gradz: %.16lf\n", phgDofNormL2(gradz_err));
-    //phgPrintf("L2 err of compare: %.16lf\n", phgDofNormL2(compare_err));
-    //phgAbort(0);
 
     char fn_err[50], fn_rhs[50], fn_C[50];
     FILE *fp_err, *fp_rhs, *fp_C;

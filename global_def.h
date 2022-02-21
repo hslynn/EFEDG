@@ -9,6 +9,7 @@
 
 extern INT SPACETIME;
 extern FLOAT M;
+extern FLOAT A;
 extern INT gamma0;
 extern INT gamma1;
 extern INT gamma2;
