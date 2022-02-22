@@ -1,7 +1,5 @@
-#include "phg.h"
-#include "filter.h"
 #include "global_def.h"
-#include <math.h>
+#include "filter.h"
 
 void
 phgQuadDofGradBas(ELEMENT *e, DOF *p, DOF *v, int m, int order, FLOAT *values)

@@ -1,7 +1,6 @@
-#include "phg.h"
+#include "global_def.h"
 #include "auxi_dofs.h"
 #include "Hhat.h"
-#include "global_def.h"
 #include "hdw.h"
 
 void

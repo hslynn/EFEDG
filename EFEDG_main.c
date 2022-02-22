@@ -1,6 +1,4 @@
-#include "phg.h"
 #include <string.h>
-#include <math.h>
 
 #include "global_def.h"
 #include "initial_condition.h"
@@ -14,19 +12,19 @@ int
 main(int argc, char *argv[])
 {
     //char *meshfile ="./mesh/hollowed_icosahedron.mesh";
-    char *meshfile ="./mesh/SinS_fine_moderate.albert";
-    //char *meshfile ="./mesh/SinS.albert";
+    //char *meshfile ="./mesh/SinS_fine_moderate.albert";
+    char *meshfile ="./mesh/SinS.albert";
     GRID *g; 
     ELEMENT *e;
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
     FLOAT t0 = 0.0, t1 = 0.0; 
     FLOAT dt, max_time = 1000*M;
-    INT i, j, p_order = 0, refine_time = 0, rk_order = 3;
+    INT i, j, p_order = 1, refine_time = 0, rk_order = 3;
     DOF_TYPE *dg_type = DG_TYPE, *dg_filter = DG_FILTER;
     MPI_Status status; 
 
     //command line options
-    phgOptionsRegisterInt("p", "polynomial order of DG basis, default is 2", &p_order);
+    phgOptionsRegisterInt("p", "polynomial order of DG basis, default is 1", &p_order);
     phgOptionsRegisterString("m", "name of the mesh file,  default is \"./mesh/hollowed_icsahedron.mesh\"", 
             &meshfile);
     phgOptionsRegisterInt("r", "mesh refine times, default is 0", &refine_time);

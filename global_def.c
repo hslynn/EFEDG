@@ -1,3 +1,5 @@
+#include "global_def.h"
+
 FLOAT M = 1; 
 FLOAT A = 0.5;
 INT NVAR = 50;

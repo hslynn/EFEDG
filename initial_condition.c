@@ -1,6 +1,6 @@
 #include "global_def.h"
 
-#define spacetime 5
+#define spacetime 1 
 #if (spacetime == 1)
 #include "Sch_Kerr_Schild_ingoing.c"
 #elif (spacetime == 2)

@@ -1,4 +1,3 @@
-#include "phg.h"
 #include "rhs.h"
 #include "hdw.h"
 #include "global_def.h"

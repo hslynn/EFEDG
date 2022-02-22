@@ -1,7 +1,5 @@
-#include "phg.h"
 #include "source_values.h"
 #include "global_def.h"
-#include <math.h>
 
 void
 get_dofs_g(DOF **dofs_Psi, DOF **dofs_g)

@@ -1,7 +1,6 @@
-#include "phg.h"
+#include "global_def.h"
 #include "grad.h"
 #include "hdw.h"
-#include "global_def.h"
 
 void
 get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT values_gradPhi[][2], 
