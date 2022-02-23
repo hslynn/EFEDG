@@ -38,7 +38,7 @@ rk3(FLOAT dt, DOF **dofs_var, DOF **dofs_exact, DOF **dofs_g, DOF **dofs_N, DOF 
     copy_dofs(dofs_var, dofs_var_temp, "temp_var", NVAR);
     
     /*u_1 = u_n + dt*rhs(u_n)*/
-    get_dofs_rhs(dofs_var, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+    get_dofs_rhs(dofs_var, dofs_exact, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     //phgExportVTKn(dofs_src[0]->g, "src.vtk", NVAR, dofs_src);
     //phgExportVTKn(dofs_src[0]->g, "Hhat.vtk", NVAR, dofs_Hhat);
@@ -48,7 +48,7 @@ rk3(FLOAT dt, DOF **dofs_var, DOF **dofs_exact, DOF **dofs_g, DOF **dofs_N, DOF 
     }
 
     /*u_2 = 3/4*u_n + 1/4*u_1 + 1/4*dt*rhs(u_1)*/
-    get_dofs_rhs(dofs_var_temp, dofs_var_temp, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+    get_dofs_rhs(dofs_var_temp, dofs_exact, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs); 
     for(i=0;i<NVAR;i++){
         phgDofAXPBY(dt, dofs_rhs[i], 1.0, dofs_var_temp + i); 
@@ -56,7 +56,7 @@ rk3(FLOAT dt, DOF **dofs_var, DOF **dofs_exact, DOF **dofs_g, DOF **dofs_N, DOF 
     }
 
     /*u_{n+1} = 1/3*u_n + 2/3*u_2 + 2/3*dt*rhs(u_2)*/
-    get_dofs_rhs(dofs_var_temp, dofs_var_temp, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+    get_dofs_rhs(dofs_var_temp, dofs_exact, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     for(i=0;i<NVAR;i++){
         phgDofAXPBY(dt, dofs_rhs[i], 1.0, dofs_var_temp + i); 

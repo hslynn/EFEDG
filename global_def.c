@@ -1,7 +1,7 @@
 #include "global_def.h"
 
-FLOAT M = 1; 
-FLOAT A = 0.5;
+FLOAT M = 0.3; 
+FLOAT A = 0;
 INT NVAR = 50;
 INT gamma0 = 1.0;
 INT gamma1 = -1.0;

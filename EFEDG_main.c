@@ -92,12 +92,7 @@ main(int argc, char *argv[])
         phgBalanceGrid(g, 1.2, 1, NULL, 0.);
     }
 
-    phgPrintf("\nUsing mesh file: %s\n", meshfile);
-    phgPrintf("Refine times: %d\n", refine_time);
-    phgPrintf("Highest polymonial order: %d\n", dg_type->order);
-    phgPrintf("Total elements = %d\n", g->nelem_global);
-    phgPrintf("Total processes = %d\n", phgNProcs);
-
+    
 
     /*find the max and min diameter of all elements*/
     ForAllElements(g, e){
@@ -127,13 +122,24 @@ main(int argc, char *argv[])
         MPI_Recv(&max_diam, 1, PHG_MPI_FLOAT, 0, phgRank, phgComm, &status);
         MPI_Recv(&min_diam, 1, PHG_MPI_FLOAT, 0, phgNProcs + phgRank, phgComm, &status);
     }
-    
-    phgPrintf("\nmax_diam = %.16lf\n", max_diam);
-    phgPrintf("min_diam = %.16lf\n", min_diam);
 
+    phgPrintf("Total processes = %d\n\n", phgNProcs);
+
+    phgPrintf("Using mesh file: %s\n", meshfile);
+    phgPrintf("Refine times = %d\n", refine_time);
+    phgPrintf("Total elements = %d\n", g->nelem_global);
+    phgPrintf("max_diam = %.16lf\n", max_diam);
+    phgPrintf("min_diam = %.16lf\n\n", min_diam);
+
+    phgPrintf("Highest polymonial order = %d\n", dg_type->order);
+    phgPrintf("Runge-Kutta order = %d\n", rk_order);
     dt = 0.05/(2.*p_order+1.)*min_diam; 
-    //dt = 0.3*Pow(10000./g->nelem_global, 1./3.); 
+    phgPrintf("time step length = %.16lf\n\n", dt);
 
+    phgPrintf("Spacetime type = %d\n", SPACETIME);
+    phgPrintf("Black hole mass = %.2f\n", M);
+    phgPrintf("Black hole spin = %.2f\n\n", A);
+ 
     /*creat dofs for all the functions to be solved*/ 
     DOF *dofs_Psi[10], *dofs_Pi[10], *dofs_Phi[30];
     DOF *dofs_sol[50], *dofs_exact[50], *dofs_err[NVAR];
@@ -196,11 +202,7 @@ main(int argc, char *argv[])
     set_data_deriH(dofs_deriH);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_exact, "exact", NVAR);
-    phgPrintf("Spacetime type: %d\n", SPACETIME);
-    phgPrintf("Black hole mass: %.2f\n\n", M);
-    phgPrintf("Black hole spin: %.2f\n\n", A);
-    phgPrintf("Runge-Kutta order: %d\n\n", rk_order);
-
+   
 
     //for(i=0;i<30;i++){
     //    split_dof(dofs_gradPsi[i], dofs_gradPsi_ave[i], dofs_gradPsi_diff[i]);
@@ -218,19 +220,11 @@ main(int argc, char *argv[])
     sprintf(fn_rhs, "./data/rhs_r%dp%d_T%dM%.2f.data", refine_time, p_order, SPACETIME, M);
     sprintf(fn_C, "./data/C_r%dp%d_T%dM%.2f.data", refine_time, p_order, SPACETIME, M);
     INT steps_complished = 0;
-    //if((fp_C = fopen(fn_C, "r")) != NULL ){
-    //    char str_buffer[1024];
-    //    for(steps_complished=0; !feof(fp_C); steps_complished++){
-    //        fgets(str_buffer, sizeof(str_buffer), fp_C);
-    //    }
-    //    steps_complished--;
-    //}
-    
     t0 = phgGetTime(NULL);
     FLOAT L2_err_array[NVAR], L2_rhs_array[NVAR], L2_C_array[4];
-    get_dofs_rhs(dofs_var, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-        dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-    phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs);
+    //get_dofs_rhs(dofs_var, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+    //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+    //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs);
     for(i=steps_complished;i*dt<max_time;i++){
         //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);

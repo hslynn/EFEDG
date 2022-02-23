@@ -1,4 +1,6 @@
 default: EFEDG 
+dataClean:
+	/bin/rm -f ./data/*.data
 clean:
 	/bin/rm -f *.o *.txt *.vtk Einstein_DG *.err *.out
 objects = EFEDG_main.o hdw.o auxi_dofs.o grad.o Hhat.o initial_condition.o rhs.o rk.o source_values.o\
