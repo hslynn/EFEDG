@@ -11,9 +11,9 @@
 int 
 main(int argc, char *argv[])
 {
-    //char *meshfile ="./mesh/hollowed_icosahedron.mesh";
+    char *meshfile ="./mesh/hollowed_icosahedron_1.8_10.mesh";
     //char *meshfile ="./mesh/SinS_fine_moderate.albert";
-    char *meshfile ="./mesh/SinS.albert";
+    //char *meshfile ="./mesh/SinS.albert";
     GRID *g; 
     ELEMENT *e;
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
@@ -224,7 +224,8 @@ main(int argc, char *argv[])
     FLOAT L2_err_array[NVAR], L2_rhs_array[NVAR], L2_C_array[4];
     //get_dofs_rhs(dofs_var, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
     //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-    //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs);
+    phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs);
+    phgExportALBERT(g, "mesh.albert");
     for(i=steps_complished;i*dt<max_time;i++){
         //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
         //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);

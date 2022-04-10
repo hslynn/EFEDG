@@ -1,3 +1,5 @@
+#include "global_def.h"
+
 void
 get_values_Hhat(FLOAT values_gradPsi[][2], FLOAT values_gradPi[][2], FLOAT values_gradPhi[][2], 
         FLOAT *values_g, FLOAT *values_N, FLOAT *values_Hhat);
