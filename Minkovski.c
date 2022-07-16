@@ -1,5 +1,4 @@
-#define M 0.5
-#define R (Pow(x*x + y*y + z*z, 0.5))
+#include "global_def.h"
 
 static void
 func_zero(FLOAT x, FLOAT y, FLOAT z, FLOAT *value)

@@ -4,16 +4,22 @@ dataClean:
 clean:
 	/bin/rm -f *.o *.txt *.vtk Einstein_DG *.err *.out
 objects = EFEDG_main.o hdw.o auxi_dofs.o grad.o Hhat.o initial_condition.o rhs.o rk.o source_values.o\
-		  filter.o runtime.o global_def.o
+		  filter.o runtime.o global_def.o random.o
 EFEDG: $(objects)
 	$(LINKER) $(LDFLAGS) -o EFEDG $(objects) $(LIBS)
 
+gaugeWaveTestObjects = gaugeWaveTest_main.o hdw.o auxi_dofs.o grad.o Hhat.o initial_condition.o rhs.o rk.o source_values.o\
+		  global_def.o runtime.o
+gaugeWaveTest: $(gaugeWaveTestObjects)
+	$(LINKER) $(LDFLAGS) -o gaugeWaveTest $(gaugeWaveTestObjects) $(LIBS)
+
+gaugeWaveTest_main.o: global_def.h initial_condition.h hdw.h rk.h rhs.h
 EFEDG_main.o: global_def.h initial_condition.h hdw.h rk.h rhs.h filter.h runtime.h
 auxi_dofs.o: global_def.h source_values.h 
 grad.o: global_def.h filter.h
 Hhat.o: global_def.h hdw.h grad.h
 initial_condition.o: global_def.h Sch_Harmonic_hp.c Sch_Harmonic_non_hp.c Sch_Kerr_Schild_outgoing.c\
-	Sch_Kerr_Schild_ingoing.c Minkovski.c Kerr_Kerr_Schild_ingoing.c
+	Sch_Kerr_Schild_ingoing.c Minkovski.c Kerr_Kerr_Schild_ingoing.c gaugeWave.c
 rhs.o: global_def.h Hhat.h auxi_dofs.h hdw.h
 rk.o: global_def.h rhs.h hdw.h
 source_values.o: global_def.h

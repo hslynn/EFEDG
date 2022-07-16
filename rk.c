@@ -1,6 +1,6 @@
+#include "global_def.h"
 #include "rhs.h"
 #include "hdw.h"
-#include "global_def.h"
 
 void
 rk2(FLOAT dt, DOF **dofs_var, DOF **dofs_exact, DOF **dofs_g, DOF **dofs_N, DOF **dofs_H, DOF **dofs_deriH, DOF **dofs_src, DOF **dofs_C,
@@ -72,7 +72,7 @@ rk1(FLOAT dt, DOF **dofs_var, DOF **dofs_exact, DOF **dofs_g, DOF **dofs_N, DOF 
 {
     INT i; 
     /*u_n = u_n + dt*rhs(u_n)*/
-    get_dofs_rhs(dofs_var, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+    get_dofs_rhs(dofs_var, dofs_exact, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
         dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
     for(i=0;i<NVAR;i++){
         phgDofAXPBY(dt, dofs_rhs[i], 1.0, dofs_var + i);

@@ -14,6 +14,8 @@ extern INT gamma0;
 extern INT gamma1;
 extern INT gamma2;
 extern INT NVAR;
+extern FLOAT TIME; 
+extern FLOAT AA; 
 
 #endif
 

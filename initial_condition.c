@@ -1,6 +1,6 @@
 #include "global_def.h"
 
-#define spacetime 1 
+#define spacetime 6 
 #if (spacetime == 1)
 #include "Sch_Kerr_Schild_ingoing.c"
 #elif (spacetime == 2)
@@ -11,6 +11,8 @@
 #include "Sch_Harmonic_hp.c"
 #elif (spacetime == 5)
 #include "Kerr_Kerr_Schild_ingoing.c"
+#elif (spacetime == 6)
+#include "gaugeWave.c"
 #endif
 
 INT SPACETIME = spacetime;

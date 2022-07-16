@@ -5,22 +5,19 @@
 #include "hdw.h"
 #include "rk.h"
 #include "rhs.h"
-#include "filter.h"
 #include "runtime.h"
-#include "random.h"
 
 int 
 main(int argc, char *argv[])
 {
-    //char *meshfile ="./mesh/577.albert";
-    char *meshfile ="./mesh/4616.albert";
-    char *testname ="test";
+    char *meshfile ="./mesh/cube4.dat";
     GRID *g; 
     ELEMENT *e;
     FLOAT ele_diam, min_diam = 1000.0, max_diam = 0.0;
     FLOAT t0 = 0.0, t1 = 0.0; 
     FLOAT dt, max_time = 100;
     INT i, j, p_order = 1, refine_time = 0, rk_order = 3;
+    INT isPeri = 0;
     DOF_TYPE *dg_type = DG_TYPE, *dg_filter = DG_FILTER;
     MPI_Status status; 
 
@@ -29,9 +26,8 @@ main(int argc, char *argv[])
     phgOptionsRegisterString("m", "name of the mesh file,  default is \"./mesh/hollowed_icsahedron.mesh\"", 
             &meshfile);
     phgOptionsRegisterInt("r", "mesh refine times, default is 0", &refine_time);
-    phgOptionsRegisterInt("o", "Runge-Kutta order, default is 3", &rk_order);
-    phgOptionsRegisterString("n", "name of the test, default is \"test\"", &testname);
-    
+    phgOptionsRegisterInt("o", "Periodic or not, default is 0", &isPeri);
+
     phgInit(&argc, &argv);	
     switch(p_order){
         case 0: dg_type = DOF_DG0;
@@ -85,8 +81,10 @@ main(int argc, char *argv[])
             dg_filter = DOF_DG1;
             phgPrintf("\nUnavailable polynomial order, using default set DOF_DG2\n");
     }
-
     g = phgNewGrid(-1); 
+    if(isPeri == 1){
+        phgSetPeriodicity(g, X_MASK | Y_MASK | Z_MASK);
+    }
     phgImport(g, meshfile, FALSE);
     phgBalanceGrid(g, 1.2, 1, NULL, 0.);
     if (refine_time > 0){
@@ -202,78 +200,42 @@ main(int argc, char *argv[])
     set_data_deriH(dofs_deriH);
     copy_dofs(dofs_var, dofs_sol, "sol", NVAR);
     copy_dofs(dofs_var, dofs_exact, "exact", NVAR);
-   
-
-    //for(i=0;i<30;i++){
-    //    split_dof(dofs_gradPsi[i], dofs_gradPsi_ave[i], dofs_gradPsi_diff[i]);
-    //}
-    //get_dofs_diff(dofs_gradPsi_ave, dofs_var + 20, dofs_gradPsi_err, 30);
-    //for(j=0;j<10;j++){
-    //    phgPrintf("L2 error of gradPsi[%d] = %.16lf\n", j, phgDofNormL2(dofs_gradPsi_err[j]));
-    //    phgPrintf("L2 error of gradPsi[%d] = %.16lf\n", j + 10, phgDofNormL2(dofs_gradPsi_err[j+10]));
-    //    phgPrintf("L2 error of gradPsi[%d] = %.16lf\n\n", j + 20, phgDofNormL2(dofs_gradPsi_err[j+20]));
-    //}
 
     char fn_err[50], fn_err_inf[NVAR], fn_rhs[50], fn_C[50];
     FILE *fp_err, *fp_err_inf, *fp_rhs, *fp_C;
-    sprintf(fn_err, "./data/%s_err_r%dp%d_T%dM%.2f.data", testname, refine_time, p_order, SPACETIME, M);
-    sprintf(fn_err_inf, "./data/%s_err_inf_r%dp%d_T%dM%.2f.data", testname, refine_time, p_order, SPACETIME, M);
-    sprintf(fn_rhs, "./data/%s_rhs_r%dp%d_T%dM%.2f.data", testname, refine_time, p_order, SPACETIME, M);
-    sprintf(fn_C, "./data/%s_C_r%dp%d_T%dM%.2f.data", testname, refine_time, p_order, SPACETIME, M);
+    sprintf(fn_err, "./data/gaugeWaveTest_err_A%.2f_r%dp%d_peri%d.data", AA, refine_time, p_order, isPeri);
+    sprintf(fn_err_inf, "./data/gaugeWaveTest_err_inf_A%.2f_r%dp%d_peri%d.data", AA, refine_time, p_order, isPeri);
+    sprintf(fn_rhs, "./data/gaugeWaveTest_rhs_A%.2f_r%dp%d_peri%d.data", AA, refine_time, p_order, isPeri);
+    sprintf(fn_C, "./data/gaugeWaveTest_C_A%.2f_r%dp%d_peri%d.data", AA, refine_time, p_order, isPeri);
     INT steps_complished = 0;
     t0 = phgGetTime(NULL);
     FLOAT L2_err_array[NVAR], Linf_err_array[NVAR], L2_rhs_array[NVAR], L2_C_array[4];
 
-    /*robust test*/
-    //set_perturb(dofs_var, 10e-6);
-
-    /*refine*/
-    //get_dofs_rhs(dofs_var, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-    //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-    //phgMarkElements(MARK_MAX, dofs_C[0], 0.5, NULL, 1, 1, MARK_NONE, NULL, 0, 1, 1);
-    //phgRefineAllElements(g, 1);
-    //get_dofs_rhs(dofs_var, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-    //    dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-    //phgExportVTKn(g, "C[0].vtk", 1, dofs_C);
-    //phgExportALBERT(g, "mesh.albert");
-    //phgPrintf("Total elements = %d\n", g->nelem_global);
-
     /* advance in time */
-    for(i=steps_complished;i*dt<max_time;i++){
-        //phgExportVTKn(g, "Hhat.vtk", 50, dofs_Hhat + 0);
-        //phgExportVTKn(g, "rhs.vtk", 50, dofs_rhs + 0);
-        //phgExportVTKn(g, "src.vtk", 50, dofs_src + 0);
-        //phgExportVTKn(g, "var_err.vtk", NVAR, dofs_err + 0);
-        if(rk_order==3){
-            rk3(dt, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-        }
-        else if(rk_order==2){
-            rk2(dt, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
-                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
-        }
-        else if(rk_order==1){
+    for(i=steps_complished;TIME<max_time;i++){
+        if(TIME+dt <= max_time){
             rk1(dt, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
                 dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+            TIME += dt;
         }
-        else {
-            phgPrintf("Wrong Runge-Kutta order parameter!");
-            phgAbort(0);
-        }
-        if (USE_FILTER && p_order != 0){
-            filter(dofs_var, dg_filter, alpha_filter, NVAR);
+        else{
+            rk1(max_time - TIME, dofs_var, dofs_exact, dofs_g, dofs_N, dofs_H, dofs_deriH, dofs_src, dofs_C,
+                dofs_gradPsi, dofs_gradPi, dofs_gradPhi, dofs_Hhat, dofs_rhs);
+            TIME = max_time;
         }
 
         phgPrintf("Step %d completed\n", i + 1);
-        phgPrintf("Advanced in time: %lf\n", i*dt);
+        phgPrintf("Advanced in time: %lf\n", TIME);
         t1 = phgGetTime(NULL);
         phgPrintf("Wall time past: %lf\n\n", t1 - t0);
 
+        set_data_var(dofs_sol);
+        set_data_var(dofs_exact);
         get_dofs_diff(dofs_var, dofs_sol, dofs_err, NVAR); 
         for(j=0;j<NVAR;j++){
             L2_err_array[j] = phgDofNormL2(dofs_err[j]);
-            L2_rhs_array[j] = phgDofNormL2(dofs_rhs[j]);
             Linf_err_array[j] = phgDofNormInftyVec(dofs_err[j]);
+            L2_rhs_array[j] = phgDofNormL2(dofs_rhs[j]);
         }
         for(j=0;j<4;j++){
             L2_C_array[j] = phgDofNormL2(dofs_C[j]);
@@ -285,10 +247,10 @@ main(int argc, char *argv[])
             fp_C=fopen(fn_C, "a");
             fp_rhs=fopen(fn_rhs, "a");
 
-            fprintf(fp_err, "%.16lf ", i*dt);
-            fprintf(fp_err_inf, "%.16lf ", i*dt);
-            fprintf(fp_rhs, "%.16lf ", i*dt);
-            fprintf(fp_C, "%.16lf ", i*dt);
+            fprintf(fp_err, "%.16lf ", TIME);
+            fprintf(fp_err_inf, "%.16lf ", TIME);
+            fprintf(fp_rhs, "%.16lf ", TIME);
+            fprintf(fp_C, "%.16lf ", TIME);
             for(j=0;j<NVAR;j++){
                 fprintf(fp_err, "%.16lf ", L2_err_array[j]);
                 fprintf(fp_err_inf, "%.16lf ", Linf_err_array[j]);
@@ -310,6 +272,11 @@ main(int argc, char *argv[])
     }
     t1 = phgGetTime(NULL);
     phgPrintf("Total time cost = %lf\n", t1 - t0);
+
+    phgExportVTKn(g, "g00.vtk", 1, dofs_var);
+    phgExportVTKn(g, "g11.vtk", 1, dofs_var + 4);
+    phgExportVTKn(g, "g00_exact.vtk", 1, dofs_sol);
+    phgExportVTKn(g, "g11_exact.vtk", 1, dofs_sol + 4);
    
     /*release the mem*/
     free_dofs(dofs_var, NVAR);

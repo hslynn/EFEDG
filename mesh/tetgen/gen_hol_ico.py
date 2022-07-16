@@ -4,7 +4,7 @@ equilateral triangular faces, 30 edges and 12 vertices.
 """
 GR = 0.5*(1+5**0.5); #golden ratio
 RADIUS_EXT = 10 
-RADIUS_IN = 3 
+RADIUS_IN = 1.8 
 NUM_VERTS = 12
 BASE_VERTS = [[-1.0, GR, 0.0],  #see https://en.wikipedia.org/wiki/Regular_icosahedron#Cartesian_coordinates
               [ 1.0, GR, 0.0],

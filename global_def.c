@@ -7,3 +7,5 @@ INT gamma0 = 1.0;
 INT gamma1 = -1.0;
 INT gamma2 = 1.0;
 
+FLOAT TIME = 0.0;
+FLOAT AA = 0.01;
